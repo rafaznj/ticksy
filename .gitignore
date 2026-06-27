@@ -1,7 +1,14 @@
-# compiled output
-/dist
-/node_modules
-/build
+# Dependencies
+node_modules/
+
+# Build
+dist/
+build/
+
+# Cache
+.vite/
+coverage/
+*.tsbuildinfo
 
 # Logs
 logs
@@ -35,7 +42,7 @@ lerna-debug.log*
 !.vscode/launch.json
 !.vscode/extensions.json
 
-# dotenv environment variable files
+# Environment
 .env
 .env.development.local
 .env.test.local
