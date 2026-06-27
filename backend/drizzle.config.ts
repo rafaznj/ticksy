@@ -2,7 +2,7 @@ import type { Config } from "drizzle-kit";
 
 export default {
   schema: "./src/database/drizzle/schema",
-  out: "./src/infrastructure/database/drizzle/migrations",
+  out: "./src/database/drizzle/migrations",
   dialect: "postgresql",
   dbCredentials: {
     host: process.env.DATABASE_HOST!,
@@ -11,6 +11,4 @@ export default {
     password: process.env.DATABASE_PASSWORD,
     port: Number(process.env.DATABASE_PORT),
   },
-  verbose: true,
-  strict: true,
 } satisfies Config;
