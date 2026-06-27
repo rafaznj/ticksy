@@ -1,0 +1,1 @@
+{"version":3,"file":"simple-injection.js","sourceRoot":"","sources":["../../../../src/shared/utils/simple-injection.ts"],"names":[],"mappings":";;;AACA,2CAAuC;AAEhC,MAAM,eAAe,GAAG,CAC7B,KAAa,EACb,GAAyB,EACzB,KAAK,GAAG,cAAK,CAAC,OAAO,EACX,EAAE;IACZ,OAAO;QACL,KAAK;QACL,OAAO,EAAE,KAAK;QACd,QAAQ,EAAE,GAAG;KACd,CAAC;AACJ,CAAC,CAAC;AAVW,QAAA,eAAe,mBAU1B"}
