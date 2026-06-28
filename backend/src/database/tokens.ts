@@ -1,3 +1,3 @@
 export const DATABASE_TOKENS = {
-  Drizzle: Symbol("Drizzle"),
-} as const;
+  Drizzle: Symbol.for("Drizzle"),
+};

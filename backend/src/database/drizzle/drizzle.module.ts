@@ -1,10 +1,10 @@
-import { Module } from "@nestjs/common";
+import { Global, Module } from "@nestjs/common";
 
-import { DATABASE_TOKENS } from "../tokens";
 import { drizzleProvider } from "./provider";
 
+@Global()
 @Module({
   providers: drizzleProvider,
-  exports: [DATABASE_TOKENS.Drizzle],
+  exports: drizzleProvider,
 })
 export class DrizzleModule {}

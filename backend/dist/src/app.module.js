@@ -9,13 +9,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
 const drizzle_module_1 = require("./database/drizzle/drizzle.module");
+const auth_module_1 = require("./modules/auth/auth.module");
+const auth_controller_1 = require("./modules/auth/controllers/auth.controller");
 const ticket_module_1 = require("./modules/ticket/ticket.module");
+const user_module_1 = require("./modules/user/user.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [ticket_module_1.TicketModule, drizzle_module_1.DrizzleModule],
+        imports: [drizzle_module_1.DrizzleModule, ticket_module_1.TicketModule, user_module_1.UserModule, auth_module_1.AuthModule],
+        controllers: [auth_controller_1.AuthController],
     })
 ], AppModule);
 //# sourceMappingURL=app.module.js.map

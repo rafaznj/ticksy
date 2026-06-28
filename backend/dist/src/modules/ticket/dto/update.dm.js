@@ -11,16 +11,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UpdateTicketDto = void 0;
 const mapped_types_1 = require("@nestjs/mapped-types");
-const create_dm_1 = require("./create.dm");
 const class_validator_1 = require("class-validator");
 const ticket_enum_1 = require("../enums/ticket.enum");
+const create_dm_1 = require("./create.dm");
 class UpdateTicketDto extends (0, mapped_types_1.PartialType)(create_dm_1.CreateTicketDto) {
     status;
     assignedToId;
 }
 exports.UpdateTicketDto = UpdateTicketDto;
 __decorate([
-    (0, class_validator_1.IsEnum)(ticket_enum_1.TicketStatus),
+    (0, class_validator_1.IsEnum)(ticket_enum_1.TicketStatusEnum),
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", String)
 ], UpdateTicketDto.prototype, "status", void 0);

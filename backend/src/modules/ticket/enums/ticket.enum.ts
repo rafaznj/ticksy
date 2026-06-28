@@ -1,4 +1,4 @@
-export enum TicketStatus {
+export enum TicketStatusEnum {
   OPEN = "OPEN",
   IN_PROGRESS = "IN_PROGRESS",
   WAITING_CUSTOMER = "WAITING_CUSTOMER",
@@ -6,7 +6,7 @@ export enum TicketStatus {
   CLOSED = "CLOSED",
 }
 
-export enum TicketPriority {
+export enum TicketPriorityEnum {
   LOW = "LOW",
   MEDIUM = "MEDIUM",
   HIGH = "HIGH",

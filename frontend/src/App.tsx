@@ -1,5 +1,13 @@
+import { AppSidebar } from "@/layouts/AppSidebar";
+import Home from "./pages/Home";
+
 function App() {
-  return <></>;
+  return (
+    <>
+      <AppSidebar />
+      <Home />
+    </>
+  );
 }
 
 export default App;
