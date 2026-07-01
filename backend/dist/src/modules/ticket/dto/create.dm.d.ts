@@ -1,6 +1,6 @@
-import { TicketPriority } from "../enums/ticket.enum";
+import { TicketPriorityEnum } from "../enums/ticket.enum";
 export declare class CreateTicketDto {
     title: string;
     description: string;
-    priority: TicketPriority;
+    priority: TicketPriorityEnum;
 }

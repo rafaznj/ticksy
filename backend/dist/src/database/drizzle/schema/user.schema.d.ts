@@ -1,4 +1,4 @@
-export declare const rolesEnum: import("drizzle-orm/pg-core").PgEnum<["employee", "admin", "technical_assistance"]>;
+export declare const userRoleEnum: import("drizzle-orm/pg-core").PgEnum<[string, ...string[]]>;
 export declare const user: import("drizzle-orm/pg-core").PgTableWithColumns<{
     name: "user";
     schema: undefined;
@@ -80,14 +80,48 @@ export declare const user: import("drizzle-orm/pg-core").PgTableWithColumns<{
             tableName: "user";
             dataType: "string";
             columnType: "PgEnumColumn";
-            data: "employee" | "admin" | "technical_assistance";
+            data: string;
             driverParam: string;
             notNull: true;
             hasDefault: true;
             isPrimaryKey: false;
             isAutoincrement: false;
             hasRuntimeDefault: false;
-            enumValues: ["employee", "admin", "technical_assistance"];
+            enumValues: [string, ...string[]];
+            baseColumn: never;
+            identity: undefined;
+            generated: undefined;
+        }, {}, {}>;
+        createdAt: import("drizzle-orm/pg-core").PgColumn<{
+            name: "createdAt";
+            tableName: "user";
+            dataType: "date";
+            columnType: "PgTimestamp";
+            data: Date;
+            driverParam: string;
+            notNull: true;
+            hasDefault: true;
+            isPrimaryKey: false;
+            isAutoincrement: false;
+            hasRuntimeDefault: false;
+            enumValues: undefined;
+            baseColumn: never;
+            identity: undefined;
+            generated: undefined;
+        }, {}, {}>;
+        updatedAt: import("drizzle-orm/pg-core").PgColumn<{
+            name: "updatedAt";
+            tableName: "user";
+            dataType: "date";
+            columnType: "PgTimestamp";
+            data: Date;
+            driverParam: string;
+            notNull: true;
+            hasDefault: true;
+            isPrimaryKey: false;
+            isAutoincrement: false;
+            hasRuntimeDefault: false;
+            enumValues: undefined;
             baseColumn: never;
             identity: undefined;
             generated: undefined;

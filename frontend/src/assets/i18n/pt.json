@@ -1,0 +1,20 @@
+{
+  "general": {
+    "backHome": "Voltar para a página inicial",
+    "errors": {
+      "notFoundRoute": "Rota não encontrada"
+    }
+  },
+  "tickets": {
+    "title": "Tickets",
+    "open": {
+      "title": "Tickets Abertos"
+    },
+    "waiting": {
+      "title": "Tickets em Espera"
+    },
+    "finished": {
+      "title": "Tickets Concluídos"
+    }
+  }
+}

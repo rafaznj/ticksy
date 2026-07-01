@@ -29,7 +29,7 @@ __decorate([
     __metadata("design:type", String)
 ], CreateTicketDto.prototype, "description", void 0);
 __decorate([
-    (0, class_validator_1.IsEnum)(ticket_enum_1.TicketPriority),
+    (0, class_validator_1.IsEnum)(ticket_enum_1.TicketPriorityEnum),
     __metadata("design:type", String)
 ], CreateTicketDto.prototype, "priority", void 0);
 //# sourceMappingURL=create.dm.js.map

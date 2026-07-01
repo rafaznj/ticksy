@@ -1,5 +1,5 @@
-import { IsString, IsNotEmpty, IsEnum } from "class-validator";
-import { TicketPriority } from "../enums/ticket.enum";
+import { IsEnum, IsNotEmpty, IsString } from "class-validator";
+import { TicketPriorityEnum } from "../enums/ticket.enum";
 
 export class CreateTicketDto {
   @IsString()
@@ -10,6 +10,6 @@ export class CreateTicketDto {
   @IsNotEmpty()
   description!: string;
 
-  @IsEnum(TicketPriority)
-  priority!: TicketPriority;
+  @IsEnum(TicketPriorityEnum)
+  priority!: TicketPriorityEnum;
 }

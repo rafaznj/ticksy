@@ -9,7 +9,5 @@ declare const _default: {
         password: string | undefined;
         port: number;
     };
-    verbose: true;
-    strict: true;
 };
 export default _default;

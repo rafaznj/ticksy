@@ -8,15 +8,15 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DrizzleModule = void 0;
 const common_1 = require("@nestjs/common");
-const tokens_1 = require("../tokens");
 const provider_1 = require("./provider");
 let DrizzleModule = class DrizzleModule {
 };
 exports.DrizzleModule = DrizzleModule;
 exports.DrizzleModule = DrizzleModule = __decorate([
+    (0, common_1.Global)(),
     (0, common_1.Module)({
         providers: provider_1.drizzleProvider,
-        exports: [tokens_1.DATABASE_TOKENS.Drizzle],
+        exports: provider_1.drizzleProvider,
     })
 ], DrizzleModule);
 //# sourceMappingURL=drizzle.module.js.map

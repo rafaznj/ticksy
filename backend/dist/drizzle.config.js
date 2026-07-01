@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = {
     schema: "./src/database/drizzle/schema",
-    out: "./src/infrastructure/database/drizzle/migrations",
+    out: "./src/database/drizzle/migrations",
     dialect: "postgresql",
     dbCredentials: {
         host: process.env.DATABASE_HOST,
@@ -11,7 +11,5 @@ exports.default = {
         password: process.env.DATABASE_PASSWORD,
         port: Number(process.env.DATABASE_PORT),
     },
-    verbose: true,
-    strict: true,
 };
 //# sourceMappingURL=drizzle.config.js.map

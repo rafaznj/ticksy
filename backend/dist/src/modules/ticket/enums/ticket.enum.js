@@ -1,19 +1,19 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.TicketPriority = exports.TicketStatus = void 0;
-var TicketStatus;
-(function (TicketStatus) {
-    TicketStatus["OPEN"] = "OPEN";
-    TicketStatus["IN_PROGRESS"] = "IN_PROGRESS";
-    TicketStatus["WAITING_CUSTOMER"] = "WAITING_CUSTOMER";
-    TicketStatus["RESOLVED"] = "RESOLVED";
-    TicketStatus["CLOSED"] = "CLOSED";
-})(TicketStatus || (exports.TicketStatus = TicketStatus = {}));
-var TicketPriority;
-(function (TicketPriority) {
-    TicketPriority["LOW"] = "LOW";
-    TicketPriority["MEDIUM"] = "MEDIUM";
-    TicketPriority["HIGH"] = "HIGH";
-    TicketPriority["URGENT"] = "URGENT";
-})(TicketPriority || (exports.TicketPriority = TicketPriority = {}));
+exports.TicketPriorityEnum = exports.TicketStatusEnum = void 0;
+var TicketStatusEnum;
+(function (TicketStatusEnum) {
+    TicketStatusEnum["OPEN"] = "OPEN";
+    TicketStatusEnum["IN_PROGRESS"] = "IN_PROGRESS";
+    TicketStatusEnum["WAITING_CUSTOMER"] = "WAITING_CUSTOMER";
+    TicketStatusEnum["RESOLVED"] = "RESOLVED";
+    TicketStatusEnum["CLOSED"] = "CLOSED";
+})(TicketStatusEnum || (exports.TicketStatusEnum = TicketStatusEnum = {}));
+var TicketPriorityEnum;
+(function (TicketPriorityEnum) {
+    TicketPriorityEnum["LOW"] = "LOW";
+    TicketPriorityEnum["MEDIUM"] = "MEDIUM";
+    TicketPriorityEnum["HIGH"] = "HIGH";
+    TicketPriorityEnum["URGENT"] = "URGENT";
+})(TicketPriorityEnum || (exports.TicketPriorityEnum = TicketPriorityEnum = {}));
 //# sourceMappingURL=ticket.enum.js.map

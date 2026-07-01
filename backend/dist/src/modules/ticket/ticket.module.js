@@ -9,14 +9,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.TicketModule = void 0;
 const common_1 = require("@nestjs/common");
 const ticket_controller_1 = require("./controllers/ticket.controller");
-const ticket_service_1 = require("./services/ticket.service");
 let TicketModule = class TicketModule {
 };
 exports.TicketModule = TicketModule;
 exports.TicketModule = TicketModule = __decorate([
     (0, common_1.Module)({
         controllers: [ticket_controller_1.TicketController],
-        providers: [ticket_service_1.TicketService],
+        providers: [],
     })
 ], TicketModule);
 //# sourceMappingURL=ticket.module.js.map

@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.databaseConfig = void 0;
+require("dotenv/config");
 exports.databaseConfig = {
     host: process.env.DATABASE_HOST,
     port: Number(process.env.DATABASE_PORT),
