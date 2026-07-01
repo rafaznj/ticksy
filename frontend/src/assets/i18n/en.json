@@ -1,0 +1,20 @@
+{
+  "general": {
+    "backHome": "Back to home",
+    "errors": {
+      "notFoundRoute": "Route not found"
+    }
+  },
+  "tickets": {
+    "title": "Tickets",
+    "open": {
+      "title": "Open Tickets"
+    },
+    "waiting": {
+      "title": "Waiting Tickets"
+    },
+    "finished": {
+      "title": "Finished Tickets"
+    }
+  }
+}

@@ -1,3 +1,9 @@
-export default function Home() {
-  return <></>;
+import { AppSidebar } from "@/layouts/AppSidebar";
+
+export default function HomePage() {
+  return (
+    <>
+      <AppSidebar />
+    </>
+  );
 }

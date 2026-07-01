@@ -1,11 +1,11 @@
 import { AppSidebar } from "@/layouts/AppSidebar";
-import Home from "./pages/Home";
+import HomePage from "./pages/Home";
 
 function App() {
   return (
     <>
       <AppSidebar />
-      <Home />
+      <HomePage />
     </>
   );
 }
