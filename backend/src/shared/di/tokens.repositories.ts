@@ -4,6 +4,7 @@ export const REPOSITORY_TOKENS = {
   UpdateUserRepository: Symbol.for("UpdateUserRepository"),
   DeleteUserRepository: Symbol.for("DeleteUserRepository"),
   GetUserByIdRepository: Symbol.for("GetUserByIdRepository"),
+  GetUserByEmailRepository: Symbol.for("GetUserByEmailRepository"),
   GetUserPagedRepository: Symbol.for("GetUserPagedRepository"),
 
   // Ticket

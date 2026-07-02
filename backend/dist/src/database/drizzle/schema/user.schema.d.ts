@@ -1,4 +1,5 @@
-export declare const userRoleEnum: import("drizzle-orm/pg-core").PgEnum<[string, ...string[]]>;
+import { UserRoleEnum } from "../../../modules/user/enums/roles.enum";
+export declare const userRoleEnum: import("drizzle-orm/pg-core").PgEnum<[UserRoleEnum, ...UserRoleEnum[]]>;
 export declare const user: import("drizzle-orm/pg-core").PgTableWithColumns<{
     name: "user";
     schema: undefined;
@@ -80,14 +81,14 @@ export declare const user: import("drizzle-orm/pg-core").PgTableWithColumns<{
             tableName: "user";
             dataType: "string";
             columnType: "PgEnumColumn";
-            data: string;
+            data: UserRoleEnum;
             driverParam: string;
             notNull: true;
             hasDefault: true;
             isPrimaryKey: false;
             isAutoincrement: false;
             hasRuntimeDefault: false;
-            enumValues: [string, ...string[]];
+            enumValues: [UserRoleEnum, ...UserRoleEnum[]];
             baseColumn: never;
             identity: undefined;
             generated: undefined;

@@ -2,7 +2,10 @@ import { sql } from "drizzle-orm";
 import { pgEnum, pgTable, text, timestamp, uuid, varchar } from "drizzle-orm/pg-core";
 import { UserRoleEnum } from "../../../modules/user/enums/roles.enum";
 
-export const userRoleEnum = pgEnum("role", Object.values(UserRoleEnum) as [string, ...string[]]);
+export const userRoleEnum = pgEnum(
+  "role",
+  Object.values(UserRoleEnum) as [UserRoleEnum, ...UserRoleEnum[]],
+);
 
 export const user = pgTable("user", {
   id: uuid().defaultRandom().primaryKey(),

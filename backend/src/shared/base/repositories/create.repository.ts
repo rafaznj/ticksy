@@ -10,11 +10,11 @@ export class BaseCreateRepository<T> implements IBaseCreateRepository<T> {
   constructor(private readonly table: PgTable) {}
 
   async execute(data: T): Promise<T | null> {
-    const recordsAdded = await this.db
+    const [created] = await this.db
       .insert(this.table)
       .values([{ ...data }])
       .returning();
-    if (recordsAdded.length < 1) return null;
-    return recordsAdded[0] as T;
+
+    return (created as T) ?? null;
   }
 }

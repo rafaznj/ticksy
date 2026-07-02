@@ -1,11 +1,3 @@
-import { UserRoleEnum } from "../enums/roles.enum";
+import { user } from "../../../database/drizzle/schema/user.schema";
 
-export interface User {
-  id: string;
-  name: string;
-  email: string;
-  password: string;
-  role: UserRoleEnum;
-  createdAt: Date;
-  updatedAt: Date;
-}
+export type User = typeof user.$inferSelect;
