@@ -1,4 +1,4 @@
-import { NotFoundException } from "@nestjs/common";
+import { InternalServerErrorException } from "@nestjs/common";
 import type { IBaseGetByIdRepository } from "../repositories/contracts/get-by-id";
 import type { IBaseGetByIdService } from "./contracts/get-by-id";
 
@@ -8,7 +8,7 @@ export class BaseGetByIdService<T> implements IBaseGetByIdService<T> {
   async execute(id: string): Promise<T> {
     const record = await this.repository.execute(id);
     if (!record) {
-      throw new NotFoundException("Registro não encontrado");
+      throw new InternalServerErrorException("Falha ao buscar o registro");
     }
     return record;
   }

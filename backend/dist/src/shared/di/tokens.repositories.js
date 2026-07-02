@@ -6,6 +6,7 @@ exports.REPOSITORY_TOKENS = {
     UpdateUserRepository: Symbol.for("UpdateUserRepository"),
     DeleteUserRepository: Symbol.for("DeleteUserRepository"),
     GetUserByIdRepository: Symbol.for("GetUserByIdRepository"),
+    GetUserByEmailRepository: Symbol.for("GetUserByEmailRepository"),
     GetUserPagedRepository: Symbol.for("GetUserPagedRepository"),
     CreateTicketRepository: Symbol.for("CreateTicketRepository"),
     UpdateTicketRepository: Symbol.for("UpdateTicketRepository"),

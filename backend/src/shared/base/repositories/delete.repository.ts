@@ -5,7 +5,7 @@ import { DATABASE_TOKENS } from "../../../database/tokens";
 import { TableWithId } from "../../types/table-with-id.type";
 import { IBaseDeleteRepository } from "./contracts/delete";
 
-export abstract class BaseDeleteRepository implements IBaseDeleteRepository {
+export class BaseDeleteRepository implements IBaseDeleteRepository {
   @Inject(DATABASE_TOKENS.Drizzle)
   protected db!: NodePgDatabase;
   constructor(private readonly table: TableWithId) {}

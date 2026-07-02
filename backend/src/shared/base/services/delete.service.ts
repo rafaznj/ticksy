@@ -1,4 +1,4 @@
-import { NotFoundException } from "@nestjs/common";
+import { InternalServerErrorException } from "@nestjs/common";
 import type { IBaseDeleteRepository } from "../repositories/contracts/delete";
 import type { IBaseDeleteService } from "./contracts/delete";
 
@@ -8,7 +8,7 @@ export class BaseDeleteService implements IBaseDeleteService {
   async execute(id: string): Promise<boolean> {
     const deleted = await this.repository.execute(id);
     if (!deleted) {
-      throw new NotFoundException("Registro não encontrado");
+      throw new InternalServerErrorException("Falha ao excluir o registro");
     }
     return deleted;
   }

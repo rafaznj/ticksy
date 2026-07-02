@@ -11,12 +11,12 @@ export abstract class BaseGetByIdRepository<T> implements IBaseGetByIdRepository
   constructor(private readonly table: TableWithId) {}
 
   async execute(id: string): Promise<T | null> {
-    const records = (await this.db
+    const [record] = (await this.db
       .select()
       .from(this.table)
       .where(eq(this.table.id, id))
       .limit(1)) as T[];
 
-    return records[0] ?? null;
+    return (record as T) ?? null;
   }
 }

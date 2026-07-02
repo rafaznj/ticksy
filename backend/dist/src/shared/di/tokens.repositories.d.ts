@@ -3,6 +3,7 @@ export declare const REPOSITORY_TOKENS: {
     readonly UpdateUserRepository: symbol;
     readonly DeleteUserRepository: symbol;
     readonly GetUserByIdRepository: symbol;
+    readonly GetUserByEmailRepository: symbol;
     readonly GetUserPagedRepository: symbol;
     readonly CreateTicketRepository: symbol;
     readonly UpdateTicketRepository: symbol;

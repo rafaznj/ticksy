@@ -1,17 +1,50 @@
-import { Body, Controller, Inject, Post } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Inject, Param, Post, Put } from "@nestjs/common";
 import { SERVICE_TOKENS } from "../../../shared/di/tokens.services";
-import { CreateUserDto } from "../dto/create-user.dm";
-import { CreateUserService } from "../services/create.service";
+import { CreateUserDto } from "../dto/create-user.dto";
+import type { ICreateUserService } from "../services/contracts/create";
+import type { IDeleteUserService } from "../services/contracts/delete";
+import type { IGetUserByIdService } from "../services/contracts/get-by-id";
+import type { IUpdateUserService } from "../services/contracts/update";
+import type { IGetUserByEmailService } from "../services/contracts/get-by-email";
+import { UpdateUserDto } from "../dto/update-user.dto";
 
 @Controller("user")
 export class UserController {
   constructor(
     @Inject(SERVICE_TOKENS.CreateUserService)
-    private readonly createUserService: CreateUserService,
+    private readonly createUserService: ICreateUserService,
+    @Inject(SERVICE_TOKENS.GetUserByIdService)
+    private readonly getUserByIdService: IGetUserByIdService,
+    @Inject(SERVICE_TOKENS.UpdateUserService)
+    private readonly updateUserService: IUpdateUserService,
+    @Inject(SERVICE_TOKENS.DeleteUserService)
+    private readonly deleteUserService: IDeleteUserService,
+    @Inject(SERVICE_TOKENS.GetUserByEmailService)
+    private readonly getUserByEmailService: IGetUserByEmailService,
   ) {}
 
-  @Post("/")
+  @Post("")
   async create(@Body() data: CreateUserDto) {
     return this.createUserService.execute(data);
+  }
+
+  @Get(":id")
+  async getById(@Param("id") id: string) {
+    return this.getUserByIdService.execute(id);
+  }
+
+  @Put(":id")
+  async update(@Param("id") id: string, @Body() data: UpdateUserDto) {
+    return this.updateUserService.execute(id, data);
+  }
+
+  @Delete(":id")
+  async delete(@Param("id") id: string) {
+    return this.deleteUserService.execute(id);
+  }
+
+  @Get("get-by-email/:email")
+  async getByEmail(@Param("email") email: string) {
+    return this.getUserByEmailService.execute(email);
   }
 }
