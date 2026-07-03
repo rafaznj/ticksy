@@ -5,10 +5,17 @@ node_modules/
 dist/
 build/
 
+# Compiled files (in-place compilation)
+*.js
+*.js.map
+*.d.ts
+!jest.config.js    # exceção se você tiver
+
 # Cache
 .vite/
 coverage/
 *.tsbuildinfo
+tsconfig.build.json  # se for gerado automaticamente
 
 # Logs
 logs
@@ -58,6 +65,3 @@ pids
 *.pid
 *.seed
 *.pid.lock
-
-# Diagnostic reports (https://nodejs.org/api/report.html)
-report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json

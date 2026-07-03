@@ -1,5 +1,7 @@
-export declare const ticketStatusEnum: import("drizzle-orm/pg-core").PgEnum<[string, ...string[]]>;
-export declare const ticketPriorityEnum: import("drizzle-orm/pg-core").PgEnum<[string, ...string[]]>;
+import { TicketPriorityEnum } from "../../../modules/ticket/enums/ticket-priority.enum";
+import { TicketStatusEnum } from "../../../modules/ticket/enums/ticket-status.enum";
+export declare const ticketStatusEnum: import("drizzle-orm/pg-core").PgEnum<[TicketStatusEnum, ...TicketStatusEnum[]]>;
+export declare const ticketPriorityEnum: import("drizzle-orm/pg-core").PgEnum<[TicketPriorityEnum, ...TicketPriorityEnum[]]>;
 export declare const ticket: import("drizzle-orm/pg-core").PgTableWithColumns<{
     name: "ticket";
     schema: undefined;
@@ -62,14 +64,14 @@ export declare const ticket: import("drizzle-orm/pg-core").PgTableWithColumns<{
             tableName: "ticket";
             dataType: "string";
             columnType: "PgEnumColumn";
-            data: string;
+            data: TicketPriorityEnum;
             driverParam: string;
             notNull: true;
             hasDefault: false;
             isPrimaryKey: false;
             isAutoincrement: false;
             hasRuntimeDefault: false;
-            enumValues: [string, ...string[]];
+            enumValues: [TicketPriorityEnum, ...TicketPriorityEnum[]];
             baseColumn: never;
             identity: undefined;
             generated: undefined;
@@ -79,14 +81,14 @@ export declare const ticket: import("drizzle-orm/pg-core").PgTableWithColumns<{
             tableName: "ticket";
             dataType: "string";
             columnType: "PgEnumColumn";
-            data: string;
+            data: TicketStatusEnum;
             driverParam: string;
             notNull: true;
             hasDefault: true;
             isPrimaryKey: false;
             isAutoincrement: false;
             hasRuntimeDefault: false;
-            enumValues: [string, ...string[]];
+            enumValues: [TicketStatusEnum, ...TicketStatusEnum[]];
             baseColumn: never;
             identity: undefined;
             generated: undefined;

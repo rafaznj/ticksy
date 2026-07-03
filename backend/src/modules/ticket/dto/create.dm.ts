@@ -1,5 +1,5 @@
 import { IsEnum, IsNotEmpty, IsString } from "class-validator";
-import { TicketPriorityEnum } from "../enums/ticket.enum";
+import { TicketPriorityEnum } from "../enums/ticket-priority.enum";
 
 export class CreateTicketDto {
   @IsString()

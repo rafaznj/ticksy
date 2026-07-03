@@ -11,7 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateTicketDto = void 0;
 const class_validator_1 = require("class-validator");
-const ticket_enum_1 = require("../enums/ticket.enum");
+const ticket_priority_enum_1 = require("../enums/ticket-priority.enum");
 class CreateTicketDto {
     title;
     description;
@@ -29,7 +29,7 @@ __decorate([
     __metadata("design:type", String)
 ], CreateTicketDto.prototype, "description", void 0);
 __decorate([
-    (0, class_validator_1.IsEnum)(ticket_enum_1.TicketPriorityEnum),
+    (0, class_validator_1.IsEnum)(ticket_priority_enum_1.TicketPriorityEnum),
     __metadata("design:type", String)
 ], CreateTicketDto.prototype, "priority", void 0);
 //# sourceMappingURL=create.dm.js.map
