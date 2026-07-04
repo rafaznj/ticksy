@@ -1,9 +1,19 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { Outlet, createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute('/_authenticated')({
-  component: RouteComponent,
-})
+import { AppSidebar } from "@/layouts/AppSidebar";
 
-function RouteComponent() {
-  return <div>Hello "/_authenticated"!</div>
+export const Route = createFileRoute("/_authenticated")({
+  component: AuthenticatedLayout,
+});
+
+function AuthenticatedLayout() {
+  return (
+    <div className="flex h-screen">
+      <AppSidebar />
+
+      <main className="flex-1">
+        <Outlet />
+      </main>
+    </div>
+  );
 }

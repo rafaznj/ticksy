@@ -1,3 +1,3 @@
 import { IBaseDeleteRepository } from "../../../../shared/base/repositories/contracts/delete";
 
-export type IDeleteUserRepository = IBaseDeleteRepository;
+export type IDeleteTicketRepository = IBaseDeleteRepository;

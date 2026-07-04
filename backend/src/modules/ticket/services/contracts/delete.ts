@@ -1,3 +1,3 @@
 import { IBaseDeleteService } from "../../../../shared/base/services/contracts/delete";
 
-export type IDeleteUserService = IBaseDeleteService;
+export type IDeleteTicketService = IBaseDeleteService;

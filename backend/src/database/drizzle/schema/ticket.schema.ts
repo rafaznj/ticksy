@@ -29,5 +29,4 @@ export const ticket = pgTable("ticket", {
     .defaultNow()
     .$onUpdate(() => sql`now()`)
     .notNull(),
-  closedAt: timestamp(),
 });

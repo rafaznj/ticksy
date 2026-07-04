@@ -1,4 +1,4 @@
-import { IsEnum, IsNotEmpty, IsString } from "class-validator";
+import { IsEnum, IsNotEmpty, IsString, IsUUID } from "class-validator";
 import { TicketPriorityEnum } from "../enums/ticket-priority.enum";
 
 export class CreateTicketDto {
@@ -12,4 +12,8 @@ export class CreateTicketDto {
 
   @IsEnum(TicketPriorityEnum)
   priority!: TicketPriorityEnum;
+
+  @IsUUID(4)
+  @IsNotEmpty()
+  createdById!: string;
 }
