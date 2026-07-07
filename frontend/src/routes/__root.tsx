@@ -2,8 +2,8 @@ import { createRootRoute, Outlet, useRouter } from "@tanstack/react-router";
 import { Suspense, useEffect } from "react";
 
 import { NotFoundRouteComponent } from "@/components/NotFoundRoute";
-import { useUser } from "@/libs/zustand/use-user";
-import { Toaster } from "@/components/ui/sonner";
+import { Toaster } from "@/components/primitives/sonner";
+import { useUser } from "@/lib/zustand/use-user";
 
 function RootComponent() {
   const router = useRouter();

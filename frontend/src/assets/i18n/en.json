@@ -1,20 +1,86 @@
 {
-  "general": {
-    "backHome": "Back to home",
+  "auth": {
+    "login": {
+      "accessibility": {
+        "hidePassword": "Hide password",
+        "showPassword": "Show password"
+      },
+      "actions": {
+        "createAccount": "Create account",
+        "forgotPassword": "Forgot my password",
+        "loggingIn": "Signing in...",
+        "login": "Sign In"
+      },
+      "descriptions": {
+        "copyright": "© {{year}} Ticksy. All rights reserved.",
+        "featureAnalytics": "Reports and dashboards with real-time metrics.",
+        "featureAutomation": "Automate workflows and boost productivity.",
+        "featureSecurity": "Advanced protection with end-to-end encryption.",
+        "featureSupport": "Manage tickets, track metrics, and deliver the best support with a platform built for modern teams.",
+        "featureTickets": "Organize and track all tickets in one place.",
+        "welcome": "Sign in with your credentials to access your account"
+      },
+      "labels": {
+        "email": "Email",
+        "password": "Password",
+        "rememberMe": "Remember me"
+      },
+      "messages": {
+        "fillFields": "Please fill in all fields.",
+        "invalidEmail": "Please enter a valid email.",
+        "noAccount": "Don't have an account?",
+        "passwordMinLength": "Password must be at least 6 characters."
+      },
+      "placeholders": {
+        "email": "your@email.com",
+        "password": "••••••••"
+      },
+      "titles": {
+        "featureAnalytics": "Advanced Analytics",
+        "featureAutomation": "Automation",
+        "featureSecurity": "Security",
+        "featureSupport": "Simplify your team's support",
+        "featureTickets": "Ticket Management",
+        "welcome": "Welcome back"
+      }
+    }
+  },
+  "common": {
+    "actions": {
+      "backHome": "Back to home"
+    },
     "errors": {
       "notFoundRoute": "Route not found"
     }
   },
-  "tickets": {
-    "title": "Tickets",
-    "open": {
-      "title": "Open Tickets"
+  "layout": {
+    "header": {
+      "languageToggle": {
+        "ariaLabel": "Change language",
+        "tooltip": "Change language"
+      },
+      "themeToggle": {
+        "ariaLabel": "Toggle theme",
+        "tooltip": "Toggle theme"
+      }
     },
-    "waiting": {
-      "title": "Waiting Tickets"
-    },
-    "finished": {
-      "title": "Finished Tickets"
+    "sidebar": {
+      "actions": {
+        "logout": "Sign Out",
+        "myProfile": "My Profile"
+      },
+      "labels": {
+        "finishedTickets": "Finished",
+        "home": "Home",
+        "openTickets": "Open",
+        "settings": "Settings",
+        "users": "Users",
+        "waitingTickets": "Waiting"
+      },
+      "titles": {
+        "social": "Social",
+        "tickets": "Tickets"
+      }
     }
   }
 }
