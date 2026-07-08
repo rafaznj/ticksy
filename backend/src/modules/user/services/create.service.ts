@@ -16,7 +16,7 @@ export class CreateUserService
 {
   constructor(
     @Inject(REPOSITORY_TOKENS.CreateUserRepository)
-    private readonly createUserRepository: ICreateUserRepository,
+    createUserRepository: ICreateUserRepository,
     @Inject(SERVICE_TOKENS.GetUserByEmailService)
     private readonly getUserByEmailService: IGetUserByEmailService,
   ) {

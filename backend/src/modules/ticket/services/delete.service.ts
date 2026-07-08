@@ -8,7 +8,7 @@ import type { IDeleteTicketRepository } from "../repositories/contracts/delete";
 export class DeleteTicketService extends BaseDeleteService implements IDeleteTicketService {
   constructor(
     @Inject(REPOSITORY_TOKENS.DeleteTicketRepository)
-    private readonly deleteTicketRepository: IDeleteTicketRepository,
+    deleteTicketRepository: IDeleteTicketRepository,
   ) {
     super(deleteTicketRepository);
   }

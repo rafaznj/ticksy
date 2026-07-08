@@ -1,8 +1,8 @@
-import { Body, Controller, Delete, Get, Inject, Param, Post, Put } from "@nestjs/common";
+import { Body, Controller, Get, Inject, Param, Patch, Post, Put } from "@nestjs/common";
 import { SERVICE_TOKENS } from "../../../shared/di/tokens.services";
 import { CreateUserDto } from "../dto/create-user.dto";
 import type { ICreateUserService } from "../services/contracts/create";
-import type { IDeleteUserService } from "../services/contracts/delete";
+import type { IDeactivateUserService } from "../services/contracts/deactivate";
 import type { IGetUserByIdService } from "../services/contracts/get-by-id";
 import type { IUpdateUserService } from "../services/contracts/update";
 import type { IGetUserByEmailService } from "../services/contracts/get-by-email";
@@ -17,8 +17,8 @@ export class UserController {
     private readonly getUserByIdService: IGetUserByIdService,
     @Inject(SERVICE_TOKENS.UpdateUserService)
     private readonly updateUserService: IUpdateUserService,
-    @Inject(SERVICE_TOKENS.DeleteUserService)
-    private readonly deleteUserService: IDeleteUserService,
+    @Inject(SERVICE_TOKENS.DeactivateUserService)
+    private readonly deactivateUserService: IDeactivateUserService,
     @Inject(SERVICE_TOKENS.GetUserByEmailService)
     private readonly getUserByEmailService: IGetUserByEmailService,
   ) {}
@@ -38,9 +38,9 @@ export class UserController {
     return this.updateUserService.execute(id, data);
   }
 
-  @Delete(":id")
-  async delete(@Param("id") id: string) {
-    return this.deleteUserService.execute(id);
+  @Patch(":id")
+  async deactivate(@Param("id") id: string) {
+    return this.deactivateUserService.execute(id);
   }
 
   @Get("get-by-email/:email")

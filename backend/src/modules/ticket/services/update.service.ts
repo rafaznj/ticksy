@@ -12,7 +12,7 @@ export class UpdateTicketService
 {
   constructor(
     @Inject(REPOSITORY_TOKENS.UpdateTicketRepository)
-    private readonly updateTicketRepository: IUpdateTicketRepository,
+    updateTicketRepository: IUpdateTicketRepository,
   ) {
     super(updateTicketRepository);
   }

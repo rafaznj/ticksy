@@ -12,7 +12,7 @@ export class GetTicketByIdService
 {
   constructor(
     @Inject(REPOSITORY_TOKENS.GetTicketByIdRepository)
-    private readonly getTicketByIdRepository: IGetTicketByIdRepository,
+    getTicketByIdRepository: IGetTicketByIdRepository,
   ) {
     super(getTicketByIdRepository);
   }

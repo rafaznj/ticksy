@@ -12,7 +12,7 @@ export class UpdateUserService
 {
   constructor(
     @Inject(REPOSITORY_TOKENS.UpdateUserRepository)
-    private readonly updateUserRepository: IUpdateUserRepository,
+    updateUserRepository: IUpdateUserRepository,
   ) {
     super(updateUserRepository);
   }

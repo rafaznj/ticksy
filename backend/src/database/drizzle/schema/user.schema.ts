@@ -1,5 +1,5 @@
 import { sql } from "drizzle-orm";
-import { pgEnum, pgTable, text, timestamp, uuid, varchar } from "drizzle-orm/pg-core";
+import { boolean, pgEnum, pgTable, text, timestamp, uuid, varchar } from "drizzle-orm/pg-core";
 import { UserRoleEnum } from "../../../modules/user/enums/roles.enum";
 
 export const userRoleEnum = pgEnum(
@@ -13,8 +13,9 @@ export const user = pgTable("user", {
   email: varchar({ length: 254 }).notNull(),
   password: text().notNull(),
   role: userRoleEnum().default(UserRoleEnum.EMPLOYEE).notNull(),
-  createdAt: timestamp().defaultNow().notNull(),
-  updatedAt: timestamp()
+  isActive: boolean("is_active").default(true).notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at")
     .defaultNow()
     .$onUpdate(() => sql`now()`)
     .notNull(),

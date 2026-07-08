@@ -20,12 +20,12 @@ export const ticket = pgTable("ticket", {
   description: text().notNull(),
   priority: ticketPriorityEnum().notNull(),
   status: ticketStatusEnum().default(TicketStatusEnum.OPEN).notNull(),
-  createdById: uuid()
+  createdById: uuid("created_by_id")
     .references(() => user.id)
     .notNull(),
-  assignedToId: uuid().references(() => user.id),
-  createdAt: timestamp().defaultNow().notNull(),
-  updatedAt: timestamp()
+  assignedToId: uuid("assigned_to_id").references(() => user.id),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("update_at")
     .defaultNow()
     .$onUpdate(() => sql`now()`)
     .notNull(),

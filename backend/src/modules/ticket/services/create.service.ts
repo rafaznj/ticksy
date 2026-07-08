@@ -13,7 +13,7 @@ export class CreateTicketService
 {
   constructor(
     @Inject(REPOSITORY_TOKENS.CreateTicketRepository)
-    private readonly createTicketRepository: ICreateTicketRepository,
+    createTicketRepository: ICreateTicketRepository,
   ) {
     super(createTicketRepository);
   }
