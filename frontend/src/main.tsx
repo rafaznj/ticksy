@@ -6,7 +6,7 @@ import { I18nextProvider } from "react-i18next";
 
 import i18n from "./assets/i18n";
 import { router } from "@/router";
-import tanStackQueryClient from "@/libs/query-client";
+import tanStackQueryClient from "@/lib/query-client";
 
 const rootElement = document.getElementById("root")!;
 if (!rootElement.innerHTML) {

@@ -5,14 +5,14 @@ import { SERVICE_TOKENS } from "../../shared/di/tokens.services";
 import { UserController } from "./controllers/user.controller";
 import { CreateUserRepository } from "./repositories/create.repository";
 import { CreateUserService } from "./services/create.service";
-import { DeleteUserService } from "./services/delete.service";
-import { DeleteUserRepository } from "./repositories/delete.repository";
+import { DeactivateUserService } from "./services/deactivate.service";
 import { UpdateUserService } from "./services/update.service";
 import { UpdateUserRepository } from "./repositories/update.repository";
 import { GetUserByIdRepository } from "./repositories/get-by-id.repository";
 import { GetUserByIdService } from "./services/get-by-id.service";
 import GetUserByEmailService from "./services/get-by-email.service";
 import { GetUserByEmailRepository } from "./repositories/get-by-email.repository";
+import { DeactivateUserRepository } from "./repositories/deactivate.repository";
 
 @Module({
   imports: [DrizzleModule],
@@ -43,12 +43,12 @@ import { GetUserByEmailRepository } from "./repositories/get-by-email.repository
       useClass: UpdateUserRepository,
     },
     {
-      provide: SERVICE_TOKENS.DeleteUserService,
-      useClass: DeleteUserService,
+      provide: SERVICE_TOKENS.DeactivateUserService,
+      useClass: DeactivateUserService,
     },
     {
-      provide: REPOSITORY_TOKENS.DeleteUserRepository,
-      useClass: DeleteUserRepository,
+      provide: REPOSITORY_TOKENS.DeactivateUserRepository,
+      useClass: DeactivateUserRepository,
     },
     {
       provide: SERVICE_TOKENS.GetUserByEmailService,

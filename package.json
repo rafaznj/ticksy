@@ -7,13 +7,20 @@
     "dev": "pnpm -r --parallel dev",
     "build": "pnpm -r build",
     "lint": "pnpm -r lint",
-    "format": "prettier . --write"
+    "lint:fix": "pnpm -r lint:fix",
+    "format": "prettier . --write",
+    "format:check": "prettier . --check",
+    "fix": "pnpm run lint:fix && pnpm run format"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "eslint": "^10.5.0",
     "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-prettier": "^5.5.6",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.3",
     "globals": "^17.7.0",
     "prettier": "^3.8.5",
     "typescript": "^6.0.3",

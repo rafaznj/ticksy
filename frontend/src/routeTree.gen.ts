@@ -11,7 +11,9 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
+import { Route as AuthenticatedIndexRouteImport } from './routes/_authenticated/index'
 import { Route as AuthenticatedHomeRouteImport } from './routes/_authenticated/home'
+import { Route as AuthenticatedUserUserRouteImport } from './routes/_authenticated/user/user'
 import { Route as AuthenticatedTicketsWaitingRouteImport } from './routes/_authenticated/tickets/waiting'
 import { Route as AuthenticatedTicketsOpenRouteImport } from './routes/_authenticated/tickets/open'
 import { Route as AuthenticatedTicketsFinishedRouteImport } from './routes/_authenticated/tickets/finished'
@@ -25,9 +27,19 @@ const AuthenticatedRoute = AuthenticatedRouteImport.update({
   id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedIndexRoute = AuthenticatedIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
 const AuthenticatedHomeRoute = AuthenticatedHomeRouteImport.update({
   id: '/home',
   path: '/home',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedUserUserRoute = AuthenticatedUserUserRouteImport.update({
+  id: '/user/user',
+  path: '/user/user',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
 const AuthenticatedTicketsWaitingRoute =
@@ -50,29 +62,33 @@ const AuthenticatedTicketsFinishedRoute =
   } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof AuthenticatedRouteWithChildren
+  '/': typeof AuthenticatedIndexRoute
   '/login': typeof LoginRoute
   '/home': typeof AuthenticatedHomeRoute
   '/tickets/finished': typeof AuthenticatedTicketsFinishedRoute
   '/tickets/open': typeof AuthenticatedTicketsOpenRoute
   '/tickets/waiting': typeof AuthenticatedTicketsWaitingRoute
+  '/user/user': typeof AuthenticatedUserUserRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof AuthenticatedRouteWithChildren
   '/login': typeof LoginRoute
   '/home': typeof AuthenticatedHomeRoute
+  '/': typeof AuthenticatedIndexRoute
   '/tickets/finished': typeof AuthenticatedTicketsFinishedRoute
   '/tickets/open': typeof AuthenticatedTicketsOpenRoute
   '/tickets/waiting': typeof AuthenticatedTicketsWaitingRoute
+  '/user/user': typeof AuthenticatedUserUserRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_authenticated': typeof AuthenticatedRouteWithChildren
   '/login': typeof LoginRoute
   '/_authenticated/home': typeof AuthenticatedHomeRoute
+  '/_authenticated/': typeof AuthenticatedIndexRoute
   '/_authenticated/tickets/finished': typeof AuthenticatedTicketsFinishedRoute
   '/_authenticated/tickets/open': typeof AuthenticatedTicketsOpenRoute
   '/_authenticated/tickets/waiting': typeof AuthenticatedTicketsWaitingRoute
+  '/_authenticated/user/user': typeof AuthenticatedUserUserRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -83,22 +99,26 @@ export interface FileRouteTypes {
     | '/tickets/finished'
     | '/tickets/open'
     | '/tickets/waiting'
+    | '/user/user'
   fileRoutesByTo: FileRoutesByTo
   to:
-    | '/'
     | '/login'
     | '/home'
+    | '/'
     | '/tickets/finished'
     | '/tickets/open'
     | '/tickets/waiting'
+    | '/user/user'
   id:
     | '__root__'
     | '/_authenticated'
     | '/login'
     | '/_authenticated/home'
+    | '/_authenticated/'
     | '/_authenticated/tickets/finished'
     | '/_authenticated/tickets/open'
     | '/_authenticated/tickets/waiting'
+    | '/_authenticated/user/user'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -122,11 +142,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/': {
+      id: '/_authenticated/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedIndexRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
     '/_authenticated/home': {
       id: '/_authenticated/home'
       path: '/home'
       fullPath: '/home'
       preLoaderRoute: typeof AuthenticatedHomeRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/user/user': {
+      id: '/_authenticated/user/user'
+      path: '/user/user'
+      fullPath: '/user/user'
+      preLoaderRoute: typeof AuthenticatedUserUserRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
     '/_authenticated/tickets/waiting': {
@@ -155,16 +189,20 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedRouteChildren {
   AuthenticatedHomeRoute: typeof AuthenticatedHomeRoute
+  AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
   AuthenticatedTicketsFinishedRoute: typeof AuthenticatedTicketsFinishedRoute
   AuthenticatedTicketsOpenRoute: typeof AuthenticatedTicketsOpenRoute
   AuthenticatedTicketsWaitingRoute: typeof AuthenticatedTicketsWaitingRoute
+  AuthenticatedUserUserRoute: typeof AuthenticatedUserUserRoute
 }
 
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedHomeRoute: AuthenticatedHomeRoute,
+  AuthenticatedIndexRoute: AuthenticatedIndexRoute,
   AuthenticatedTicketsFinishedRoute: AuthenticatedTicketsFinishedRoute,
   AuthenticatedTicketsOpenRoute: AuthenticatedTicketsOpenRoute,
   AuthenticatedTicketsWaitingRoute: AuthenticatedTicketsWaitingRoute,
+  AuthenticatedUserUserRoute: AuthenticatedUserUserRoute,
 }
 
 const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(

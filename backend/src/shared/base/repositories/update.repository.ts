@@ -12,13 +12,9 @@ export abstract class BaseUpdateRepository<T> implements IBaseUpdateRepository<T
 
   constructor(private readonly table: TableWithId) {}
 
-  async execute(id: string, data: Partial<T>): Promise<T | null> {
-    const [updated] = await this.db
-      .update(this.table)
-      .set(data)
-      .where(eq(this.table.id, id))
-      .returning();
+  async execute(id: string, data: Partial<T>): Promise<boolean> {
+    const result = await this.db.update(this.table).set(data).where(eq(this.table.id, id));
 
-    return (updated as T) ?? null;
+    return !!result.rowCount;
   }
 }

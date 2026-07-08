@@ -1,20 +1,86 @@
 {
-  "general": {
-    "backHome": "Voltar para a página inicial",
+  "auth": {
+    "login": {
+      "accessibility": {
+        "hidePassword": "Esconder senha",
+        "showPassword": "Mostrar senha"
+      },
+      "actions": {
+        "createAccount": "Criar conta",
+        "forgotPassword": "Esqueci minha senha",
+        "loggingIn": "Entrando...",
+        "login": "Entrar"
+      },
+      "descriptions": {
+        "copyright": "© {{year}} Ticksy. Todos os direitos reservados.",
+        "featureAnalytics": "Relatórios e dashboards com métricas em tempo real.",
+        "featureAutomation": "Automatize fluxos de trabalho e ganhe produtividade.",
+        "featureSecurity": "Proteção avançada com criptografia de ponta a ponta.",
+        "featureSupport": "Gerencie tickets, acompanhe métricas e ofereça o melhor suporte com uma plataforma feita para equipes modernas.",
+        "featureTickets": "Organize e acompanhe todos os chamados em um só lugar.",
+        "welcome": "Entre com suas credenciais para acessar sua conta"
+      },
+      "labels": {
+        "email": "E-mail",
+        "password": "Senha",
+        "rememberMe": "Lembrar-me"
+      },
+      "messages": {
+        "fillFields": "Preencha todos os campos.",
+        "invalidEmail": "Digite um e-mail válido.",
+        "noAccount": "Não tem uma conta?",
+        "passwordMinLength": "A senha deve ter no mínimo 6 caracteres."
+      },
+      "placeholders": {
+        "email": "seu@email.com",
+        "password": "••••••••"
+      },
+      "titles": {
+        "featureAnalytics": "Analytics Avançados",
+        "featureAutomation": "Automações",
+        "featureSecurity": "Segurança",
+        "featureSupport": "Simplifique o atendimento do seu time",
+        "featureTickets": "Gestão de Tickets",
+        "welcome": "Bem-vindo de volta"
+      }
+    }
+  },
+  "common": {
+    "actions": {
+      "backHome": "Voltar para a página inicial"
+    },
     "errors": {
       "notFoundRoute": "Rota não encontrada"
     }
   },
-  "tickets": {
-    "title": "Tickets",
-    "open": {
-      "title": "Tickets Abertos"
+  "layout": {
+    "header": {
+      "languageToggle": {
+        "ariaLabel": "Alterar idioma",
+        "tooltip": "Alterar idioma"
+      },
+      "themeToggle": {
+        "ariaLabel": "Alternar tema",
+        "tooltip": "Alternar tema"
+      }
     },
-    "waiting": {
-      "title": "Tickets em Espera"
-    },
-    "finished": {
-      "title": "Tickets Concluídos"
+    "sidebar": {
+      "actions": {
+        "logout": "Sair",
+        "myProfile": "Meu Perfil"
+      },
+      "labels": {
+        "finishedTickets": "Concluídos",
+        "home": "Home",
+        "openTickets": "Abertos",
+        "settings": "Configurações",
+        "users": "Usuários",
+        "waitingTickets": "Aguardando"
+      },
+      "titles": {
+        "social": "Social",
+        "tickets": "Tickets"
+      }
     }
   }
 }

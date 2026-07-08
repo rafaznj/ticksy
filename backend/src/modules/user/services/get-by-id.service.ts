@@ -12,7 +12,7 @@ export class GetUserByIdService
 {
   constructor(
     @Inject(REPOSITORY_TOKENS.GetUserByIdRepository)
-    private readonly getUserByIdRepository: IGetUserByIdRepository,
+    getUserByIdRepository: IGetUserByIdRepository,
   ) {
     super(getUserByIdRepository);
   }

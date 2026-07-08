@@ -1,5 +1,5 @@
 {
-  "id": "299f6159-57dd-4d37-8d33-0917d1e6975a",
+  "id": "d47b4dc0-0338-4714-ac62-15fef8a6e107",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -42,47 +42,41 @@
           "notNull": true,
           "default": "'OPEN'"
         },
-        "createdById": {
-          "name": "createdById",
+        "created_by_id": {
+          "name": "created_by_id",
           "type": "uuid",
           "primaryKey": false,
           "notNull": true
         },
-        "assignedToId": {
-          "name": "assignedToId",
+        "assigned_to_id": {
+          "name": "assigned_to_id",
           "type": "uuid",
           "primaryKey": false,
           "notNull": false
         },
-        "createdAt": {
-          "name": "createdAt",
+        "created_at": {
+          "name": "created_at",
           "type": "timestamp",
           "primaryKey": false,
           "notNull": true,
           "default": "now()"
         },
-        "updatedAt": {
-          "name": "updatedAt",
+        "update_at": {
+          "name": "update_at",
           "type": "timestamp",
           "primaryKey": false,
           "notNull": true,
           "default": "now()"
-        },
-        "closedAt": {
-          "name": "closedAt",
-          "type": "timestamp",
-          "primaryKey": false,
-          "notNull": false
         }
       },
       "indexes": {},
       "foreignKeys": {
-        "ticket_createdById_user_id_fk": {
-          "name": "ticket_createdById_user_id_fk",
+        "ticket_created_by_id_user_id_fk": {
+          "name": "ticket_created_by_id_user_id_fk",
           "tableFrom": "ticket",
           "tableTo": "user",
           "columnsFrom": [
-            "createdById"
+            "created_by_id"
           ],
           "columnsTo": [
             "id"
@@ -90,12 +84,12 @@
           "onDelete": "no action",
           "onUpdate": "no action"
         },
-        "ticket_assignedToId_user_id_fk": {
-          "name": "ticket_assignedToId_user_id_fk",
+        "ticket_assigned_to_id_user_id_fk": {
+          "name": "ticket_assigned_to_id_user_id_fk",
           "tableFrom": "ticket",
           "tableTo": "user",
           "columnsFrom": [
-            "assignedToId"
+            "assigned_to_id"
           ],
           "columnsTo": [
             "id"
@@ -147,15 +141,22 @@
           "notNull": true,
           "default": "'EMPLOYEE'"
         },
-        "createdAt": {
-          "name": "createdAt",
+        "is_active": {
+          "name": "is_active",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": true
+        },
+        "created_at": {
+          "name": "created_at",
           "type": "timestamp",
           "primaryKey": false,
           "notNull": true,
           "default": "now()"
         },
-        "updatedAt": {
-          "name": "updatedAt",
+        "updated_at": {
+          "name": "updated_at",
           "type": "timestamp",
           "primaryKey": false,
           "notNull": true,
@@ -164,6 +165,71 @@
       },
       "indexes": {},
       "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.refresh_tokens": {
+      "name": "refresh_tokens",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "token_hash": {
+          "name": "token_hash",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "expires_at": {
+          "name": "expires_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "revoked_at": {
+          "name": "revoked_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "refresh_tokens_user_id_user_id_fk": {
+          "name": "refresh_tokens_user_id_user_id_fk",
+          "tableFrom": "refresh_tokens",
+          "tableTo": "user",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
       "policies": {},
