@@ -3,13 +3,13 @@ import { Suspense, useEffect } from "react";
 
 import { NotFoundRouteComponent } from "@/components/NotFoundRoute";
 import { Toaster } from "@/components/primitives/sonner";
-import { useUser } from "@/lib/zustand/use-user";
+import { useAuthStore } from "@/lib/zustand/use-auth";
 
 function RootComponent() {
   const router = useRouter();
 
   useEffect(() => {
-    useUser.setState({
+    useAuthStore.setState({
       logout: () => void router.navigate({ to: "/login" }),
     });
   }, [router]);
@@ -18,7 +18,6 @@ function RootComponent() {
     <>
       <Outlet />
       <Toaster />
-
       <Suspense />
     </>
   );
