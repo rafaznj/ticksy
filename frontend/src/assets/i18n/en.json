@@ -1,86 +1,85 @@
 {
   "auth": {
+    "createAccount": {
+      "actions": {
+        "submit": "Create account",
+        "submitting": "Creating account..."
+      }
+    },
+    "forgotPassword": {
+      "actions": {
+        "submit": "Reset password",
+        "submitting": "Resetting password..."
+      }
+    },
     "login": {
-      "accessibility": {
-        "hidePassword": "Hide password",
-        "showPassword": "Show password"
-      },
       "actions": {
         "createAccount": "Create account",
         "forgotPassword": "Forgot my password",
-        "loggingIn": "Signing in...",
-        "login": "Sign In"
+        "submit": "Sign In",
+        "submitting": "Signing in..."
       },
-      "descriptions": {
-        "copyright": "© {{year}} Ticksy. All rights reserved.",
-        "featureAnalytics": "Reports and dashboards with real-time metrics.",
-        "featureAutomation": "Automate workflows and boost productivity.",
-        "featureSecurity": "Advanced protection with end-to-end encryption.",
-        "featureSupport": "Manage tickets, track metrics, and deliver the best support with a platform built for modern teams.",
-        "featureTickets": "Organize and track all tickets in one place.",
-        "welcome": "Sign in with your credentials to access your account"
+      "description": "Enter your email and password to continue",
+      "fields": {
+        "email": {
+          "label": "Email",
+          "placeholder": "your@email.com",
+          "validations": {
+            "invalid": "Please enter a valid email.",
+            "maxLength": "Email must not exceed {{max}} characters.",
+            "required": "Email is required."
+          }
+        },
+        "password": {
+          "label": "Password",
+          "placeholder": "••••••••",
+          "validations": {
+            "minLength": "Password must be at least {{min}} characters.",
+            "required": "Password is required."
+          }
+        }
       },
-      "labels": {
-        "email": "Email",
-        "password": "Password",
-        "rememberMe": "Remember me"
-      },
-      "messages": {
-        "fillFields": "Please fill in all fields.",
-        "invalidEmail": "Please enter a valid email.",
-        "noAccount": "Don't have an account?",
-        "passwordMinLength": "Password must be at least 6 characters."
-      },
-      "placeholders": {
-        "email": "your@email.com",
-        "password": "••••••••"
-      },
-      "titles": {
-        "featureAnalytics": "Advanced Analytics",
-        "featureAutomation": "Automation",
-        "featureSecurity": "Security",
-        "featureSupport": "Simplify your team's support",
-        "featureTickets": "Ticket Management",
-        "welcome": "Welcome back"
-      }
+      "title": "Sign in to your account"
     }
   },
-  "common": {
+  "general": {
+    "settings": "Settings",
+    "copyright": "© {{year}} Ticksy. All rights reserved.",
+    "theme": "Switch to the {{theme}} theme",
+    "language": "Switch to the language {{language}}",
     "actions": {
-      "backHome": "Back to home"
-    },
-    "errors": {
-      "notFoundRoute": "Route not found"
+      "back": "Back",
+      "cancel": "Cancel",
+      "close": "Close",
+      "delete": "Delete",
+      "edit": "Edit",
+      "refresh": "Refresh",
+      "retry": "Retry",
+      "save": "Save"
     }
   },
-  "layout": {
-    "header": {
-      "languageToggle": {
-        "ariaLabel": "Change language",
-        "tooltip": "Change language"
-      },
-      "themeToggle": {
-        "ariaLabel": "Toggle theme",
-        "tooltip": "Toggle theme"
-      }
+  "sidebar": {
+    "labels": {
+      "home": "Home",
+      "openTickets": "Opens",
+      "waitingTickets": "Waitings",
+      "finishedTickets": "Finishes",
+      "profile": "Profile",
+      "users": "Users"
     },
-    "sidebar": {
-      "actions": {
-        "logout": "Sign Out",
-        "myProfile": "My Profile"
-      },
-      "labels": {
-        "finishedTickets": "Finished",
-        "home": "Home",
-        "openTickets": "Open",
-        "settings": "Settings",
-        "users": "Users",
-        "waitingTickets": "Waiting"
-      },
-      "titles": {
-        "social": "Social",
-        "tickets": "Tickets"
-      }
+    "tooltips": {
+      "home": "Go to Home",
+      "openTickets": "View open tickets",
+      "waitingTickets": "View waiting tickets",
+      "finishedTickets": "View completed tickets",
+      "users": "View users"
+    },
+    "titles": {
+      "tickets": "Tickets",
+      "social": "Social"
+    },
+    "actions": {
+      "logout": "Logout"
     }
   }
 }

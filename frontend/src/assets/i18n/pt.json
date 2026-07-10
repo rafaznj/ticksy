@@ -1,86 +1,85 @@
 {
   "auth": {
+    "createAccount": {
+      "actions": {
+        "submit": "Criar conta",
+        "submitting": "Criando conta..."
+      }
+    },
+    "forgotPassword": {
+      "actions": {
+        "submit": "Restaurar senha",
+        "submitting": "Restaurando senha..."
+      }
+    },
     "login": {
-      "accessibility": {
-        "hidePassword": "Esconder senha",
-        "showPassword": "Mostrar senha"
-      },
       "actions": {
         "createAccount": "Criar conta",
         "forgotPassword": "Esqueci minha senha",
-        "loggingIn": "Entrando...",
-        "login": "Entrar"
+        "submit": "Entrar",
+        "submitting": "Entrando..."
       },
-      "descriptions": {
-        "copyright": "© {{year}} Ticksy. Todos os direitos reservados.",
-        "featureAnalytics": "Relatórios e dashboards com métricas em tempo real.",
-        "featureAutomation": "Automatize fluxos de trabalho e ganhe produtividade.",
-        "featureSecurity": "Proteção avançada com criptografia de ponta a ponta.",
-        "featureSupport": "Gerencie tickets, acompanhe métricas e ofereça o melhor suporte com uma plataforma feita para equipes modernas.",
-        "featureTickets": "Organize e acompanhe todos os chamados em um só lugar.",
-        "welcome": "Entre com suas credenciais para acessar sua conta"
+      "description": "Entre com seu e-mail e senha para continuar",
+      "fields": {
+        "email": {
+          "label": "E-mail",
+          "placeholder": "seu@email.com",
+          "validations": {
+            "invalid": "Digite um e-mail válido.",
+            "maxLength": "O e-mail deve ter no máximo {{max}} caracteres.",
+            "required": "O e-mail é obrigatório."
+          }
+        },
+        "password": {
+          "label": "Senha",
+          "placeholder": "••••••••",
+          "validations": {
+            "minLength": "A senha deve ter no mínimo {{min}} caracteres.",
+            "required": "A senha é obrigatória."
+          }
+        }
       },
-      "labels": {
-        "email": "E-mail",
-        "password": "Senha",
-        "rememberMe": "Lembrar-me"
-      },
-      "messages": {
-        "fillFields": "Preencha todos os campos.",
-        "invalidEmail": "Digite um e-mail válido.",
-        "noAccount": "Não tem uma conta?",
-        "passwordMinLength": "A senha deve ter no mínimo 6 caracteres."
-      },
-      "placeholders": {
-        "email": "seu@email.com",
-        "password": "••••••••"
-      },
-      "titles": {
-        "featureAnalytics": "Analytics Avançados",
-        "featureAutomation": "Automações",
-        "featureSecurity": "Segurança",
-        "featureSupport": "Simplifique o atendimento do seu time",
-        "featureTickets": "Gestão de Tickets",
-        "welcome": "Bem-vindo de volta"
-      }
+      "title": "Acesse sua conta"
     }
   },
-  "common": {
+  "general": {
+    "settings": "Configurações",
+    "copyright": "© {{year}} Ticksy. Todos os direitos reservados.",
+    "theme": "Mudar para o tema {{theme}}",
+    "language": "Mudar a linguagem para {{language}}",
     "actions": {
-      "backHome": "Voltar para a página inicial"
-    },
-    "errors": {
-      "notFoundRoute": "Rota não encontrada"
+      "back": "Voltar",
+      "cancel": "Cancelar",
+      "close": "Fechar",
+      "delete": "Excluir",
+      "edit": "Editar",
+      "refresh": "Atualizar",
+      "retry": "Tentar novamente",
+      "save": "Salvar"
     }
   },
-  "layout": {
-    "header": {
-      "languageToggle": {
-        "ariaLabel": "Alterar idioma",
-        "tooltip": "Alterar idioma"
-      },
-      "themeToggle": {
-        "ariaLabel": "Alternar tema",
-        "tooltip": "Alternar tema"
-      }
+  "sidebar": {
+    "labels": {
+      "home": "Home",
+      "openTickets": "Abertos",
+      "waitingTickets": "Esperando",
+      "finishedTickets": "Finalizados",
+      "profile": "Perfil",
+      "users": "Usuários"
     },
-    "sidebar": {
-      "actions": {
-        "logout": "Sair",
-        "myProfile": "Meu Perfil"
-      },
-      "labels": {
-        "finishedTickets": "Concluídos",
-        "home": "Home",
-        "openTickets": "Abertos",
-        "settings": "Configurações",
-        "users": "Usuários",
-        "waitingTickets": "Aguardando"
-      },
-      "titles": {
-        "social": "Social",
-        "tickets": "Tickets"
-      }
+    "tooltips": {
+      "home": "Ir para a página inicial",
+      "openTickets": "Ver tickets abertos",
+      "waitingTickets": "Ver tickets em espera",
+      "finishedTickets": "Ver tickets finalizados",
+      "users": "Ver usuários"
+    },
+    "titles": {
+      "tickets": "Tickets",
+      "social": "Social"
+    },
+    "actions": {
+      "logout": "Sair"
     }
   }
 }

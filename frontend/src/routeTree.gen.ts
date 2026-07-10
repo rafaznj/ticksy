@@ -13,7 +13,8 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
 import { Route as AuthenticatedIndexRouteImport } from './routes/_authenticated/index'
 import { Route as AuthenticatedHomeRouteImport } from './routes/_authenticated/home'
-import { Route as AuthenticatedUserUserRouteImport } from './routes/_authenticated/user/user'
+import { Route as AuthenticatedUserUsersRouteImport } from './routes/_authenticated/user/users'
+import { Route as AuthenticatedUserProfileRouteImport } from './routes/_authenticated/user/profile'
 import { Route as AuthenticatedTicketsWaitingRouteImport } from './routes/_authenticated/tickets/waiting'
 import { Route as AuthenticatedTicketsOpenRouteImport } from './routes/_authenticated/tickets/open'
 import { Route as AuthenticatedTicketsFinishedRouteImport } from './routes/_authenticated/tickets/finished'
@@ -37,11 +38,17 @@ const AuthenticatedHomeRoute = AuthenticatedHomeRouteImport.update({
   path: '/home',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
-const AuthenticatedUserUserRoute = AuthenticatedUserUserRouteImport.update({
-  id: '/user/user',
-  path: '/user/user',
+const AuthenticatedUserUsersRoute = AuthenticatedUserUsersRouteImport.update({
+  id: '/user/users',
+  path: '/user/users',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
+const AuthenticatedUserProfileRoute =
+  AuthenticatedUserProfileRouteImport.update({
+    id: '/user/profile',
+    path: '/user/profile',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
 const AuthenticatedTicketsWaitingRoute =
   AuthenticatedTicketsWaitingRouteImport.update({
     id: '/tickets/waiting',
@@ -68,7 +75,8 @@ export interface FileRoutesByFullPath {
   '/tickets/finished': typeof AuthenticatedTicketsFinishedRoute
   '/tickets/open': typeof AuthenticatedTicketsOpenRoute
   '/tickets/waiting': typeof AuthenticatedTicketsWaitingRoute
-  '/user/user': typeof AuthenticatedUserUserRoute
+  '/user/profile': typeof AuthenticatedUserProfileRoute
+  '/user/users': typeof AuthenticatedUserUsersRoute
 }
 export interface FileRoutesByTo {
   '/login': typeof LoginRoute
@@ -77,7 +85,8 @@ export interface FileRoutesByTo {
   '/tickets/finished': typeof AuthenticatedTicketsFinishedRoute
   '/tickets/open': typeof AuthenticatedTicketsOpenRoute
   '/tickets/waiting': typeof AuthenticatedTicketsWaitingRoute
-  '/user/user': typeof AuthenticatedUserUserRoute
+  '/user/profile': typeof AuthenticatedUserProfileRoute
+  '/user/users': typeof AuthenticatedUserUsersRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -88,7 +97,8 @@ export interface FileRoutesById {
   '/_authenticated/tickets/finished': typeof AuthenticatedTicketsFinishedRoute
   '/_authenticated/tickets/open': typeof AuthenticatedTicketsOpenRoute
   '/_authenticated/tickets/waiting': typeof AuthenticatedTicketsWaitingRoute
-  '/_authenticated/user/user': typeof AuthenticatedUserUserRoute
+  '/_authenticated/user/profile': typeof AuthenticatedUserProfileRoute
+  '/_authenticated/user/users': typeof AuthenticatedUserUsersRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -99,7 +109,8 @@ export interface FileRouteTypes {
     | '/tickets/finished'
     | '/tickets/open'
     | '/tickets/waiting'
-    | '/user/user'
+    | '/user/profile'
+    | '/user/users'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/login'
@@ -108,7 +119,8 @@ export interface FileRouteTypes {
     | '/tickets/finished'
     | '/tickets/open'
     | '/tickets/waiting'
-    | '/user/user'
+    | '/user/profile'
+    | '/user/users'
   id:
     | '__root__'
     | '/_authenticated'
@@ -118,7 +130,8 @@ export interface FileRouteTypes {
     | '/_authenticated/tickets/finished'
     | '/_authenticated/tickets/open'
     | '/_authenticated/tickets/waiting'
-    | '/_authenticated/user/user'
+    | '/_authenticated/user/profile'
+    | '/_authenticated/user/users'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -156,11 +169,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedHomeRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
-    '/_authenticated/user/user': {
-      id: '/_authenticated/user/user'
-      path: '/user/user'
-      fullPath: '/user/user'
-      preLoaderRoute: typeof AuthenticatedUserUserRouteImport
+    '/_authenticated/user/users': {
+      id: '/_authenticated/user/users'
+      path: '/user/users'
+      fullPath: '/user/users'
+      preLoaderRoute: typeof AuthenticatedUserUsersRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/user/profile': {
+      id: '/_authenticated/user/profile'
+      path: '/user/profile'
+      fullPath: '/user/profile'
+      preLoaderRoute: typeof AuthenticatedUserProfileRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
     '/_authenticated/tickets/waiting': {
@@ -193,7 +213,8 @@ interface AuthenticatedRouteChildren {
   AuthenticatedTicketsFinishedRoute: typeof AuthenticatedTicketsFinishedRoute
   AuthenticatedTicketsOpenRoute: typeof AuthenticatedTicketsOpenRoute
   AuthenticatedTicketsWaitingRoute: typeof AuthenticatedTicketsWaitingRoute
-  AuthenticatedUserUserRoute: typeof AuthenticatedUserUserRoute
+  AuthenticatedUserProfileRoute: typeof AuthenticatedUserProfileRoute
+  AuthenticatedUserUsersRoute: typeof AuthenticatedUserUsersRoute
 }
 
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
@@ -202,7 +223,8 @@ const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedTicketsFinishedRoute: AuthenticatedTicketsFinishedRoute,
   AuthenticatedTicketsOpenRoute: AuthenticatedTicketsOpenRoute,
   AuthenticatedTicketsWaitingRoute: AuthenticatedTicketsWaitingRoute,
-  AuthenticatedUserUserRoute: AuthenticatedUserUserRoute,
+  AuthenticatedUserProfileRoute: AuthenticatedUserProfileRoute,
+  AuthenticatedUserUsersRoute: AuthenticatedUserUsersRoute,
 }
 
 const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(

@@ -1,0 +1,19 @@
+import { BaseCreateService } from "@/shared/base/services/create.service";
+import { REPOSITORY_TOKENS } from "@/shared/di/tokens.repositories";
+import type { CreateUserDto } from "../dto/create-user.dto";
+import type { User } from "../entity/user.entity";
+import type { ICreateUserRepository } from "../repositories/contracts/create";
+import type { ICreateUserService } from "./contracts/create";
+import { inject } from "inversify";
+
+export class CreateUserService
+  extends BaseCreateService<CreateUserDto, User>
+  implements ICreateUserService
+{
+  constructor(
+    @inject(REPOSITORY_TOKENS.CreateUserRepository)
+    repository: ICreateUserRepository,
+  ) {
+    super(repository);
+  }
+}
