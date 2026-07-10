@@ -4,10 +4,10 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/primitives/select";
-import { Label } from "@/components/primitives/label";
+} from "@/components/ui/select";
+import { Label } from "@/components/ui/label";
 import { useFieldContext } from "@/hooks/use-form";
-import { FieldErrors } from "@/components/FieldErrors";
+import { FieldErrors } from "@/components/form/FieldErrors";
 
 interface Option {
   value: string;

@@ -3,7 +3,7 @@ import { useNavigate } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 
 import { useAppForm } from "@/hooks/use-form";
-import { loginFormSchema } from "@/layouts/forms/LoginForm/validations";
+import { loginFormSchema } from "@/pages/login/form/validations";
 
 export function useLoginFormHook() {
   const navigate = useNavigate();

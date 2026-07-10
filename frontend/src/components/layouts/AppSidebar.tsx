@@ -1,3 +1,4 @@
+import { AppSidebarFooter } from "@/components/layouts/AppSidebarFooter";
 import {
   Sidebar,
   SidebarContent,
@@ -7,8 +8,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/components/primitives/sidebar";
-import { AppSidebarFooter } from "@/layouts/Sidebar/AppSidebarFooter";
+} from "@/components/ui/sidebar";
 import { useNavigate, useRouterState } from "@tanstack/react-router";
 import { Home, Ticket, Clock, CheckCircle, Users } from "lucide-react";
 import { useTranslation } from "react-i18next";

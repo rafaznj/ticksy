@@ -1,6 +1,6 @@
 import { useStore } from "@tanstack/react-form";
 
-import { Button } from "@/components/primitives/button";
+import { Button } from "@/components/ui/button";
 import { useFormContext } from "@/hooks/use-form";
 
 interface SubmitButtonProps {

@@ -1,11 +1,11 @@
 import { Outlet, createFileRoute, redirect } from "@tanstack/react-router";
 import { ThemeProvider } from "next-themes";
 
-import { AppSidebar } from "@/layouts/Sidebar/AppSidebar";
-import { AppHeader } from "@/layouts/Sidebar/AppHeader";
-import { TooltipProvider } from "@/components/primitives/tooltip";
-import { SidebarProvider } from "@/components/primitives/sidebar";
 import { useAuthStore } from "@/lib/zustand/use-auth";
+import { AppHeader } from "@/components/layouts/AppHeader";
+import { AppSidebar } from "@/components/layouts/AppSidebar";
+import { SidebarProvider } from "@/components/ui/sidebar";
+import { TooltipProvider } from "@/components/ui/tooltip";
 
 export const Route = createFileRoute("/_authenticated")({
   beforeLoad: () => {

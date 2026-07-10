@@ -1,6 +1,6 @@
 import { CircleX } from "lucide-react";
 import useNotFoundRoute from "./hook";
-import { Button } from "@/components/primitives/button";
+import { Button } from "@/components/ui/button";
 
 export const NotFoundRouteComponent = () => {
   const { navigate, t } = useNotFoundRoute();

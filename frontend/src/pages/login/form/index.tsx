@@ -1,4 +1,4 @@
-import { useLoginFormHook } from "@/layouts/forms/LoginForm/hook";
+import { useLoginFormHook } from "@/pages/login/form/hook";
 
 export function LoginForm() {
   const { form, t, handleSubmit, errorMessages } = useLoginFormHook();

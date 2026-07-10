@@ -1,11 +1,11 @@
 import { useState, type ComponentProps } from "react";
 import { Eye, EyeOff } from "lucide-react";
 
-import { Input } from "@/components/primitives/input";
-import { Label } from "@/components/primitives/label";
-import { Button } from "@/components/primitives/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
 import { useFieldContext } from "@/hooks/use-form";
-import { FieldErrors } from "@/components/FieldErrors";
+import { FieldErrors } from "@/components/form/FieldErrors";
 
 interface TextFieldProps extends Omit<
   ComponentProps<typeof Input>,

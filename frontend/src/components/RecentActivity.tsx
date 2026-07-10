@@ -1,7 +1,7 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/primitives/card";
-import { Avatar, AvatarFallback } from "@/components/primitives/avatar";
-import { Badge } from "@/components/primitives/badge";
-import { ScrollArea } from "@/components/primitives/scroll-area";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 interface Activity {
   id: number;
@@ -100,7 +100,7 @@ export function RecentActivity() {
         <CardTitle className="text-base font-semibold">Atividades Recentes</CardTitle>
       </CardHeader>
       <CardContent className="p-0">
-        <ScrollArea className="h-[340px]">
+        <ScrollArea className="h-85">
           <div className="space-y-0">
             {activities.map((activity, i) => (
               <div

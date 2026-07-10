@@ -1,10 +1,10 @@
 import { Bell } from "lucide-react";
-import { Button } from "@/components/primitives/button";
-import { Badge } from "@/components/primitives/badge";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/primitives/popover";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { ThemeToggle } from "@/components/ThemeToggle";
-import { SidebarTrigger } from "@/components/primitives/sidebar";
-import { Separator } from "@/components/primitives/separator";
+import { SidebarTrigger } from "@/components/ui/sidebar";
+import { Separator } from "@/components/ui/separator";
 import { LanguageToggle } from "@/components/LanguageToggle";
 import { SettingsButton } from "@/components/SettingsButton";
 

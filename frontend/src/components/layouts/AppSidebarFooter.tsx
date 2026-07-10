@@ -1,4 +1,4 @@
-import { AvatarImage, AvatarFallback, Avatar } from "@/components/primitives/avatar";
+import { AvatarImage, AvatarFallback, Avatar } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -6,14 +6,14 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/primitives/dropdown-menu";
+} from "@/components/ui/dropdown-menu";
 import {
   useSidebar,
   SidebarFooter,
   SidebarMenu,
   SidebarMenuItem,
   SidebarMenuButton,
-} from "@/components/primitives/sidebar";
+} from "@/components/ui/sidebar";
 import { useNavigate } from "@tanstack/react-router";
 import { ChevronsUpDown, User, LogOut } from "lucide-react";
 import { useTranslation } from "react-i18next";
