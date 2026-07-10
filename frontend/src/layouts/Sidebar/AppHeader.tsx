@@ -1,4 +1,4 @@
-import { Bell, Settings } from "lucide-react";
+import { Bell } from "lucide-react";
 import { Button } from "@/components/primitives/button";
 import { Badge } from "@/components/primitives/badge";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/primitives/popover";
@@ -6,6 +6,7 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 import { SidebarTrigger } from "@/components/primitives/sidebar";
 import { Separator } from "@/components/primitives/separator";
 import { LanguageToggle } from "@/components/LanguageToggle";
+import { SettingsButton } from "@/components/SettingsButton";
 
 const notifications = [
   {
@@ -32,6 +33,7 @@ const notifications = [
 ];
 
 export function AppHeader() {
+  //TODO: Refactor styles in authenticated
   const unreadCount = notifications.filter((n) => !n.read).length;
 
   return (
@@ -44,7 +46,6 @@ export function AppHeader() {
 
         <div className="flex items-center gap-2">
           <ThemeToggle />
-
           <Popover>
             <PopoverTrigger asChild>
               <Button variant="ghost" size="icon" className="relative size-9 cursor-pointer">
@@ -82,12 +83,8 @@ export function AppHeader() {
               </div>
             </PopoverContent>
           </Popover>
-
           <LanguageToggle />
-
-          <Button variant="ghost" size="icon" className="relative size-9 cursor-pointer">
-            <Settings className="size-[1.1rem]" />
-          </Button>
+          <SettingsButton />
         </div>
       </div>
     </header>

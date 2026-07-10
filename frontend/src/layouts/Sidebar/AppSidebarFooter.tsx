@@ -15,7 +15,7 @@ import {
   SidebarMenuButton,
 } from "@/components/primitives/sidebar";
 import { useNavigate } from "@tanstack/react-router";
-import { ChevronsUpDown, User, Settings, LogOut } from "lucide-react";
+import { ChevronsUpDown, User, LogOut } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 export function AppSidebarFooter() {
@@ -63,14 +63,10 @@ export function AppSidebarFooter() {
               <DropdownMenuSeparator />
               <DropdownMenuItem
                 className="cursor-pointer"
-                onClick={() => navigate({ to: "/user/user" })}
+                onClick={() => navigate({ to: "/user/profile" })} // TODO: Profile user page
               >
                 <User className="mr-2 size-4" />
-                {t("layout.sidebar.actions.myProfile")}
-              </DropdownMenuItem>
-              <DropdownMenuItem className="cursor-pointer">
-                <Settings className="mr-2 size-4" />
-                {t("layout.sidebar.labels.settings")}
+                {t("sidebar.labels.profile")}
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem
@@ -78,7 +74,7 @@ export function AppSidebarFooter() {
                 onClick={() => navigate({ to: "/login" })}
               >
                 <LogOut className="mr-2 size-4" />
-                {t("layout.sidebar.actions.logout")}
+                {t("sidebar.actions.logout")}
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>

@@ -1,8 +1,8 @@
 import { Outlet, createFileRoute, redirect } from "@tanstack/react-router";
 import { ThemeProvider } from "next-themes";
 
-import { AppSidebar } from "@/layouts/AppSidebar";
-import { AppHeader } from "@/layouts/AppHeader";
+import { AppSidebar } from "@/layouts/Sidebar/AppSidebar";
+import { AppHeader } from "@/layouts/Sidebar/AppHeader";
 import { TooltipProvider } from "@/components/primitives/tooltip";
 import { SidebarProvider } from "@/components/primitives/sidebar";
 import { useAuthStore } from "@/lib/zustand/use-auth";
@@ -29,7 +29,9 @@ function AuthenticatedLayout() {
             <AppSidebar />
             <main className="flex flex-1 flex-col">
               <AppHeader />
-              <Outlet />
+              <div className="flex-1 px-4 py-6 md:px-6 lg:px-8">
+                <Outlet />
+              </div>
             </main>
           </div>
         </SidebarProvider>

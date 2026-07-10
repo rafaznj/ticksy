@@ -1,14 +1,10 @@
-import useLanguageToggle from "@/components/LanguageToggle/hook";
 import { Button } from "@/components/primitives/button";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/primitives/tooltip";
-import { Languages } from "lucide-react";
+import { Settings } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
-export function LanguageToggle() {
-  const { toggleLanguage, language } = useLanguageToggle();
+export function SettingsButton() {
   const { t } = useTranslation();
-
-  const nextLanguage = language === "pt" ? "inglês" : "portuguese";
 
   return (
     <Tooltip>
@@ -16,13 +12,15 @@ export function LanguageToggle() {
         <Button
           variant="ghost"
           size="icon"
-          onClick={toggleLanguage}
+          onClick={() => alert("Configurações")}
           className="relative size-9 cursor-pointer"
         >
-          <Languages className="size-[1.1rem]" />
+          <Settings className="size-[1.1rem]" />
         </Button>
       </TooltipTrigger>
-      <TooltipContent>{t("general.language", { language: nextLanguage })}</TooltipContent>
+      <TooltipContent>
+        <p>{t("general.settings")}</p>
+      </TooltipContent>
     </Tooltip>
   );
 }
