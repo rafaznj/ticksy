@@ -70,10 +70,10 @@ export function AppSidebarFooter() {
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem
-                className="cursor-pointer text-destructive focus:text-destructive"
+                className="hover:text-destructive focus:text-destructive"
                 onClick={() => navigate({ to: "/login" })}
               >
-                <LogOut className="mr-2 size-4" />
+                <LogOut />
                 {t("sidebar.actions.logout")}
               </DropdownMenuItem>
             </DropdownMenuContent>

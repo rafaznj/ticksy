@@ -1,4 +1,13 @@
-import { Body, Controller, Get, Post, Req, Res, UseGuards, UnauthorizedException } from "@nestjs/common";
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  Req,
+  Res,
+  UseGuards,
+  UnauthorizedException,
+} from "@nestjs/common";
 import { AuthGuard } from "@nestjs/passport";
 import { ConfigService } from "@nestjs/config";
 import type { Request, Response } from "express";
@@ -22,7 +31,7 @@ export class AuthController {
     });
   }
 
-  @Post("login")
+  @Post("/login")
   async login(@Body() dto: LoginDto, @Res({ passthrough: true }) res: Response) {
     const { accessToken, refreshToken, user } = await this.authService.login(
       dto.email,

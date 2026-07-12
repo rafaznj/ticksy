@@ -47,6 +47,7 @@
     "copyright": "© {{year}} Ticksy. All rights reserved.",
     "theme": "Switch to the {{theme}} theme",
     "language": "Switch to the language {{language}}",
+    "notFoundRoute": "This route was not found...",
     "actions": {
       "back": "Back",
       "cancel": "Cancel",
