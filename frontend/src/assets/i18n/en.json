@@ -6,6 +6,11 @@
         "submitting": "Creating account..."
       }
     },
+    "errors": {
+      "invalidCredentials": "Invalid email or password. Please check your credentials and try again.",
+      "refreshTokenMissing": "Your session has expired, please log in again",
+      "userNotFound": "User not found"
+    },
     "forgotPassword": {
       "actions": {
         "submit": "Reset password",
@@ -43,11 +48,6 @@
     }
   },
   "general": {
-    "settings": "Settings",
-    "copyright": "© {{year}} Ticksy. All rights reserved.",
-    "theme": "Switch to the {{theme}} theme",
-    "language": "Switch to the language {{language}}",
-    "notFoundRoute": "This route was not found...",
     "actions": {
       "back": "Back",
       "cancel": "Cancel",
@@ -57,30 +57,38 @@
       "refresh": "Refresh",
       "retry": "Retry",
       "save": "Save"
-    }
+    },
+    "copyright": "© {{year}} Ticksy. All rights reserved.",
+    "errors": {
+      "unknownError": "An unknown error occurred"
+    },
+    "language": "Switch to the language {{language}}",
+    "notFoundRoute": "This route was not found...",
+    "settings": "Settings",
+    "theme": "Switch to the {{theme}} theme"
   },
   "sidebar": {
-    "labels": {
-      "home": "Home",
-      "openTickets": "Opens",
-      "waitingTickets": "Waitings",
-      "finishedTickets": "Finishes",
-      "profile": "Profile",
-      "users": "Users"
-    },
-    "tooltips": {
-      "home": "Go to Home",
-      "openTickets": "View open tickets",
-      "waitingTickets": "View waiting tickets",
-      "finishedTickets": "View completed tickets",
-      "users": "View users"
-    },
-    "titles": {
-      "tickets": "Tickets",
-      "social": "Social"
-    },
     "actions": {
       "logout": "Logout"
+    },
+    "labels": {
+      "finishedTickets": "Finishes",
+      "home": "Home",
+      "openTickets": "Opens",
+      "profile": "Profile",
+      "users": "Users",
+      "waitingTickets": "Waitings"
+    },
+    "titles": {
+      "social": "Social",
+      "tickets": "Tickets"
+    },
+    "tooltips": {
+      "finishedTickets": "View completed tickets",
+      "home": "Go to Home",
+      "openTickets": "View open tickets",
+      "users": "View users",
+      "waitingTickets": "View waiting tickets"
     }
   }
 }

@@ -2,29 +2,18 @@ import { Inject, Injectable } from "@nestjs/common";
 import { and, eq, isNull } from "drizzle-orm";
 import { NodePgDatabase } from "drizzle-orm/node-postgres";
 
-import { user } from "../../database/drizzle/schema/user.schema";
-import { refreshTokens } from "../../database/drizzle/schema/refresh-tokens.schema";
-import { DATABASE_TOKENS } from "../../database/tokens";
-import { IAuthRepository } from "./auth";
+import { DATABASE_TOKENS } from "../../../database/tokens";
+import { refreshTokens } from "../../../database/drizzle/schema/refresh-tokens.schema";
+import type { IRefreshTokenRepository } from "./contracts/refresh-token";
 
 @Injectable()
-export class AuthRepository implements IAuthRepository {
+export class RefreshTokenRepository implements IRefreshTokenRepository {
   constructor(
     @Inject(DATABASE_TOKENS.Drizzle)
     private readonly db: NodePgDatabase,
   ) {}
 
-  async findByEmail(email: string) {
-    const [result] = await this.db.select().from(user).where(eq(user.email, email));
-    return result ?? null;
-  }
-
-  async findById(id: string) {
-    const [result] = await this.db.select().from(user).where(eq(user.id, id));
-    return result ?? null;
-  }
-
-  async saveRefreshToken(userId: string, tokenHash: string) {
+  async create(userId: string, tokenHash: string) {
     await this.db.insert(refreshTokens).values({
       userId,
       tokenHash,
@@ -32,7 +21,7 @@ export class AuthRepository implements IAuthRepository {
     });
   }
 
-  async findValidRefreshToken(userId: string) {
+  async findActiveByUserId(userId: string) {
     const [result] = await this.db
       .select()
       .from(refreshTokens)
@@ -40,7 +29,7 @@ export class AuthRepository implements IAuthRepository {
     return result ?? null;
   }
 
-  async revokeRefreshToken(userId: string) {
+  async revoke(userId: string) {
     await this.db
       .update(refreshTokens)
       .set({ revokedAt: new Date() })

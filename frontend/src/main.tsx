@@ -4,9 +4,9 @@ import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
 import { I18nextProvider } from "react-i18next";
 
-import i18n from "./assets/i18n";
 import { router } from "@/router";
 import tanStackQueryClient from "@/lib/query-client";
+import i18n from "@/assets/i18n";
 
 const rootElement = document.getElementById("root")!;
 if (!rootElement.innerHTML) {

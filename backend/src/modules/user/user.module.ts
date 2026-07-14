@@ -59,5 +59,6 @@ import { DeactivateUserRepository } from "./repositories/deactivate.repository";
       useClass: GetUserByEmailRepository,
     },
   ],
+  exports: [SERVICE_TOKENS.GetUserByIdService, SERVICE_TOKENS.GetUserByEmailService],
 })
 export class UserModule {}

@@ -12,25 +12,18 @@ export function useLoginFormHook() {
   const { t } = useTranslation();
   const [errorMessages, setErrorMessages] = useState<string[]>([]);
 
-  const loginMutation = useLoginMutation();
+  const { mutate: handleLogin } = useLoginMutation();
 
   const form = useAppForm({
     defaultValues: {
       email: "",
       password: "",
     },
+    onSubmit: async (value) => {
+      handleLogin(value.value);
+    },
     validators: {
       onSubmit: loginFormSchema(t),
-    },
-    onSubmit: async ({ value }) => {
-      setErrorMessages([]);
-
-      try {
-        await loginMutation.mutateAsync(value);
-        await navigate({ to: "/home" });
-      } catch {
-        setErrorMessages(["tete"]);
-      }
     },
   });
 

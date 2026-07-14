@@ -6,6 +6,11 @@
         "submitting": "Criando conta..."
       }
     },
+    "errors": {
+      "invalidCredentials": "E-mail ou senha inválidos. Verifique seus dados e tente novamente.",
+      "refreshTokenMissing": "Sua sessão expirou, faça login novamente",
+      "userNotFound": "Usuário não encontrado"
+    },
     "forgotPassword": {
       "actions": {
         "submit": "Restaurar senha",
@@ -43,11 +48,6 @@
     }
   },
   "general": {
-    "settings": "Configurações",
-    "copyright": "© {{year}} Ticksy. Todos os direitos reservados.",
-    "theme": "Mudar para o tema {{theme}}",
-    "language": "Mudar a linguagem para {{language}}",
-    "notFoundRoute": "Esta rota não foi encontrada...",
     "actions": {
       "back": "Voltar",
       "cancel": "Cancelar",
@@ -57,30 +57,38 @@
       "refresh": "Atualizar",
       "retry": "Tentar novamente",
       "save": "Salvar"
-    }
+    },
+    "copyright": "© {{year}} Ticksy. Todos os direitos reservados.",
+    "errors": {
+      "unknown": "Ocorreu um erro desconhecido"
+    },
+    "language": "Mudar a linguagem para {{language}}",
+    "notFoundRoute": "Esta rota não foi encontrada...",
+    "settings": "Configurações",
+    "theme": "Mudar para o tema {{theme}}"
   },
   "sidebar": {
-    "labels": {
-      "home": "Home",
-      "openTickets": "Abertos",
-      "waitingTickets": "Esperando",
-      "finishedTickets": "Finalizados",
-      "profile": "Perfil",
-      "users": "Usuários"
-    },
-    "tooltips": {
-      "home": "Ir para a página inicial",
-      "openTickets": "Ver tickets abertos",
-      "waitingTickets": "Ver tickets em espera",
-      "finishedTickets": "Ver tickets finalizados",
-      "users": "Ver usuários"
-    },
-    "titles": {
-      "tickets": "Tickets",
-      "social": "Social"
-    },
     "actions": {
       "logout": "Sair"
+    },
+    "labels": {
+      "finishedTickets": "Finalizados",
+      "home": "Home",
+      "openTickets": "Abertos",
+      "profile": "Perfil",
+      "users": "Usuários",
+      "waitingTickets": "Esperando"
+    },
+    "titles": {
+      "social": "Social",
+      "tickets": "Tickets"
+    },
+    "tooltips": {
+      "finishedTickets": "Ver tickets finalizados",
+      "home": "Ir para a página inicial",
+      "openTickets": "Ver tickets abertos",
+      "users": "Ver usuários",
+      "waitingTickets": "Ver tickets em espera"
     }
   }
 }

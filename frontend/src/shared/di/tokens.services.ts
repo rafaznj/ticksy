@@ -1,6 +1,8 @@
 export const SERVICE_TOKENS = {
   // Auth
-  AuthService: Symbol.for("AuthService"),
+  LoginService: Symbol.for("LoginService"),
+  LogoutService: Symbol.for("LogoutService"),
+  RefreshService: Symbol.for("RefreshService"),
 
   // User
   CreateUserService: Symbol.for("CreateUserService"),
