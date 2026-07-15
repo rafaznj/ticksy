@@ -1,4 +1,4 @@
-import { Body, Controller, Post, Req, Res, UseGuards, Inject, HttpStatus } from "@nestjs/common";
+import { Body, Controller, Post, Req, Res, UseGuards, Inject, Get } from "@nestjs/common";
 import { AuthGuard } from "@nestjs/passport";
 import { ConfigService } from "@nestjs/config";
 import type { Request, Response } from "express";
@@ -47,10 +47,7 @@ export class AuthController {
   async refresh(@Req() req: Request, @Res({ passthrough: true }) res: Response) {
     const refreshToken = req.cookies?.refreshToken;
     if (!refreshToken) {
-      throw new AppException(
-        [{ key: "auth.errors.refreshTokenMissing", value: "Refresh token missing" }],
-        HttpStatus.UNAUTHORIZED,
-      );
+      throw AppException.unauthorized("auth.errors.refreshTokenMissing");
     }
 
     const { accessToken, refreshToken: newRefreshToken } =
@@ -60,6 +57,8 @@ export class AuthController {
     return { accessToken };
   }
 
+  @Get("/me")
+  @UseGuards(AuthGuard("jwt"))
   async me(@Req() req: Request & { user: Omit<User, "password"> }) {
     return req.user;
   }

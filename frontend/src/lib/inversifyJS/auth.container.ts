@@ -10,6 +10,10 @@ import { LogoutRepository } from "@/modules/auth/repositories/logout.repository"
 import type { ILogoutRepository } from "@/modules/auth/repositories/contracts/logout";
 import type { ILogoutService } from "@/modules/auth/services/contracts/logout";
 import { LogoutService } from "@/modules/auth/services/logout.service";
+import type { IRefreshRepository } from "@/modules/auth/repositories/contracts/refresh";
+import { RefreshRepository } from "@/modules/auth/repositories/refresh.repository";
+import type { IRefreshService } from "@/modules/auth/services/contracts/refresh";
+import { RefreshService } from "@/modules/auth/services/refresh.service";
 
 export const authContainerModule = new ContainerModule(({ bind }: ContainerModuleLoadOptions) => {
   bind<ILoginRepository>(REPOSITORY_TOKENS.LoginRepository).to(LoginRepository);

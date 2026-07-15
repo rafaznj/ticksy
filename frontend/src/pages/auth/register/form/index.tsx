@@ -1,7 +1,7 @@
-import { useLoginFormHook } from "@/pages/login/form/hook";
+import { useRegisterFormHook } from "@/pages/auth/register/form/hook";
 
-export function LoginForm() {
-  const { form, t, handleSubmit, errorMessages } = useLoginFormHook();
+export function RegisterForm() {
+  const { form, t, handleSubmit, errorMessages } = useRegisterFormHook();
 
   return (
     <form onSubmit={(event) => handleSubmit(event)}>
@@ -18,11 +18,22 @@ export function LoginForm() {
           </div>
         )}
 
+        <form.AppField name="name">
+          {(field) => (
+            <field.TextField
+              label={t("auth.register.fields.name.label")}
+              placeholder={t("auth.register.fields.name.placeholder")}
+              type="text"
+              required
+            />
+          )}
+        </form.AppField>
+
         <form.AppField name="email">
           {(field) => (
             <field.TextField
-              label={t("auth.login.fields.email.label")}
-              placeholder={t("auth.login.fields.email.placeholder")}
+              label={t("auth.register.fields.email.label")}
+              placeholder={t("auth.register.fields.email.placeholder")}
               type="email"
               required
             />
@@ -32,8 +43,8 @@ export function LoginForm() {
         <form.AppField name="password">
           {(field) => (
             <field.TextField
-              label={t("auth.login.fields.password.label")}
-              placeholder={t("auth.login.fields.password.placeholder")}
+              label={t("auth.register.fields.password.label")}
+              placeholder={t("auth.register.fields.password.placeholder")}
               type="password"
               required
             />
@@ -41,7 +52,9 @@ export function LoginForm() {
         </form.AppField>
 
         <form.AppForm>
-          <form.SubmitButton className="mt-4">{t("auth.login.actions.submit")}</form.SubmitButton>
+          <form.SubmitButton className="mt-4">
+            {t("auth.register.actions.submit")}
+          </form.SubmitButton>
         </form.AppForm>
       </div>
     </form>

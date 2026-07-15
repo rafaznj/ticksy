@@ -2,7 +2,7 @@ import { injectable } from "inversify";
 import type { AxiosError } from "axios";
 
 import { AppError } from "./app-error";
-import type { IErrorResponse } from "./error-message";
+import type { IErrorResponse } from "./contracts/error-message";
 import type { IErrorHandlerService } from "@/shared/errors/contracts/error";
 import { translateErrors } from "@/shared/errors/translated-errors";
 

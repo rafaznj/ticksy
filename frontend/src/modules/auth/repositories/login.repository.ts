@@ -1,10 +1,12 @@
 import { inject, injectable } from "inversify";
 
 import type { AxiosSingleton } from "@/lib/axios/axios-singleton";
-import type { LoginResponse } from "@/modules/auth/dto/login-response";
 import type { LoginDto } from "@/modules/auth/dto/login.dto";
-import type { ILoginRepository } from "@/modules/auth/repositories/contracts/login";
+import type { LoginResponse } from "@/modules/auth/dto/login-response";
+import type { ILoginRepository } from "./contracts/login";
 import { INFRASTRUCTURE_TOKENS } from "@/shared/di/tokens.infrastructure";
+import type { AppError } from "@/shared/errors/app-error";
+import { handleResponse } from "@/shared/errors/handle-response";
 
 @injectable()
 export class LoginRepository implements ILoginRepository {
@@ -15,11 +17,11 @@ export class LoginRepository implements ILoginRepository {
     private readonly axiosSingleton: AxiosSingleton,
   ) {}
 
-  async execute(dto: LoginDto): Promise<LoginResponse> {
-    const { data } = await this.axiosSingleton.client.post<LoginResponse>(
+  async execute(dto: LoginDto): Promise<LoginResponse | AppError> {
+    const response = await this.axiosSingleton.client.post<LoginResponse>(
       `${this.basePath}/login`,
       dto,
     );
-    return data;
+    return handleResponse(response);
   }
 }

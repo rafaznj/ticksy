@@ -1,8 +1,8 @@
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { LoginForm } from "@/pages/login/form";
+import { RegisterForm } from "@/pages/auth/register/form";
 import { useTranslation } from "react-i18next";
 
-export default function LoginPage() {
+export default function RegisterPage() {
   const { t } = useTranslation();
 
   return (
@@ -34,7 +34,7 @@ export default function LoginPage() {
                 {t("auth.login.description")}
               </CardDescription>
             </CardHeader>
-            <LoginForm />
+            <RegisterForm />
           </Card>
         </div>
       </div>

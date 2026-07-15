@@ -1,4 +1,4 @@
-import { HttpStatus, Inject, Injectable } from "@nestjs/common";
+import { Inject, Injectable } from "@nestjs/common";
 import * as argon2 from "argon2";
 
 import type { IGetUserByEmailService } from "../../user/services/contracts/get-by-email";
@@ -20,10 +20,7 @@ export class LoginService implements ILoginService {
   async execute(email: string, password: string): Promise<LoginResult> {
     const user = await this.getUserByEmailService.execute(email);
     if (!user || !(await argon2.verify(user.password, password))) {
-      throw new AppException(
-        [{ key: "general.errors.invalidCredentials", value: "Invalid credentials" }],
-        HttpStatus.UNAUTHORIZED,
-      );
+      throw AppException.unauthorized("general.errors.invalidCredentials");
     }
 
     const accessToken = this.jwtTokenService.signAccessToken(user.id, user.email);

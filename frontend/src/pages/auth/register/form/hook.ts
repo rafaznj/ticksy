@@ -1,13 +1,13 @@
-// pages/login/form/hook.ts
-import { useState, type FormEventHandler } from "react";
+import { useState, type FormEvent } from "react";
 import { useNavigate } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 
 import { useAppForm } from "@/hooks/use-form";
-import { loginFormSchema } from "@/pages/login/form/validations";
 import { useLoginMutation } from "@/query-hooks/auth/mutation/use-login";
+import { registerFormSchema } from "@/pages/auth/register/form/validations";
+import type { RegisterFormProps } from "@/pages/auth/register/form/types";
 
-export function useLoginFormHook() {
+export function useRegisterFormHook() {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const [errorMessages, setErrorMessages] = useState<string[]>([]);
@@ -15,19 +15,16 @@ export function useLoginFormHook() {
   const { mutate: handleLogin } = useLoginMutation();
 
   const form = useAppForm({
-    defaultValues: {
-      email: "",
-      password: "",
-    },
+    defaultValues: {} as RegisterFormProps,
     onSubmit: async (value) => {
       handleLogin(value.value);
     },
     validators: {
-      onSubmit: loginFormSchema(t),
+      onSubmit: registerFormSchema(t),
     },
   });
 
-  const handleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     event.stopPropagation();
     await form.handleSubmit();

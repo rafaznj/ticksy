@@ -1,4 +1,4 @@
-import { HttpStatus, Inject, Injectable } from "@nestjs/common";
+import { Inject, Injectable } from "@nestjs/common";
 import * as argon2 from "argon2";
 
 import { SERVICE_TOKENS } from "../../../shared/di/tokens.services";
@@ -23,19 +23,13 @@ export class RefreshService implements IRefreshService {
     const stored = await this.jwtTokenService.findActiveByUserId(payload.sub);
 
     if (!stored || !(await argon2.verify(stored.tokenHash, refreshToken))) {
-      throw new AppException(
-        [{ key: "auth.errors.refreshTokenInvalid", value: "Refresh token invalid or expired" }],
-        HttpStatus.UNAUTHORIZED,
-      );
+      throw AppException.unauthorized("auth.errors.refreshTokenInvalid");
     }
 
     const user = await this.getUserByIdService.execute(payload.sub);
 
     if (!user) {
-      throw new AppException(
-        [{ key: "auth.errors.userNotFound", value: "User not found" }],
-        HttpStatus.UNAUTHORIZED,
-      );
+      throw AppException.unauthorized("auth.errors.userNotFound");
     }
 
     await this.jwtTokenService.revoke(user.id);

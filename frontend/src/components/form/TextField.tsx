@@ -3,9 +3,10 @@ import { Eye, EyeOff } from "lucide-react";
 
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Button } from "@/components/ui/button";
 import { useFieldContext } from "@/hooks/use-form";
 import { FieldErrors } from "@/components/form/FieldErrors";
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 
 interface TextFieldProps extends Omit<
   ComponentProps<typeof Input>,
@@ -25,9 +26,13 @@ export function TextField({ label, required, type, ...props }: TextFieldProps) {
   return (
     <div className="flex flex-col gap-1.5">
       {label && (
-        <Label htmlFor={field.name}>
+        <Label htmlFor={field.name} className="flex items-center gap-0.5">
           {label}
-          {required && <span className="text-destructive"> *</span>}
+          {required && (
+            <span className="text-destructive font-semibold select-none" aria-hidden="true">
+              *
+            </span>
+          )}
         </Label>
       )}
 
@@ -40,6 +45,7 @@ export function TextField({ label, required, type, ...props }: TextFieldProps) {
           onChange={(e) => field.handleChange(e.target.value)}
           onBlur={field.handleBlur}
           aria-invalid={field.state.meta.errors.length > 0}
+          className={cn("h-11 pr-11", props.className)}
           {...props}
         />
 
@@ -47,15 +53,18 @@ export function TextField({ label, required, type, ...props }: TextFieldProps) {
           <Button
             type="button"
             variant="ghost"
-            size="icon-sm"
-            className="absolute right-1 top-1/2 -translate-y-1/2"
-            onClick={() => setShowPassword((prev) => !prev)}
+            size="icon"
+            tabIndex={-1}
+            aria-label={showPassword ? "Hide password" : "Show password"}
+            onMouseDown={(e) => e.preventDefault()}
+            onClick={() => setShowPassword((v) => !v)}
+            className=" absolute inset-y-0 right-0 h-full w-11 rounded-none border-0 shadow-none hover:bg-transparent focus-visible:ring-0 active:translate-y-0 cursor-pointer"
           >
-            {showPassword ? <EyeOff /> : <Eye />}
+            {" "}
+            {showPassword ? <EyeOff className="size-4" /> : <Eye className="size-4" />}{" "}
           </Button>
         )}
       </div>
-
       <FieldErrors />
     </div>
   );

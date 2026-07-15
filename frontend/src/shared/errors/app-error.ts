@@ -1,4 +1,4 @@
-import type { ErrorMessage } from "./error-message";
+import type { ErrorMessage } from "@/shared/errors/contracts/error-message";
 
 export class AppError {
   constructor(
@@ -7,7 +7,7 @@ export class AppError {
     public readonly statusCode?: number,
   ) {}
 
-  static generic(message = "Ocorreu um erro inesperado"): AppError {
-    return new AppError([{ key: "general.errors.unknown", value: message }], [message]);
+  static generic(message = "An unexpected error occurred"): AppError {
+    return new AppError([{ key: "general.errors.unknown" }], [message]);
   }
 }

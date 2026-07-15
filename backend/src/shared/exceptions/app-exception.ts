@@ -6,15 +6,23 @@ export class AppException extends HttpException {
     super({ success: false, errors }, status);
   }
 
-  static unauthorized(key: string, value?: string): AppException {
-    return new AppException([{ key, value }], HttpStatus.UNAUTHORIZED);
+  static unauthorized(key: string): AppException {
+    return new AppException([{ key }], HttpStatus.UNAUTHORIZED);
   }
 
-  static badRequest(key: string, value?: string): AppException {
-    return new AppException([{ key, value }], HttpStatus.BAD_REQUEST);
+  static badRequest(key: string): AppException {
+    return new AppException([{ key }], HttpStatus.BAD_REQUEST);
   }
 
-  static notFound(key: string, value?: string): AppException {
-    return new AppException([{ key, value }], HttpStatus.NOT_FOUND);
+  static notFound(key: string): AppException {
+    return new AppException([{ key }], HttpStatus.NOT_FOUND);
+  }
+
+  static internalServerError(key: string): AppException {
+    return new AppException([{ key }], HttpStatus.INTERNAL_SERVER_ERROR);
+  }
+
+  static conflict(key: string): AppException {
+    return new AppException([{ key }], HttpStatus.CONFLICT);
   }
 }

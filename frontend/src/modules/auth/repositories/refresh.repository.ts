@@ -1,13 +1,14 @@
 import { inject, injectable } from "inversify";
 
 import type { AxiosSingleton } from "@/lib/axios/axios-singleton";
-import type { ILogoutRepository } from "./contracts/logout";
+import type { RefreshResponse } from "@/modules/auth/dto/refresh-response.dto";
+import type { IRefreshRepository } from "./contracts/refresh";
 import { INFRASTRUCTURE_TOKENS } from "@/shared/di/tokens.infrastructure";
 import type { AppError } from "@/shared/errors/app-error";
 import { handleResponse } from "@/shared/errors/handle-response";
 
 @injectable()
-export class LogoutRepository implements ILogoutRepository {
+export class RefreshRepository implements IRefreshRepository {
   private basePath = "auth";
 
   constructor(
@@ -15,8 +16,10 @@ export class LogoutRepository implements ILogoutRepository {
     private readonly axiosSingleton: AxiosSingleton,
   ) {}
 
-  async execute(): Promise<void | AppError> {
-    const response = await this.axiosSingleton.client.post(`${this.basePath}/logout`);
+  async execute(): Promise<RefreshResponse | AppError> {
+    const response = await this.axiosSingleton.client.post<RefreshResponse>(
+      `${this.basePath}/refresh`,
+    );
     return handleResponse(response);
   }
 }

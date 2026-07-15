@@ -4,6 +4,7 @@ import { useAuthStore } from "@/lib/zustand/use-auth";
 import type { ILogoutRepository } from "@/modules/auth/repositories/contracts/logout";
 import type { ILogoutService } from "@/modules/auth/services/contracts/logout";
 import { REPOSITORY_TOKENS } from "@/shared/di/tokens.repositories";
+import { AppError } from "@/shared/errors/app-error";
 
 @injectable()
 export class LogoutService implements ILogoutService {
@@ -12,11 +13,13 @@ export class LogoutService implements ILogoutService {
     private readonly logoutRepository: ILogoutRepository,
   ) {}
 
-  async execute(): Promise<void> {
+  async execute(): Promise<void | AppError> {
     const response = await this.logoutRepository.execute();
 
-    useAuthStore.getState().clearAuth();
+    if (response instanceof AppError) {
+      throw response;
+    }
 
-    return response;
+    useAuthStore.getState().clearAuth();
   }
 }

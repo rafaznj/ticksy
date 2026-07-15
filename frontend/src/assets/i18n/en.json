@@ -1,15 +1,10 @@
 {
   "auth": {
-    "createAccount": {
-      "actions": {
-        "submit": "Create account",
-        "submitting": "Creating account..."
-      }
-    },
     "errors": {
+      "emailAlreadyExists": "A user with this email already exists.",
       "invalidCredentials": "Invalid email or password. Please check your credentials and try again.",
-      "refreshTokenMissing": "Your session has expired, please log in again",
-      "userNotFound": "User not found"
+      "refreshTokenMissing": "Your session has expired. Please sign in again.",
+      "userNotFound": "User not found."
     },
     "forgotPassword": {
       "actions": {
@@ -21,7 +16,7 @@
       "actions": {
         "createAccount": "Create account",
         "forgotPassword": "Forgot my password",
-        "submit": "Sign In",
+        "submit": "Sign in",
         "submitting": "Signing in..."
       },
       "description": "Enter your email and password to continue",
@@ -39,12 +34,54 @@
           "label": "Password",
           "placeholder": "••••••••",
           "validations": {
+            "maxLength": "Password must not exceed {{max}} characters.",
             "minLength": "Password must be at least {{min}} characters.",
             "required": "Password is required."
           }
         }
       },
+      "noAccount": "Don't have an account?",
       "title": "Sign in to your account"
+    },
+    "register": {
+      "actions": {
+        "submit": "Create account",
+        "submitting": "Creating account..."
+      },
+      "description": "Enter your information to create your account",
+      "fields": {
+        "email": {
+          "label": "Email",
+          "placeholder": "your@email.com",
+          "validations": {
+            "invalid": "Please enter a valid email.",
+            "maxLength": "Email must not exceed {{max}} characters.",
+            "required": "Email is required."
+          }
+        },
+        "name": {
+          "label": "Name",
+          "placeholder": "John Doe",
+          "validations": {
+            "maxLength": "Name must not exceed {{max}} characters.",
+            "required": "Name is required."
+          }
+        },
+        "password": {
+          "label": "Password",
+          "placeholder": "••••••••",
+          "validations": {
+            "lowerCaseLetter": "Password must contain at least one lowercase letter.",
+            "maxLength": "Password must not exceed {{max}} characters.",
+            "minLength": "Password must be at least {{min}} characters.",
+            "number": "Password must contain at least one number.",
+            "required": "Password is required.",
+            "specialCharacter": "Password must contain at least one special character (!@#$%).",
+            "upperCaseLetter": "Password must contain at least one uppercase letter."
+          }
+        }
+      },
+      "title": "Create your account"
     }
   },
   "general": {
@@ -60,7 +97,9 @@
     },
     "copyright": "© {{year}} Ticksy. All rights reserved.",
     "errors": {
-      "unknownError": "An unknown error occurred"
+      "createFailed": "Could not create the record.",
+      "recordNotFound": "Record not found.",
+      "unknownError": "An unknown error occurred."
     },
     "language": "Switch to the language {{language}}",
     "notFoundRoute": "This route was not found...",
@@ -72,12 +111,12 @@
       "logout": "Logout"
     },
     "labels": {
-      "finishedTickets": "Finishes",
+      "finishedTickets": "Finished",
       "home": "Home",
-      "openTickets": "Opens",
+      "openTickets": "Open",
       "profile": "Profile",
       "users": "Users",
-      "waitingTickets": "Waitings"
+      "waitingTickets": "Waiting"
     },
     "titles": {
       "social": "Social",
@@ -89,6 +128,11 @@
       "openTickets": "View open tickets",
       "users": "View users",
       "waitingTickets": "View waiting tickets"
+    }
+  },
+  "user": {
+    "errors": {
+      "deactivateFailed": "Failed to deactivate the user."
     }
   }
 }
