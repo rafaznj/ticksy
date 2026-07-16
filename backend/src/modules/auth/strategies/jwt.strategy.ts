@@ -4,7 +4,7 @@ import { ConfigService } from "@nestjs/config";
 import { ExtractJwt, Strategy } from "passport-jwt";
 
 import { REPOSITORY_TOKENS } from "../../../shared/di/tokens.repositories";
-import type { IAuthRepository } from "../auth";
+import type { IRefreshTokenRepository } from "../repositories/contracts/refresh-token";
 
 interface JwtPayload {
   sub: string;
@@ -15,8 +15,8 @@ interface JwtPayload {
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(
     configService: ConfigService,
-    @Inject(REPOSITORY_TOKENS.AuthRepository)
-    private readonly authRepository: IAuthRepository,
+    @Inject(REPOSITORY_TOKENS.RefreshTokenRepository)
+    private readonly tokenRepository: IRefreshTokenRepository,
   ) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
@@ -26,11 +26,11 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   }
 
   async validate(payload: JwtPayload) {
-    const user = await this.authRepository.findById(payload.sub);
-    if (!user) {
+    const result = await this.tokenRepository.findActiveByUserId(payload.sub);
+    if (!result) {
       throw new UnauthorizedException("Usuário não encontrado");
     }
-    const { password, ...safeUser } = user;
-    return safeUser;
+
+    return result;
   }
 }

@@ -1,10 +1,10 @@
 {
   "auth": {
-    "createAccount": {
-      "actions": {
-        "submit": "Criar conta",
-        "submitting": "Criando conta..."
-      }
+    "errors": {
+      "emailAlreadyExists": "Já existe um usuário com este e-mail.",
+      "invalidCredentials": "E-mail ou senha inválidos. Verifique seus dados e tente novamente.",
+      "refreshTokenMissing": "Sua sessão expirou. Faça login novamente.",
+      "userNotFound": "Usuário não encontrado."
     },
     "forgotPassword": {
       "actions": {
@@ -20,6 +20,7 @@
         "submitting": "Entrando..."
       },
       "description": "Entre com seu e-mail e senha para continuar",
+      "failed": "Não foi possível realizar o login.",
       "fields": {
         "email": {
           "label": "E-mail",
@@ -34,19 +35,60 @@
           "label": "Senha",
           "placeholder": "••••••••",
           "validations": {
+            "maxLength": "A senha deve ter no máximo {{max}} caracteres.",
             "minLength": "A senha deve ter no mínimo {{min}} caracteres.",
             "required": "A senha é obrigatória."
           }
         }
       },
+      "noAccount": "Ainda não possui uma conta?",
+      "success": "Login realizado com sucesso.",
       "title": "Acesse sua conta"
+    },
+    "register": {
+      "actions": {
+        "signIn": "Entrar",
+        "submit": "Criar conta",
+        "submitting": "Criando conta..."
+      },
+      "alreadyHaveAccount": "Já possui uma conta?",
+      "description": "Preencha seus dados para criar sua conta",
+      "fields": {
+        "email": {
+          "label": "E-mail",
+          "placeholder": "seu@email.com",
+          "validations": {
+            "invalid": "Digite um e-mail válido.",
+            "maxLength": "O e-mail deve ter no máximo {{max}} caracteres.",
+            "required": "O e-mail é obrigatório."
+          }
+        },
+        "name": {
+          "label": "Nome",
+          "placeholder": "João da Silva",
+          "validations": {
+            "maxLength": "O nome deve ter no máximo {{max}} caracteres.",
+            "required": "O nome é obrigatório."
+          }
+        },
+        "password": {
+          "label": "Senha",
+          "placeholder": "••••••••",
+          "validations": {
+            "lowerCaseLetter": "A senha deve conter pelo menos uma letra minúscula.",
+            "maxLength": "A senha deve ter no máximo {{max}} caracteres.",
+            "minLength": "A senha deve ter no mínimo {{min}} caracteres.",
+            "number": "A senha deve conter pelo menos um número.",
+            "required": "A senha é obrigatória.",
+            "specialCharacter": "A senha deve conter pelo menos um caractere especial (!@#$%).",
+            "upperCaseLetter": "A senha deve conter pelo menos uma letra maiúscula."
+          }
+        }
+      },
+      "title": "Crie sua conta"
     }
   },
   "general": {
-    "settings": "Configurações",
-    "copyright": "© {{year}} Ticksy. Todos os direitos reservados.",
-    "theme": "Mudar para o tema {{theme}}",
-    "language": "Mudar a linguagem para {{language}}",
     "actions": {
       "back": "Voltar",
       "cancel": "Cancelar",
@@ -56,30 +98,45 @@
       "refresh": "Atualizar",
       "retry": "Tentar novamente",
       "save": "Salvar"
-    }
+    },
+    "copyright": "© {{year}} Ticksy. Todos os direitos reservados.",
+    "errors": {
+      "createFailed": "Não foi possível criar o registro.",
+      "recordNotFound": "Registro não encontrado.",
+      "unknownError": "Ocorreu um erro desconhecido."
+    },
+    "language": "Mudar o idioma para {{language}}",
+    "notFoundRoute": "Esta rota não foi encontrada...",
+    "settings": "Configurações",
+    "theme": "Mudar para o tema {{theme}}"
   },
   "sidebar": {
-    "labels": {
-      "home": "Home",
-      "openTickets": "Abertos",
-      "waitingTickets": "Esperando",
-      "finishedTickets": "Finalizados",
-      "profile": "Perfil",
-      "users": "Usuários"
-    },
-    "tooltips": {
-      "home": "Ir para a página inicial",
-      "openTickets": "Ver tickets abertos",
-      "waitingTickets": "Ver tickets em espera",
-      "finishedTickets": "Ver tickets finalizados",
-      "users": "Ver usuários"
-    },
-    "titles": {
-      "tickets": "Tickets",
-      "social": "Social"
-    },
     "actions": {
       "logout": "Sair"
+    },
+    "labels": {
+      "finishedTickets": "Finalizados",
+      "home": "Home",
+      "openTickets": "Abertos",
+      "profile": "Perfil",
+      "users": "Usuários",
+      "waitingTickets": "Em espera"
+    },
+    "titles": {
+      "social": "Social",
+      "tickets": "Tickets"
+    },
+    "tooltips": {
+      "finishedTickets": "Ver tickets finalizados",
+      "home": "Ir para a página inicial",
+      "openTickets": "Ver tickets abertos",
+      "users": "Ver usuários",
+      "waitingTickets": "Ver tickets em espera"
+    }
+  },
+  "user": {
+    "errors": {
+      "deactivateFailed": "Falha ao desativar o usuário."
     }
   }
 }

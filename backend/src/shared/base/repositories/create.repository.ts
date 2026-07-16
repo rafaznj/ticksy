@@ -4,17 +4,20 @@ import { PgTable } from "drizzle-orm/pg-core";
 import { DATABASE_TOKENS } from "../../../database/tokens";
 import { IBaseCreateRepository } from "./contracts/create";
 
-export class BaseCreateRepository<T> implements IBaseCreateRepository<T> {
+export class BaseCreateRepository<TInput, TOutput> implements IBaseCreateRepository<
+  TInput,
+  TOutput
+> {
   @Inject(DATABASE_TOKENS.Drizzle)
   protected db!: NodePgDatabase;
   constructor(private readonly table: PgTable) {}
 
-  async execute(data: T): Promise<T | null> {
+  async execute(data: TInput): Promise<TOutput | null> {
     const [created] = await this.db
       .insert(this.table)
       .values([{ ...data }])
       .returning();
 
-    return (created as T) ?? null;
+    return (created as TOutput) ?? null;
   }
 }

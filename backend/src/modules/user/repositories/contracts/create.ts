@@ -1,4 +1,5 @@
 import { IBaseCreateRepository } from "../../../../shared/base/repositories/contracts/create";
-import { User } from "../../entity/user.entity";
+import { CreateUserDto } from "../../dto/create.dto";
+import { UserEntity } from "../../entity/user.entity";
 
-export type ICreateUserRepository = IBaseCreateRepository<User>;
+export type ICreateUserRepository = IBaseCreateRepository<CreateUserDto, UserEntity>;

@@ -1,13 +1,13 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/primitives/card";
-import { Badge } from "@/components/primitives/badge";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
   TableHeader,
   TableRow,
-} from "@/components/primitives/table";
+  TableHead,
+  TableBody,
+  TableCell,
+  Table,
+} from "@/components/ui/table";
 
 interface Ticket {
   id: string;
@@ -98,7 +98,7 @@ export function RecentTicketsTable() {
                 <TableCell className="pl-6 font-mono text-sm font-medium text-primary">
                   {ticket.id}
                 </TableCell>
-                <TableCell className="max-w-[200px] truncate font-medium">{ticket.title}</TableCell>
+                <TableCell className="max-w-50 truncate font-medium">{ticket.title}</TableCell>
                 <TableCell className="hidden text-muted-foreground md:table-cell">
                   {ticket.assignee}
                 </TableCell>

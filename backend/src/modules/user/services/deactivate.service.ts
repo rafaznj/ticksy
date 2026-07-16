@@ -1,7 +1,8 @@
-import { Inject, Injectable, InternalServerErrorException } from "@nestjs/common";
+import { Inject, Injectable } from "@nestjs/common";
 import { REPOSITORY_TOKENS } from "../../../shared/di/tokens.repositories";
 import type { IDeactivateUserService } from "./contracts/deactivate";
 import type { IDeactivateUserRepository } from "../repositories/contracts/deactivate";
+import { AppException } from "../../../shared/exceptions/app-exception";
 
 @Injectable()
 export class DeactivateUserService implements IDeactivateUserService {
@@ -13,7 +14,7 @@ export class DeactivateUserService implements IDeactivateUserService {
     const deactivated = await this.deactivateUserRepository.execute(id);
 
     if (!deactivated) {
-      throw new InternalServerErrorException("Falha ao desativar o usuário.");
+      throw AppException.internalServerError("user.errors.deactivateFailed");
     }
 
     return deactivated;

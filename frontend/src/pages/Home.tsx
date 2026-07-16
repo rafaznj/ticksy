@@ -5,7 +5,7 @@ import { MetricCard } from "@/components/MetricCard";
 import { PerformanceChart } from "@/components/PerformanceChart";
 import { RecentActivity } from "@/components/RecentActivity";
 import { RecentTicketsTable } from "@/components/RecentTicketsTable";
-import { Skeleton } from "@/components/primitives/skeleton";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const metrics = [
   {
@@ -76,13 +76,11 @@ export default function HomePage() {
           ))}
         </div>
 
-        {/* ─── Chart + Activity ─── */}
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
           <PerformanceChart />
           <RecentActivity />
         </div>
 
-        {/* ─── Tickets Table ─── */}
         <RecentTicketsTable />
       </div>
     </div>

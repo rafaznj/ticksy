@@ -1,6 +1,9 @@
 export const REPOSITORY_TOKENS = {
   // Auth
-  AuthRepository: Symbol.for("AuthRepository"),
+  LoginRepository: Symbol.for("LoginRepository"),
+  RegisterRepository: Symbol.for("RegisterRepository"),
+  LogoutRepository: Symbol.for("LogoutRepository"),
+  RefreshRepository: Symbol.for("RefreshRepository"),
 
   // User
   CreateUserRepository: Symbol.for("CreateUserRepository"),

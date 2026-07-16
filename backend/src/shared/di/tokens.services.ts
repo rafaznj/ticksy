@@ -1,6 +1,10 @@
 export const SERVICE_TOKENS = {
   // Auth
-  AuthService: Symbol.for("AuthService"),
+  JwtTokenService: Symbol("JwtTokenService"),
+  LoginService: Symbol("LoginService"),
+  RegisterService: Symbol("RegisterService"),
+  LogoutService: Symbol("LogoutService"),
+  RefreshService: Symbol("RefreshService"),
 
   // User
   CreateUserService: Symbol.for("CreateUserService"),

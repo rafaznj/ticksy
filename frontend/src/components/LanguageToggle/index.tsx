@@ -1,6 +1,6 @@
 import useLanguageToggle from "@/components/LanguageToggle/hook";
-import { Button } from "@/components/primitives/button";
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/primitives/tooltip";
+import { Button } from "@/components/ui/button";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { Languages } from "lucide-react";
 import { useTranslation } from "react-i18next";
 

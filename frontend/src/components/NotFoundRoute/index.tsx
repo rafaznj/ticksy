@@ -1,18 +1,18 @@
-import { CircleX } from "lucide-react";
+import { BadgeAlert } from "lucide-react";
 import useNotFoundRoute from "./hook";
-import { Button } from "@/components/primitives/button";
+import { Button } from "@/components/ui/button";
 
 export const NotFoundRouteComponent = () => {
   const { navigate, t } = useNotFoundRoute();
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen gap-4">
-      <CircleX className="size-20 text-red-500" />
+    <div className="flex min-h-screen flex-col items-center justify-center gap-8 bg-blue-600 px-4">
+      <BadgeAlert className="size-40 text-white" strokeWidth={1.5} />
 
-      <p className="text-lg text-muted-foreground">{t("general.actions.back")}</p>
+      <p className="text-center text-3xl font-semibold text-white">{t("general.notFoundRoute")}</p>
 
       <Button
-        className="px-4 py-2 rounded-md bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
+        className="rounded-lg bg-white px-6 py-6 text-xl font-semibold text-blue-600 transition-colors hover:bg-blue-50 cursor-pointer "
         onClick={() => navigate({ to: "/home" })}
       >
         {t("general.actions.back")}
