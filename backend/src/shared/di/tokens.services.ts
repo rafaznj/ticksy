@@ -2,6 +2,7 @@ export const SERVICE_TOKENS = {
   // Auth
   JwtTokenService: Symbol("JwtTokenService"),
   LoginService: Symbol("LoginService"),
+  RegisterService: Symbol("RegisterService"),
   LogoutService: Symbol("LogoutService"),
   RefreshService: Symbol("RefreshService"),
 

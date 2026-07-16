@@ -1,13 +1,16 @@
+import { authContainerModule } from "@/lib/inversifyJS/auth.container";
+import { ticketContainerModule } from "@/lib/inversifyJS/ticket.container";
+import { userContainerModule } from "@/lib/inversifyJS/user.container";
 import { utilsContainerModule } from "@/lib/inversifyJS/utils.container";
 import { Container } from "inversify";
-import { authContainerModule } from "./auth.container";
-import { userContainerModule } from "@/lib/inversifyJS/user.container";
-import { ticketContainerModule } from "@/lib/inversifyJS/ticket.container";
 
-export const container = new Container({ defaultScope: "Singleton" });
+export const container = new Container({
+  defaultScope: "Singleton",
+});
+
 container.load(
-  authContainerModule,
   utilsContainerModule,
+  authContainerModule,
   userContainerModule,
   ticketContainerModule,
 );

@@ -1,4 +1,4 @@
 import { IBaseGetByIdService } from "../../../../shared/base/services/contracts/get-by-id";
-import { CreateUserDto } from "../../dto/create-user.dto";
+import { UserEntity } from "../../entity/user.entity";
 
-export type IGetUserByIdService = IBaseGetByIdService<CreateUserDto>;
+export type IGetUserByIdService = IBaseGetByIdService<UserEntity>;

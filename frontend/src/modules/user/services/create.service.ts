@@ -4,8 +4,9 @@ import type { CreateUserDto } from "../dto/create-user.dto";
 import type { User } from "../entity/user.entity";
 import type { ICreateUserRepository } from "../repositories/contracts/create";
 import type { ICreateUserService } from "./contracts/create";
-import { inject } from "inversify";
+import { inject, injectable } from "inversify";
 
+@injectable()
 export class CreateUserService
   extends BaseCreateService<CreateUserDto, User>
   implements ICreateUserService

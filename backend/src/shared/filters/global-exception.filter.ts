@@ -55,14 +55,17 @@ export class GlobalExceptionFilter implements ExceptionFilter {
 
       return {
         success: false,
-        errors: messages.map((msg) => ({ key: "validation.generic", value: String(msg) })),
+        errors: messages.map((msg) => ({
+          key: "validation.generic",
+          params: { message: String(msg) },
+        })),
         code: status,
       };
     }
 
     return {
       success: false,
-      errors: [{ key: "general.errors.unknown", value: "An unexpected error occurred." }],
+      errors: [{ key: "general.errors.unknownError" }],
       code: HttpStatus.INTERNAL_SERVER_ERROR,
     };
   }

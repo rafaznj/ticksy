@@ -1,8 +1,8 @@
 import { Inject } from "@nestjs/common";
 import { REPOSITORY_TOKENS } from "../../../shared/di/tokens.repositories";
-import { CreateUserDto } from "../dto/create-user.dto";
 import { IGetUserByEmailService } from "./contracts/get-by-email";
 import type { IGetUserByEmailRepository } from "../repositories/contracts/get-by-email";
+import { UserEntity } from "../entity/user.entity";
 
 export default class GetUserByEmailService implements IGetUserByEmailService {
   constructor(
@@ -10,7 +10,7 @@ export default class GetUserByEmailService implements IGetUserByEmailService {
     private readonly getUserByEmailRepository: IGetUserByEmailRepository,
   ) {}
 
-  async execute(email: string): Promise<CreateUserDto | null> {
+  async execute(email: string): Promise<UserEntity | null> {
     const response = await this.getUserByEmailRepository.execute(email);
 
     return response;

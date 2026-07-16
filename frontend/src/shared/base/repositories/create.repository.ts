@@ -1,4 +1,4 @@
-import { inject, injectable } from "inversify";
+import { inject, injectable, unmanaged } from "inversify";
 import { AxiosSingleton } from "@/lib/axios/axios-singleton";
 import type { IBaseCreateRepository } from "./contracts/create";
 import { INFRASTRUCTURE_TOKENS } from "@/shared/di/tokens.infrastructure";
@@ -13,7 +13,7 @@ export class BaseCreateRepository<TInput, TOutput> implements IBaseCreateReposit
   @inject(INFRASTRUCTURE_TOKENS.AxiosSingleton)
   private axiosSingleton!: AxiosSingleton;
 
-  constructor(private basePath: string) {}
+  constructor(@unmanaged() private basePath: string) {}
 
   async execute(data: TInput): Promise<TOutput | AppError> {
     const response = await this.axiosSingleton.client.post<TOutput>(`${this.basePath}/`, data);

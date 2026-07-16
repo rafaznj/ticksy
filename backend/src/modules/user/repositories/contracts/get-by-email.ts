@@ -1,5 +1,5 @@
-import { User } from "../../entity/user.entity";
+import { UserEntity } from "../../entity/user.entity";
 
 export interface IGetUserByEmailRepository {
-  execute(email: string): Promise<User | null>;
+  execute(email: string): Promise<UserEntity | null>;
 }

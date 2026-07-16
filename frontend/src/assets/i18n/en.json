@@ -40,14 +40,20 @@
           }
         }
       },
+      "messages": {
+        "failed": "Unable to sign in.",
+        "success": "Successfully signed in."
+      },
       "noAccount": "Don't have an account?",
       "title": "Sign in to your account"
     },
     "register": {
       "actions": {
+        "signIn": "Sign in",
         "submit": "Create account",
         "submitting": "Creating account..."
       },
+      "alreadyHaveAccount": "Already have an account?",
       "description": "Enter your information to create your account",
       "fields": {
         "email": {

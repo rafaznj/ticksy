@@ -29,7 +29,7 @@ export function TextField({ label, required, type, ...props }: TextFieldProps) {
         <Label htmlFor={field.name} className="flex items-center gap-0.5">
           {label}
           {required && (
-            <span className="text-destructive font-semibold select-none" aria-hidden="true">
+            <span className="text-blue-700 font-semibold select-none" aria-hidden="true">
               *
             </span>
           )}

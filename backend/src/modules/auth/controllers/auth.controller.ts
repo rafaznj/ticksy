@@ -9,28 +9,24 @@ import { SERVICE_TOKENS } from "../../../shared/di/tokens.services";
 import type { IRefreshService } from "../services/contracts/refresh";
 import type { ILogoutService } from "../services/contracts/logout";
 import { AppException } from "../../../shared/exceptions/app-exception";
-import { User } from "../../user/entity/user.entity";
+import { UserEntity } from "../../user/entity/user.entity";
+import { setRefreshCookie } from "../../../shared/utils/set-refresh-cookie";
+import { CreateUserDto } from "../../user/dto/create.dto";
+import type { IRegisterService } from "../services/contracts/register";
 
 @Controller("auth")
 export class AuthController {
   constructor(
     @Inject(SERVICE_TOKENS.LoginService)
     private readonly loginService: ILoginService,
+    @Inject(SERVICE_TOKENS.RegisterService)
+    private readonly registerService: IRegisterService,
     private readonly configService: ConfigService,
     @Inject(SERVICE_TOKENS.RefreshService)
     private readonly refreshService: IRefreshService,
     @Inject(SERVICE_TOKENS.LogoutService)
     private readonly logoutService: ILogoutService,
   ) {}
-
-  private setRefreshCookie(res: Response, refreshToken: string) {
-    res.cookie("refreshToken", refreshToken, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
-      maxAge: this.configService.get<number>("jwt.refreshExpirationMs"),
-    });
-  }
 
   @Post("/login")
   async login(@Body() dto: LoginDto, @Res({ passthrough: true }) res: Response) {
@@ -39,8 +35,20 @@ export class AuthController {
       dto.password,
     );
 
-    this.setRefreshCookie(res, refreshToken);
+    setRefreshCookie(res, refreshToken, this.configService);
     return { accessToken, user };
+  }
+
+  @Post("/register")
+  async register(@Body() dto: CreateUserDto, @Res({ passthrough: true }) res: Response) {
+    const { accessToken, refreshToken, user } = await this.registerService.execute(dto);
+
+    setRefreshCookie(res, refreshToken, this.configService);
+
+    return {
+      accessToken,
+      user,
+    };
   }
 
   @Post("/refresh")
@@ -53,13 +61,13 @@ export class AuthController {
     const { accessToken, refreshToken: newRefreshToken } =
       await this.refreshService.execute(refreshToken);
 
-    this.setRefreshCookie(res, newRefreshToken);
+    setRefreshCookie(res, newRefreshToken, this.configService);
     return { accessToken };
   }
 
   @Get("/me")
   @UseGuards(AuthGuard("jwt"))
-  async me(@Req() req: Request & { user: Omit<User, "password"> }) {
+  async me(@Req() req: Request & { user: Omit<UserEntity, "password"> }) {
     return req.user;
   }
 

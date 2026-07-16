@@ -1,3 +1,3 @@
-export interface IBaseCreateService<T> {
-  execute(data: T): Promise<T>;
+export interface IBaseCreateService<TInput, TOutput> {
+  execute(data: TInput): Promise<TOutput>;
 }

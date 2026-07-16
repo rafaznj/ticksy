@@ -1,3 +1,3 @@
-export interface IBaseCreateRepository<T> {
-  execute(data: T): Promise<T | null>;
+export interface IBaseCreateRepository<TInput, TOutput> {
+  execute(data: TInput): Promise<TOutput | null>;
 }

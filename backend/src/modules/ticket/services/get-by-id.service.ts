@@ -1,6 +1,6 @@
 import { Inject, Injectable } from "@nestjs/common";
 import { BaseGetByIdService } from "../../../shared/base/services/get-by-id.service";
-import { CreateTicketDto } from "../dto/create.dm";
+import { CreateTicketDto } from "../dto/create.dto";
 import { REPOSITORY_TOKENS } from "../../../shared/di/tokens.repositories";
 import type { IGetTicketByIdRepository } from "../repositories/contracts/get-by-id";
 import { IGetTicketByIdService } from "./contracts/get-by-id";

@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import type { IUpdateUserService } from "../services/contracts/update";
-import type { UpdateUserDto } from "../dto/update-user.dto";
+import type { IUpdateUserService } from "../../services/contracts/update";
+import type { UpdateUserDto } from "../../dto/update-user.dto";
 
 export function useUpdateUser(updateUserService: IUpdateUserService) {
   const queryClient = useQueryClient();

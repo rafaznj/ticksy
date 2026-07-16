@@ -20,6 +20,7 @@
         "submitting": "Entrando..."
       },
       "description": "Entre com seu e-mail e senha para continuar",
+      "failed": "Não foi possível realizar o login.",
       "fields": {
         "email": {
           "label": "E-mail",
@@ -41,13 +42,16 @@
         }
       },
       "noAccount": "Ainda não possui uma conta?",
+      "success": "Login realizado com sucesso.",
       "title": "Acesse sua conta"
     },
     "register": {
       "actions": {
+        "signIn": "Entrar",
         "submit": "Criar conta",
         "submitting": "Criando conta..."
       },
+      "alreadyHaveAccount": "Já possui uma conta?",
       "description": "Preencha seus dados para criar sua conta",
       "fields": {
         "email": {

@@ -14,10 +14,17 @@ import type { IRefreshRepository } from "@/modules/auth/repositories/contracts/r
 import { RefreshRepository } from "@/modules/auth/repositories/refresh.repository";
 import type { IRefreshService } from "@/modules/auth/services/contracts/refresh";
 import { RefreshService } from "@/modules/auth/services/refresh.service";
+import type { IRegisterRepository } from "@/modules/auth/repositories/contracts/register";
+import { RegisterRepository } from "@/modules/auth/repositories/register.repository";
+import type { IRegisterService } from "@/modules/auth/services/contracts/register";
+import { RegisterService } from "@/modules/auth/services/register.service";
 
 export const authContainerModule = new ContainerModule(({ bind }: ContainerModuleLoadOptions) => {
   bind<ILoginRepository>(REPOSITORY_TOKENS.LoginRepository).to(LoginRepository);
   bind<ILoginService>(SERVICE_TOKENS.LoginService).to(LoginService);
+
+  bind<IRegisterRepository>(REPOSITORY_TOKENS.RegisterRepository).to(RegisterRepository);
+  bind<IRegisterService>(SERVICE_TOKENS.RegisterService).to(RegisterService);
 
   bind<ILogoutRepository>(REPOSITORY_TOKENS.LogoutRepository).to(LogoutRepository);
   bind<ILogoutService>(SERVICE_TOKENS.LogoutService).to(LogoutService);

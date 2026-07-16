@@ -4,8 +4,8 @@ import type { ICreateTicketService } from "../services/contracts/create";
 import type { IDeleteTicketService } from "../services/contracts/delete";
 import type { IGetTicketByIdService } from "../services/contracts/get-by-id";
 import type { IUpdateTicketService } from "../services/contracts/update";
-import { CreateTicketDto } from "../dto/create.dm";
-import { UpdateTicketDto } from "../dto/update.dm";
+import { CreateTicketDto } from "../dto/create.dto";
+import { UpdateTicketDto } from "../dto/update.dto";
 
 @Controller("ticket")
 export class TicketController {

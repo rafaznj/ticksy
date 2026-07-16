@@ -20,7 +20,7 @@ export class LoginService implements ILoginService {
   async execute(email: string, password: string): Promise<LoginResult> {
     const user = await this.getUserByEmailService.execute(email);
     if (!user || !(await argon2.verify(user.password, password))) {
-      throw AppException.unauthorized("general.errors.invalidCredentials");
+      throw AppException.unauthorized("auth.errors.invalidCredentials");
     }
 
     const accessToken = this.jwtTokenService.signAccessToken(user.id, user.email);

@@ -1,12 +1,12 @@
 import { Body, Controller, Get, Inject, Param, Patch, Post, Put } from "@nestjs/common";
 import { SERVICE_TOKENS } from "../../../shared/di/tokens.services";
-import { CreateUserDto } from "../dto/create-user.dto";
+import { CreateUserDto } from "../dto/create.dto";
 import type { ICreateUserService } from "../services/contracts/create";
 import type { IDeactivateUserService } from "../services/contracts/deactivate";
 import type { IGetUserByIdService } from "../services/contracts/get-by-id";
 import type { IUpdateUserService } from "../services/contracts/update";
 import type { IGetUserByEmailService } from "../services/contracts/get-by-email";
-import { UpdateUserDto } from "../dto/update-user.dto";
+import { UpdateUserDto } from "../dto/update.dto";
 
 @Controller("user")
 export class UserController {
@@ -33,6 +33,11 @@ export class UserController {
     return this.getUserByIdService.execute(id);
   }
 
+  @Get("get-by-email/:email")
+  async getByEmail(@Param("email") email: string) {
+    return this.getUserByEmailService.execute(email);
+  }
+
   @Put(":id")
   async update(@Param("id") id: string, @Body() data: UpdateUserDto) {
     return this.updateUserService.execute(id, data);
@@ -41,10 +46,5 @@ export class UserController {
   @Patch(":id")
   async deactivate(@Param("id") id: string) {
     return this.deactivateUserService.execute(id);
-  }
-
-  @Get("get-by-email/:email")
-  async getByEmail(@Param("email") email: string) {
-    return this.getUserByEmailService.execute(email);
   }
 }

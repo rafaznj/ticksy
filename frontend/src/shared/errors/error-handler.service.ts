@@ -4,7 +4,6 @@ import type { AxiosError } from "axios";
 import { AppError } from "./app-error";
 import type { IErrorResponse } from "./contracts/error-message";
 import type { IErrorHandlerService } from "@/shared/errors/contracts/error";
-import { translateErrors } from "@/shared/errors/translated-errors";
 
 @injectable()
 export class ErrorHandlerService implements IErrorHandlerService {
@@ -16,6 +15,6 @@ export class ErrorHandlerService implements IErrorHandlerService {
       return AppError.generic();
     }
 
-    return new AppError(body.errors, translateErrors(body.errors), body.code);
+    return new AppError(body.errors, body.code);
   }
 }

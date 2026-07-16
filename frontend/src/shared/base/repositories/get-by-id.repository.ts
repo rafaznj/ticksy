@@ -1,5 +1,5 @@
 import { AxiosSingleton } from "@/lib/axios/axios-singleton";
-import { inject, injectable } from "inversify";
+import { inject, injectable, unmanaged } from "inversify";
 import type { IBaseGetByIdRepository } from "./contracts/get-by-id";
 import { INFRASTRUCTURE_TOKENS } from "@/shared/di/tokens.infrastructure";
 import type { AppError } from "@/shared/errors/app-error";
@@ -10,7 +10,7 @@ export class BaseGetByIdRepository<TOutput> implements IBaseGetByIdRepository<TO
   @inject(INFRASTRUCTURE_TOKENS.AxiosSingleton)
   private axiosSingleton!: AxiosSingleton;
 
-  constructor(protected readonly basePath: string) {}
+  constructor(@unmanaged() private basePath: string) {}
 
   async execute(id: string): Promise<TOutput | AppError> {
     const response = await this.axiosSingleton.client.get<TOutput>(`${this.basePath}/${id}`);

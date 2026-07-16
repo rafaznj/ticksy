@@ -1,5 +1,5 @@
-import { CreateUserDto } from "../../dto/create-user.dto";
+import { UserEntity } from "../../entity/user.entity";
 
 export interface IGetUserByEmailService {
-  execute(email: string): Promise<CreateUserDto | null>;
+  execute(email: string): Promise<UserEntity | null>;
 }

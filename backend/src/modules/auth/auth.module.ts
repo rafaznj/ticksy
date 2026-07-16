@@ -13,6 +13,7 @@ import { RefreshService } from "./services/refresh.service";
 import { LogoutService } from "./services/logout.service";
 import { JwtTokenService } from "./services/jwt-token.service";
 import { UserModule } from "../user/user.module";
+import { RegisterService } from "./services/register.service";
 
 @Module({
   imports: [
@@ -43,6 +44,10 @@ import { UserModule } from "../user/user.module";
     {
       provide: SERVICE_TOKENS.LoginService,
       useClass: LoginService,
+    },
+    {
+      provide: SERVICE_TOKENS.RegisterService,
+      useClass: RegisterService,
     },
     {
       provide: SERVICE_TOKENS.LogoutService,

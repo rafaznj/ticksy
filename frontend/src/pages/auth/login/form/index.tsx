@@ -2,7 +2,7 @@ import { useLoginFormHook } from "@/pages/auth/login/form/hook";
 import { Separator } from "@/components/ui/separator";
 
 export function LoginForm() {
-  const { form, t, handleSubmit, errorMessages } = useLoginFormHook();
+  const { form, t, handleSubmit } = useLoginFormHook();
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-8">
@@ -18,18 +18,6 @@ export function LoginForm() {
           <p className="text-base text-muted-foreground">{t("auth.login.description")}</p>
         </div>
       </div>
-
-      {errorMessages.length > 0 && (
-        <div className="rounded-lg border border-destructive/20 bg-destructive/10 p-4">
-          <ul className="space-y-1">
-            {errorMessages.map((message, index) => (
-              <li key={index} className="text-base text-destructive">
-                {message}
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
 
       <div className="space-y-5">
         <form.AppField name="email">
