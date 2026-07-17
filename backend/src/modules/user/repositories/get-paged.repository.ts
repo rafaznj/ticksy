@@ -1,12 +1,12 @@
 import { user } from "../../../database/drizzle/schema";
-import { GetPagedRepository } from "../../../shared/base/repositories/get-paged.repository";
+import { BaseGetPagedRepository } from "../../../shared/base/repositories/get-paged.repository";
 import { IPagedResult } from "../../../shared/types/paged-result";
 import { IQueryOptions } from "../../../shared/types/query-options";
 import { UserModel } from "../entity/user-model";
 import { IGetUserPagedRepository } from "./contracts/get-paged";
 
 export class GetUserPagedRepository
-  extends GetPagedRepository<UserModel>
+  extends BaseGetPagedRepository<UserModel>
   implements IGetUserPagedRepository
 {
   constructor() {

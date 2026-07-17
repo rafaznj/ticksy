@@ -3,14 +3,14 @@ import { and } from "drizzle-orm";
 import { NodePgDatabase } from "drizzle-orm/node-postgres";
 import { PgTable } from "drizzle-orm/pg-core";
 import { DATABASE_TOKENS } from "../../../database/tokens";
-import { IGetPagedRepository } from "./contracts/get-paged";
+import { IBaseGetPagedRepository } from "./contracts/get-paged";
 import { IPagedResult } from "../../types/paged-result";
 import { IQueryOptions } from "../../types/query-options";
 import buildPagedOptions from "../../utils/build-paged-options";
 import { customQueryConditions } from "../../utils/custom-conditions";
 import buildPagedReturn from "../../utils/build-paged-return";
 
-export class GetPagedRepository<T> implements IGetPagedRepository<T> {
+export class BaseGetPagedRepository<T> implements IBaseGetPagedRepository<T> {
   @Inject(DATABASE_TOKENS.Drizzle)
   protected db!: NodePgDatabase;
   constructor(private readonly table: PgTable) {}
