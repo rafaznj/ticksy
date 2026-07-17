@@ -9,9 +9,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 
 export const Route = createFileRoute("/_authenticated")({
   beforeLoad: () => {
-    const { accessToken, isHydrated } = useAuthStore.getState();
-
-    if (!isHydrated) return;
+    const { accessToken } = useAuthStore.getState();
 
     if (!accessToken) {
       throw redirect({ to: "/login" });
@@ -25,9 +23,9 @@ function AuthenticatedLayout() {
     <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
       <TooltipProvider delayDuration={0}>
         <SidebarProvider>
-          <div className="flex min-h-screen">
+          <div className="flex min-h-screen w-full">
             <AppSidebar />
-            <main className="flex flex-1 flex-col">
+            <main className="flex min-w-0 flex-1 flex-col">
               <AppHeader />
               <div className="flex-1 px-4 py-6 md:px-6 lg:px-8">
                 <Outlet />

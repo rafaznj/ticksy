@@ -1,11 +1,9 @@
-import { useState, useEffect } from "react";
 import { Ticket, AlertCircle, CheckCircle, Clock } from "lucide-react";
 
 import { MetricCard } from "@/components/MetricCard";
 import { PerformanceChart } from "@/components/PerformanceChart";
 import { RecentActivity } from "@/components/RecentActivity";
 import { RecentTicketsTable } from "@/components/RecentTicketsTable";
-import { Skeleton } from "@/components/ui/skeleton";
 
 const metrics = [
   {
@@ -51,28 +49,12 @@ const metrics = [
 ];
 
 export default function HomePage() {
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 1200);
-    return () => clearTimeout(timer);
-  }, []);
-
-  if (isLoading) {
-    return <Skeleton />;
-  }
-
   return (
     <div className="flex-1 overflow-y-auto">
       <div className="space-y-6 p-4 md:p-6 lg:p-8">
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {metrics.map((metric, i) => (
-            <MetricCard
-              key={metric.title}
-              {...metric}
-              className="animate-slide-up"
-              style={{ animationDelay: `${i * 75}ms`, animationFillMode: "backwards" }}
-            />
+          {metrics.map((metric) => (
+            <MetricCard key={metric.title} {...metric} className="animate-slide-up" />
           ))}
         </div>
 

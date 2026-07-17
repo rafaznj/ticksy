@@ -112,29 +112,35 @@
   },
   "sidebar": {
     "actions": {
-      "logout": "Sair"
+      "logout": "Sair",
+      "newTicket": "Novo Ticket"
     },
     "labels": {
-      "finishedTickets": "Finalizados",
-      "home": "Home",
+      "home": "Início",
       "openTickets": "Abertos",
       "profile": "Perfil",
-      "users": "Usuários",
-      "waitingTickets": "Em espera"
+      "resolvedTickets": "Resolvidos",
+      "totalTickets": "Todos",
+      "users": "Usuários"
     },
     "titles": {
       "social": "Social",
       "tickets": "Tickets"
     },
     "tooltips": {
-      "finishedTickets": "Ver tickets finalizados",
       "home": "Ir para a página inicial",
-      "openTickets": "Ver tickets abertos",
-      "users": "Ver usuários",
-      "waitingTickets": "Ver tickets em espera"
+      "openTickets": "Ver tickets em aberto",
+      "resolvedTickets": "Ver tickets resolvidos",
+      "totalTickets": "Ver todos os tickets",
+      "users": "Gerenciar usuários"
     }
   },
   "user": {
+    "roles": {
+      "EMPLOYEE": "Colaborador",
+      "ADMIN": "Administrador",
+      "TECHNICAL_ASSISTANCE": "Assistência Técnica"
+    },
     "errors": {
       "deactivateFailed": "Falha ao desativar o usuário."
     }

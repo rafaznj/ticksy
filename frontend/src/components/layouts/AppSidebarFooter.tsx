@@ -1,4 +1,4 @@
-import { AvatarImage, AvatarFallback, Avatar } from "@/components/ui/avatar";
+import { AvatarFallback, Avatar } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,6 +14,7 @@ import {
   SidebarMenuItem,
   SidebarMenuButton,
 } from "@/components/ui/sidebar";
+import { useAuthStore } from "@/lib/zustand/use-auth";
 import { useNavigate } from "@tanstack/react-router";
 import { ChevronsUpDown, User, LogOut } from "lucide-react";
 import { useTranslation } from "react-i18next";
@@ -22,10 +23,11 @@ export function AppSidebarFooter() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { state } = useSidebar();
+  const { user } = useAuthStore();
   const collapsed = state === "collapsed";
 
   return (
-    <SidebarFooter className="p-2">
+    <SidebarFooter className="gap-2 p-2">
       <SidebarMenu>
         <SidebarMenuItem>
           <DropdownMenu>
@@ -35,16 +37,16 @@ export function AppSidebarFooter() {
                 className="h-12 cursor-pointer gap-3 rounded-lg px-2 transition-all hover:bg-sidebar-accent data-[state=open]:bg-sidebar-accent"
               >
                 <Avatar className="size-8 shrink-0 rounded-lg">
-                  <AvatarImage src="" alt="Rafael" />
-                  <AvatarFallback className="rounded-lg bg-sidebar-primary/20 text-xs font-semibold text-sidebar-primary">
-                    RA
-                  </AvatarFallback>
+                  <AvatarFallback
+                    className="rounded-lg bg-sidebar-primary/20 text-xs font-semibold text-sidebar-primary"
+                    name={user?.name}
+                  />
                 </Avatar>
                 {!collapsed && (
                   <div className="flex min-w-0 flex-1 flex-col">
-                    <span className="truncate text-sm font-semibold">Rafael</span>
+                    <span className="truncate text-sm font-semibold">{user?.name}</span>
                     <span className="truncate text-xs text-sidebar-foreground/50">
-                      Administrador
+                      {user?.role && t(`user.roles.${user.role}`)}
                     </span>
                   </div>
                 )}
@@ -56,14 +58,14 @@ export function AppSidebarFooter() {
             <DropdownMenuContent align="start" side="top" sideOffset={8} className="w-56">
               <DropdownMenuLabel className="font-normal">
                 <div className="flex flex-col">
-                  <p className="text-sm font-semibold">Rafael</p>
-                  <p className="text-xs text-muted-foreground">admin@ticksy.com</p>
+                  <p className="text-sm font-semibold">{user?.name}</p>
+                  <p className="text-xs text-muted-foreground">{user?.email}</p>
                 </div>
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem
                 className="cursor-pointer"
-                onClick={() => navigate({ to: "/user/profile" })} // TODO: Profile user page
+                onClick={() => navigate({ to: "/user/profile" })}
               >
                 <User className="mr-2 size-4" />
                 {t("sidebar.labels.profile")}

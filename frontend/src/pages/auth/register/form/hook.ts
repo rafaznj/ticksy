@@ -14,7 +14,7 @@ export function useRegisterFormHook() {
   const { t } = useTranslation();
   const registerService = container.get<IRegisterService>(SERVICE_TOKENS.RegisterService);
 
-  const { mutate: handleRegister } = useRegister(registerService);
+  const { mutate: handleRegister, isPending } = useRegister(registerService);
 
   const form = useAppForm({
     defaultValues: {} as RegisterFormProps,
@@ -39,6 +39,7 @@ export function useRegisterFormHook() {
   return {
     form,
     t,
+    isPending,
     navigate,
     handleSubmit,
   };

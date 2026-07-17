@@ -114,29 +114,35 @@
   },
   "sidebar": {
     "actions": {
-      "logout": "Logout"
+      "logout": "Logout",
+      "newTicket": "New Ticket"
     },
     "labels": {
-      "finishedTickets": "Finished",
       "home": "Home",
       "openTickets": "Open",
       "profile": "Profile",
-      "users": "Users",
-      "waitingTickets": "Waiting"
+      "resolvedTickets": "Resolved",
+      "totalTickets": "All",
+      "users": "Users"
     },
     "titles": {
       "social": "Social",
       "tickets": "Tickets"
     },
     "tooltips": {
-      "finishedTickets": "View completed tickets",
-      "home": "Go to Home",
+      "home": "Go to the home page",
       "openTickets": "View open tickets",
-      "users": "View users",
-      "waitingTickets": "View waiting tickets"
+      "resolvedTickets": "View resolved tickets",
+      "totalTickets": "View all tickets",
+      "users": "Manage users"
     }
   },
   "user": {
+    "roles": {
+      "EMPLOYEE": "Employee",
+      "ADMIN": "Administrator",
+      "TECHNICAL_ASSISTANCE": "Technical Assistance"
+    },
     "errors": {
       "deactivateFailed": "Failed to deactivate the user."
     }

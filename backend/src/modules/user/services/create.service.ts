@@ -28,7 +28,7 @@ export class CreateUserService
   async execute(data: CreateUserDto): Promise<UserEntity> {
     const existingUser = await this.getUserByEmailService.execute(data.email);
 
-    if (existingUser) {
+    if (existingUser?.email) {
       throw AppException.conflict("auth.errors.emailAlreadyExists");
     }
 

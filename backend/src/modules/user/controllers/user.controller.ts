@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Inject, Param, Patch, Post, Put } from "@nestjs/common";
+import { Body, Controller, Get, Inject, Param, Patch, Post, Put, Query } from "@nestjs/common";
 import { SERVICE_TOKENS } from "../../../shared/di/tokens.services";
 import { CreateUserDto } from "../dto/create.dto";
 import type { ICreateUserService } from "../services/contracts/create";
@@ -7,6 +7,7 @@ import type { IGetUserByIdService } from "../services/contracts/get-by-id";
 import type { IUpdateUserService } from "../services/contracts/update";
 import type { IGetUserByEmailService } from "../services/contracts/get-by-email";
 import { UpdateUserDto } from "../dto/update.dto";
+import type { IGetUserPagedService } from "../services/contracts/get-paged";
 
 @Controller("user")
 export class UserController {
@@ -21,6 +22,8 @@ export class UserController {
     private readonly deactivateUserService: IDeactivateUserService,
     @Inject(SERVICE_TOKENS.GetUserByEmailService)
     private readonly getUserByEmailService: IGetUserByEmailService,
+    @Inject(SERVICE_TOKENS.GetUserPagedService)
+    private readonly getUserPagedService: IGetUserPagedService,
   ) {}
 
   @Post("")
@@ -36,6 +39,25 @@ export class UserController {
   @Get("get-by-email/:email")
   async getByEmail(@Param("email") email: string) {
     return this.getUserByEmailService.execute(email);
+  }
+
+  @Get("/paged/")
+  async getPaged(
+    @Query("currentPage") currentPage: number,
+    @Query("pageSize") pageSize: number,
+    @Query("sort") sort?: string,
+    @Query("order") order?: string,
+    @Query("search") search?: string,
+  ) {
+    const result = await this.getUserPagedService.execute({
+      currentPage,
+      pageSize,
+      sort,
+      order,
+      search,
+    });
+
+    return result;
   }
 
   @Put(":id")

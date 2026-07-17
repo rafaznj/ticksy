@@ -14,7 +14,7 @@ export function useLoginFormHook() {
   const { t } = useTranslation();
   const loginService = container.get<ILoginService>(SERVICE_TOKENS.LoginService);
 
-  const { mutate: handleLogin } = useLoginMutation(loginService);
+  const { mutate: handleLogin, isPending } = useLoginMutation(loginService);
 
   const form = useAppForm({
     defaultValues: {} as LoginFormProps,
@@ -36,6 +36,7 @@ export function useLoginFormHook() {
   return {
     form,
     t,
+    isPending,
     navigate,
     handleSubmit,
   };

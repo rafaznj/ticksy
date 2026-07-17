@@ -6,7 +6,6 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Separator } from "@/components/ui/separator";
 import { LanguageToggle } from "@/components/LanguageToggle";
-import { SettingsButton } from "@/components/SettingsButton";
 
 const notifications = [
   {
@@ -33,7 +32,6 @@ const notifications = [
 ];
 
 export function AppHeader() {
-  //TODO: Refactor styles in authenticated
   const unreadCount = notifications.filter((n) => !n.read).length;
 
   return (
@@ -84,7 +82,6 @@ export function AppHeader() {
             </PopoverContent>
           </Popover>
           <LanguageToggle />
-          <SettingsButton />
         </div>
       </div>
     </header>
