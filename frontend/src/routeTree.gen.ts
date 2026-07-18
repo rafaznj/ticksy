@@ -13,12 +13,10 @@ import { Route as RegisterRouteImport } from './routes/register'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
 import { Route as AuthenticatedIndexRouteImport } from './routes/_authenticated/index'
+import { Route as AuthenticatedTicketsRouteImport } from './routes/_authenticated/tickets'
 import { Route as AuthenticatedHomeRouteImport } from './routes/_authenticated/home'
 import { Route as AuthenticatedUserUsersRouteImport } from './routes/_authenticated/user/users'
 import { Route as AuthenticatedUserProfileRouteImport } from './routes/_authenticated/user/profile'
-import { Route as AuthenticatedTicketsTotalRouteImport } from './routes/_authenticated/tickets/total'
-import { Route as AuthenticatedTicketsResolvedRouteImport } from './routes/_authenticated/tickets/resolved'
-import { Route as AuthenticatedTicketsOpenRouteImport } from './routes/_authenticated/tickets/open'
 
 const RegisterRoute = RegisterRouteImport.update({
   id: '/register',
@@ -39,6 +37,11 @@ const AuthenticatedIndexRoute = AuthenticatedIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
+const AuthenticatedTicketsRoute = AuthenticatedTicketsRouteImport.update({
+  id: '/tickets',
+  path: '/tickets',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
 const AuthenticatedHomeRoute = AuthenticatedHomeRouteImport.update({
   id: '/home',
   path: '/home',
@@ -55,33 +58,13 @@ const AuthenticatedUserProfileRoute =
     path: '/user/profile',
     getParentRoute: () => AuthenticatedRoute,
   } as any)
-const AuthenticatedTicketsTotalRoute =
-  AuthenticatedTicketsTotalRouteImport.update({
-    id: '/tickets/total',
-    path: '/tickets/total',
-    getParentRoute: () => AuthenticatedRoute,
-  } as any)
-const AuthenticatedTicketsResolvedRoute =
-  AuthenticatedTicketsResolvedRouteImport.update({
-    id: '/tickets/resolved',
-    path: '/tickets/resolved',
-    getParentRoute: () => AuthenticatedRoute,
-  } as any)
-const AuthenticatedTicketsOpenRoute =
-  AuthenticatedTicketsOpenRouteImport.update({
-    id: '/tickets/open',
-    path: '/tickets/open',
-    getParentRoute: () => AuthenticatedRoute,
-  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof AuthenticatedIndexRoute
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
   '/home': typeof AuthenticatedHomeRoute
-  '/tickets/open': typeof AuthenticatedTicketsOpenRoute
-  '/tickets/resolved': typeof AuthenticatedTicketsResolvedRoute
-  '/tickets/total': typeof AuthenticatedTicketsTotalRoute
+  '/tickets': typeof AuthenticatedTicketsRoute
   '/user/profile': typeof AuthenticatedUserProfileRoute
   '/user/users': typeof AuthenticatedUserUsersRoute
 }
@@ -89,10 +72,8 @@ export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
   '/home': typeof AuthenticatedHomeRoute
+  '/tickets': typeof AuthenticatedTicketsRoute
   '/': typeof AuthenticatedIndexRoute
-  '/tickets/open': typeof AuthenticatedTicketsOpenRoute
-  '/tickets/resolved': typeof AuthenticatedTicketsResolvedRoute
-  '/tickets/total': typeof AuthenticatedTicketsTotalRoute
   '/user/profile': typeof AuthenticatedUserProfileRoute
   '/user/users': typeof AuthenticatedUserUsersRoute
 }
@@ -102,10 +83,8 @@ export interface FileRoutesById {
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
   '/_authenticated/home': typeof AuthenticatedHomeRoute
+  '/_authenticated/tickets': typeof AuthenticatedTicketsRoute
   '/_authenticated/': typeof AuthenticatedIndexRoute
-  '/_authenticated/tickets/open': typeof AuthenticatedTicketsOpenRoute
-  '/_authenticated/tickets/resolved': typeof AuthenticatedTicketsResolvedRoute
-  '/_authenticated/tickets/total': typeof AuthenticatedTicketsTotalRoute
   '/_authenticated/user/profile': typeof AuthenticatedUserProfileRoute
   '/_authenticated/user/users': typeof AuthenticatedUserUsersRoute
 }
@@ -116,9 +95,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/register'
     | '/home'
-    | '/tickets/open'
-    | '/tickets/resolved'
-    | '/tickets/total'
+    | '/tickets'
     | '/user/profile'
     | '/user/users'
   fileRoutesByTo: FileRoutesByTo
@@ -126,10 +103,8 @@ export interface FileRouteTypes {
     | '/login'
     | '/register'
     | '/home'
+    | '/tickets'
     | '/'
-    | '/tickets/open'
-    | '/tickets/resolved'
-    | '/tickets/total'
     | '/user/profile'
     | '/user/users'
   id:
@@ -138,10 +113,8 @@ export interface FileRouteTypes {
     | '/login'
     | '/register'
     | '/_authenticated/home'
+    | '/_authenticated/tickets'
     | '/_authenticated/'
-    | '/_authenticated/tickets/open'
-    | '/_authenticated/tickets/resolved'
-    | '/_authenticated/tickets/total'
     | '/_authenticated/user/profile'
     | '/_authenticated/user/users'
   fileRoutesById: FileRoutesById
@@ -182,6 +155,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedIndexRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/_authenticated/tickets': {
+      id: '/_authenticated/tickets'
+      path: '/tickets'
+      fullPath: '/tickets'
+      preLoaderRoute: typeof AuthenticatedTicketsRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
     '/_authenticated/home': {
       id: '/_authenticated/home'
       path: '/home'
@@ -203,46 +183,21 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedUserProfileRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
-    '/_authenticated/tickets/total': {
-      id: '/_authenticated/tickets/total'
-      path: '/tickets/total'
-      fullPath: '/tickets/total'
-      preLoaderRoute: typeof AuthenticatedTicketsTotalRouteImport
-      parentRoute: typeof AuthenticatedRoute
-    }
-    '/_authenticated/tickets/resolved': {
-      id: '/_authenticated/tickets/resolved'
-      path: '/tickets/resolved'
-      fullPath: '/tickets/resolved'
-      preLoaderRoute: typeof AuthenticatedTicketsResolvedRouteImport
-      parentRoute: typeof AuthenticatedRoute
-    }
-    '/_authenticated/tickets/open': {
-      id: '/_authenticated/tickets/open'
-      path: '/tickets/open'
-      fullPath: '/tickets/open'
-      preLoaderRoute: typeof AuthenticatedTicketsOpenRouteImport
-      parentRoute: typeof AuthenticatedRoute
-    }
   }
 }
 
 interface AuthenticatedRouteChildren {
   AuthenticatedHomeRoute: typeof AuthenticatedHomeRoute
+  AuthenticatedTicketsRoute: typeof AuthenticatedTicketsRoute
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
-  AuthenticatedTicketsOpenRoute: typeof AuthenticatedTicketsOpenRoute
-  AuthenticatedTicketsResolvedRoute: typeof AuthenticatedTicketsResolvedRoute
-  AuthenticatedTicketsTotalRoute: typeof AuthenticatedTicketsTotalRoute
   AuthenticatedUserProfileRoute: typeof AuthenticatedUserProfileRoute
   AuthenticatedUserUsersRoute: typeof AuthenticatedUserUsersRoute
 }
 
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedHomeRoute: AuthenticatedHomeRoute,
+  AuthenticatedTicketsRoute: AuthenticatedTicketsRoute,
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
-  AuthenticatedTicketsOpenRoute: AuthenticatedTicketsOpenRoute,
-  AuthenticatedTicketsResolvedRoute: AuthenticatedTicketsResolvedRoute,
-  AuthenticatedTicketsTotalRoute: AuthenticatedTicketsTotalRoute,
   AuthenticatedUserProfileRoute: AuthenticatedUserProfileRoute,
   AuthenticatedUserUsersRoute: AuthenticatedUserUsersRoute,
 }

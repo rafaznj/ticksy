@@ -15,6 +15,7 @@ import {
   SidebarMenuButton,
 } from "@/components/ui/sidebar";
 import { useAuthStore } from "@/lib/zustand/use-auth";
+import { useLogout } from "@/modules/auth/query-hooks/mutation/use-logout";
 import { useNavigate } from "@tanstack/react-router";
 import { ChevronsUpDown, User, LogOut } from "lucide-react";
 import { useTranslation } from "react-i18next";
@@ -24,6 +25,7 @@ export function AppSidebarFooter() {
   const navigate = useNavigate();
   const { state } = useSidebar();
   const { user } = useAuthStore();
+  const { mutate: handleLogout } = useLogout();
   const collapsed = state === "collapsed";
 
   return (
@@ -33,6 +35,7 @@ export function AppSidebarFooter() {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <SidebarMenuButton
+                tooltip={t("sidebar.tooltips.profile")}
                 size="lg"
                 className="h-12 cursor-pointer gap-3 rounded-lg px-2 transition-all hover:bg-sidebar-accent data-[state=open]:bg-sidebar-accent"
               >
@@ -64,19 +67,26 @@ export function AppSidebarFooter() {
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem
-                className="cursor-pointer"
-                onClick={() => navigate({ to: "/user/profile" })}
+                className="cursor-pointer hover:text-orange-500 focus:text-orange-500 data-highlighted:text-orange-500"
+                onClick={() =>
+                  navigate({
+                    to: "/user/profile",
+                    search: {
+                      redirect: location.pathname,
+                    },
+                  })
+                }
               >
                 <User className="mr-2 size-4" />
-                {t("sidebar.labels.profile")}
+                {t("sidebar.labels.editProfile")}
               </DropdownMenuItem>
-              <DropdownMenuSeparator />
+
               <DropdownMenuItem
-                className="hover:text-destructive focus:text-destructive"
-                onClick={() => navigate({ to: "/login" })}
+                className="cursor-pointer hover:text-destructive focus:text-destructive data-highlighted:text-destructive"
+                onClick={() => handleLogout()}
               >
-                <LogOut />
-                {t("sidebar.actions.logout")}
+                <LogOut className="mr-2 size-4" />
+                {t("sidebar.labels.logout")}
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>

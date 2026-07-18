@@ -1,9 +1,11 @@
 import type { IDeactivateUserService } from "@/modules/user/services/contracts/deactivate";
 import { AppError } from "@/shared/errors/app-error";
+import { handleMutationError } from "@/shared/errors/handle-mutation-error";
 import { useMutation } from "@tanstack/react-query";
-import { toast } from "sonner";
+import { useTranslation } from "react-i18next";
 
 export function useDeactivateUser(deactivateUserService: IDeactivateUserService) {
+  const { t } = useTranslation();
   return useMutation({
     mutationFn: async (id: string) => {
       const response = await deactivateUserService.execute(id);
@@ -14,8 +16,6 @@ export function useDeactivateUser(deactivateUserService: IDeactivateUserService)
 
       return response;
     },
-    onError: (error: AppError) => {
-      toast.error(error.message);
-    },
+    onError: handleMutationError(t("user.errors.deactivateFailed")),
   });
 }

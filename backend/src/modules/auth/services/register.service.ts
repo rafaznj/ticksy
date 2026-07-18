@@ -29,10 +29,7 @@ export class RegisterService implements IRegisterService {
     return {
       accessToken,
       refreshToken,
-      user: {
-        id: user.id,
-        email: user.email,
-      },
+      user,
     };
   }
 }

@@ -7,7 +7,7 @@ import type { RegisterFormProps } from "@/pages/auth/register/form/types";
 import { container } from "@/lib/inversifyJS/index.container";
 import { SERVICE_TOKENS } from "@/shared/di/tokens.services";
 import type { IRegisterService } from "@/modules/auth/services/contracts/register";
-import { useRegister } from "@/modules/auth/query-hooks/use-register";
+import { useRegister } from "@/modules/auth/query-hooks/mutation/use-register";
 
 export function useRegisterFormHook() {
   const navigate = useNavigate();

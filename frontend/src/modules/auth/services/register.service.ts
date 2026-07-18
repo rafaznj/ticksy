@@ -6,6 +6,7 @@ import type { IRegisterService } from "@/modules/auth/services/contracts/registe
 import type { CreateUserDto } from "@/modules/user/dto/create-user.dto";
 import type { RegisterResponse } from "@/modules/auth/dto/register-response";
 import type { IRegisterRepository } from "@/modules/auth/repositories/contracts/register";
+import { useAuthStore } from "@/lib/zustand/use-auth";
 
 @injectable()
 export class RegisterService implements IRegisterService {
@@ -21,6 +22,7 @@ export class RegisterService implements IRegisterService {
       throw response;
     }
 
+    useAuthStore.getState().setAuth(response.accessToken, response.user);
     return response;
   }
 }

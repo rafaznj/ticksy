@@ -7,11 +7,11 @@ export function CreateTicketForm() {
     isOpen,
     form,
     priorityOptions,
-    close,
-    handleSubmit,
     isBlurred,
     canSubmit,
     isSubmitting,
+    close,
+    handleSubmit,
   } = useCreateTicketForm();
 
   return (
