@@ -4,10 +4,10 @@ import type { IBaseUpdateService } from "./contracts/update";
 import { AppError } from "@/shared/errors/app-error";
 
 @injectable()
-export class BaseUpdateService<TInput, TOutput> implements IBaseUpdateService<TInput, TOutput> {
-  constructor(protected readonly repository: IBaseUpdateRepository<TInput, TOutput>) {}
+export class BaseUpdateService<T> implements IBaseUpdateService<T> {
+  constructor(protected readonly repository: IBaseUpdateRepository<T>) {}
 
-  async execute(id: string, data: TInput): Promise<TOutput | AppError> {
+  async execute(id: string, data: T): Promise<T | AppError> {
     const response = await this.repository.execute(id, data);
 
     if (response instanceof AppError) {
