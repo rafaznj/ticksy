@@ -19,7 +19,7 @@ CREATE TABLE "user" (
 	"email" varchar(254) NOT NULL,
 	"password" text NOT NULL,
 	"role" "role" DEFAULT 'EMPLOYEE' NOT NULL,
-	"is_active" boolean DEFAULT true NOT NULL,
+	"deleted" boolean DEFAULT false NOT NULL,
 	"created_at" timestamp DEFAULT now() NOT NULL,
 	"updated_at" timestamp DEFAULT now() NOT NULL
 );

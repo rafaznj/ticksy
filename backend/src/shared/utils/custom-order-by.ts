@@ -12,5 +12,5 @@ export const customOrderBy = (options: IQueryOptions, tableName?: string) => {
         : asc(sql.identifier(options.sort));
   }
 
-  return tableName ? asc(sql.raw(`${tableName}.createdAt`)) : asc(sql.identifier("createdAt"));
+  return tableName ? asc(sql.raw(`${tableName}.created_at`)) : asc(sql.identifier("created_at"));
 };

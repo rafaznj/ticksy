@@ -135,14 +135,62 @@
       "users": "Gerenciar usuários"
     }
   },
+  "ticket": {
+    "create": {
+      "actions": {
+        "cancel": "Cancelar",
+        "submit": "Criar ticket"
+      },
+      "description": "Preencha as informações abaixo para registrar um novo ticket.",
+      "fields": {
+        "description": {
+          "label": "Descrição",
+          "placeholder": "Descreva o problema ou solicitação com o máximo de detalhes possível.",
+          "validations": {
+            "maxLength": "A descrição deve ter no máximo {{max}} caracteres.",
+            "minLength": "A descrição deve ter pelo menos {{min}} caracteres.",
+            "required": "A descrição é obrigatória."
+          }
+        },
+        "priority": {
+          "label": "Prioridade",
+          "options": {
+            "HIGH": "Alta",
+            "LOW": "Baixa",
+            "MEDIUM": "Média",
+            "URGENT": "Urgente"
+          },
+          "placeholder": "Selecione a prioridade do ticket",
+          "validations": {
+            "invalid": "Selecione uma prioridade válida.",
+            "required": "A prioridade é obrigatória."
+          }
+        },
+        "title": {
+          "label": "Título",
+          "placeholder": "Ex.: Erro ao acessar o sistema",
+          "validations": {
+            "maxLength": "O título deve ter no máximo {{max}} caracteres.",
+            "minLength": "O título deve ter pelo menos {{min}} caracteres.",
+            "required": "O título é obrigatório."
+          }
+        }
+      },
+      "messages": {
+        "failed": "Não foi possível criar o ticket.",
+        "success": "Ticket criado com sucesso."
+      },
+      "title": "Novo ticket"
+    }
+  },
   "user": {
-    "roles": {
-      "EMPLOYEE": "Colaborador",
-      "ADMIN": "Administrador",
-      "TECHNICAL_ASSISTANCE": "Assistência Técnica"
-    },
     "errors": {
       "deactivateFailed": "Falha ao desativar o usuário."
+    },
+    "roles": {
+      "ADMIN": "Administrador",
+      "EMPLOYEE": "Colaborador",
+      "TECHNICAL_ASSISTANCE": "Assistência Técnica"
     }
   }
 }

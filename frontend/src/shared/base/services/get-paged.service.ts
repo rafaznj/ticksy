@@ -6,7 +6,7 @@ import type { PagedParamsQuery } from "@/shared/types/paged-params-query";
 import type { PagedResponse } from "@/shared/types/paged-response";
 
 @injectable()
-export class BaseGetPagedRService<T> implements IBaseGetPagedService<T> {
+export class BaseGetPagedService<T> implements IBaseGetPagedService<T> {
   constructor(protected readonly repository: IBaseGetPagedRepository<T>) {}
 
   async execute(params: PagedParamsQuery): Promise<PagedResponse<T> | AppError> {

@@ -137,14 +137,62 @@
       "users": "Manage users"
     }
   },
+  "ticket": {
+    "create": {
+      "actions": {
+        "cancel": "Cancel",
+        "submit": "Create ticket"
+      },
+      "description": "Fill out the information below to create a new ticket.",
+      "fields": {
+        "description": {
+          "label": "Description",
+          "placeholder": "Describe the issue or request in as much detail as possible.",
+          "validations": {
+            "maxLength": "Description must not exceed {{max}} characters.",
+            "minLength": "Description must be at least {{min}} characters.",
+            "required": "Description is required."
+          }
+        },
+        "priority": {
+          "label": "Priority",
+          "options": {
+            "HIGH": "High",
+            "LOW": "Low",
+            "MEDIUM": "Medium",
+            "URGENT": "Urgent"
+          },
+          "placeholder": "Select the ticket priority",
+          "validations": {
+            "invalid": "Please select a valid priority.",
+            "required": "Priority is required."
+          }
+        },
+        "title": {
+          "label": "Title",
+          "placeholder": "e.g. Unable to access the system",
+          "validations": {
+            "maxLength": "Title must not exceed {{max}} characters.",
+            "minLength": "Title must be at least {{min}} characters.",
+            "required": "Title is required."
+          }
+        }
+      },
+      "messages": {
+        "failed": "Unable to create the ticket.",
+        "success": "Ticket created successfully."
+      },
+      "title": "New ticket"
+    }
+  },
   "user": {
-    "roles": {
-      "EMPLOYEE": "Employee",
-      "ADMIN": "Administrator",
-      "TECHNICAL_ASSISTANCE": "Technical Assistance"
-    },
     "errors": {
       "deactivateFailed": "Failed to deactivate the user."
+    },
+    "roles": {
+      "ADMIN": "Administrator",
+      "EMPLOYEE": "Employee",
+      "TECHNICAL_ASSISTANCE": "Technical Assistance"
     }
   }
 }

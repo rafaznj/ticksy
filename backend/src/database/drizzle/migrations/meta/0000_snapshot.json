@@ -1,5 +1,5 @@
 {
-  "id": "d47b4dc0-0338-4714-ac62-15fef8a6e107",
+  "id": "0e186698-34f7-474f-b9f2-df01debd1a6d",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -75,8 +75,12 @@
           "name": "ticket_created_by_id_user_id_fk",
           "tableFrom": "ticket",
           "tableTo": "user",
-          "columnsFrom": ["created_by_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "created_by_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -84,8 +88,12 @@
           "name": "ticket_assigned_to_id_user_id_fk",
           "tableFrom": "ticket",
           "tableTo": "user",
-          "columnsFrom": ["assigned_to_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "assigned_to_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -133,12 +141,12 @@
           "notNull": true,
           "default": "'EMPLOYEE'"
         },
-        "is_active": {
-          "name": "is_active",
+        "deleted": {
+          "name": "deleted",
           "type": "boolean",
           "primaryKey": false,
           "notNull": true,
-          "default": true
+          "default": false
         },
         "created_at": {
           "name": "created_at",
@@ -212,8 +220,12 @@
           "name": "refresh_tokens_user_id_user_id_fk",
           "tableFrom": "refresh_tokens",
           "tableTo": "user",
-          "columnsFrom": ["user_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -229,17 +241,32 @@
     "public.ticket_priority": {
       "name": "ticket_priority",
       "schema": "public",
-      "values": ["LOW", "MEDIUM", "HIGH", "URGENT"]
+      "values": [
+        "LOW",
+        "MEDIUM",
+        "HIGH",
+        "URGENT"
+      ]
     },
     "public.ticket_status": {
       "name": "ticket_status",
       "schema": "public",
-      "values": ["OPEN", "IN_PROGRESS", "WAITING_CUSTOMER", "RESOLVED", "CLOSED"]
+      "values": [
+        "OPEN",
+        "IN_PROGRESS",
+        "WAITING_CUSTOMER",
+        "RESOLVED",
+        "CLOSED"
+      ]
     },
     "public.role": {
       "name": "role",
       "schema": "public",
-      "values": ["EMPLOYEE", "ADMIN", "TECHNICAL_ASSISTANCE"]
+      "values": [
+        "EMPLOYEE",
+        "ADMIN",
+        "TECHNICAL_ASSISTANCE"
+      ]
     }
   },
   "schemas": {},

@@ -31,17 +31,7 @@ export class UserController {
     return this.createUserService.execute(data);
   }
 
-  @Get(":id")
-  async getById(@Param("id") id: string) {
-    return this.getUserByIdService.execute(id);
-  }
-
-  @Get("get-by-email/:email")
-  async getByEmail(@Param("email") email: string) {
-    return this.getUserByEmailService.execute(email);
-  }
-
-  @Get("/paged/")
+  @Get("paged")
   async getPaged(
     @Query("currentPage") currentPage: number,
     @Query("pageSize") pageSize: number,
@@ -58,6 +48,16 @@ export class UserController {
     });
 
     return result;
+  }
+
+  @Get("get-by-email/:email")
+  async getByEmail(@Param("email") email: string) {
+    return this.getUserByEmailService.execute(email);
+  }
+
+  @Get(":id")
+  getById(@Param("id") id: string) {
+    return this.getUserByIdService.execute(id);
   }
 
   @Put(":id")

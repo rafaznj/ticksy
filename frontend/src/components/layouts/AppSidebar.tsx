@@ -1,3 +1,4 @@
+import { CreateTicketForm } from "@/components/forms/ticket/create";
 import { AppSidebarFooter } from "@/components/layouts/AppSidebarFooter";
 import {
   Sidebar,
@@ -11,6 +12,9 @@ import {
   SidebarMenuItem,
   SidebarSeparator,
 } from "@/components/ui/sidebar";
+import { useDialog } from "@/contexts/DialogContext";
+import { DIALOG_KEYS } from "@/shared/constants/dialog-keys";
+
 import { useNavigate, useRouterState } from "@tanstack/react-router";
 import { Home, Ticket, Clock, CheckCircle, Users, Plus } from "lucide-react";
 import { useTranslation } from "react-i18next";
@@ -19,6 +23,7 @@ export function AppSidebar() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const { open: openCreateTicketDialog } = useDialog(DIALOG_KEYS.CREATE_TICKET);
 
   return (
     <Sidebar collapsible="icon" variant="floating">
@@ -26,7 +31,7 @@ export function AppSidebar() {
         <SidebarMenu>
           <SidebarMenuItem className="flex justify-center">
             <SidebarMenuButton
-              onClick={() => alert("abri dialog")}
+              onClick={openCreateTicketDialog}
               className="h-10 gap-2 justify-center rounded-lg bg-primary text-sm text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground px-5 mx-auto group-data-[collapsible=icon]:w-10 group-data-[collapsible=icon]:p-0"
             >
               <Plus className="size-5 shrink-0" />
@@ -137,6 +142,8 @@ export function AppSidebar() {
       <SidebarSeparator />
 
       <AppSidebarFooter />
+
+      <CreateTicketForm />
     </Sidebar>
   );
 }
