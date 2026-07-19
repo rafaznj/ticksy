@@ -4,7 +4,7 @@ import { TrendingUp, TrendingDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-interface MetricCardProps {
+export interface MetricCardItem {
   title: string;
   value: string | number;
   description?: string;
@@ -13,11 +13,24 @@ interface MetricCardProps {
   trendValue?: string;
   iconColor?: string;
   iconBg?: string;
-  className?: string;
-  style?: React.CSSProperties;
 }
 
-export function MetricCard({
+interface MetricCardProps {
+  metrics: MetricCardItem[];
+  className?: string;
+}
+
+export function MetricCard({ metrics, className }: MetricCardProps) {
+  return (
+    <div className={cn("grid grid-cols-1 gap-4 sm:grid-cols-2", className)}>
+      {metrics.map((metric) => (
+        <MetricCardItem key={metric.title} {...metric} />
+      ))}
+    </div>
+  );
+}
+
+function MetricCardItem({
   title,
   value,
   description,
@@ -26,17 +39,9 @@ export function MetricCard({
   trendValue,
   iconColor = "text-blue-600",
   iconBg = "bg-blue-50 dark:bg-blue-950/50",
-  className,
-  style,
-}: MetricCardProps) {
+}: MetricCardItem) {
   return (
-    <Card
-      className={cn(
-        "group transition-all duration-300 hover:shadow-md hover:-translate-y-0.5",
-        className,
-      )}
-      style={style}
-    >
+    <Card className="group animate-slide-up transition-all duration-300 hover:shadow-md hover:-translate-y-0.5">
       <CardHeader className="flex flex-row items-center justify-between pb-2">
         <CardTitle className="text-sm font-medium text-muted-foreground">{title}</CardTitle>
         <div

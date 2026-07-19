@@ -45,6 +45,9 @@
       "success": "Login realizado com sucesso.",
       "title": "Acesse sua conta"
     },
+    "logout": {
+      "error": "Não foi possível encerrar sua sessão. Tente novamente."
+    },
     "register": {
       "actions": {
         "signIn": "Entrar",
@@ -86,9 +89,64 @@
         }
       },
       "title": "Crie sua conta"
+    }
+  },
+  "dashboard": {
+    "admin": {
+      "metrics": {
+        "avgTime": {
+          "description": "para resolução",
+          "title": "Tempo Médio"
+        },
+        "openTickets": {
+          "description": "aguardando ação",
+          "title": "Tickets Abertos"
+        },
+        "resolvedThisMonth": {
+          "description": "vs. mês anterior",
+          "title": "Resolvidos este mês"
+        },
+        "totalTickets": {
+          "description": "vs. mês anterior",
+          "title": "Total de Tickets"
+        }
+      }
     },
-    "logout": {
-      "error": "Não foi possível encerrar sua sessão. Tente novamente."
+    "employee": {
+      "metrics": {
+        "myTickets": {
+          "description": "no total",
+          "title": "Meus Tickets"
+        },
+        "open": {
+          "description": "aguardando ação",
+          "title": "Abertos"
+        },
+        "resolved": {
+          "description": "no total",
+          "title": "Resolvidos"
+        }
+      }
+    },
+    "technical_assistance": {
+      "metrics": {
+        "highPriority": {
+          "description": "requerem atenção",
+          "title": "Alta Prioridade"
+        },
+        "inProgress": {
+          "description": "sendo trabalhados",
+          "title": "Em Andamento"
+        },
+        "myTickets": {
+          "description": "atribuídos a mim",
+          "title": "Meus Tickets"
+        },
+        "resolvedToday": {
+          "description": "concluídos hoje",
+          "title": "Resolvidos Hoje"
+        }
+      }
     }
   },
   "general": {
@@ -174,29 +232,20 @@
       "title": "Novo ticket"
     }
   },
-  "user": {
-    "roles": {
-      "ADMIN": "Administrador",
-      "EMPLOYEE": "Colaborador",
-      "TECHNICAL_ASSISTANCE": "Assistência Técnica"
+  "user": { 
+    "confirmations": {
+      "activate": "Tem certeza de que deseja ativar este usuário?",
+      "deactivate": "Tem certeza de que deseja desativar este usuário?",
+      "delete": "Tem certeza de que deseja remover este usuário?"
     },
     "edit": {
-      "title": "Editar perfil",
-      "description": "Atualize suas informações pessoais.",
       "actions": {
+        "cancel": "Cancelar",
         "save": "Salvar alterações",
-        "saving": "Salvando...",
-        "cancel": "Cancelar"
+        "saving": "Salvando..."
       },
+      "description": "Atualize suas informações pessoais.",
       "fields": {
-        "name": {
-          "label": "Nome",
-          "placeholder": "Digite seu nome",
-          "validations": {
-            "minLength": "O nome deve ter no mínimo {{min}} caracteres.",
-            "maxLength": "O nome deve ter no máximo {{max}} caracteres."
-          }
-        },
         "email": {
           "label": "E-mail",
           "placeholder": "Digite seu e-mail",
@@ -204,29 +253,38 @@
             "invalid": "Informe um endereço de e-mail válido.",
             "maxLength": "O e-mail deve ter no máximo {{max}} caracteres."
           }
+        },
+        "name": {
+          "label": "Nome",
+          "placeholder": "Digite seu nome",
+          "validations": {
+            "maxLength": "O nome deve ter no máximo {{max}} caracteres.",
+            "minLength": "O nome deve ter no mínimo {{min}} caracteres."
+          }
         }
-      }
-    },
-    "success": {
-      "created": "Usuário criado com sucesso.",
-      "updated": "Perfil atualizado com sucesso.",
-      "deleted": "Usuário removido com sucesso.",
-      "deactivated": "Usuário desativado com sucesso.",
-      "activated": "Usuário ativado com sucesso."
+      },
+      "title": "Editar perfil"
     },
     "errors": {
-      "createFailed": "Falha ao criar o usuário.",
-      "updateFailed": "Falha ao atualizar o perfil.",
-      "deleteFailed": "Falha ao remover o usuário.",
-      "deactivateFailed": "Falha ao desativar o usuário.",
       "activateFailed": "Falha ao ativar o usuário.",
+      "createFailed": "Falha ao criar o usuário.",
+      "deactivateFailed": "Falha ao desativar o usuário.",
+      "deleteFailed": "Falha ao remover o usuário.",
       "loadFailed": "Falha ao carregar os dados do usuário.",
-      "notFound": "Usuário não encontrado."
+      "notFound": "Usuário não encontrado.",
+      "updateFailed": "Falha ao atualizar o perfil."
     },
-    "confirmations": {
-      "delete": "Tem certeza de que deseja remover este usuário?",
-      "deactivate": "Tem certeza de que deseja desativar este usuário?",
-      "activate": "Tem certeza de que deseja ativar este usuário?"
+    "roles": {
+      "ADMIN": "Administrador",
+      "EMPLOYEE": "Colaborador",
+      "TECHNICAL_ASSISTANCE": "Assistência Técnica"
+    },
+    "success": {
+      "activated": "Usuário ativado com sucesso.",
+      "created": "Usuário criado com sucesso.",
+      "deactivated": "Usuário desativado com sucesso.",
+      "deleted": "Usuário removido com sucesso.",
+      "updated": "Perfil atualizado com sucesso."
     }
   }
 }

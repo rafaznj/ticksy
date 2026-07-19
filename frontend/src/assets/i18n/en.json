@@ -6,9 +6,6 @@
       "refreshTokenMissing": "Your session has expired. Please sign in again.",
       "userNotFound": "User not found."
     },
-    "logout": {
-      "error": "Unable to sign you out. Please try again."
-    },
     "forgotPassword": {
       "actions": {
         "submit": "Reset password",
@@ -49,6 +46,9 @@
       },
       "noAccount": "Don't have an account?",
       "title": "Sign in to your account"
+    },
+    "logout": {
+      "error": "Unable to sign you out. Please try again."
     },
     "register": {
       "actions": {
@@ -91,6 +91,64 @@
         }
       },
       "title": "Create your account"
+    }
+  },
+  "dashboard": {
+    "admin": {
+      "metrics": {
+        "totalTickets": {
+          "title": "Total Tickets",
+          "description": "vs. last month"
+        },
+        "openTickets": {
+          "title": "Open Tickets",
+          "description": "awaiting action"
+        },
+        "resolvedThisMonth": {
+          "title": "Resolved this month",
+          "description": "vs. last month"
+        },
+        "avgTime": {
+          "title": "Average Time",
+          "description": "to resolution"
+        }
+      }
+    },
+    "employee": {
+      "metrics": {
+        "myTickets": {
+          "title": "My Tickets",
+          "description": "in total"
+        },
+        "open": {
+          "title": "Open",
+          "description": "awaiting action"
+        },
+        "resolved": {
+          "title": "Resolved",
+          "description": "in total"
+        }
+      }
+    },
+    "technical_assistance": {
+      "metrics": {
+        "myTickets": {
+          "title": "My Tickets",
+          "description": "assigned to me"
+        },
+        "inProgress": {
+          "title": "In Progress",
+          "description": "being worked on"
+        },
+        "resolvedToday": {
+          "title": "Resolved Today",
+          "description": "completed today"
+        },
+        "highPriority": {
+          "title": "High Priority",
+          "description": "require attention"
+        }
+      }
     }
   },
   "general": {
@@ -177,28 +235,19 @@
     }
   },
   "user": {
-    "roles": {
-      "ADMIN": "Administrator",
-      "EMPLOYEE": "Employee",
-      "TECHNICAL_ASSISTANCE": "Technical Assistance"
+    "confirmations": {
+      "activate": "Are you sure you want to activate this user?",
+      "deactivate": "Are you sure you want to deactivate this user?",
+      "delete": "Are you sure you want to delete this user?"
     },
     "edit": {
-      "title": "Edit profile",
-      "description": "Update your personal information.",
       "actions": {
+        "cancel": "Cancel",
         "save": "Save changes",
-        "saving": "Saving...",
-        "cancel": "Cancel"
+        "saving": "Saving..."
       },
+      "description": "Update your personal information.",
       "fields": {
-        "name": {
-          "label": "Name",
-          "placeholder": "Enter your name",
-          "validations": {
-            "minLength": "Name must be at least {{min}} characters.",
-            "maxLength": "Name must have at most {{max}} characters."
-          }
-        },
         "email": {
           "label": "Email",
           "placeholder": "Enter your email",
@@ -206,29 +255,38 @@
             "invalid": "Please enter a valid email address.",
             "maxLength": "Email must have at most {{max}} characters."
           }
+        },
+        "name": {
+          "label": "Name",
+          "placeholder": "Enter your name",
+          "validations": {
+            "maxLength": "Name must have at most {{max}} characters.",
+            "minLength": "Name must be at least {{min}} characters."
+          }
         }
-      }
-    },
-    "success": {
-      "created": "User created successfully.",
-      "updated": "Profile updated successfully.",
-      "deleted": "User deleted successfully.",
-      "deactivated": "User deactivated successfully.",
-      "activated": "User activated successfully."
+      },
+      "title": "Edit profile"
     },
     "errors": {
-      "createFailed": "Failed to create the user.",
-      "updateFailed": "Failed to update the profile.",
-      "deleteFailed": "Failed to delete the user.",
-      "deactivateFailed": "Failed to deactivate the user.",
       "activateFailed": "Failed to activate the user.",
+      "createFailed": "Failed to create the user.",
+      "deactivateFailed": "Failed to deactivate the user.",
+      "deleteFailed": "Failed to delete the user.",
       "loadFailed": "Failed to load user data.",
-      "notFound": "User not found."
+      "notFound": "User not found.",
+      "updateFailed": "Failed to update the profile."
     },
-    "confirmations": {
-      "delete": "Are you sure you want to delete this user?",
-      "deactivate": "Are you sure you want to deactivate this user?",
-      "activate": "Are you sure you want to activate this user?"
+    "roles": {
+      "ADMIN": "Administrator",
+      "EMPLOYEE": "Employee",
+      "TECHNICAL_ASSISTANCE": "Technical Assistance"
+    },
+    "success": {
+      "activated": "User activated successfully.",
+      "created": "User created successfully.",
+      "deactivated": "User deactivated successfully.",
+      "deleted": "User deleted successfully.",
+      "updated": "Profile updated successfully."
     }
   }
 }
