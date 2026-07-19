@@ -10,9 +10,11 @@ import { UpdateUserService } from "./services/update.service";
 import { UpdateUserRepository } from "./repositories/update.repository";
 import { GetUserByIdRepository } from "./repositories/get-by-id.repository";
 import { GetUserByIdService } from "./services/get-by-id.service";
+import { DeactivateUserRepository } from "./repositories/deactivate.repository";
 import GetUserByEmailService from "./services/get-by-email.service";
 import { GetUserByEmailRepository } from "./repositories/get-by-email.repository";
-import { DeactivateUserRepository } from "./repositories/deactivate.repository";
+import { GetUserPagedRepository } from "./repositories/get-paged.repository";
+import { GetUserPagedService } from "./services/get-paged.service";
 
 @Module({
   imports: [DrizzleModule],
@@ -35,6 +37,22 @@ import { DeactivateUserRepository } from "./repositories/deactivate.repository";
       useClass: GetUserByIdRepository,
     },
     {
+      provide: SERVICE_TOKENS.GetUserByEmailService,
+      useClass: GetUserByEmailService,
+    },
+    {
+      provide: REPOSITORY_TOKENS.GetUserByEmailRepository,
+      useClass: GetUserByEmailRepository,
+    },
+    {
+      provide: SERVICE_TOKENS.GetUserPagedService,
+      useClass: GetUserPagedService,
+    },
+    {
+      provide: REPOSITORY_TOKENS.GetUserPagedRepository,
+      useClass: GetUserPagedRepository,
+    },
+    {
       provide: SERVICE_TOKENS.UpdateUserService,
       useClass: UpdateUserService,
     },
@@ -49,14 +67,6 @@ import { DeactivateUserRepository } from "./repositories/deactivate.repository";
     {
       provide: REPOSITORY_TOKENS.DeactivateUserRepository,
       useClass: DeactivateUserRepository,
-    },
-    {
-      provide: SERVICE_TOKENS.GetUserByEmailService,
-      useClass: GetUserByEmailService,
-    },
-    {
-      provide: REPOSITORY_TOKENS.GetUserByEmailRepository,
-      useClass: GetUserByEmailRepository,
     },
   ],
   exports: [

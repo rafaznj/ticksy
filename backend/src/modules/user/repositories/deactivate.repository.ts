@@ -15,7 +15,7 @@ export class DeactivateUserRepository implements IDeactivateUserRepository {
     const result = await this.db
       .update(user)
       .set({
-        isActive: false,
+        deleted: true,
       })
       .where(eq(user.id, id));
 

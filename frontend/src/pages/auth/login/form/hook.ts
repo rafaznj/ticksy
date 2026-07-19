@@ -2,7 +2,7 @@ import { useNavigate } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 
 import { useAppForm } from "@/hooks/use-form";
-import { useLoginMutation } from "@/modules/auth/query-hooks/use-login";
+import { useLoginMutation } from "@/modules/auth/query-hooks/mutation/use-login";
 import { loginFormSchema } from "@/pages/auth/login/form/validations";
 import type { LoginFormProps } from "@/pages/auth/login/form/types";
 import { container } from "@/lib/inversifyJS/index.container";
@@ -14,7 +14,7 @@ export function useLoginFormHook() {
   const { t } = useTranslation();
   const loginService = container.get<ILoginService>(SERVICE_TOKENS.LoginService);
 
-  const { mutate: handleLogin } = useLoginMutation(loginService);
+  const { mutate: handleLogin, isPending } = useLoginMutation(loginService);
 
   const form = useAppForm({
     defaultValues: {} as LoginFormProps,
@@ -36,6 +36,7 @@ export function useLoginFormHook() {
   return {
     form,
     t,
+    isPending,
     navigate,
     handleSubmit,
   };

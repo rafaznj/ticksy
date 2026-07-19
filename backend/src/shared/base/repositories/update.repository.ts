@@ -6,15 +6,19 @@ import { DATABASE_TOKENS } from "../../../database/tokens";
 import { TableWithId } from "../../types/table-with-id.type";
 import { IBaseUpdateRepository } from "./contracts/update";
 
-export abstract class BaseUpdateRepository<T> implements IBaseUpdateRepository<T> {
+export class BaseUpdateRepository<T> implements IBaseUpdateRepository<T> {
   @Inject(DATABASE_TOKENS.Drizzle)
   protected db!: NodePgDatabase;
 
   constructor(private readonly table: TableWithId) {}
 
-  async execute(id: string, data: Partial<T>): Promise<boolean> {
-    const result = await this.db.update(this.table).set(data).where(eq(this.table.id, id));
+  async execute(id: string, data: Partial<T>): Promise<T | null> {
+    const result = await this.db
+      .update(this.table)
+      .set(data)
+      .where(eq(this.table.id, id))
+      .returning();
 
-    return !!result.rowCount;
+    return (result[0] as T) ?? null;
   }
 }

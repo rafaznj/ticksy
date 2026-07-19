@@ -1,5 +1,5 @@
 {
-  "id": "d47b4dc0-0338-4714-ac62-15fef8a6e107",
+  "id": "0e186698-34f7-474f-b9f2-df01debd1a6d",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -141,12 +141,12 @@
           "notNull": true,
           "default": "'EMPLOYEE'"
         },
-        "is_active": {
-          "name": "is_active",
+        "deleted": {
+          "name": "deleted",
           "type": "boolean",
           "primaryKey": false,
           "notNull": true,
-          "default": true
+          "default": false
         },
         "created_at": {
           "name": "created_at",

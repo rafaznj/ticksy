@@ -3,10 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { ThemeToggle } from "@/components/ThemeToggle";
-import { SidebarTrigger } from "@/components/ui/sidebar";
-import { Separator } from "@/components/ui/separator";
 import { LanguageToggle } from "@/components/LanguageToggle";
-import { SettingsButton } from "@/components/SettingsButton";
 
 const notifications = [
   {
@@ -33,17 +30,11 @@ const notifications = [
 ];
 
 export function AppHeader() {
-  //TODO: Refactor styles in authenticated
   const unreadCount = notifications.filter((n) => !n.read).length;
 
   return (
     <header className="flex flex-col gap-4 border-b bg-background/80 px-4 py-4 backdrop-blur-sm md:px-6 lg:px-8">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <SidebarTrigger className="-ml-1 cursor-pointer" />
-          <Separator orientation="vertical" className="mr-1 hidden h-5 md:block" />
-        </div>
-
+      <div className="flex items-center justify-end">
         <div className="flex items-center gap-2">
           <ThemeToggle />
           <Popover>
@@ -84,7 +75,6 @@ export function AppHeader() {
             </PopoverContent>
           </Popover>
           <LanguageToggle />
-          <SettingsButton />
         </div>
       </div>
     </header>

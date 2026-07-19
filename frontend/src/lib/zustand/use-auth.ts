@@ -1,26 +1,42 @@
 import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
-interface User {
-  id: string;
-  email: string;
-}
+import type { UserEntity } from "@/modules/user/entity/user.entity";
 
 interface AuthState {
   accessToken: string | null;
-  user: User | null;
-  isHydrated: boolean;
-  setAuth: (accessToken: string, user: User) => void;
+  user: UserEntity | null;
+  setAuth: (accessToken: string, user: UserEntity) => void;
   clearAuth: () => void;
-  setHydrated: () => void;
   logout: () => void;
 }
 
-export const useAuthStore = create<AuthState>((set) => ({
-  accessToken: null,
-  user: null,
-  isHydrated: false,
-  setAuth: (accessToken, user) => set({ accessToken, user }),
-  clearAuth: () => set({ accessToken: null, user: null }),
-  setHydrated: () => set({ isHydrated: true }),
-  logout: () => {},
-}));
+export const useAuthStore = create<AuthState>()(
+  persist(
+    (set) => ({
+      accessToken: null,
+      user: null,
+
+      setAuth: (accessToken, user) =>
+        set({
+          accessToken,
+          user,
+        }),
+
+      clearAuth: () =>
+        set({
+          accessToken: null,
+          user: null,
+        }),
+
+      logout: () =>
+        set({
+          accessToken: null,
+          user: null,
+        }),
+    }),
+    {
+      name: "auth",
+    },
+  ),
+);

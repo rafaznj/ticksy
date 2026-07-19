@@ -7,14 +7,14 @@ import type { RegisterFormProps } from "@/pages/auth/register/form/types";
 import { container } from "@/lib/inversifyJS/index.container";
 import { SERVICE_TOKENS } from "@/shared/di/tokens.services";
 import type { IRegisterService } from "@/modules/auth/services/contracts/register";
-import { useRegister } from "@/modules/auth/query-hooks/use-register";
+import { useRegister } from "@/modules/auth/query-hooks/mutation/use-register";
 
 export function useRegisterFormHook() {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const registerService = container.get<IRegisterService>(SERVICE_TOKENS.RegisterService);
 
-  const { mutate: handleRegister } = useRegister(registerService);
+  const { mutate: handleRegister, isPending } = useRegister(registerService);
 
   const form = useAppForm({
     defaultValues: {} as RegisterFormProps,
@@ -39,6 +39,7 @@ export function useRegisterFormHook() {
   return {
     form,
     t,
+    isPending,
     navigate,
     handleSubmit,
   };

@@ -1,8 +1,7 @@
+import { UserModel } from "../../user/entity/user-model";
+
 export interface LoginResult {
   accessToken: string;
   refreshToken: string;
-  user: {
-    id: string;
-    email: string;
-  };
+  user: UserModel;
 }

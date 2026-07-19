@@ -1,5 +1,7 @@
+import type { TranslationKey } from "@/shared/utils/translation-key";
+
 export interface ErrorMessage {
-  key: string;
+  key: TranslationKey;
   params?: Record<string, unknown>;
 }
 

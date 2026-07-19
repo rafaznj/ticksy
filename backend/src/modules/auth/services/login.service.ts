@@ -31,7 +31,7 @@ export class LoginService implements ILoginService {
     return {
       accessToken,
       refreshToken,
-      user: { id: user.id, email: user.email },
+      user,
     };
   }
 }

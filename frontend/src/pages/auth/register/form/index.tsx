@@ -2,7 +2,7 @@ import { Separator } from "@/components/ui/separator";
 import { useRegisterFormHook } from "@/pages/auth/register/form/hook";
 
 export function RegisterForm() {
-  const { form, t, handleSubmit } = useRegisterFormHook();
+  const { form, t, isPending, handleSubmit } = useRegisterFormHook();
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-8">
@@ -56,7 +56,7 @@ export function RegisterForm() {
 
       <form.AppForm>
         <form.SubmitButton className="mt-2 w-full py-3 text-lg cursor-pointer">
-          {t("auth.login.actions.submit")}
+          {isPending ? t("auth.register.actions.submitting") : t("auth.register.actions.submit")}
         </form.SubmitButton>
       </form.AppForm>
     </form>

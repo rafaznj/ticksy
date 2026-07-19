@@ -2,7 +2,7 @@ import { useLoginFormHook } from "@/pages/auth/login/form/hook";
 import { Separator } from "@/components/ui/separator";
 
 export function LoginForm() {
-  const { form, t, handleSubmit } = useLoginFormHook();
+  const { form, t, isPending, handleSubmit } = useLoginFormHook();
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-8">
@@ -45,7 +45,7 @@ export function LoginForm() {
 
       <form.AppForm>
         <form.SubmitButton className="mt-2 w-full py-3 text-lg cursor-pointer">
-          {t("auth.login.actions.submit")}
+          {isPending ? t("auth.login.actions.submitting") : t("auth.login.actions.submit")}
         </form.SubmitButton>
       </form.AppForm>
     </form>

@@ -6,16 +6,13 @@ import type { AppError } from "@/shared/errors/app-error";
 import { handleResponse } from "@/shared/errors/handle-response";
 
 @injectable()
-export class BaseUpdateRepository<TInput, TOutput> implements IBaseUpdateRepository<
-  TInput,
-  TOutput
-> {
+export class BaseUpdateRepository<T> implements IBaseUpdateRepository<T> {
   @inject(INFRASTRUCTURE_TOKENS.AxiosSingleton)
   private axiosSingleton!: AxiosSingleton;
   constructor(@unmanaged() private basePath: string) {}
 
-  async execute(id: string, data: TInput): Promise<TOutput | AppError> {
-    const response = await this.axiosSingleton.client.put<TOutput>(`${this.basePath}/${id}`, data);
+  async execute(id: string, data: T): Promise<T | AppError> {
+    const response = await this.axiosSingleton.client.put<T>(`${this.basePath}/${id}`, data);
     return handleResponse(response);
   }
 }

@@ -47,6 +47,9 @@
       "noAccount": "Don't have an account?",
       "title": "Sign in to your account"
     },
+    "logout": {
+      "error": "Unable to sign you out. Please try again."
+    },
     "register": {
       "actions": {
         "signIn": "Sign in",
@@ -90,6 +93,64 @@
       "title": "Create your account"
     }
   },
+  "dashboard": {
+    "admin": {
+      "metrics": {
+        "totalTickets": {
+          "title": "Total Tickets",
+          "description": "vs. last month"
+        },
+        "openTickets": {
+          "title": "Open Tickets",
+          "description": "awaiting action"
+        },
+        "resolvedThisMonth": {
+          "title": "Resolved this month",
+          "description": "vs. last month"
+        },
+        "avgTime": {
+          "title": "Average Time",
+          "description": "to resolution"
+        }
+      }
+    },
+    "employee": {
+      "metrics": {
+        "myTickets": {
+          "title": "My Tickets",
+          "description": "in total"
+        },
+        "open": {
+          "title": "Open",
+          "description": "awaiting action"
+        },
+        "resolved": {
+          "title": "Resolved",
+          "description": "in total"
+        }
+      }
+    },
+    "technical_assistance": {
+      "metrics": {
+        "myTickets": {
+          "title": "My Tickets",
+          "description": "assigned to me"
+        },
+        "inProgress": {
+          "title": "In Progress",
+          "description": "being worked on"
+        },
+        "resolvedToday": {
+          "title": "Resolved Today",
+          "description": "completed today"
+        },
+        "highPriority": {
+          "title": "High Priority",
+          "description": "require attention"
+        }
+      }
+    }
+  },
   "general": {
     "actions": {
       "back": "Back",
@@ -113,32 +174,119 @@
     "theme": "Switch to the {{theme}} theme"
   },
   "sidebar": {
-    "actions": {
+    "labels": {
+      "editProfile": "Edit profile",
       "logout": "Logout"
     },
-    "labels": {
-      "finishedTickets": "Finished",
-      "home": "Home",
-      "openTickets": "Open",
-      "profile": "Profile",
-      "users": "Users",
-      "waitingTickets": "Waiting"
-    },
-    "titles": {
-      "social": "Social",
-      "tickets": "Tickets"
-    },
     "tooltips": {
-      "finishedTickets": "View completed tickets",
-      "home": "Go to Home",
-      "openTickets": "View open tickets",
-      "users": "View users",
-      "waitingTickets": "View waiting tickets"
+      "home": "Go to the home page",
+      "newTicket": "New Ticket",
+      "profile": "Profile",
+      "tickets": "View tickets",
+      "users": "Manage users"
+    }
+  },
+  "ticket": {
+    "create": {
+      "actions": {
+        "cancel": "Cancel",
+        "submit": "Create ticket"
+      },
+      "description": "Fill out the information below to create a new ticket.",
+      "fields": {
+        "description": {
+          "label": "Description",
+          "placeholder": "Describe the issue or request in as much detail as possible.",
+          "validations": {
+            "maxLength": "Description must not exceed {{max}} characters.",
+            "minLength": "Description must be at least {{min}} characters.",
+            "required": "Description is required."
+          }
+        },
+        "priority": {
+          "label": "Priority",
+          "options": {
+            "HIGH": "High",
+            "LOW": "Low",
+            "MEDIUM": "Medium",
+            "URGENT": "Urgent"
+          },
+          "placeholder": "Select the ticket priority",
+          "validations": {
+            "invalid": "Please select a valid priority.",
+            "required": "Priority is required."
+          }
+        },
+        "title": {
+          "label": "Title",
+          "placeholder": "e.g. Unable to access the system",
+          "validations": {
+            "maxLength": "Title must not exceed {{max}} characters.",
+            "minLength": "Title must be at least {{min}} characters.",
+            "required": "Title is required."
+          }
+        }
+      },
+      "messages": {
+        "failed": "Unable to create the ticket.",
+        "success": "Ticket created successfully."
+      },
+      "title": "New ticket"
     }
   },
   "user": {
+    "confirmations": {
+      "activate": "Are you sure you want to activate this user?",
+      "deactivate": "Are you sure you want to deactivate this user?",
+      "delete": "Are you sure you want to delete this user?"
+    },
+    "edit": {
+      "actions": {
+        "cancel": "Cancel",
+        "save": "Save changes",
+        "saving": "Saving..."
+      },
+      "description": "Update your personal information.",
+      "fields": {
+        "email": {
+          "label": "Email",
+          "placeholder": "Enter your email",
+          "validations": {
+            "invalid": "Please enter a valid email address.",
+            "maxLength": "Email must have at most {{max}} characters."
+          }
+        },
+        "name": {
+          "label": "Name",
+          "placeholder": "Enter your name",
+          "validations": {
+            "maxLength": "Name must have at most {{max}} characters.",
+            "minLength": "Name must be at least {{min}} characters."
+          }
+        }
+      },
+      "title": "Edit profile"
+    },
     "errors": {
-      "deactivateFailed": "Failed to deactivate the user."
+      "activateFailed": "Failed to activate the user.",
+      "createFailed": "Failed to create the user.",
+      "deactivateFailed": "Failed to deactivate the user.",
+      "deleteFailed": "Failed to delete the user.",
+      "loadFailed": "Failed to load user data.",
+      "notFound": "User not found.",
+      "updateFailed": "Failed to update the profile."
+    },
+    "roles": {
+      "ADMIN": "Administrator",
+      "EMPLOYEE": "Employee",
+      "TECHNICAL_ASSISTANCE": "Technical Assistance"
+    },
+    "success": {
+      "activated": "User activated successfully.",
+      "created": "User created successfully.",
+      "deactivated": "User deactivated successfully.",
+      "deleted": "User deleted successfully.",
+      "updated": "Profile updated successfully."
     }
   }
 }

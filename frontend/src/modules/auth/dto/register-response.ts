@@ -1,5 +1,6 @@
+import type { UserEntity } from "@/modules/user/entity/user.entity";
+
 export interface RegisterResponse {
   accessToken: string;
-  refreshToken: string;
-  user: { id: string; email: string };
+  user: UserEntity;
 }

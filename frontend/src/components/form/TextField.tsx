@@ -44,7 +44,7 @@ export function TextField({ label, required, type, ...props }: TextFieldProps) {
           value={field.state.value ?? ""}
           onChange={(e) => field.handleChange(e.target.value)}
           onBlur={field.handleBlur}
-          aria-invalid={field.state.meta.errors.length > 0}
+          aria-invalid={field.state.meta.isTouched && field.state.meta.errors.length > 0}
           className={cn("h-11 pr-11", props.className)}
           {...props}
         />

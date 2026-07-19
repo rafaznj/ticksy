@@ -11,13 +11,14 @@ interface SubmitButtonProps {
 export const SubmitButton = ({ children, className }: SubmitButtonProps) => {
   const form = useFormContext();
 
-  const [isSubmitting, canSubmit] = useStore(form.store, (state) => [
+  const [isSubmitting, canSubmit, isDirty] = useStore(form.store, (state) => [
     state.isSubmitting,
     state.canSubmit,
+    state.isDirty,
   ]);
 
   return (
-    <Button type="submit" className={className} disabled={isSubmitting || !canSubmit}>
+    <Button type="submit" className={className} disabled={isSubmitting || !canSubmit || !isDirty}>
       {children}
     </Button>
   );

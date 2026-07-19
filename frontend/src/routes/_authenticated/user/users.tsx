@@ -1,9 +1,6 @@
+import { UsersTable } from "@/components/users-table";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/_authenticated/user/users")({
-  component: RouteComponent,
+  component: UsersTable,
 });
-
-function RouteComponent() {
-  return <div>Hello "/_authenticated/user/user"!</div>;
-}

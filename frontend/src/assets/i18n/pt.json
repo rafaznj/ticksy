@@ -45,6 +45,9 @@
       "success": "Login realizado com sucesso.",
       "title": "Acesse sua conta"
     },
+    "logout": {
+      "error": "Não foi possível encerrar sua sessão. Tente novamente."
+    },
     "register": {
       "actions": {
         "signIn": "Entrar",
@@ -88,6 +91,64 @@
       "title": "Crie sua conta"
     }
   },
+  "dashboard": {
+    "admin": {
+      "metrics": {
+        "avgTime": {
+          "description": "para resolução",
+          "title": "Tempo Médio"
+        },
+        "openTickets": {
+          "description": "aguardando ação",
+          "title": "Tickets Abertos"
+        },
+        "resolvedThisMonth": {
+          "description": "vs. mês anterior",
+          "title": "Resolvidos este mês"
+        },
+        "totalTickets": {
+          "description": "vs. mês anterior",
+          "title": "Total de Tickets"
+        }
+      }
+    },
+    "employee": {
+      "metrics": {
+        "myTickets": {
+          "description": "no total",
+          "title": "Meus Tickets"
+        },
+        "open": {
+          "description": "aguardando ação",
+          "title": "Abertos"
+        },
+        "resolved": {
+          "description": "no total",
+          "title": "Resolvidos"
+        }
+      }
+    },
+    "technical_assistance": {
+      "metrics": {
+        "highPriority": {
+          "description": "requerem atenção",
+          "title": "Alta Prioridade"
+        },
+        "inProgress": {
+          "description": "sendo trabalhados",
+          "title": "Em Andamento"
+        },
+        "myTickets": {
+          "description": "atribuídos a mim",
+          "title": "Meus Tickets"
+        },
+        "resolvedToday": {
+          "description": "concluídos hoje",
+          "title": "Resolvidos Hoje"
+        }
+      }
+    }
+  },
   "general": {
     "actions": {
       "back": "Voltar",
@@ -111,32 +172,119 @@
     "theme": "Mudar para o tema {{theme}}"
   },
   "sidebar": {
-    "actions": {
+    "labels": {
+      "editProfile": "Editar perfil",
       "logout": "Sair"
     },
-    "labels": {
-      "finishedTickets": "Finalizados",
-      "home": "Home",
-      "openTickets": "Abertos",
-      "profile": "Perfil",
-      "users": "Usuários",
-      "waitingTickets": "Em espera"
-    },
-    "titles": {
-      "social": "Social",
-      "tickets": "Tickets"
-    },
     "tooltips": {
-      "finishedTickets": "Ver tickets finalizados",
       "home": "Ir para a página inicial",
-      "openTickets": "Ver tickets abertos",
-      "users": "Ver usuários",
-      "waitingTickets": "Ver tickets em espera"
+      "newTicket": "Novo ticket",
+      "profile": "Perfil",
+      "tickets": "Ver tickets",
+      "users": "Gerenciar usuários"
     }
   },
-  "user": {
+  "ticket": {
+    "create": {
+      "actions": {
+        "cancel": "Cancelar",
+        "submit": "Criar ticket"
+      },
+      "description": "Preencha as informações abaixo para registrar um novo ticket.",
+      "fields": {
+        "description": {
+          "label": "Descrição",
+          "placeholder": "Descreva o problema ou solicitação com o máximo de detalhes possível.",
+          "validations": {
+            "maxLength": "A descrição deve ter no máximo {{max}} caracteres.",
+            "minLength": "A descrição deve ter pelo menos {{min}} caracteres.",
+            "required": "A descrição é obrigatória."
+          }
+        },
+        "priority": {
+          "label": "Prioridade",
+          "options": {
+            "HIGH": "Alta",
+            "LOW": "Baixa",
+            "MEDIUM": "Média",
+            "URGENT": "Urgente"
+          },
+          "placeholder": "Selecione a prioridade do ticket",
+          "validations": {
+            "invalid": "Selecione uma prioridade válida.",
+            "required": "A prioridade é obrigatória."
+          }
+        },
+        "title": {
+          "label": "Título",
+          "placeholder": "Ex.: Erro ao acessar o sistema",
+          "validations": {
+            "maxLength": "O título deve ter no máximo {{max}} caracteres.",
+            "minLength": "O título deve ter pelo menos {{min}} caracteres.",
+            "required": "O título é obrigatório."
+          }
+        }
+      },
+      "messages": {
+        "failed": "Não foi possível criar o ticket.",
+        "success": "Ticket criado com sucesso."
+      },
+      "title": "Novo ticket"
+    }
+  },
+  "user": { 
+    "confirmations": {
+      "activate": "Tem certeza de que deseja ativar este usuário?",
+      "deactivate": "Tem certeza de que deseja desativar este usuário?",
+      "delete": "Tem certeza de que deseja remover este usuário?"
+    },
+    "edit": {
+      "actions": {
+        "cancel": "Cancelar",
+        "save": "Salvar alterações",
+        "saving": "Salvando..."
+      },
+      "description": "Atualize suas informações pessoais.",
+      "fields": {
+        "email": {
+          "label": "E-mail",
+          "placeholder": "Digite seu e-mail",
+          "validations": {
+            "invalid": "Informe um endereço de e-mail válido.",
+            "maxLength": "O e-mail deve ter no máximo {{max}} caracteres."
+          }
+        },
+        "name": {
+          "label": "Nome",
+          "placeholder": "Digite seu nome",
+          "validations": {
+            "maxLength": "O nome deve ter no máximo {{max}} caracteres.",
+            "minLength": "O nome deve ter no mínimo {{min}} caracteres."
+          }
+        }
+      },
+      "title": "Editar perfil"
+    },
     "errors": {
-      "deactivateFailed": "Falha ao desativar o usuário."
+      "activateFailed": "Falha ao ativar o usuário.",
+      "createFailed": "Falha ao criar o usuário.",
+      "deactivateFailed": "Falha ao desativar o usuário.",
+      "deleteFailed": "Falha ao remover o usuário.",
+      "loadFailed": "Falha ao carregar os dados do usuário.",
+      "notFound": "Usuário não encontrado.",
+      "updateFailed": "Falha ao atualizar o perfil."
+    },
+    "roles": {
+      "ADMIN": "Administrador",
+      "EMPLOYEE": "Colaborador",
+      "TECHNICAL_ASSISTANCE": "Assistência Técnica"
+    },
+    "success": {
+      "activated": "Usuário ativado com sucesso.",
+      "created": "Usuário criado com sucesso.",
+      "deactivated": "Usuário desativado com sucesso.",
+      "deleted": "Usuário removido com sucesso.",
+      "updated": "Perfil atualizado com sucesso."
     }
   }
 }
