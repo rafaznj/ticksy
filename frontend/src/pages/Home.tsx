@@ -1,8 +1,8 @@
 import { AdminMetrics } from "@/components/AdminMetrics";
 import { EmployeeMetrics } from "@/components/EmployeeMetrics";
-import { TechnicalAssistanceMetrics } from "@/components/TechnicalAssistance";
+import { TechnicalAssistanceMetrics } from "@/components/TechnicalAssistanceMetrics";
 import { useAuthStore } from "@/lib/zustand/use-auth";
-import { UserRoleEnum } from "@/modules/user/enums/roles.enum";
+import { UserRoleEnum } from "@/modules/user/enums/user-role.enum";
 import type { JSX } from "react/jsx-runtime";
 
 const HOME_PAGE_BY_ROLE: Record<UserRoleEnum, () => JSX.Element> = {

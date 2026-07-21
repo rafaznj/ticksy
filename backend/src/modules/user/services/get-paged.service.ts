@@ -11,10 +11,11 @@ export class GetUserPagedService implements IGetUserPagedService {
     @Inject(REPOSITORY_TOKENS.GetUserPagedRepository)
     private getUserPagedRepository: IGetUserPagedRepository,
   ) {}
+
   async execute(options: IQueryOptions): Promise<IPagedResult<UserModel>> {
     const response = await this.getUserPagedRepository.execute({
       ...options,
-      columnsComparison: ["name", "description"],
+      columnsComparison: ["name", "email"],
       softDeleteFilter: true,
     });
     return response;

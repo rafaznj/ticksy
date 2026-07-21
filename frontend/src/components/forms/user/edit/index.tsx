@@ -1,48 +1,54 @@
-import { Button } from "@/components/ui/button";
-import { useEditUserForm } from "@/components/forms/user/edit/hook";
+import { useEditUserForm } from "@/components/forms/user/Edit/hook";
+import { ComplexDialog } from "@/components/ui/complex-dialog";
 
 export function EditUserForm() {
-  const { form, t, isPending, redirect, handleSubmit, navigate } = useEditUserForm();
+  const { t, isOpen, form, roleOptions, isBlurred, canSubmit, isSubmitting, close, handleSubmit } =
+    useEditUserForm();
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-8">
-      <form.AppField name="name">
-        {(field) => (
-          <field.TextField
-            label={t("auth.register.fields.name.label")}
-            placeholder={t("auth.register.fields.name.placeholder")}
-            type="text"
-          />
-        )}
-      </form.AppField>
+    <ComplexDialog
+      open={isOpen}
+      onOpenChange={(open) => !open && close()}
+      onConfirm={handleSubmit}
+      isConfirmDisabled={!isBlurred || !canSubmit || isSubmitting}
+      title={t("user.edit.title")}
+      description={t("user.edit.description")}
+      cancelText={t("user.edit.actions.cancel")}
+      confirmText={t("user.edit.actions.cancel")}
+    >
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+        <form.AppField name="name">
+          {(field) => (
+            <field.TextField
+              label={t("user.edit.fields.name.label")}
+              placeholder={t("user.edit.fields.name.placeholder")}
+              type="text"
+              required
+            />
+          )}
+        </form.AppField>
 
-      <form.AppField name="email">
-        {(field) => (
-          <field.TextField
-            className="h-12 text-base"
-            label={t("auth.login.fields.email.label")}
-            placeholder={t("auth.login.fields.email.placeholder")}
-            type="email"
-          />
-        )}
-      </form.AppField>
+        <form.AppField name="email">
+          {(field) => (
+            <field.TextareaField
+              label={t("user.edit.fields.email.label")}
+              placeholder={t("user.edit.fields.email.placeholder")}
+              required
+            />
+          )}
+        </form.AppField>
 
-      <div className="flex justify-end gap-3">
-        <Button
-          type="button"
-          variant="outline"
-          className="min-w-32 cursor-pointer py-6 border-destructive text-base text-destructive hover:text-white hover:bg-destructive"
-          onClick={() => navigate({ to: redirect })}
-        >
-          {t("general.actions.cancel")}
-        </Button>
-
-        <form.AppForm>
-          <form.SubmitButton className="min-w-48 cursor-pointer py-6 text-base">
-            {isPending ? t("user.edit.actions.saving") : t("user.edit.actions.save")}
-          </form.SubmitButton>
-        </form.AppForm>
-      </div>
-    </form>
+        <form.AppField name="role">
+          {(field) => (
+            <field.SelectField
+              label={t("user.edit.fields.role.label")}
+              placeholder={t("user.edit.fields.role.placeholder")}
+              options={roleOptions}
+              required
+            />
+          )}
+        </form.AppField>
+      </form>
+    </ComplexDialog>
   );
 }

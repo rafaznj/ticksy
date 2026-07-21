@@ -96,57 +96,57 @@
   "dashboard": {
     "admin": {
       "metrics": {
-        "totalTickets": {
-          "title": "Total Tickets",
-          "description": "vs. last month"
+        "avgTime": {
+          "description": "to resolution",
+          "title": "Average Time"
         },
         "openTickets": {
-          "title": "Open Tickets",
-          "description": "awaiting action"
+          "description": "awaiting action",
+          "title": "Open Tickets"
         },
         "resolvedThisMonth": {
-          "title": "Resolved this month",
-          "description": "vs. last month"
+          "description": "vs. last month",
+          "title": "Resolved this month"
         },
-        "avgTime": {
-          "title": "Average Time",
-          "description": "to resolution"
+        "totalTickets": {
+          "description": "vs. last month",
+          "title": "Total Tickets"
         }
       }
     },
     "employee": {
       "metrics": {
         "myTickets": {
-          "title": "My Tickets",
-          "description": "in total"
+          "description": "in total",
+          "title": "My Tickets"
         },
         "open": {
-          "title": "Open",
-          "description": "awaiting action"
+          "description": "awaiting action",
+          "title": "Open"
         },
         "resolved": {
-          "title": "Resolved",
-          "description": "in total"
+          "description": "in total",
+          "title": "Resolved"
         }
       }
     },
     "technical_assistance": {
       "metrics": {
-        "myTickets": {
-          "title": "My Tickets",
-          "description": "assigned to me"
+        "highPriority": {
+          "description": "require attention",
+          "title": "High Priority"
         },
         "inProgress": {
-          "title": "In Progress",
-          "description": "being worked on"
+          "description": "being worked on",
+          "title": "In Progress"
+        },
+        "myTickets": {
+          "description": "assigned to me",
+          "title": "My Tickets"
         },
         "resolvedToday": {
-          "title": "Resolved Today",
-          "description": "completed today"
-        },
-        "highPriority": {
-          "title": "High Priority",
-          "description": "require attention"
+          "description": "completed today",
+          "title": "Resolved Today"
         }
       }
     }
@@ -206,10 +206,10 @@
         "priority": {
           "label": "Priority",
           "options": {
-            "HIGH": "High",
-            "LOW": "Low",
-            "MEDIUM": "Medium",
-            "URGENT": "Urgent"
+            "high": "High",
+            "low": "Low",
+            "medium": "Medium",
+            "urgent": "Urgent"
           },
           "placeholder": "Select the ticket priority",
           "validations": {
@@ -263,6 +263,18 @@
             "maxLength": "Name must have at most {{max}} characters.",
             "minLength": "Name must be at least {{min}} characters."
           }
+        },
+        "role": {
+          "label": "Role",
+          "options": {
+            "employee": "Employee",
+            "technicalAssistance": "Technical Assistance",
+            "admin": "Admin"
+          },
+          "placeholder": "Select the role",
+          "validations": {
+            "invalid": "Please select a valid role."
+          }
         }
       },
       "title": "Edit profile"
@@ -277,9 +289,9 @@
       "updateFailed": "Failed to update the profile."
     },
     "roles": {
-      "ADMIN": "Administrator",
-      "EMPLOYEE": "Employee",
-      "TECHNICAL_ASSISTANCE": "Technical Assistance"
+      "admin": "Administrator",
+      "employee": "Employee",
+      "technicalAssistance": "Technical Assistance"
     },
     "success": {
       "activated": "User activated successfully.",
@@ -287,6 +299,21 @@
       "deactivated": "User deactivated successfully.",
       "deleted": "User deleted successfully.",
       "updated": "Profile updated successfully."
+    },
+    "table": {
+      "columns": {
+        "id": "ID",
+        "name": "Name",
+        "email": "Email",
+        "role": "Role",
+        "created_at": "Created At",
+        "updated_at": "Updated At"
+      },
+      "actions": {
+        "edit": "Edit",
+        "deactivate": "Deactivate",
+        "delete": "Delete"
+      }
     }
   }
 }

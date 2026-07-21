@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { AvatarFallback, Avatar } from "@/components/ui/avatar";
 import {
   DropdownMenu,
@@ -16,9 +17,11 @@ import {
 } from "@/components/ui/sidebar";
 import { useAuthStore } from "@/lib/zustand/use-auth";
 import { useLogout } from "@/modules/auth/query-hooks/mutation/use-logout";
+import { enumToLabels } from "@/shared/utils/enum-to-labels";
 import { useNavigate } from "@tanstack/react-router";
 import { ChevronsUpDown, User, LogOut } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { UserRoleEnum } from "@/modules/user/enums/user-role.enum";
 
 export function AppSidebarFooter() {
   const { t } = useTranslation();
@@ -27,6 +30,8 @@ export function AppSidebarFooter() {
   const { user } = useAuthStore();
   const { mutate: handleLogout } = useLogout();
   const collapsed = state === "collapsed";
+
+  const roleLabels = useMemo(() => enumToLabels(UserRoleEnum, "user.role", t), [t]);
 
   return (
     <SidebarFooter className="gap-2 p-2">
@@ -49,7 +54,7 @@ export function AppSidebarFooter() {
                   <div className="flex min-w-0 flex-1 flex-col">
                     <span className="truncate text-sm font-semibold">{user?.name}</span>
                     <span className="truncate text-xs text-sidebar-foreground/50">
-                      {user?.role && t(`user.roles.${user.role}`)}
+                      {user?.role && roleLabels[user.role]}
                     </span>
                   </div>
                 )}

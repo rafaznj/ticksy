@@ -24,15 +24,15 @@ export function useCreateTicketForm() {
 
   const priorityOptions = useMemo(
     () => [
-      { value: TicketPriorityEnum.LOW, label: t("ticket.create.fields.priority.options.LOW") },
+      { value: TicketPriorityEnum.LOW, label: t("ticket.create.fields.priority.options.low") },
       {
         value: TicketPriorityEnum.MEDIUM,
-        label: t("ticket.create.fields.priority.options.MEDIUM"),
+        label: t("ticket.create.fields.priority.options.medium"),
       },
-      { value: TicketPriorityEnum.HIGH, label: t("ticket.create.fields.priority.options.HIGH") },
+      { value: TicketPriorityEnum.HIGH, label: t("ticket.create.fields.priority.options.high") },
       {
         value: TicketPriorityEnum.URGENT,
-        label: t("ticket.create.fields.priority.options.URGENT"),
+        label: t("ticket.create.fields.priority.options.urgent"),
       },
     ],
     [t],

@@ -204,10 +204,10 @@
         "priority": {
           "label": "Prioridade",
           "options": {
-            "HIGH": "Alta",
-            "LOW": "Baixa",
-            "MEDIUM": "Média",
-            "URGENT": "Urgente"
+            "high": "Alta",
+            "low": "Baixa",
+            "medium": "Média",
+            "urgent": "Urgente"
           },
           "placeholder": "Selecione a prioridade do ticket",
           "validations": {
@@ -232,7 +232,7 @@
       "title": "Novo ticket"
     }
   },
-  "user": { 
+  "user": {
     "confirmations": {
       "activate": "Tem certeza de que deseja ativar este usuário?",
       "deactivate": "Tem certeza de que deseja desativar este usuário?",
@@ -261,6 +261,18 @@
             "maxLength": "O nome deve ter no máximo {{max}} caracteres.",
             "minLength": "O nome deve ter no mínimo {{min}} caracteres."
           }
+        },
+        "role": {
+          "label": "Perfil",
+          "options": {
+            "employee": "Colaborador",
+            "technicalAssistance": "Assistência Técnica",
+            "admin": "Administrador"
+          },
+          "placeholder": "Selecione o perfil",
+          "validations": {
+            "invalid": "Selecione um perfil válido."
+          }
         }
       },
       "title": "Editar perfil"
@@ -275,9 +287,9 @@
       "updateFailed": "Falha ao atualizar o perfil."
     },
     "roles": {
-      "ADMIN": "Administrador",
-      "EMPLOYEE": "Colaborador",
-      "TECHNICAL_ASSISTANCE": "Assistência Técnica"
+      "admin": "Administrador",
+      "employee": "Colaborador",
+      "technicalAssistance": "Assistência Técnica"
     },
     "success": {
       "activated": "Usuário ativado com sucesso.",
@@ -285,6 +297,21 @@
       "deactivated": "Usuário desativado com sucesso.",
       "deleted": "Usuário removido com sucesso.",
       "updated": "Perfil atualizado com sucesso."
+    },
+    "table": {
+      "columns": {
+        "id": "ID",
+        "name": "Nome",
+        "email": "E-mail",
+        "role": "Perfil",
+        "created_at": "Criado em",
+        "updated_at": "Atualizado em"
+      },
+      "actions": {
+        "edit": "Editar",
+        "deactivate": "Desativar",
+        "delete": "Excluir"
+      }
     }
   }
 }
