@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Inject, Param, Post, Put } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Inject, Param, Post, Put, Query } from "@nestjs/common";
 import { SERVICE_TOKENS } from "../../../shared/di/tokens.services";
 import type { ICreateTicketService } from "../services/contracts/create";
 import type { IDeleteTicketService } from "../services/contracts/delete";
@@ -6,6 +6,7 @@ import type { IGetTicketByIdService } from "../services/contracts/get-by-id";
 import type { IUpdateTicketService } from "../services/contracts/update";
 import { CreateTicketDto } from "../dto/create.dto";
 import { UpdateTicketDto } from "../dto/update.dto";
+import type { IGetTicketPagedService } from "../services/contracts/get-paged";
 
 @Controller("ticket")
 export class TicketController {
@@ -14,6 +15,8 @@ export class TicketController {
     private readonly createTicketService: ICreateTicketService,
     @Inject(SERVICE_TOKENS.GetTicketByIdService)
     private readonly getTicketByIdService: IGetTicketByIdService,
+    @Inject(SERVICE_TOKENS.GetTicketPagedService)
+    private readonly getTicketPagedService: IGetTicketPagedService,
     @Inject(SERVICE_TOKENS.UpdateTicketService)
     private readonly updateTicketService: IUpdateTicketService,
     @Inject(SERVICE_TOKENS.DeleteTicketService)
@@ -23,6 +26,25 @@ export class TicketController {
   @Post("")
   async create(@Body() data: CreateTicketDto) {
     return this.createTicketService.execute(data);
+  }
+
+  @Get("paged")
+  async getPaged(
+    @Query("currentPage") currentPage: number,
+    @Query("pageSize") pageSize: number,
+    @Query("sort") sort?: string,
+    @Query("order") order?: string,
+    @Query("search") search?: string,
+  ) {
+    const result = await this.getTicketPagedService.execute({
+      currentPage,
+      pageSize,
+      sort,
+      order,
+      search,
+    });
+
+    return result;
   }
 
   @Get(":id")

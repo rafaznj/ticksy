@@ -14,7 +14,7 @@ export function EditUserForm() {
       title={t("user.edit.title")}
       description={t("user.edit.description")}
       cancelText={t("user.edit.actions.cancel")}
-      confirmText={t("user.edit.actions.cancel")}
+      confirmText={t("user.edit.actions.save")}
     >
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <form.AppField name="name">

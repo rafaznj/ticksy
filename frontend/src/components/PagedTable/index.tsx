@@ -49,7 +49,6 @@ interface ActionsConfig<T> {
 interface PagedTableProps<T> {
   columns: ColumnDef<T>[];
   data: T[];
-  searchPlaceholder?: string;
   search: string;
   onSearchChange: (value: string) => void;
   currentPage: number;
@@ -60,8 +59,6 @@ interface PagedTableProps<T> {
   onPreviousPage: () => void;
   isLoading?: boolean;
   isError?: boolean;
-  emptyMessage?: string;
-  errorMessage?: string;
   getRowId?: (row: T) => string;
 
   actions?: ActionsConfig<T>;
@@ -79,27 +76,24 @@ interface PagedTableProps<T> {
 export function PagedTable<T>({
   columns,
   data,
-  searchPlaceholder = "Buscar...",
   search,
-  onSearchChange,
   currentPage,
   totalPages,
   hasPrevious,
   hasNext,
-  onNextPage,
-  onPreviousPage,
   isLoading,
   isError,
-  emptyMessage = "Nenhum registro encontrado.",
-  errorMessage = "Erro ao carregar dados.",
-  getRowId,
   actions,
   sorting,
-  onSortingChange,
   pageSize,
   rowsPerPageOptions = [10, 25, 50, 100],
-  onPageSizeChange,
   headerButton,
+  onSearchChange,
+  onNextPage,
+  onPreviousPage,
+  getRowId,
+  onSortingChange,
+  onPageSizeChange,
 }: PagedTableProps<T>) {
   const { t } = useTranslation();
   const columnsWithActions = useMemo<ColumnDef<T>[]>(() => {
@@ -109,7 +103,7 @@ export function PagedTable<T>({
       ...columns,
       {
         id: "actions",
-        header: actions.headerName ?? "Ações",
+        header: actions.headerName ?? t("general.table.header.actions"),
         enableSorting: false,
         cell: ({ row }: { row: Row<T> }) => {
           const item = row.original;
@@ -137,7 +131,7 @@ export function PagedTable<T>({
                         <Pencil className="h-4 w-4" />
                       </Button>
                     </TooltipTrigger>
-                    <TooltipContent>{t("user.table.actions.edit")}</TooltipContent>
+                    <TooltipContent>{t("general.actions.edit")}</TooltipContent>
                   </Tooltip>
                 </TooltipProvider>
               )}
@@ -156,7 +150,7 @@ export function PagedTable<T>({
                         <Minus className="h-4 w-4" />
                       </Button>
                     </TooltipTrigger>
-                    <TooltipContent>{t("user.table.actions.deactivate")}</TooltipContent>
+                    <TooltipContent>{t("general.actions.deactivate")}</TooltipContent>
                   </Tooltip>
                 </TooltipProvider>
               )}
@@ -175,7 +169,7 @@ export function PagedTable<T>({
                         <Trash2 className="h-4 w-4" />
                       </Button>
                     </TooltipTrigger>
-                    <TooltipContent>{t("user.table.actions.delete")}</TooltipContent>
+                    <TooltipContent>{t("general.actions.delete")}</TooltipContent>
                   </Tooltip>
                 </TooltipProvider>
               )}
@@ -202,7 +196,7 @@ export function PagedTable<T>({
     <div className="flex flex-col gap-4">
       <div className="flex items-center justify-between gap-4">
         <Input
-          placeholder={searchPlaceholder}
+          placeholder={t("general.table.searchPlaceholder")}
           value={search}
           onChange={(e) => onSearchChange(e.target.value)}
           className="max-w-sm"
@@ -260,7 +254,7 @@ export function PagedTable<T>({
                   colSpan={columnsWithActions.length}
                   className="h-24 text-center text-destructive"
                 >
-                  {errorMessage}
+                  {t("general.table.errorMessage")}
                 </TableCell>
               </TableRow>
             ) : table.getRowModel().rows.length === 0 ? (
@@ -269,7 +263,7 @@ export function PagedTable<T>({
                   colSpan={columnsWithActions.length}
                   className="h-24 text-center text-muted-foreground"
                 >
-                  {emptyMessage}
+                  {t("general.table.emptyMessage")}
                 </TableCell>
               </TableRow>
             ) : (
@@ -291,7 +285,9 @@ export function PagedTable<T>({
         <div className="flex items-center gap-2">
           {onPageSizeChange && (
             <>
-              <span className="text-sm text-muted-foreground">Linhas por página</span>
+              <span className="text-sm text-muted-foreground">
+                {t("general.table.rowsPerPage")}
+              </span>
               <Select
                 value={String(pageSize ?? rowsPerPageOptions[0])}
                 onValueChange={(value) => onPageSizeChange(Number(value))}
@@ -312,15 +308,18 @@ export function PagedTable<T>({
         </div>
 
         <div className="flex items-center gap-4">
-          <span className="text-sm text-muted-foreground">
-            Página {currentPage} de {totalPages || 1}
+          <span>
+            {t("general.table.page", {
+              current: currentPage,
+              total: totalPages || 1,
+            })}
           </span>
           <div className="flex gap-2">
             <Button variant="outline" size="sm" disabled={!hasPrevious} onClick={onPreviousPage}>
-              Anterior
+              {t("general.table.previous")}
             </Button>
             <Button variant="outline" size="sm" disabled={!hasNext} onClick={onNextPage}>
-              Próxima
+              {t("general.table.next")}
             </Button>
           </div>
         </div>

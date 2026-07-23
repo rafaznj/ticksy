@@ -1,6 +1,6 @@
 import type { CreateTicketFormProps } from "@/components/forms/ticket/create/types";
 import { createTicketFormSchema } from "@/components/forms/ticket/create/validations";
-import { useDialog } from "@/contexts/DialogContext";
+import { useDialog } from "@/contexts/use-dialog";
 import { useAppForm } from "@/hooks/use-form";
 import { container } from "@/lib/inversifyJS/index.container";
 import { useAuthStore } from "@/lib/zustand/use-auth";

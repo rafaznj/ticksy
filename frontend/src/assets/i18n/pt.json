@@ -154,6 +154,7 @@
       "back": "Voltar",
       "cancel": "Cancelar",
       "close": "Fechar",
+      "deactivate": "Desativar",
       "delete": "Excluir",
       "edit": "Editar",
       "refresh": "Atualizar",
@@ -169,6 +170,18 @@
     "language": "Mudar o idioma para {{language}}",
     "notFoundRoute": "Esta rota não foi encontrada...",
     "settings": "Configurações",
+    "table": {
+      "emptyMessage": "Nenhum registro encontrado.",
+      "errorMessage": "Erro ao carregar dados.",
+      "header": {
+        "actions": "Ações"
+      },
+      "next": "Próxima",
+      "page": "Página {{current}} de {{total}}",
+      "previous": "Anterior",
+      "rowsPerPage": "Linhas por página",
+      "searchPlaceholder": "Buscar..."
+    },
     "theme": "Mudar para o tema {{theme}}"
   },
   "sidebar": {
@@ -230,6 +243,31 @@
         "success": "Ticket criado com sucesso."
       },
       "title": "Novo ticket"
+    },
+    "priority": {
+      "high": "Alta",
+      "low": "Baixa",
+      "medium": "Média",
+      "urgent": "Urgente"
+    },
+    "status": {
+      "inProgress": "Em Andamento",
+      "open": "Aberto",
+      "resolved": "Resolvido"
+    },
+    "table": {
+      "columns": {
+        "assignedToId": "Responsável",
+        "created_at": "Criado em",
+        "description": "Descrição",
+        "id": "ID",
+        "priority": "Prioridade",
+        "status": "Status",
+        "title": "Título",
+        "updated_at": "Atualizado em"
+      },
+      "emptyMessage": "Nenhum ticket encontrado",
+      "searchPlaceholder": "Buscar ticket"
     }
   },
   "user": {
@@ -265,9 +303,9 @@
         "role": {
           "label": "Perfil",
           "options": {
+            "admin": "Administrador",
             "employee": "Colaborador",
-            "technicalAssistance": "Assistência Técnica",
-            "admin": "Administrador"
+            "technicalAssistance": "Assistência Técnica"
           },
           "placeholder": "Selecione o perfil",
           "validations": {
@@ -300,18 +338,15 @@
     },
     "table": {
       "columns": {
+        "created_at": "Criado em",
+        "email": "E-mail",
         "id": "ID",
         "name": "Nome",
-        "email": "E-mail",
         "role": "Perfil",
-        "created_at": "Criado em",
         "updated_at": "Atualizado em"
       },
-      "actions": {
-        "edit": "Editar",
-        "deactivate": "Desativar",
-        "delete": "Excluir"
-      }
+      "emptyMessage": "Nenhum usuário encontrado",
+      "searchPlaceholder": "Buscar usuário"
     }
   }
 }

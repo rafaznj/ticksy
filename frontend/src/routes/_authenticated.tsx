@@ -6,7 +6,7 @@ import { AppHeader } from "@/components/layouts/AppHeader";
 import { AppSidebar } from "@/components/layouts/Sidebar";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { DialogProvider } from "@/contexts/DialogContext";
+import { DialogProvider } from "@/contexts/dialog-provider";
 
 export const Route = createFileRoute("/_authenticated")({
   beforeLoad: () => {

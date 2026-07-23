@@ -12,6 +12,8 @@ import { AssignTicketService } from "./services/assign.service";
 import { ChangeTicketStatusService } from "./services/change-status.service";
 import { DeleteTicketService } from "./services/delete.service";
 import { DeleteTicketRepository } from "./repositories/delete.repository";
+import { GetTicketPagedService } from "./services/get-paged.service";
+import { GetTicketPagedRepository } from "./repositories/get-paged.repository";
 
 @Module({
   controllers: [TicketController],
@@ -31,6 +33,14 @@ import { DeleteTicketRepository } from "./repositories/delete.repository";
     {
       provide: REPOSITORY_TOKENS.GetTicketByIdRepository,
       useClass: GetTicketByIdRepository,
+    },
+    {
+      provide: SERVICE_TOKENS.GetTicketPagedService,
+      useClass: GetTicketPagedService,
+    },
+    {
+      provide: REPOSITORY_TOKENS.GetTicketPagedRepository,
+      useClass: GetTicketPagedRepository,
     },
     {
       provide: SERVICE_TOKENS.UpdateTicketService,

@@ -157,6 +157,7 @@
       "cancel": "Cancel",
       "close": "Close",
       "delete": "Delete",
+      "deactivate": "Deactivate",
       "edit": "Edit",
       "refresh": "Refresh",
       "retry": "Retry",
@@ -171,6 +172,18 @@
     "language": "Switch to the language {{language}}",
     "notFoundRoute": "This route was not found...",
     "settings": "Settings",
+    "table": {
+      "emptyMessage": "No records found.",
+      "errorMessage": "Failed to load data.",
+      "header": {
+        "actions": "Actions"
+      },
+      "next": "Next",
+      "page": "Page {{current}} of {{total}}",
+      "previous": "Previous",
+      "rowsPerPage": "Rows per page",
+      "searchPlaceholder": "Search..."
+    },
     "theme": "Switch to the {{theme}} theme"
   },
   "sidebar": {
@@ -232,6 +245,31 @@
         "success": "Ticket created successfully."
       },
       "title": "New ticket"
+    },
+    "priority": {
+      "high": "High",
+      "low": "Low",
+      "medium": "Medium",
+      "urgent": "Urgent"
+    },
+    "status": {
+      "inProgress": "In Progress",
+      "open": "Open",
+      "resolved": "Resolved"
+    },
+    "table": {
+      "columns": {
+        "assignedToId": "Assignee",
+        "created_at": "Created at",
+        "description": "Description",
+        "id": "ID",
+        "priority": "Priority",
+        "status": "Status",
+        "title": "Title",
+        "updated_at": "Updated at"
+      },
+      "emptyMessage": "No tickets found",
+      "searchPlaceholder": "Search tickets"
     }
   },
   "user": {
@@ -267,9 +305,9 @@
         "role": {
           "label": "Role",
           "options": {
+            "admin": "Admin",
             "employee": "Employee",
-            "technicalAssistance": "Technical Assistance",
-            "admin": "Admin"
+            "technicalAssistance": "Technical Assistance"
           },
           "placeholder": "Select the role",
           "validations": {
@@ -302,18 +340,15 @@
     },
     "table": {
       "columns": {
+        "created_at": "Created At",
+        "email": "Email",
         "id": "ID",
         "name": "Name",
-        "email": "Email",
         "role": "Role",
-        "created_at": "Created At",
         "updated_at": "Updated At"
       },
-      "actions": {
-        "edit": "Edit",
-        "deactivate": "Deactivate",
-        "delete": "Delete"
-      }
+      "emptyMessage": "No users found",
+      "searchPlaceholder": "Search users"
     }
   }
 }

@@ -7,15 +7,20 @@ import { container } from "@/lib/inversifyJS/index.container";
 import type { IGetUserPagedService } from "@/modules/user/services/contracts/get-paged";
 import type { UserEntity } from "@/modules/user/entity/user.entity";
 import { enumToLabels } from "@/shared/utils/enum-to-labels";
+import { DIALOG_KEYS } from "@/shared/constants/dialog-keys";
 import { SERVICE_TOKENS } from "@/shared/di/tokens.services";
 import { formatDate } from "@/shared/utils/format-date";
 import { UserRoleEnum } from "@/modules/user/enums/user-role.enum";
+import { useDialog } from "@/contexts/use-dialog";
 
 export function useUsersPagedTable() {
   const { t } = useTranslation();
+
   const getUserPagedService = container.get<IGetUserPagedService>(
     SERVICE_TOKENS.GetUserPagedService,
   );
+
+  const { open: openEditUser } = useDialog<UserEntity>(DIALOG_KEYS.UPDATE_USER);
 
   const {
     data,
@@ -63,10 +68,10 @@ export function useUsersPagedTable() {
 
   const actions = useMemo(
     () => ({
-      edit: (user: UserEntity) => console.log("editar", user),
+      edit: (user: UserEntity) => openEditUser(user),
       deactivate: (user: UserEntity) => console.log("desativar", user),
     }),
-    [],
+    [openEditUser],
   );
 
   return {

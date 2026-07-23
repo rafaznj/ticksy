@@ -13,7 +13,7 @@ import {
   SidebarMenuItem,
   SidebarSeparator,
 } from "@/components/ui/sidebar";
-import { useDialog } from "@/contexts/DialogContext";
+import { useDialog } from "@/contexts/use-dialog";
 import { cn } from "@/lib/utils";
 import { DIALOG_KEYS } from "@/shared/constants/dialog-keys";
 import { Plus } from "lucide-react";
