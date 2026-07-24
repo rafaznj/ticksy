@@ -1,7 +1,7 @@
+import { UserProfileEditForm } from "@/components/forms/user/profile-edit";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
-import { UserProfileEditForm } from "@/components/forms/user/ProfileEdit";
 import { useAuthStore } from "@/lib/zustand/use-auth";
 import { useTranslation } from "react-i18next";
 

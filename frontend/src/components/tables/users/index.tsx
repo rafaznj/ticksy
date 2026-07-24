@@ -1,6 +1,6 @@
 import { PagedTable } from "@/components/PagedTable";
 import { useUsersPagedTable } from "./hook";
-import { EditUserForm } from "@/components/forms/user/Edit";
+import { EditUserForm } from "@/components/forms/user/edit";
 
 export function UsersPagedTable() {
   const {

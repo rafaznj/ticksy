@@ -1,4 +1,4 @@
-import { useEditUserForm } from "@/components/forms/user/Edit/hook";
+import { useEditUserForm } from "@/components/forms/user/edit/hook";
 import { ComplexDialog } from "@/components/ui/complex-dialog";
 
 export function EditUserForm() {

@@ -1,5 +1,5 @@
+import { useUserProfileEditForm } from "@/components/forms/user/profile-edit/hook";
 import { Button } from "@/components/ui/button";
-import { useUserProfileEditForm } from "@/components/forms/user/ProfileEdit/hook";
 
 export function UserProfileEditForm() {
   const { form, t, isPending, redirect, handleSubmit, navigate } = useUserProfileEditForm();
