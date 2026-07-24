@@ -6,10 +6,10 @@ import { container } from "@/lib/inversifyJS/index.container";
 import { SERVICE_TOKENS } from "@/shared/di/tokens.services";
 import type { IUpdateUserService } from "@/modules/user/services/contracts/update";
 import { useUpdateUser } from "../../../../modules/user/query-hooks/mutation/use-update-user";
-import type { UserProfileEditProps } from "@/components/forms/user/ProfileEdit/types";
 import { useAuthStore } from "@/lib/zustand/use-auth";
-import { userProfileEditFormSchema } from "@/components/forms/user/ProfileEdit/validations";
 import { Route } from "@/routes/_authenticated/user/profile";
+import type { UserProfileEditProps } from "@/components/forms/user/profile-edit/types";
+import { userProfileEditFormSchema } from "@/components/forms/user/profile-edit/validations";
 
 export function useUserProfileEditForm() {
   const { user } = useAuthStore();

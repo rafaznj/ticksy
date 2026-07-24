@@ -1,6 +1,5 @@
 import { useEffect, useMemo } from "react";
-import type { EditUserFormProps } from "@/components/forms/user/Edit/types";
-import { editUserFormSchema } from "@/components/forms/user/Edit/validations";
+
 import { useAppForm } from "@/hooks/use-form";
 import { container } from "@/lib/inversifyJS/index.container";
 import { UserRoleEnum } from "@/modules/user/enums/user-role.enum";
@@ -12,6 +11,8 @@ import { SERVICE_TOKENS } from "@/shared/di/tokens.services";
 import { useStore } from "@tanstack/react-form";
 import { useTranslation } from "react-i18next";
 import { useDialog } from "@/contexts/use-dialog";
+import type { EditUserFormProps } from "@/components/forms/user/edit/types";
+import { editUserFormSchema } from "@/components/forms/user/edit/validations";
 
 export function useEditUserForm() {
   const { t } = useTranslation();
