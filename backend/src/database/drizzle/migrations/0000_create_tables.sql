@@ -1,5 +1,5 @@
 CREATE TYPE "public"."ticket_priority" AS ENUM('LOW', 'MEDIUM', 'HIGH', 'URGENT');--> statement-breakpoint
-CREATE TYPE "public"."ticket_status" AS ENUM('OPEN', 'IN_PROGRESS', 'WAITING_CUSTOMER', 'RESOLVED', 'CLOSED');--> statement-breakpoint
+CREATE TYPE "public"."ticket_status" AS ENUM('OPEN', 'IN_PROGRESS', 'RESOLVED');--> statement-breakpoint
 CREATE TYPE "public"."role" AS ENUM('EMPLOYEE', 'ADMIN', 'TECHNICAL_ASSISTANCE');--> statement-breakpoint
 CREATE TABLE "ticket" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
