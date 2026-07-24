@@ -1,4 +1,4 @@
-import { CreateUserDto } from "../../../user/dto/create.dto";
+import { CreateUserDto } from "../../../user/dtos/create.dto";
 import { RegisterResult } from "../../dto/register-result.dto";
 
 export interface IRegisterService {

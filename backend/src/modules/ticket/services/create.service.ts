@@ -2,14 +2,14 @@ import { Inject, Injectable } from "@nestjs/common";
 
 import { BaseCreateService } from "../../../shared/base/services/create.service";
 import { REPOSITORY_TOKENS } from "../../../shared/di/tokens.repositories";
-import { CreateTicketDto } from "../dto/create.dto";
+import { CreateTicketDto } from "../dtos/create.dto";
 import { ICreateTicketService } from "./contracts/create";
 import type { ICreateTicketRepository } from "../repositories/contracts/create";
-import { TicketEntity } from "../entity/ticket.entity";
+import { TicketModel } from "../models/ticket";
 
 @Injectable()
 export class CreateTicketService
-  extends BaseCreateService<CreateTicketDto, TicketEntity>
+  extends BaseCreateService<CreateTicketDto, TicketModel>
   implements ICreateTicketService
 {
   constructor(

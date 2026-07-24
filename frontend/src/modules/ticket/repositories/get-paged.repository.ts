@@ -1,12 +1,12 @@
 import { BaseGetPagedRepository } from "@/shared/base/repositories/get-paged.repository";
 import { injectable, injectFromBase } from "inversify";
-import type { TicketEntity } from "../../../../../backend/dist/src/modules/ticket/entity/ticket.entity";
 import type { IGetTicketPagedRepository } from "@/modules/ticket/repositories/contracts/get-paged";
+import type { TicketPagedDto } from "@/modules/ticket/dtos/paged.dto";
 
 @injectFromBase()
 @injectable()
 export class GetTicketPagedRepository
-  extends BaseGetPagedRepository<TicketEntity>
+  extends BaseGetPagedRepository<TicketPagedDto>
   implements IGetTicketPagedRepository
 {
   constructor() {

@@ -15,7 +15,7 @@ build/
 .vite/
 coverage/
 *.tsbuildinfo
-tsconfig.build.json  # se for gerado automaticamente
+tsconfig.build.json
 
 # Logs
 logs

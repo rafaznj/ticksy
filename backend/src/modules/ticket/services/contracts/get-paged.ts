@@ -1,7 +1,7 @@
 import { IPagedResult } from "../../../../shared/types/paged-result";
 import { IQueryOptions } from "../../../../shared/types/query-options";
-import { TicketEntity } from "../../entity/ticket.entity";
+import { TicketPagedModel } from "../../models/ticket-paged";
 
 export interface IGetTicketPagedService {
-  execute(options: IQueryOptions): Promise<IPagedResult<TicketEntity>>;
+  execute(options: IQueryOptions): Promise<IPagedResult<TicketPagedModel>>;
 }

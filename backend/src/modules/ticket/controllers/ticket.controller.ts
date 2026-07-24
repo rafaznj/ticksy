@@ -4,8 +4,8 @@ import type { ICreateTicketService } from "../services/contracts/create";
 import type { IDeleteTicketService } from "../services/contracts/delete";
 import type { IGetTicketByIdService } from "../services/contracts/get-by-id";
 import type { IUpdateTicketService } from "../services/contracts/update";
-import { CreateTicketDto } from "../dto/create.dto";
-import { UpdateTicketDto } from "../dto/update.dto";
+import { CreateTicketDto } from "../dtos/create.dto";
+import { UpdateTicketDto } from "../dtos/update.dto";
 import type { IGetTicketPagedService } from "../services/contracts/get-paged";
 
 @Controller("ticket")

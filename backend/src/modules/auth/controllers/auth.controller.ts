@@ -9,10 +9,10 @@ import { SERVICE_TOKENS } from "../../../shared/di/tokens.services";
 import type { IRefreshService } from "../services/contracts/refresh";
 import type { ILogoutService } from "../services/contracts/logout";
 import { AppException } from "../../../shared/exceptions/app-exception";
-import { UserEntity } from "../../user/entity/user.entity";
 import { setRefreshCookie } from "../../../shared/utils/set-refresh-cookie";
-import { CreateUserDto } from "../../user/dto/create.dto";
+import { CreateUserDto } from "../../user/dtos/create.dto";
 import type { IRegisterService } from "../services/contracts/register";
+import { UserModel } from "../../user/models/user-model";
 
 @Controller("auth")
 export class AuthController {
@@ -67,7 +67,7 @@ export class AuthController {
 
   @Get("/me")
   @UseGuards(AuthGuard("jwt"))
-  async me(@Req() req: Request & { user: Omit<UserEntity, "password"> }) {
+  async me(@Req() req: Request & { user: UserModel }) {
     return req.user;
   }
 

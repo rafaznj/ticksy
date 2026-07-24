@@ -1,5 +1,5 @@
 import { IBaseCreateRepository } from "../../../../shared/base/repositories/contracts/create";
-import { CreateTicketDto } from "../../dto/create.dto";
-import { TicketEntity } from "../../entity/ticket.entity";
+import { CreateTicketDto } from "../../dtos/create.dto";
+import { TicketModel } from "../../models/ticket";
 
-export type ICreateTicketRepository = IBaseCreateRepository<CreateTicketDto, TicketEntity>;
+export type ICreateTicketRepository = IBaseCreateRepository<CreateTicketDto, TicketModel>;

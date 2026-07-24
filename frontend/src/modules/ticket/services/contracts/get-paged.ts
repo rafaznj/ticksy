@@ -1,8 +1,8 @@
+import type { TicketPagedDto } from "@/modules/ticket/dtos/paged.dto";
 import type { AppError } from "@/shared/errors/app-error";
 import type { PagedParamsQuery } from "@/shared/types/paged-params-query";
 import type { PagedResponse } from "@/shared/types/paged-response";
-import type { TicketEntity } from "../../../../../../backend/dist/src/modules/ticket/entity/ticket.entity";
 
 export interface IGetTicketPagedService {
-  execute(params: PagedParamsQuery): Promise<PagedResponse<TicketEntity> | AppError>;
+  execute(params: PagedParamsQuery): Promise<PagedResponse<TicketPagedDto> | AppError>;
 }

@@ -180,7 +180,7 @@
       "page": "Página {{current}} de {{total}}",
       "previous": "Anterior",
       "rowsPerPage": "Linhas por página",
-      "searchPlaceholder": "Buscar..."
+      "searchPlaceholder": "Buscar"
     },
     "theme": "Mudar para o tema {{theme}}"
   },
@@ -257,8 +257,9 @@
     },
     "table": {
       "columns": {
-        "assignedToId": "Responsável",
+        "assignedToName": "Responsável",
         "created_at": "Criado em",
+        "createdByName": "Criador",
         "description": "Descrição",
         "id": "ID",
         "priority": "Prioridade",

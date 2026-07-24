@@ -39,38 +39,34 @@ interface ActionVisibility<T> {
 
 interface ActionsConfig<T> {
   headerName?: string;
+  visibilityAction?: ActionVisibility<T>;
+  disableAction?: ActionVisibility<T>;
   edit?: (item: T) => void;
   deactivate?: (item: T) => void;
   delete?: (item: T) => void;
-  visibilityAction?: ActionVisibility<T>;
-  disableAction?: ActionVisibility<T>;
 }
 
 interface PagedTableProps<T> {
   columns: ColumnDef<T>[];
   data: T[];
   search: string;
-  onSearchChange: (value: string) => void;
   currentPage: number;
   totalPages: number;
   hasPrevious: boolean;
   hasNext: boolean;
-  onNextPage: () => void;
-  onPreviousPage: () => void;
   isLoading?: boolean;
   isError?: boolean;
-  getRowId?: (row: T) => string;
-
   actions?: ActionsConfig<T>;
-
   sorting?: SortingState;
-  onSortingChange?: (updater: Updater<SortingState>) => void;
-
   pageSize?: number;
   rowsPerPageOptions?: number[];
-  onPageSizeChange?: (size: number) => void;
-
   headerButton?: { label: string; onClick: () => void };
+  onPageSizeChange?: (size: number) => void;
+  onSearchChange: (value: string) => void;
+  onNextPage: () => void;
+  onPreviousPage: () => void;
+  getRowId?: (row: T) => string;
+  onSortingChange?: (updater: Updater<SortingState>) => void;
 }
 
 export function PagedTable<T>({

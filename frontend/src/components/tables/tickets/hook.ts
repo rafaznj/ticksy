@@ -10,7 +10,7 @@ import { formatDate } from "@/shared/utils/format-date";
 import type { IGetTicketPagedService } from "@/modules/ticket/services/contracts/get-paged";
 import { TicketPriorityEnum } from "@/modules/ticket/enums/ticket-priority.enum";
 import { TicketStatusEnum } from "@/modules/ticket/enums/ticket-status.enum";
-import type { TicketEntity } from "../../../../../backend/dist/src/modules/ticket/entity/ticket.entity";
+import type { TicketPagedDto } from "@/modules/ticket/dtos/paged.dto";
 
 export function useTicketsPagedTable() {
   const { t } = useTranslation();
@@ -39,11 +39,11 @@ export function useTicketsPagedTable() {
   const priorityLabels = useMemo(() => enumToLabels(TicketPriorityEnum, "ticket.priority", t), [t]);
   const statusLabels = useMemo(() => enumToLabels(TicketStatusEnum, "ticket.status", t), [t]);
 
-  const columns = useMemo<ColumnDef<TicketEntity>[]>(
+  const columns = useMemo<ColumnDef<TicketPagedDto>[]>(
     () => [
       { accessorKey: "id", header: t("ticket.table.columns.id") },
       { accessorKey: "title", header: t("ticket.table.columns.title") },
-      { accessorKey: "email", header: t("ticket.table.columns.description") },
+      { accessorKey: "description", header: t("ticket.table.columns.description") },
       {
         accessorKey: "priority",
         header: t("ticket.table.columns.priority"),
@@ -55,9 +55,14 @@ export function useTicketsPagedTable() {
         cell: ({ row }) => statusLabels[row.original.status] ?? row.original.status,
       },
       {
-        accessorKey: "assignedToId",
-        header: t("ticket.table.columns.assignedToId"),
-        cell: ({ row }) => row.original.assignedToId,
+        accessorKey: "createdByName",
+        header: t("ticket.table.columns.createdByName"),
+        cell: ({ row }) => row.original.createdByName,
+      },
+      {
+        accessorKey: "assignedToName",
+        header: t("ticket.table.columns.assignedToName"),
+        cell: ({ row }) => row.original.assignedToName,
       },
       {
         accessorKey: "createdAt",
@@ -75,8 +80,8 @@ export function useTicketsPagedTable() {
 
   const actions = useMemo(
     () => ({
-      edit: (ticket: TicketEntity) => console.log("editar", ticket),
-      deactivate: (ticket: TicketEntity) => console.log("desativar", ticket),
+      edit: (ticket: TicketPagedDto) => console.log("editar", ticket),
+      deactivate: (ticket: TicketPagedDto) => console.log("desativar", ticket),
     }),
     [],
   );

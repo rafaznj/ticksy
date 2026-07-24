@@ -156,8 +156,8 @@
       "back": "Back",
       "cancel": "Cancel",
       "close": "Close",
-      "delete": "Delete",
       "deactivate": "Deactivate",
+      "delete": "Delete",
       "edit": "Edit",
       "refresh": "Refresh",
       "retry": "Retry",
@@ -182,7 +182,7 @@
       "page": "Page {{current}} of {{total}}",
       "previous": "Previous",
       "rowsPerPage": "Rows per page",
-      "searchPlaceholder": "Search..."
+      "searchPlaceholder": "Search"
     },
     "theme": "Switch to the {{theme}} theme"
   },
@@ -259,8 +259,9 @@
     },
     "table": {
       "columns": {
-        "assignedToId": "Assignee",
+        "assignedToName": "Assignee",
         "created_at": "Created at",
+        "createdByName": "Creator",
         "description": "Description",
         "id": "ID",
         "priority": "Priority",

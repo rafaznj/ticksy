@@ -2,7 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import { AppError } from "@/shared/errors/app-error";
 import { toast } from "sonner";
 import type { ICreateTicketService } from "@/modules/ticket/services/contracts/create";
-import type { CreateTicketDto } from "@/modules/ticket/dto/create.dto";
+import type { CreateTicketDto } from "@/modules/ticket/dtos/create.dto";
 import { useTranslation } from "react-i18next";
 import { handleMutationError } from "@/shared/errors/handle-mutation-error";
 
