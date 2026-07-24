@@ -1,16 +1,16 @@
-import { asc, desc, sql } from "drizzle-orm";
+import { asc, desc, getTableColumns } from "drizzle-orm";
+import { PgTable } from "drizzle-orm/pg-core";
 import { IQueryOptions } from "../types/query-options";
 
-export const customOrderBy = (options: IQueryOptions, tableName?: string) => {
-  if (options.order && options.sort) {
-    return options.order === "desc"
-      ? tableName
-        ? desc(sql.raw(`${tableName}.${options.sort}`))
-        : desc(sql.identifier(options.sort))
-      : tableName
-        ? asc(sql.raw(`${tableName}.${options.sort}`))
-        : asc(sql.identifier(options.sort));
-  }
+export const customOrderBy = (options: IQueryOptions, table: PgTable) => {
+  const columns = getTableColumns(table);
 
-  return tableName ? asc(sql.raw(`${tableName}.created_at`)) : asc(sql.identifier("created_at"));
+  const sortColumn =
+    options.sort && options.sort in columns
+      ? columns[options.sort as keyof typeof columns]
+      : (columns.createdAt ?? columns.created_at);
+
+  if (!sortColumn) return undefined;
+
+  return options.order === "desc" ? desc(sortColumn) : asc(sortColumn);
 };

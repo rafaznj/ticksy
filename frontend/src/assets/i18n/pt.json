@@ -154,6 +154,7 @@
       "back": "Voltar",
       "cancel": "Cancelar",
       "close": "Fechar",
+      "deactivate": "Desativar",
       "delete": "Excluir",
       "edit": "Editar",
       "refresh": "Atualizar",
@@ -169,6 +170,18 @@
     "language": "Mudar o idioma para {{language}}",
     "notFoundRoute": "Esta rota não foi encontrada...",
     "settings": "Configurações",
+    "table": {
+      "emptyMessage": "Nenhum registro encontrado.",
+      "errorMessage": "Erro ao carregar dados.",
+      "header": {
+        "actions": "Ações"
+      },
+      "next": "Próxima",
+      "page": "Página {{current}} de {{total}}",
+      "previous": "Anterior",
+      "rowsPerPage": "Linhas por página",
+      "searchPlaceholder": "Buscar"
+    },
     "theme": "Mudar para o tema {{theme}}"
   },
   "sidebar": {
@@ -204,10 +217,10 @@
         "priority": {
           "label": "Prioridade",
           "options": {
-            "HIGH": "Alta",
-            "LOW": "Baixa",
-            "MEDIUM": "Média",
-            "URGENT": "Urgente"
+            "high": "Alta",
+            "low": "Baixa",
+            "medium": "Média",
+            "urgent": "Urgente"
           },
           "placeholder": "Selecione a prioridade do ticket",
           "validations": {
@@ -230,9 +243,35 @@
         "success": "Ticket criado com sucesso."
       },
       "title": "Novo ticket"
+    },
+    "priority": {
+      "high": "Alta",
+      "low": "Baixa",
+      "medium": "Média",
+      "urgent": "Urgente"
+    },
+    "status": {
+      "inProgress": "Em Andamento",
+      "open": "Aberto",
+      "resolved": "Resolvido"
+    },
+    "table": {
+      "columns": {
+        "assignedToName": "Responsável",
+        "created_at": "Criado em",
+        "createdByName": "Criador",
+        "description": "Descrição",
+        "id": "ID",
+        "priority": "Prioridade",
+        "status": "Status",
+        "title": "Título",
+        "updated_at": "Atualizado em"
+      },
+      "emptyMessage": "Nenhum ticket encontrado",
+      "searchPlaceholder": "Buscar ticket"
     }
   },
-  "user": { 
+  "user": {
     "confirmations": {
       "activate": "Tem certeza de que deseja ativar este usuário?",
       "deactivate": "Tem certeza de que deseja desativar este usuário?",
@@ -261,6 +300,18 @@
             "maxLength": "O nome deve ter no máximo {{max}} caracteres.",
             "minLength": "O nome deve ter no mínimo {{min}} caracteres."
           }
+        },
+        "role": {
+          "label": "Perfil",
+          "options": {
+            "admin": "Administrador",
+            "employee": "Colaborador",
+            "technicalAssistance": "Assistência Técnica"
+          },
+          "placeholder": "Selecione o perfil",
+          "validations": {
+            "invalid": "Selecione um perfil válido."
+          }
         }
       },
       "title": "Editar perfil"
@@ -275,9 +326,9 @@
       "updateFailed": "Falha ao atualizar o perfil."
     },
     "roles": {
-      "ADMIN": "Administrador",
-      "EMPLOYEE": "Colaborador",
-      "TECHNICAL_ASSISTANCE": "Assistência Técnica"
+      "admin": "Administrador",
+      "employee": "Colaborador",
+      "technicalAssistance": "Assistência Técnica"
     },
     "success": {
       "activated": "Usuário ativado com sucesso.",
@@ -285,6 +336,18 @@
       "deactivated": "Usuário desativado com sucesso.",
       "deleted": "Usuário removido com sucesso.",
       "updated": "Perfil atualizado com sucesso."
+    },
+    "table": {
+      "columns": {
+        "created_at": "Criado em",
+        "email": "E-mail",
+        "id": "ID",
+        "name": "Nome",
+        "role": "Perfil",
+        "updated_at": "Atualizado em"
+      },
+      "emptyMessage": "Nenhum usuário encontrado",
+      "searchPlaceholder": "Buscar usuário"
     }
   }
 }

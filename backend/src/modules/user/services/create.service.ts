@@ -8,24 +8,24 @@ import { SERVICE_TOKENS } from "../../../shared/di/tokens.services";
 import type { IGetUserByEmailService } from "./contracts/get-by-email";
 import { AppException } from "../../../shared/exceptions/app-exception";
 import { BaseCreateService } from "../../../shared/base/services/create.service";
-import { UserEntity } from "../entity/user.entity";
-import { CreateUserDto } from "../dto/create.dto";
+import { CreateUserDto } from "../dtos/create.dto";
+import { UserModel } from "../models/user-model";
 
 @Injectable()
 export class CreateUserService
-  extends BaseCreateService<CreateUserDto, UserEntity>
+  extends BaseCreateService<CreateUserDto, UserModel>
   implements ICreateUserService
 {
   constructor(
     @Inject(REPOSITORY_TOKENS.CreateUserRepository)
-    private readonly createUserRepository: ICreateUserRepository,
+    createUserRepository: ICreateUserRepository,
     @Inject(SERVICE_TOKENS.GetUserByEmailService)
     private readonly getUserByEmailService: IGetUserByEmailService,
   ) {
     super(createUserRepository);
   }
 
-  async execute(data: CreateUserDto): Promise<UserEntity> {
+  async execute(data: CreateUserDto): Promise<UserModel> {
     const existingUser = await this.getUserByEmailService.execute(data.email);
 
     if (existingUser?.email) {

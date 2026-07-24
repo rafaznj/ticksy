@@ -1,12 +1,12 @@
 import { Body, Controller, Get, Inject, Param, Patch, Post, Put, Query } from "@nestjs/common";
 import { SERVICE_TOKENS } from "../../../shared/di/tokens.services";
-import { CreateUserDto } from "../dto/create.dto";
+import { CreateUserDto } from "../dtos/create.dto";
 import type { ICreateUserService } from "../services/contracts/create";
 import type { IDeactivateUserService } from "../services/contracts/deactivate";
 import type { IGetUserByIdService } from "../services/contracts/get-by-id";
 import type { IUpdateUserService } from "../services/contracts/update";
 import type { IGetUserByEmailService } from "../services/contracts/get-by-email";
-import { UpdateUserDto } from "../dto/update.dto";
+import { UpdateUserDto } from "../dtos/update.dto";
 import type { IGetUserPagedService } from "../services/contracts/get-paged";
 
 @Controller("user")

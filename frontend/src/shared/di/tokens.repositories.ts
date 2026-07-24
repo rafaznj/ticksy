@@ -15,8 +15,8 @@ export const REPOSITORY_TOKENS = {
 
   // Ticket
   CreateTicketRepository: Symbol.for("CreateTicketRepository"),
+  GetTicketPagedRepository: Symbol.for("GetTicketPagedRepository"),
+  GetTicketByIdRepository: Symbol.for("GetTicketByIdRepository"),
   UpdateTicketRepository: Symbol.for("UpdateTicketRepository"),
   DeleteTicketRepository: Symbol.for("DeleteTicketRepository"),
-  GetTicketByIdRepository: Symbol.for("GetTicketByIdRepository"),
-  GetTicketPagedRepository: Symbol.for("GetTicketPagedRepository"),
 } as const;

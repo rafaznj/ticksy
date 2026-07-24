@@ -1,9 +1,6 @@
+import { TicketsPagedTable } from "@/components/tables/tickets";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/_authenticated/tickets")({
-  component: RouteComponent,
+  component: TicketsPagedTable,
 });
-
-function RouteComponent() {
-  return <div>Hello "/_authenticated/tickets"!</div>;
-}

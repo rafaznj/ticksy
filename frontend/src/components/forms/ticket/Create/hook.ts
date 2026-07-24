@@ -1,6 +1,6 @@
 import type { CreateTicketFormProps } from "@/components/forms/ticket/create/types";
 import { createTicketFormSchema } from "@/components/forms/ticket/create/validations";
-import { useDialog } from "@/contexts/DialogContext";
+import { useDialog } from "@/contexts/use-dialog";
 import { useAppForm } from "@/hooks/use-form";
 import { container } from "@/lib/inversifyJS/index.container";
 import { useAuthStore } from "@/lib/zustand/use-auth";
@@ -24,15 +24,15 @@ export function useCreateTicketForm() {
 
   const priorityOptions = useMemo(
     () => [
-      { value: TicketPriorityEnum.LOW, label: t("ticket.create.fields.priority.options.LOW") },
+      { value: TicketPriorityEnum.LOW, label: t("ticket.create.fields.priority.options.low") },
       {
         value: TicketPriorityEnum.MEDIUM,
-        label: t("ticket.create.fields.priority.options.MEDIUM"),
+        label: t("ticket.create.fields.priority.options.medium"),
       },
-      { value: TicketPriorityEnum.HIGH, label: t("ticket.create.fields.priority.options.HIGH") },
+      { value: TicketPriorityEnum.HIGH, label: t("ticket.create.fields.priority.options.high") },
       {
         value: TicketPriorityEnum.URGENT,
-        label: t("ticket.create.fields.priority.options.URGENT"),
+        label: t("ticket.create.fields.priority.options.urgent"),
       },
     ],
     [t],

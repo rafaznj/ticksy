@@ -2,7 +2,7 @@ import { Inject, Injectable } from "@nestjs/common";
 import { SERVICE_TOKENS } from "../../../shared/di/tokens.services";
 import type { ICreateUserService } from "../../user/services/contracts/create";
 import type { IJwtTokenService } from "./contracts/jwt-token";
-import { CreateUserDto } from "../../user/dto/create.dto";
+import { CreateUserDto } from "../../user/dtos/create.dto";
 import { RegisterResult } from "../dto/register-result.dto";
 import * as argon2 from "argon2";
 import { IRegisterService } from "./contracts/register";

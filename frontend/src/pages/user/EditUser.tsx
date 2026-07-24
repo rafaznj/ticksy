@@ -1,7 +1,7 @@
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
-import { EditUserForm } from "@/components/forms/user/edit";
+import { UserProfileEditForm } from "@/components/forms/user/ProfileEdit";
 import { useAuthStore } from "@/lib/zustand/use-auth";
 import { useTranslation } from "react-i18next";
 
@@ -28,7 +28,7 @@ export function EditUserPage() {
         </CardHeader>
 
         <CardContent className="p-8 pt-2">
-          <EditUserForm />
+          <UserProfileEditForm />
         </CardContent>
       </Card>
     </div>

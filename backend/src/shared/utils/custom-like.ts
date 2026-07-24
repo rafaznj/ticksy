@@ -1,12 +1,10 @@
-import { like, sql } from "drizzle-orm";
+import { ilike, getTableColumns } from "drizzle-orm";
+import { PgTable } from "drizzle-orm/pg-core";
 
-const customLike = (columnsComparison: string[], search: string, tableName?: string) => {
-  return columnsComparison.map((col) =>
-    like(
-      sql.raw(`lower(${tableName ? `${tableName}.${col}` : col})`),
-      sql.raw(`lower('%${search}%')`),
-    ),
-  );
+export const customLike = (columnsComparison: string[], search: string, table: PgTable) => {
+  const columns = getTableColumns(table);
+
+  return columnsComparison
+    .filter((col) => col in columns)
+    .map((col) => ilike(columns[col as keyof typeof columns], `%${search}%`));
 };
-
-export { customLike };

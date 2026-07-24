@@ -1,4 +1,4 @@
 import { IBaseGetByIdRepository } from "../../../../shared/base/repositories/contracts/get-by-id";
-import { UserEntity } from "../../entity/user.entity";
+import { UserModel } from "../../models/user-model";
 
-export type IGetUserByIdRepository = IBaseGetByIdRepository<UserEntity>;
+export type IGetUserByIdRepository = IBaseGetByIdRepository<UserModel>;

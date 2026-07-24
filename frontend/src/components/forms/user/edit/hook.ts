@@ -1,66 +1,91 @@
-import { useNavigate } from "@tanstack/react-router";
-import { useTranslation } from "react-i18next";
-
+import { useEffect, useMemo } from "react";
+import type { EditUserFormProps } from "@/components/forms/user/Edit/types";
+import { editUserFormSchema } from "@/components/forms/user/Edit/validations";
 import { useAppForm } from "@/hooks/use-form";
 import { container } from "@/lib/inversifyJS/index.container";
-import { SERVICE_TOKENS } from "@/shared/di/tokens.services";
+import { UserRoleEnum } from "@/modules/user/enums/user-role.enum";
+import type { UserEntity } from "@/modules/user/entity/user.entity";
+import { useUpdateUser } from "@/modules/user/query-hooks/mutation/use-update-user";
 import type { IUpdateUserService } from "@/modules/user/services/contracts/update";
-import { useUpdateUser } from "../../../../modules/user/query-hooks/mutation/use-update-user";
-import type { EditUserProps } from "@/components/forms/user/edit/types";
-import { useAuthStore } from "@/lib/zustand/use-auth";
-import { editUserFormSchema } from "@/components/forms/user/edit/validations";
-import { Route } from "@/routes/_authenticated/user/profile";
+import { DIALOG_KEYS } from "@/shared/constants/dialog-keys";
+import { SERVICE_TOKENS } from "@/shared/di/tokens.services";
+import { useStore } from "@tanstack/react-form";
+import { useTranslation } from "react-i18next";
+import { useDialog } from "@/contexts/use-dialog";
 
 export function useEditUserForm() {
-  const { user } = useAuthStore();
-  const navigate = useNavigate();
-  const { redirect } = Route.useSearch();
   const { t } = useTranslation();
+
+  const { isOpen, data: selectedUser, close } = useDialog<UserEntity>(DIALOG_KEYS.UPDATE_USER);
+
   const updateUserService = container.get<IUpdateUserService>(SERVICE_TOKENS.UpdateUserService);
 
-  const { mutate: handleUpdateUser, isPending } = useUpdateUser(updateUserService);
+  const { mutateAsync: updateUser } = useUpdateUser(updateUserService);
+
+  const roleOptions = useMemo(
+    () => [
+      { value: UserRoleEnum.EMPLOYEE, label: t("user.roles.employee") },
+      {
+        value: UserRoleEnum.TECHNICAL_ASSISTANCE,
+        label: t("user.roles.technicalAssistance"),
+      },
+      { value: UserRoleEnum.ADMIN, label: t("user.roles.admin") },
+    ],
+    [t],
+  );
 
   const form = useAppForm({
     defaultValues: {
-      id: user?.id,
-      name: user?.name,
-      email: user?.email,
-    } as EditUserProps,
-    onSubmit: async (value) => {
-      handleUpdateUser(
-        {
-          id: user!.id,
-          data: {
-            name: value.value.name,
-            email: value.value.email,
-          },
-        },
-        {
-          onSuccess: () => {
-            navigate({
-              to: redirect,
-            });
-          },
-        },
-      );
-    },
+      name: selectedUser?.name,
+      email: selectedUser?.email,
+      role: selectedUser?.role,
+    } satisfies EditUserFormProps,
     validators: {
       onBlur: editUserFormSchema(t),
     },
+    onSubmit: async ({ value }) => {
+      if (!selectedUser?.id) return;
+
+      await updateUser({
+        id: selectedUser.id,
+        data: value,
+      });
+
+      close();
+    },
   });
 
-  const handleSubmit = async (event: React.SubmitEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    event.stopPropagation();
+  useEffect(() => {
+    if (isOpen && selectedUser) {
+      form.reset({
+        name: selectedUser.name,
+        email: selectedUser.email,
+        role: selectedUser.role,
+      });
+    }
+  }, [form, isOpen, selectedUser]);
+
+  const [canSubmit, isSubmitting, isBlurred] = useStore(form.store, (state) => [
+    state.canSubmit,
+    state.isSubmitting,
+    state.isBlurred,
+  ]);
+
+  const handleSubmit = async (event?: React.FormEvent<HTMLFormElement>) => {
+    event?.preventDefault();
+    event?.stopPropagation();
     await form.handleSubmit();
   };
 
   return {
-    form,
     t,
-    isPending,
-    redirect,
-    navigate,
+    isOpen,
+    form,
+    roleOptions,
+    canSubmit,
+    isSubmitting,
+    isBlurred,
+    close,
     handleSubmit,
   };
 }
