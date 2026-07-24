@@ -75,6 +75,7 @@ import { CreateAdminUserService } from "./services/create-admin.service";
     },
   ],
   exports: [
+    SERVICE_TOKENS.CreateAdminUserService,
     SERVICE_TOKENS.CreateUserService,
     SERVICE_TOKENS.GetUserByIdService,
     SERVICE_TOKENS.GetUserByEmailService,
