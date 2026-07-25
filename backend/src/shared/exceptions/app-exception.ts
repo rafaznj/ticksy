@@ -6,6 +6,11 @@ export class AppException extends HttpException {
     super({ success: false, errors }, status);
   }
 
+  hasKey(key: string): boolean {
+    const response = this.getResponse() as { errors?: ErrorMessage[] };
+    return response.errors?.some((e) => e.key === key) ?? false;
+  }
+
   static unauthorized(key: string): AppException {
     return new AppException([{ key }], HttpStatus.UNAUTHORIZED);
   }
