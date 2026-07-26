@@ -11,7 +11,7 @@ export function useAppSidebar() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const { user } = useAuthStore();
 
-  const groups = useMemo(() => getSidebarMenuGroups(t), [t]);
+  const groups = useMemo(() => getSidebarMenuGroups(t, user?.role), [t, user?.role]);
 
   const visibleGroups = useMemo(() => {
     return groups.reduce<SidebarMenuGroup[]>((acc, group) => {

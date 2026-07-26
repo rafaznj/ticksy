@@ -1,4 +1,19 @@
-import { Body, Controller, Delete, Get, Inject, Param, Post, Put, Query } from "@nestjs/common";
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Inject,
+  Param,
+  Post,
+  Put,
+  Query,
+  Req,
+  UseGuards,
+} from "@nestjs/common";
+import { AuthGuard } from "@nestjs/passport";
+import type { Request } from "express";
+
 import { SERVICE_TOKENS } from "../../../shared/di/tokens.services";
 import type { ICreateTicketService } from "../services/contracts/create";
 import type { IDeleteTicketService } from "../services/contracts/delete";
@@ -7,6 +22,7 @@ import type { IUpdateTicketService } from "../services/contracts/update";
 import { CreateTicketDto } from "../dtos/create.dto";
 import { UpdateTicketDto } from "../dtos/update.dto";
 import type { IGetTicketPagedService } from "../services/contracts/get-paged";
+import { UserModel } from "../../user/models/user-model";
 
 @Controller("ticket")
 export class TicketController {
@@ -29,20 +45,19 @@ export class TicketController {
   }
 
   @Get("paged")
+  @UseGuards(AuthGuard("jwt"))
   async getPaged(
     @Query("currentPage") currentPage: number,
     @Query("pageSize") pageSize: number,
+    @Req() req: Request & { user: Omit<UserModel, "password"> },
     @Query("sort") sort?: string,
     @Query("order") order?: string,
     @Query("search") search?: string,
   ) {
-    const result = await this.getTicketPagedService.execute({
-      currentPage,
-      pageSize,
-      sort,
-      order,
-      search,
-    });
+    const result = await this.getTicketPagedService.execute(
+      { currentPage, pageSize, sort, order, search },
+      req.user,
+    );
 
     return result;
   }

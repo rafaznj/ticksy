@@ -41,6 +41,11 @@ interface ActionsConfig<T> {
   headerName?: string;
   visibilityAction?: ActionVisibility<T>;
   disableAction?: ActionVisibility<T>;
+  tooltips?: {
+    edit?: string;
+    deactivate?: string;
+    delete?: string;
+  };
   edit?: (item: T) => void;
   deactivate?: (item: T) => void;
   delete?: (item: T) => void;
@@ -127,7 +132,9 @@ export function PagedTable<T>({
                         <Pencil className="h-4 w-4" />
                       </Button>
                     </TooltipTrigger>
-                    <TooltipContent>{t("general.actions.edit")}</TooltipContent>
+                    <TooltipContent>
+                      {actions.tooltips?.edit ?? t("general.actions.edit")}
+                    </TooltipContent>
                   </Tooltip>
                 </TooltipProvider>
               )}
@@ -146,7 +153,9 @@ export function PagedTable<T>({
                         <Minus className="h-4 w-4" />
                       </Button>
                     </TooltipTrigger>
-                    <TooltipContent>{t("general.actions.deactivate")}</TooltipContent>
+                    <TooltipContent>
+                      {actions.tooltips?.deactivate ?? t("general.actions.deactivate")}
+                    </TooltipContent>
                   </Tooltip>
                 </TooltipProvider>
               )}
@@ -165,7 +174,9 @@ export function PagedTable<T>({
                         <Trash2 className="h-4 w-4" />
                       </Button>
                     </TooltipTrigger>
-                    <TooltipContent>{t("general.actions.delete")}</TooltipContent>
+                    <TooltipContent>
+                      {actions.tooltips?.delete ?? t("general.actions.delete")}
+                    </TooltipContent>
                   </Tooltip>
                 </TooltipProvider>
               )}

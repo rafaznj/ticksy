@@ -27,7 +27,7 @@ interface ComplexDialogProps {
   onCancel?: () => void;
   title: ReactNode;
   description?: ReactNode;
-  children: ReactNode;
+  children?: ReactNode;
   cancelText?: string;
   confirmText?: string;
   isConfirmDisabled?: boolean;

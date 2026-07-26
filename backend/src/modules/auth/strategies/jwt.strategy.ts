@@ -3,8 +3,8 @@ import { PassportStrategy } from "@nestjs/passport";
 import { ConfigService } from "@nestjs/config";
 import { ExtractJwt, Strategy } from "passport-jwt";
 
-import { REPOSITORY_TOKENS } from "../../../shared/di/tokens.repositories";
-import type { IRefreshTokenRepository } from "../repositories/contracts/refresh-token";
+import { SERVICE_TOKENS } from "../../../shared/di/tokens.services";
+import type { IGetUserByIdService } from "../../user/services/contracts/get-by-id";
 
 interface JwtPayload {
   sub: string;
@@ -15,8 +15,8 @@ interface JwtPayload {
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(
     configService: ConfigService,
-    @Inject(REPOSITORY_TOKENS.RefreshTokenRepository)
-    private readonly tokenRepository: IRefreshTokenRepository,
+    @Inject(SERVICE_TOKENS.GetUserByIdService)
+    private readonly getUserByIdService: IGetUserByIdService,
   ) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
@@ -26,11 +26,15 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   }
 
   async validate(payload: JwtPayload) {
-    const result = await this.tokenRepository.findActiveByUserId(payload.sub);
-    if (!result) {
+    const response = await this.getUserByIdService.execute(payload.sub);
+
+    if (!response) {
       throw new UnauthorizedException("Usuário não encontrado");
     }
 
-    return result;
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { password, ...user } = response;
+
+    return user;
   }
 }

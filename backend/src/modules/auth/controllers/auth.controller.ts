@@ -67,7 +67,7 @@ export class AuthController {
 
   @Get("/me")
   @UseGuards(AuthGuard("jwt"))
-  async me(@Req() req: Request & { user: UserModel }) {
+  async me(@Req() req: Request & { user: Omit<UserModel, "password"> }) {
     return req.user;
   }
 
