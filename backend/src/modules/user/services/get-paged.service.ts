@@ -16,7 +16,7 @@ export class GetUserPagedService implements IGetUserPagedService {
     const response = await this.getUserPagedRepository.execute({
       ...options,
       columnsComparison: ["name", "email"],
-      softDeleteFilter: true,
+      softDeleteFilter: false,
     });
     return response;
   }

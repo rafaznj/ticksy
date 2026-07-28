@@ -5,9 +5,10 @@ import type { SidebarMenuGroup } from "./types";
 
 const allUser = Object.values(UserRoleEnum);
 const adminOnly = [UserRoleEnum.ADMIN];
-const technicalAssistanceOnly = [UserRoleEnum.TECHNICAL_ASSISTANCE];
 
-export function getSidebarMenuGroups(t: TFunction): SidebarMenuGroup[] {
+export function getSidebarMenuGroups(t: TFunction, role?: UserRoleEnum): SidebarMenuGroup[] {
+  const isAdmin = role === UserRoleEnum.ADMIN;
+
   return [
     {
       items: [
@@ -23,7 +24,7 @@ export function getSidebarMenuGroups(t: TFunction): SidebarMenuGroup[] {
       items: [
         {
           href: "/tickets",
-          tooltip: t("sidebar.tooltips.tickets"),
+          tooltip: isAdmin ? t("sidebar.tooltips.tickets") : t("sidebar.tooltips.myTickets"),
           icon: Ticket,
           iconClassName: "text-blue-500 dark:text-blue-400",
           allowedRoles: allUser,
@@ -38,7 +39,7 @@ export function getSidebarMenuGroups(t: TFunction): SidebarMenuGroup[] {
           tooltip: t("sidebar.tooltips.users"),
           icon: Users,
           iconClassName: "text-purple-600 dark:text-purple-400",
-          allowedRoles: adminOnly || technicalAssistanceOnly,
+          allowedRoles: adminOnly,
         },
       ],
     },

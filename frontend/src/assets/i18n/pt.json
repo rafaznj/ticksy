@@ -194,6 +194,7 @@
       "newTicket": "Novo ticket",
       "profile": "Perfil",
       "tickets": "Ver tickets",
+      "myTickets": "Meus tickets",
       "users": "Gerenciar usuários"
     }
   },
@@ -272,18 +273,13 @@
     }
   },
   "user": {
-    "confirmations": {
-      "activate": "Tem certeza de que deseja ativar este usuário?",
-      "deactivate": "Tem certeza de que deseja desativar este usuário?",
-      "delete": "Tem certeza de que deseja remover este usuário?"
-    },
     "edit": {
       "actions": {
         "cancel": "Cancelar",
         "save": "Salvar alterações",
         "saving": "Salvando..."
       },
-      "description": "Atualize suas informações pessoais.",
+      "description": "Atualize as informações do usuário",
       "fields": {
         "email": {
           "label": "E-mail",
@@ -316,6 +312,14 @@
       },
       "title": "Editar perfil"
     },
+    "deactivate": {
+      "title": "Desativar usuário",
+      "description": "Tem certeza que deseja desativar o usuário {{name}}?",
+      "actions": {
+        "cancel": "Cancelar",
+        "confirm": "Desativar"
+      }
+    },
     "errors": {
       "activateFailed": "Falha ao ativar o usuário.",
       "createFailed": "Falha ao criar o usuário.",
@@ -338,6 +342,10 @@
       "updated": "Perfil atualizado com sucesso."
     },
     "table": {
+      "actions": {
+        "edit": "Editar usuário",
+        "deactivate": "Desativar usuário"
+      },
       "columns": {
         "created_at": "Criado em",
         "email": "E-mail",

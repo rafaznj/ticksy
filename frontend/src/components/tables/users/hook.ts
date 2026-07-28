@@ -21,6 +21,7 @@ export function useUsersPagedTable() {
   );
 
   const { open: openEditUser } = useDialog<UserEntity>(DIALOG_KEYS.UPDATE_USER);
+  const { open: openDeactivateUser } = useDialog<UserEntity>(DIALOG_KEYS.DEACTIVATE_USER);
 
   const {
     data,
@@ -69,9 +70,13 @@ export function useUsersPagedTable() {
   const actions = useMemo(
     () => ({
       edit: (user: UserEntity) => openEditUser(user),
-      deactivate: (user: UserEntity) => console.log("desativar", user),
+      deactivate: (user: UserEntity) => openDeactivateUser(user),
+      tooltips: {
+        edit: t("user.table.actions.edit"),
+        deactivate: t("user.table.actions.deactivate"),
+      },
     }),
-    [openEditUser],
+    [openDeactivateUser, openEditUser, t],
   );
 
   return {

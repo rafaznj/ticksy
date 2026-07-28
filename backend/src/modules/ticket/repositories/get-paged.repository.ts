@@ -10,19 +10,28 @@ import { IQueryOptions } from "../../../shared/types/query-options";
 import buildPagedOptions from "../../../shared/utils/build-paged-options";
 import { customQueryConditions } from "../../../shared/utils/custom-conditions";
 import buildPagedReturn from "../../../shared/utils/build-paged-return";
-import { IGetTicketPagedRepository } from "./contracts/get-paged";
+import { IGetTicketPagedRepository, TicketScope } from "./contracts/get-paged";
 import { TicketPagedModel } from "../models/ticket-paged";
+
+const createdByUser = alias(user, "created_by_user");
+const assignedToUser = alias(user, "assigned_to_user");
 
 export class GetTicketPagedRepository implements IGetTicketPagedRepository {
   @Inject(DATABASE_TOKENS.Drizzle)
   private db!: NodePgDatabase;
 
-  async execute(options: IQueryOptions): Promise<IPagedResult<TicketPagedModel>> {
+  async execute(
+    options: IQueryOptions,
+    scope?: TicketScope,
+  ): Promise<IPagedResult<TicketPagedModel>> {
     const { limit, offset } = buildPagedOptions(options);
     const { softDeleteCondition, sort, whereCondition } = customQueryConditions(options, ticket);
 
-    const createdByUser = alias(user, "created_by_user");
-    const assignedToUser = alias(user, "assigned_to_user");
+    const scopeCondition = scope?.assignedToId
+      ? eq(ticket.assignedToId, scope.assignedToId)
+      : scope?.createdById
+        ? eq(ticket.createdById, scope.createdById)
+        : undefined;
 
     const queryBuilder = this.db
       .select({
@@ -39,7 +48,7 @@ export class GetTicketPagedRepository implements IGetTicketPagedRepository {
       .from(ticket)
       .innerJoin(createdByUser, eq(ticket.createdById, createdByUser.id))
       .leftJoin(assignedToUser, eq(ticket.assignedToId, assignedToUser.id))
-      .where(and(whereCondition, softDeleteCondition))
+      .where(and(whereCondition, softDeleteCondition, scopeCondition))
       .limit(limit)
       .offset(offset);
 
@@ -48,7 +57,7 @@ export class GetTicketPagedRepository implements IGetTicketPagedRepository {
     }
 
     const records = (await queryBuilder) as TicketPagedModel[];
-    const totalRecords = await this.db.$count(ticket);
+    const totalRecords = await this.db.$count(ticket, scopeCondition);
 
     return buildPagedReturn(records, limit, totalRecords);
   }

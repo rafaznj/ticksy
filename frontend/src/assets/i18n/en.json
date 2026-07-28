@@ -196,6 +196,7 @@
       "newTicket": "New Ticket",
       "profile": "Profile",
       "tickets": "View tickets",
+      "myTickets": "My tickets",
       "users": "Manage users"
     }
   },
@@ -274,10 +275,13 @@
     }
   },
   "user": {
-    "confirmations": {
-      "activate": "Are you sure you want to activate this user?",
-      "deactivate": "Are you sure you want to deactivate this user?",
-      "delete": "Are you sure you want to delete this user?"
+    "deactivate": {
+      "title": "Deactivate user",
+      "description": "Are you sure you want to deactivate the user {{name}}?",
+      "actions": {
+        "cancel": "Cancel",
+        "confirm": "Deactivate"
+      }
     },
     "edit": {
       "actions": {
@@ -285,7 +289,7 @@
         "save": "Save changes",
         "saving": "Saving..."
       },
-      "description": "Update your personal information.",
+      "description": "Update user information",
       "fields": {
         "email": {
           "label": "Email",
@@ -340,6 +344,10 @@
       "updated": "Profile updated successfully."
     },
     "table": {
+      "actions": {
+        "edit": "Edit user",
+        "deactivate": "Deactivate user"
+      },
       "columns": {
         "created_at": "Created At",
         "email": "Email",
