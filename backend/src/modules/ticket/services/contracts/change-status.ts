@@ -1,5 +1,6 @@
 import { TicketStatusEnum } from "../../enums/ticket-status.enum";
+import { TicketModel } from "../../models/ticket";
 
-export interface IChangeTicketStatusService {
-  execute(id: string, status: TicketStatusEnum): Promise<void>;
+export interface IChangeStatusTicketService {
+  execute(id: string, status: TicketStatusEnum): Promise<TicketModel | null>;
 }

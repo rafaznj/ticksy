@@ -8,7 +8,7 @@ import {
   type SortingState,
   type Updater,
 } from "@tanstack/react-table";
-import { ArrowDown, ArrowUp, ArrowUpDown, Minus, Pencil, Trash2 } from "lucide-react";
+import { ArrowDown, ArrowUp, ArrowUpDown, Minus, Pencil, Trash2, UserPlus } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -31,10 +31,13 @@ import {
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { useTranslation } from "react-i18next";
 
+type TooltipValue<T> = string | ((item: T) => string);
+
 interface ActionVisibility<T> {
   edit?: (row: T) => boolean;
   deactivate?: (item: T) => boolean;
   delete?: (row: T) => boolean;
+  assign?: (item: T) => boolean;
 }
 
 interface ActionsConfig<T> {
@@ -42,13 +45,15 @@ interface ActionsConfig<T> {
   visibilityAction?: ActionVisibility<T>;
   disableAction?: ActionVisibility<T>;
   tooltips?: {
-    edit?: string;
-    deactivate?: string;
-    delete?: string;
+    edit?: TooltipValue<T>;
+    deactivate?: TooltipValue<T>;
+    delete?: TooltipValue<T>;
+    assign?: TooltipValue<T>;
   };
   edit?: (item: T) => void;
   deactivate?: (item: T) => void;
   delete?: (item: T) => void;
+  assign?: (item: T) => void;
 }
 
 interface PagedTableProps<T> {
@@ -72,6 +77,15 @@ interface PagedTableProps<T> {
   onPreviousPage: () => void;
   getRowId?: (row: T) => string;
   onSortingChange?: (updater: Updater<SortingState>) => void;
+}
+
+function resolveTooltip<T>(
+  tooltip: TooltipValue<T> | undefined,
+  item: T,
+  fallback: string,
+): string {
+  if (typeof tooltip === "function") return tooltip(item);
+  return tooltip ?? fallback;
 }
 
 export function PagedTable<T>({
@@ -109,73 +123,119 @@ export function PagedTable<T>({
         cell: ({ row }: { row: Row<T> }) => {
           const item = row.original;
 
-          const showEdit = actions.edit && actions.visibilityAction?.edit?.(item) !== false;
-          const showDeactivate =
-            actions.deactivate && actions.visibilityAction?.deactivate?.(item) !== false;
-          const showDelete = actions.delete && actions.visibilityAction?.delete?.(item) !== false;
+          const hasEdit = !!actions.edit;
+          const hasDeactivate = !!actions.deactivate;
+          const hasDelete = !!actions.delete;
+          const hasAssign = !!actions.assign;
 
-          if (!showEdit && !showDeactivate && !showDelete) return null;
+          if (!hasEdit && !hasDeactivate && !hasDelete && !hasAssign) return null;
+
+          const isEditDisabled =
+            actions.visibilityAction?.edit?.(item) === false ||
+            !!actions.disableAction?.edit?.(item);
+          const isDeactivateDisabled =
+            actions.visibilityAction?.deactivate?.(item) === false ||
+            !!actions.disableAction?.deactivate?.(item);
+          const isDeleteDisabled =
+            actions.visibilityAction?.delete?.(item) === false ||
+            !!actions.disableAction?.delete?.(item);
+          const isAssignDisabled =
+            actions.visibilityAction?.assign?.(item) === false ||
+            !!actions.disableAction?.assign?.(item);
 
           return (
             <div className="flex items-center gap-1">
-              {showEdit && (
+              {hasEdit && (
                 <TooltipProvider>
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        className="h-8 w-8 cursor-pointer rounded-md bg-muted text-amber-600 hover:bg-muted/80 hover:text-amber-700"
-                        disabled={actions.disableAction?.edit?.(item)}
-                        onClick={() => actions.edit!(item)}
-                      >
-                        <Pencil className="h-4 w-4" />
-                      </Button>
+                      <span>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="h-8 w-8 cursor-pointer rounded-md bg-muted text-amber-600 hover:bg-muted/80 hover:text-amber-700 disabled:cursor-not-allowed disabled:opacity-50"
+                          disabled={isEditDisabled}
+                          onClick={() => actions.edit!(item)}
+                        >
+                          <Pencil className="h-4 w-4" />
+                        </Button>
+                      </span>
                     </TooltipTrigger>
                     <TooltipContent>
-                      {actions.tooltips?.edit ?? t("general.actions.edit")}
+                      {resolveTooltip(actions.tooltips?.edit, item, t("general.actions.edit"))}
                     </TooltipContent>
                   </Tooltip>
                 </TooltipProvider>
               )}
 
-              {showDeactivate && (
+              {hasDeactivate && (
                 <TooltipProvider>
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        className="h-8 w-8 cursor-pointer rounded-md bg-muted text-orange-600 hover:bg-muted/80 hover:text-orange-700"
-                        disabled={actions.disableAction?.deactivate?.(item)}
-                        onClick={() => actions.deactivate!(item)}
-                      >
-                        <Minus className="h-4 w-4" />
-                      </Button>
+                      <span>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="h-8 w-8 cursor-pointer rounded-md bg-muted text-orange-600 hover:bg-muted/80 hover:text-orange-700 disabled:cursor-not-allowed disabled:opacity-50"
+                          disabled={isDeactivateDisabled}
+                          onClick={() => actions.deactivate!(item)}
+                        >
+                          <Minus className="h-4 w-4" />
+                        </Button>
+                      </span>
                     </TooltipTrigger>
                     <TooltipContent>
-                      {actions.tooltips?.deactivate ?? t("general.actions.deactivate")}
+                      {resolveTooltip(
+                        actions.tooltips?.deactivate,
+                        item,
+                        t("general.actions.deactivate"),
+                      )}
                     </TooltipContent>
                   </Tooltip>
                 </TooltipProvider>
               )}
 
-              {showDelete && (
+              {hasAssign && (
                 <TooltipProvider>
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        className="h-8 w-8 cursor-pointer rounded-md bg-muted text-red-600 hover:bg-muted/80 hover:text-red-700"
-                        disabled={actions.disableAction?.delete?.(item)}
-                        onClick={() => actions.delete!(item)}
-                      >
-                        <Trash2 className="h-4 w-4" />
-                      </Button>
+                      <span>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="h-8 w-8 cursor-pointer rounded-md bg-muted text-blue-600 hover:bg-muted/80 hover:text-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
+                          disabled={isAssignDisabled}
+                          onClick={() => actions.assign!(item)}
+                        >
+                          <UserPlus className="h-4 w-4" />
+                        </Button>
+                      </span>
                     </TooltipTrigger>
                     <TooltipContent>
-                      {actions.tooltips?.delete ?? t("general.actions.delete")}
+                      {resolveTooltip(actions.tooltips?.assign, item, t("general.actions.assign"))}
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+              )}
+
+              {hasDelete && (
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <span>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="h-8 w-8 cursor-pointer rounded-md bg-muted text-red-600 hover:bg-muted/80 hover:text-red-700 disabled:cursor-not-allowed disabled:opacity-50"
+                          disabled={isDeleteDisabled}
+                          onClick={() => actions.delete!(item)}
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </Button>
+                      </span>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      {resolveTooltip(actions.tooltips?.delete, item, t("general.actions.delete"))}
                     </TooltipContent>
                   </Tooltip>
                 </TooltipProvider>

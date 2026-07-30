@@ -1,4 +1,4 @@
-import { TicketPriorityEnum } from "../enums/ticket-priority.enum";
+import { TicketPriorityEnum } from "../enums/priority.enum";
 
 export interface CreateTicketDto {
   title: string;

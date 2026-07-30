@@ -29,8 +29,8 @@ export function CreateTicketForm() {
         <form.AppField name="title">
           {(field) => (
             <field.TextField
-              label={t("ticket.create.fields.title.label")}
-              placeholder={t("ticket.create.fields.title.placeholder")}
+              label={t("ticket.fields.title.label")}
+              placeholder={t("ticket.fields.title.placeholder")}
               type="text"
               required
             />
@@ -40,8 +40,8 @@ export function CreateTicketForm() {
         <form.AppField name="description">
           {(field) => (
             <field.TextareaField
-              label={t("ticket.create.fields.description.label")}
-              placeholder={t("ticket.create.fields.description.placeholder")}
+              label={t("ticket.fields.description.label")}
+              placeholder={t("ticket.fields.description.placeholder")}
               required
             />
           )}
@@ -50,8 +50,8 @@ export function CreateTicketForm() {
         <form.AppField name="priority">
           {(field) => (
             <field.SelectField
-              label={t("ticket.create.fields.priority.label")}
-              placeholder={t("ticket.create.fields.priority.placeholder")}
+              label={t("ticket.fields.priority.label")}
+              placeholder={t("ticket.fields.priority.placeholder")}
               options={priorityOptions}
               required
             />

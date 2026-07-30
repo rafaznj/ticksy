@@ -1,4 +1,4 @@
-import type { UserRoleEnum } from "@/modules/user/enums/user-role.enum";
+import type { UserRoleEnum } from "@/modules/user/enums/role.enum";
 
 export interface EditUserFormProps {
   name?: string;

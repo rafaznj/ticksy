@@ -1,6 +1,6 @@
 import { injectable, injectFromBase } from "inversify";
 import { BaseCreateRepository } from "@/shared/base/repositories/create.repository";
-import type { CreateUserDto } from "../dto/create-user.dto";
+import type { CreateUserDto } from "../dto/create.dto";
 import type { UserEntity } from "../entity/user.entity";
 import type { ICreateUserRepository } from "./contracts/create";
 

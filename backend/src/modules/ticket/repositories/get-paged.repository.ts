@@ -40,6 +40,8 @@ export class GetTicketPagedRepository implements IGetTicketPagedRepository {
         description: ticket.description,
         priority: ticket.priority,
         status: ticket.status,
+        createdById: ticket.createdById,
+        assignedToId: ticket.assignedToId,
         createdByName: createdByUser.name,
         assignedToName: assignedToUser.name,
         createdAt: ticket.createdAt,

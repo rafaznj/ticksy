@@ -5,7 +5,7 @@ import { SERVICE_TOKENS } from "@/shared/di/tokens.services";
 import { useTranslation } from "react-i18next";
 import { useDialog } from "@/contexts/use-dialog";
 import type { IDeactivateUserService } from "@/modules/user/services/contracts/deactivate";
-import { useDeactivateUser } from "@/modules/user/query-hooks/mutation/use-deactivate-user";
+import { useDeactivateUser } from "@/modules/user/query-hooks/mutation/use-deactivate";
 
 export function useDeactivateUserForm() {
   const { t } = useTranslation();

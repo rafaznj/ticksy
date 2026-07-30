@@ -1,4 +1,4 @@
-import { UserRoleEnum } from "../enums/user-role.enum";
+import { UserRoleEnum } from "../enums/role.enum";
 
 export interface UserEntity {
   id: string;
@@ -6,7 +6,7 @@ export interface UserEntity {
   email: string;
   password: string;
   role: UserRoleEnum;
-  isActive: boolean;
+  deleted: boolean;
   createdAt: string;
   updatedAt: string;
 }

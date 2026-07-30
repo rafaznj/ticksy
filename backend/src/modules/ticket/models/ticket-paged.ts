@@ -7,7 +7,9 @@ export interface TicketPagedModel {
   description: string;
   priority: TicketPriorityEnum;
   status: TicketStatusEnum;
+  createdById: string;
   createdByName: string;
+  assignedToId: string | null;
   assignedToName: string | null;
   createdAt: Date;
   updatedAt: Date;

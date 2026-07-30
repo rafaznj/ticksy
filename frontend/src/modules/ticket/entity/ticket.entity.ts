@@ -1,5 +1,5 @@
-import { TicketPriorityEnum } from "../enums/ticket-priority.enum";
-import { TicketStatusEnum } from "../enums/ticket-status.enum";
+import { TicketPriorityEnum } from "../enums/priority.enum";
+import { TicketStatusEnum } from "../enums/status.enum";
 
 export interface TicketEntity {
   id: string;

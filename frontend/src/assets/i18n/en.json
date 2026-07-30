@@ -1,10 +1,10 @@
 {
   "auth": {
     "errors": {
-      "emailAlreadyExists": "A user with this email already exists.",
-      "invalidCredentials": "Invalid email or password. Please check your credentials and try again.",
-      "refreshTokenMissing": "Your session has expired. Please sign in again.",
-      "userNotFound": "User not found."
+      "emailAlreadyExists": "A user with this email already exists",
+      "invalidCredentials": "Invalid email or password. Please check your credentials and try again",
+      "refreshTokenMissing": "Your session has expired. Please sign in again",
+      "userNotFound": "User not found"
     },
     "forgotPassword": {
       "actions": {
@@ -25,30 +25,30 @@
           "label": "Email",
           "placeholder": "your@email.com",
           "validations": {
-            "invalid": "Please enter a valid email.",
-            "maxLength": "Email must not exceed {{max}} characters.",
-            "required": "Email is required."
+            "invalid": "Please enter a valid email",
+            "maxLength": "Email must not exceed {{max}} characters",
+            "required": "Email is required"
           }
         },
         "password": {
           "label": "Password",
           "placeholder": "••••••••",
           "validations": {
-            "maxLength": "Password must not exceed {{max}} characters.",
-            "minLength": "Password must be at least {{min}} characters.",
-            "required": "Password is required."
+            "maxLength": "Password must not exceed {{max}} characters",
+            "minLength": "Password must be at least {{min}} characters",
+            "required": "Password is required"
           }
         }
       },
       "messages": {
-        "failed": "Unable to sign in.",
-        "success": "Successfully signed in."
+        "failed": "Unable to sign in",
+        "success": "Successfully signed in"
       },
       "noAccount": "Don't have an account?",
       "title": "Sign in to your account"
     },
     "logout": {
-      "error": "Unable to sign you out. Please try again."
+      "error": "Unable to sign you out. Please try again"
     },
     "register": {
       "actions": {
@@ -63,30 +63,30 @@
           "label": "Email",
           "placeholder": "your@email.com",
           "validations": {
-            "invalid": "Please enter a valid email.",
-            "maxLength": "Email must not exceed {{max}} characters.",
-            "required": "Email is required."
+            "invalid": "Please enter a valid email",
+            "maxLength": "Email must not exceed {{max}} characters",
+            "required": "Email is required"
           }
         },
         "name": {
           "label": "Name",
           "placeholder": "John Doe",
           "validations": {
-            "maxLength": "Name must not exceed {{max}} characters.",
-            "required": "Name is required."
+            "maxLength": "Name must not exceed {{max}} characters",
+            "required": "Name is required"
           }
         },
         "password": {
           "label": "Password",
           "placeholder": "••••••••",
           "validations": {
-            "lowerCaseLetter": "Password must contain at least one lowercase letter.",
-            "maxLength": "Password must not exceed {{max}} characters.",
-            "minLength": "Password must be at least {{min}} characters.",
-            "number": "Password must contain at least one number.",
-            "required": "Password is required.",
-            "specialCharacter": "Password must contain at least one special character (!@#$%).",
-            "upperCaseLetter": "Password must contain at least one uppercase letter."
+            "lowerCaseLetter": "Password must contain at least one lowercase letter",
+            "maxLength": "Password must not exceed {{max}} characters",
+            "minLength": "Password must be at least {{min}} characters",
+            "number": "Password must contain at least one number",
+            "required": "Password is required",
+            "specialCharacter": "Password must contain at least one special character (!@#$%)",
+            "upperCaseLetter": "Password must contain at least one uppercase letter"
           }
         }
       },
@@ -98,11 +98,11 @@
       "metrics": {
         "avgTime": {
           "description": "to resolution",
-          "title": "Average Time"
+          "title": "Average time"
         },
         "openTickets": {
           "description": "awaiting action",
-          "title": "Open Tickets"
+          "title": "Open tickets"
         },
         "resolvedThisMonth": {
           "description": "vs. last month",
@@ -110,7 +110,7 @@
         },
         "totalTickets": {
           "description": "vs. last month",
-          "title": "Total Tickets"
+          "title": "Total tickets"
         }
       }
     },
@@ -118,7 +118,7 @@
       "metrics": {
         "myTickets": {
           "description": "in total",
-          "title": "My Tickets"
+          "title": "My tickets"
         },
         "open": {
           "description": "awaiting action",
@@ -134,19 +134,19 @@
       "metrics": {
         "highPriority": {
           "description": "require attention",
-          "title": "High Priority"
+          "title": "High priority"
         },
         "inProgress": {
           "description": "being worked on",
-          "title": "In Progress"
+          "title": "In progress"
         },
         "myTickets": {
           "description": "assigned to me",
-          "title": "My Tickets"
+          "title": "My tickets"
         },
         "resolvedToday": {
           "description": "completed today",
-          "title": "Resolved Today"
+          "title": "Resolved today"
         }
       }
     }
@@ -159,22 +159,21 @@
       "deactivate": "Deactivate",
       "delete": "Delete",
       "edit": "Edit",
-      "refresh": "Refresh",
-      "retry": "Retry",
-      "save": "Save"
+      "save": "Save",
+      "assign": "Assign"
     },
-    "copyright": "© {{year}} Ticksy. All rights reserved.",
+    "copyright": "© {{year}} Ticksy. All rights reserved",
     "errors": {
-      "createFailed": "Could not create the record.",
-      "recordNotFound": "Record not found.",
-      "unknownError": "An unknown error occurred."
+      "createFailed": "Could not create the record",
+      "recordNotFound": "Record not found",
+      "unknownError": "An unknown error occurred"
     },
-    "language": "Switch to the language {{language}}",
+    "language": "Switch to the {{language}} language",
     "notFoundRoute": "This route was not found...",
     "settings": "Settings",
     "table": {
-      "emptyMessage": "No records found.",
-      "errorMessage": "Failed to load data.",
+      "emptyMessage": "No records found",
+      "errorMessage": "Failed to load data",
       "header": {
         "actions": "Actions"
       },
@@ -189,11 +188,11 @@
   "sidebar": {
     "labels": {
       "editProfile": "Edit profile",
-      "logout": "Logout"
+      "logout": "Log out"
     },
     "tooltips": {
       "home": "Go to the home page",
-      "newTicket": "New Ticket",
+      "newTicket": "New ticket",
       "profile": "Profile",
       "tickets": "View tickets",
       "myTickets": "My tickets",
@@ -201,49 +200,49 @@
     }
   },
   "ticket": {
+    "fields": {
+      "description": {
+        "label": "Description",
+        "placeholder": "Describe the issue or request in as much detail as possible",
+        "validations": {
+          "maxLength": "Description must not exceed {{max}} characters",
+          "minLength": "Description must be at least {{min}} characters",
+          "required": "Description is required"
+        }
+      },
+      "priority": {
+        "label": "Priority",
+        "options": {
+          "high": "High",
+          "low": "Low",
+          "medium": "Medium",
+          "urgent": "Urgent"
+        },
+        "placeholder": "Select the ticket priority",
+        "validations": {
+          "invalid": "Please select a valid priority",
+          "required": "Priority is required"
+        }
+      },
+      "title": {
+        "label": "Title",
+        "placeholder": "e.g. Unable to access the system",
+        "validations": {
+          "maxLength": "Title must not exceed {{max}} characters",
+          "minLength": "Title must be at least {{min}} characters",
+          "required": "Title is required"
+        }
+      }
+    },
     "create": {
       "actions": {
         "cancel": "Cancel",
         "submit": "Create ticket"
       },
-      "description": "Fill out the information below to create a new ticket.",
-      "fields": {
-        "description": {
-          "label": "Description",
-          "placeholder": "Describe the issue or request in as much detail as possible.",
-          "validations": {
-            "maxLength": "Description must not exceed {{max}} characters.",
-            "minLength": "Description must be at least {{min}} characters.",
-            "required": "Description is required."
-          }
-        },
-        "priority": {
-          "label": "Priority",
-          "options": {
-            "high": "High",
-            "low": "Low",
-            "medium": "Medium",
-            "urgent": "Urgent"
-          },
-          "placeholder": "Select the ticket priority",
-          "validations": {
-            "invalid": "Please select a valid priority.",
-            "required": "Priority is required."
-          }
-        },
-        "title": {
-          "label": "Title",
-          "placeholder": "e.g. Unable to access the system",
-          "validations": {
-            "maxLength": "Title must not exceed {{max}} characters.",
-            "minLength": "Title must be at least {{min}} characters.",
-            "required": "Title is required."
-          }
-        }
-      },
+      "description": "Fill out the information below to create a new ticket",
       "messages": {
-        "failed": "Unable to create the ticket.",
-        "success": "Ticket created successfully."
+        "failed": "Unable to create the ticket",
+        "success": "Ticket created successfully"
       },
       "title": "New ticket"
     },
@@ -253,10 +252,24 @@
       "medium": "Medium",
       "urgent": "Urgent"
     },
+    "edit": {
+      "actions": {
+        "cancel": "Cancel",
+        "save": "Save changes",
+        "saving": "Saving..."
+      },
+      "description": "Update the ticket information",
+      "title": "Edit ticket"
+    },
     "status": {
-      "inProgress": "In Progress",
+      "inProgress": "In progress",
       "open": "Open",
       "resolved": "Resolved"
+    },
+    "errors": {
+      "createFailed": "Unable to create the ticket",
+      "deleteFailed": "Unable to delete the ticket",
+      "updateFailed": "Unable to update the ticket"
     },
     "table": {
       "columns": {
@@ -264,7 +277,6 @@
         "created_at": "Created at",
         "createdByName": "Creator",
         "description": "Description",
-        "id": "ID",
         "priority": "Priority",
         "status": "Status",
         "title": "Title",
@@ -272,9 +284,49 @@
       },
       "emptyMessage": "No tickets found",
       "searchPlaceholder": "Search tickets"
+    },
+    "delete": {
+      "title": "Delete ticket",
+      "description": "Are you sure you want to delete ticket? This action cannot be undone",
+      "actions": { "cancel": "Cancel", "confirm": "Delete", "deleting": "Deleting..." }
+    },
+    "success": {
+      "created": "Ticket created successfully",
+      "deleted": "Ticket deleted successfully",
+      "updated": "Ticket updated successfully"
     }
   },
   "user": {
+    "fields": {
+      "email": {
+        "label": "Email",
+        "placeholder": "Enter your email",
+        "validations": {
+          "invalid": "Please enter a valid email address",
+          "maxLength": "Email must not exceed {{max}} characters"
+        }
+      },
+      "name": {
+        "label": "Name",
+        "placeholder": "Enter your name",
+        "validations": {
+          "maxLength": "Name must not exceed {{max}} characters",
+          "minLength": "Name must be at least {{min}} characters"
+        }
+      },
+      "role": {
+        "label": "Role",
+        "options": {
+          "admin": "Administrator",
+          "employee": "Employee",
+          "technicalAssistance": "Technical Assistance"
+        },
+        "placeholder": "Select the role",
+        "validations": {
+          "invalid": "Please select a valid role"
+        }
+      }
+    },
     "deactivate": {
       "title": "Deactivate user",
       "description": "Are you sure you want to deactivate the user {{name}}?",
@@ -289,47 +341,17 @@
         "save": "Save changes",
         "saving": "Saving..."
       },
-      "description": "Update user information",
-      "fields": {
-        "email": {
-          "label": "Email",
-          "placeholder": "Enter your email",
-          "validations": {
-            "invalid": "Please enter a valid email address.",
-            "maxLength": "Email must have at most {{max}} characters."
-          }
-        },
-        "name": {
-          "label": "Name",
-          "placeholder": "Enter your name",
-          "validations": {
-            "maxLength": "Name must have at most {{max}} characters.",
-            "minLength": "Name must be at least {{min}} characters."
-          }
-        },
-        "role": {
-          "label": "Role",
-          "options": {
-            "admin": "Admin",
-            "employee": "Employee",
-            "technicalAssistance": "Technical Assistance"
-          },
-          "placeholder": "Select the role",
-          "validations": {
-            "invalid": "Please select a valid role."
-          }
-        }
-      },
+      "description": "Update the user information",
       "title": "Edit profile"
     },
     "errors": {
-      "activateFailed": "Failed to activate the user.",
-      "createFailed": "Failed to create the user.",
-      "deactivateFailed": "Failed to deactivate the user.",
-      "deleteFailed": "Failed to delete the user.",
-      "loadFailed": "Failed to load user data.",
-      "notFound": "User not found.",
-      "updateFailed": "Failed to update the profile."
+      "activateFailed": "Unable to activate the user",
+      "createFailed": "Unable to create the user",
+      "deactivateFailed": "Unable to deactivate the user",
+      "deleteFailed": "Unable to delete the user",
+      "loadFailed": "Unable to load user data",
+      "notFound": "User not found",
+      "updateFailed": "Unable to update the profile"
     },
     "roles": {
       "admin": "Administrator",
@@ -337,11 +359,11 @@
       "technicalAssistance": "Technical Assistance"
     },
     "success": {
-      "activated": "User activated successfully.",
-      "created": "User created successfully.",
-      "deactivated": "User deactivated successfully.",
-      "deleted": "User deleted successfully.",
-      "updated": "Profile updated successfully."
+      "activated": "User activated successfully",
+      "created": "User created successfully",
+      "deactivated": "User deactivated successfully",
+      "deleted": "User deleted successfully",
+      "updated": "Profile updated successfully"
     },
     "table": {
       "actions": {
@@ -349,15 +371,19 @@
         "deactivate": "Deactivate user"
       },
       "columns": {
-        "created_at": "Created At",
+        "isActive": "Status",
+        "created_at": "Created at",
         "email": "Email",
-        "id": "ID",
         "name": "Name",
         "role": "Role",
-        "updated_at": "Updated At"
+        "updated_at": "Updated at"
       },
       "emptyMessage": "No users found",
       "searchPlaceholder": "Search users"
+    },
+    "status": {
+      "disabled": "Disabled",
+      "enabled": "Enabled"
     }
   }
 }

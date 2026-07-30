@@ -5,6 +5,7 @@ import type { ICreateTicketService } from "@/modules/ticket/services/contracts/c
 import type { CreateTicketDto } from "@/modules/ticket/dtos/create.dto";
 import { useTranslation } from "react-i18next";
 import { handleMutationError } from "@/shared/errors/handle-mutation-error";
+import queryClient from "@/lib/query-client";
 
 interface UseCreateTicketOptions {
   onSuccess?: () => void;
@@ -28,6 +29,8 @@ export function useCreateTicket(
     onSuccess: () => {
       toast.success(t("ticket.create.messages.success"));
       options?.onSuccess?.();
+
+      queryClient.invalidateQueries({ queryKey: ["tickets"] });
     },
     onError: handleMutationError(t("ticket.create.messages.failed")),
   });

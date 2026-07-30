@@ -4,7 +4,7 @@ import type { ICreateTicketRepository } from "../repositories/contracts/create";
 import type { ICreateTicketService } from "./contracts/create";
 import { inject } from "inversify";
 import type { CreateTicketDto } from "@/modules/ticket/dtos/create.dto";
-import type { TicketEntity } from "@/modules/ticket/mo/ticket.entity";
+import type { TicketEntity } from "@/modules/ticket/entity/ticket.entity";
 
 export class CreateTicketService
   extends BaseCreateService<CreateTicketDto, TicketEntity>

@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import type { CreateUserDto } from "../../dto/create-user.dto";
+import type { CreateUserDto } from "../../dto/create.dto";
 import type { ICreateUserService } from "@/modules/user/services/contracts/create";
 import { AppError } from "@/shared/errors/app-error";
 import { handleMutationError } from "@/shared/errors/handle-mutation-error";

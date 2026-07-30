@@ -1,5 +1,5 @@
 import { Inject, Injectable } from "@nestjs/common";
-import { eq } from "drizzle-orm";
+import { eq, sql } from "drizzle-orm";
 import { NodePgDatabase } from "drizzle-orm/node-postgres";
 
 import { DATABASE_TOKENS } from "../../../database/tokens";
@@ -15,7 +15,7 @@ export class DeactivateUserRepository implements IDeactivateUserRepository {
     const result = await this.db
       .update(user)
       .set({
-        deleted: true,
+        deleted: sql`NOT ${user.deleted}`,
       })
       .where(eq(user.id, id));
 

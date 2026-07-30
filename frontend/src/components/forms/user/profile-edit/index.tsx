@@ -9,8 +9,8 @@ export function UserProfileEditForm() {
       <form.AppField name="name">
         {(field) => (
           <field.TextField
-            label={t("auth.register.fields.name.label")}
-            placeholder={t("auth.register.fields.name.placeholder")}
+            label={t("user.fields.name.label")}
+            placeholder={t("user.fields.name.placeholder")}
             type="text"
           />
         )}
@@ -20,8 +20,8 @@ export function UserProfileEditForm() {
         {(field) => (
           <field.TextField
             className="h-12 text-base"
-            label={t("auth.login.fields.email.label")}
-            placeholder={t("auth.login.fields.email.placeholder")}
+            label={t("user.fields.email.label")}
+            placeholder={t("user.fields.email.placeholder")}
             type="email"
           />
         )}
