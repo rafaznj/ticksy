@@ -2,7 +2,7 @@ import type { AxiosSingleton } from "@/lib/axios/axios-singleton";
 import type { IBaseGetPagedRepository } from "@/shared/base/repositories/contracts/get-paged";
 import { INFRASTRUCTURE_TOKENS } from "@/shared/di/tokens.infrastructure";
 import type { AppError } from "@/shared/errors/app-error";
-import { handleResponse } from "@/shared/errors/handle-response";
+import { handleResponseRepository } from "@/shared/errors/handle-response-repository";
 import type { PagedParamsQuery } from "@/shared/types/paged-params-query";
 import type { PagedResponse } from "@/shared/types/paged-response";
 import { inject, injectable, unmanaged } from "inversify";
@@ -22,6 +22,6 @@ export class BaseGetPagedRepository<T> implements IBaseGetPagedRepository<T> {
       },
     );
 
-    return handleResponse(response);
+    return handleResponseRepository(response);
   }
 }

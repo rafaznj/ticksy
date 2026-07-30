@@ -1,3 +1,4 @@
+import { AssignTicketForm } from "@/components/forms/ticket/assign";
 import { DeleteTicketForm } from "@/components/forms/ticket/delete";
 import { EditTicketForm } from "@/components/forms/ticket/edit";
 import { PagedTable } from "@/components/PagedTable";
@@ -49,6 +50,7 @@ export function TicketsPagedTable() {
 
       <EditTicketForm />
       <DeleteTicketForm />
+      <AssignTicketForm />
     </>
   );
 }

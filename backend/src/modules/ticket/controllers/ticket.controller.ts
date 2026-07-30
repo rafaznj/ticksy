@@ -5,6 +5,7 @@ import {
   Get,
   Inject,
   Param,
+  Patch,
   Post,
   Put,
   Query,
@@ -23,6 +24,8 @@ import { CreateTicketDto } from "../dtos/create.dto";
 import { UpdateTicketDto } from "../dtos/update.dto";
 import type { IGetTicketPagedService } from "../services/contracts/get-paged";
 import { UserModel } from "../../user/models/user-model";
+import type { IAssignTicketService } from "../services/contracts/assign";
+import { AssignTicketDto } from "../dtos/assign.dto";
 
 @Controller("ticket")
 export class TicketController {
@@ -37,6 +40,8 @@ export class TicketController {
     private readonly updateTicketService: IUpdateTicketService,
     @Inject(SERVICE_TOKENS.DeleteTicketService)
     private readonly deleteTicketService: IDeleteTicketService,
+    @Inject(SERVICE_TOKENS.AssignTicketService)
+    private readonly assignTicketService: IAssignTicketService,
   ) {}
 
   @Post("")
@@ -75,5 +80,10 @@ export class TicketController {
   @Delete(":id")
   async delete(@Param("id") id: string) {
     return this.deleteTicketService.execute(id);
+  }
+
+  @Patch("/assign")
+  async assign(@Body() { id, userId }: AssignTicketDto) {
+    return this.assignTicketService.execute(id, userId);
   }
 }

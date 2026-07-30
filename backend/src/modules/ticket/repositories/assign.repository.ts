@@ -1,5 +1,5 @@
 import { Inject } from "@nestjs/common";
-import { eq } from "drizzle-orm";
+import { and, eq, isNull } from "drizzle-orm";
 import { DATABASE_TOKENS } from "../../../database/tokens";
 import { IAssignTicketRepository } from "./contracts/assign";
 import { NodePgDatabase } from "drizzle-orm/node-postgres";
@@ -17,7 +17,7 @@ export class AssignTicketRepository implements IAssignTicketRepository {
     const [result] = await this.db
       .update(ticket)
       .set({ assignedToId: userId, status: TicketStatusEnum.IN_PROGRESS })
-      .where(eq(ticket.id, id))
+      .where(and(eq(ticket.id, id), isNull(ticket.assignedToId)))
       .returning();
 
     return result ?? null;

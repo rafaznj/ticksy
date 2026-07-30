@@ -153,14 +153,14 @@
   },
   "general": {
     "actions": {
+      "assign": "Assign",
       "back": "Back",
       "cancel": "Cancel",
       "close": "Close",
       "deactivate": "Deactivate",
       "delete": "Delete",
       "edit": "Edit",
-      "save": "Save",
-      "assign": "Assign"
+      "save": "Save"
     },
     "copyright": "© {{year}} Ticksy. All rights reserved",
     "errors": {
@@ -179,6 +179,7 @@
       },
       "next": "Next",
       "page": "Page {{current}} of {{total}}",
+      "placeholder": "Select an option",
       "previous": "Previous",
       "rowsPerPage": "Rows per page",
       "searchPlaceholder": "Search"
@@ -192,15 +193,73 @@
     },
     "tooltips": {
       "home": "Go to the home page",
+      "myTickets": "My tickets",
       "newTicket": "New ticket",
       "profile": "Profile",
       "tickets": "View tickets",
-      "myTickets": "My tickets",
       "users": "Manage users"
     }
   },
   "ticket": {
+    "assign": {
+      "actions": {
+        "assigning": "Assigning...",
+        "cancel": "Cancel",
+        "confirm": "Assign"
+      },
+      "description": "Selecione um técnico para vincular este ticket",
+      "messages": {
+        "failed": "Unable to assign the ticket",
+        "success": "Ticket assigned successfully"
+      },
+      "title": "Assign ticket"
+    },
+    "create": {
+      "actions": {
+        "cancel": "Cancel",
+        "submit": "Create ticket"
+      },
+      "description": "Fill out the information below to create a new ticket",
+      "messages": {
+        "failed": "Unable to create the ticket",
+        "success": "Ticket created successfully"
+      },
+      "title": "New ticket"
+    },
+    "delete": {
+      "actions": {
+        "cancel": "Cancel",
+        "confirm": "Delete",
+        "deleting": "Deleting..."
+      },
+      "description": "Are you sure you want to delete ticket? This action cannot be undone",
+      "title": "Delete ticket"
+    },
+    "edit": {
+      "actions": {
+        "cancel": "Cancel",
+        "save": "Save changes",
+        "saving": "Saving..."
+      },
+      "description": "Update the ticket information",
+      "title": "Edit ticket"
+    },
+    "errors": {
+      "alreadyAssigned": "This ticket is already assigned to a user",
+      "createFailed": "Unable to create the ticket",
+      "deleteAssigned": "You cannot delete a ticket that has already been assigned",
+      "deleteFailed": "Unable to delete the ticket",
+      "editNotAllowed": "You cannot edit a ticket that has already been assigned",
+      "updateFailed": "Unable to update the ticket"
+    },
     "fields": {
+      "assignee": {
+        "label": "Assignee",
+        "placeholder": "Select the assignee",
+        "validations": {
+          "required": "Assignee is required"
+        }
+      },
       "description": {
         "label": "Description",
         "placeholder": "Describe the issue or request in as much detail as possible",
@@ -234,42 +293,21 @@
         }
       }
     },
-    "create": {
-      "actions": {
-        "cancel": "Cancel",
-        "submit": "Create ticket"
-      },
-      "description": "Fill out the information below to create a new ticket",
-      "messages": {
-        "failed": "Unable to create the ticket",
-        "success": "Ticket created successfully"
-      },
-      "title": "New ticket"
-    },
     "priority": {
       "high": "High",
       "low": "Low",
       "medium": "Medium",
       "urgent": "Urgent"
     },
-    "edit": {
-      "actions": {
-        "cancel": "Cancel",
-        "save": "Save changes",
-        "saving": "Saving..."
-      },
-      "description": "Update the ticket information",
-      "title": "Edit ticket"
-    },
     "status": {
       "inProgress": "In progress",
       "open": "Open",
       "resolved": "Resolved"
     },
-    "errors": {
-      "createFailed": "Unable to create the ticket",
-      "deleteFailed": "Unable to delete the ticket",
-      "updateFailed": "Unable to update the ticket"
+    "success": {
+      "created": "Ticket created successfully",
+      "deleted": "Ticket deleted successfully",
+      "updated": "Ticket updated successfully"
     },
     "table": {
       "columns": {
@@ -284,19 +322,35 @@
       },
       "emptyMessage": "No tickets found",
       "searchPlaceholder": "Search tickets"
-    },
-    "delete": {
-      "title": "Delete ticket",
-      "description": "Are you sure you want to delete ticket? This action cannot be undone",
-      "actions": { "cancel": "Cancel", "confirm": "Delete", "deleting": "Deleting..." }
-    },
-    "success": {
-      "created": "Ticket created successfully",
-      "deleted": "Ticket deleted successfully",
-      "updated": "Ticket updated successfully"
     }
   },
   "user": {
+    "deactivate": {
+      "actions": {
+        "cancel": "Cancel",
+        "confirm": "Deactivate"
+      },
+      "description": "Are you sure you want to deactivate the user {{name}}?",
+      "title": "Deactivate user"
+    },
+    "edit": {
+      "actions": {
+        "cancel": "Cancel",
+        "save": "Save changes",
+        "saving": "Saving..."
+      },
+      "description": "Update the user information",
+      "title": "Edit profile"
+    },
+    "errors": {
+      "activateFailed": "Unable to activate the user",
+      "createFailed": "Unable to create the user",
+      "deactivateFailed": "Unable to deactivate the user",
+      "deleteFailed": "Unable to delete the user",
+      "loadFailed": "Unable to load user data",
+      "notFound": "User not found",
+      "updateFailed": "Unable to update the profile"
+    },
     "fields": {
       "email": {
         "label": "Email",
@@ -327,36 +381,14 @@
         }
       }
     },
-    "deactivate": {
-      "title": "Deactivate user",
-      "description": "Are you sure you want to deactivate the user {{name}}?",
-      "actions": {
-        "cancel": "Cancel",
-        "confirm": "Deactivate"
-      }
-    },
-    "edit": {
-      "actions": {
-        "cancel": "Cancel",
-        "save": "Save changes",
-        "saving": "Saving..."
-      },
-      "description": "Update the user information",
-      "title": "Edit profile"
-    },
-    "errors": {
-      "activateFailed": "Unable to activate the user",
-      "createFailed": "Unable to create the user",
-      "deactivateFailed": "Unable to deactivate the user",
-      "deleteFailed": "Unable to delete the user",
-      "loadFailed": "Unable to load user data",
-      "notFound": "User not found",
-      "updateFailed": "Unable to update the profile"
-    },
     "roles": {
       "admin": "Administrator",
       "employee": "Employee",
       "technicalAssistance": "Technical Assistance"
+    },
+    "status": {
+      "disabled": "Disabled",
+      "enabled": "Enabled"
     },
     "success": {
       "activated": "User activated successfully",
@@ -367,23 +399,19 @@
     },
     "table": {
       "actions": {
-        "edit": "Edit user",
-        "deactivate": "Deactivate user"
+        "deactivate": "Deactivate user",
+        "edit": "Edit user"
       },
       "columns": {
-        "isActive": "Status",
         "created_at": "Created at",
         "email": "Email",
+        "isActive": "Status",
         "name": "Name",
         "role": "Role",
         "updated_at": "Updated at"
       },
       "emptyMessage": "No users found",
       "searchPlaceholder": "Search users"
-    },
-    "status": {
-      "disabled": "Disabled",
-      "enabled": "Enabled"
     }
   }
 }

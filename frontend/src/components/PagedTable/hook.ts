@@ -4,7 +4,7 @@ import type { SortingState, Updater } from "@tanstack/react-table";
 import { AppError } from "@/shared/errors/app-error";
 import type { PagedParamsQuery } from "@/shared/types/paged-params-query";
 import type { IBaseGetPagedService } from "@/shared/base/services/contracts/get-paged";
-import { useDebouncedValue } from "@/components/PagedTable/use-debounce-value";
+import { useDebouncedValue } from "@/hooks/use-debounce-value";
 
 interface UsePagedQueryOptions {
   queryKey: string;

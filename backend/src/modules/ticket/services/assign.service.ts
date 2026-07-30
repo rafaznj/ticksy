@@ -6,7 +6,6 @@ import { TicketModel } from "../models/ticket";
 import { AppException } from "../../../shared/exceptions/app-exception";
 import { SERVICE_TOKENS } from "../../../shared/di/tokens.services";
 import type { IGetTicketByIdService } from "./contracts/get-by-id";
-import type { IChangeStatusTicketService } from "./contracts/change-status";
 
 @Injectable()
 export class AssignTicketService implements IAssignTicketService {
@@ -15,8 +14,6 @@ export class AssignTicketService implements IAssignTicketService {
     private readonly assignTicketRepository: IAssignTicketRepository,
     @Inject(SERVICE_TOKENS.GetTicketByIdService)
     private readonly getTicketByIdService: IGetTicketByIdService,
-    @Inject(SERVICE_TOKENS.ChangeStatusTicketService)
-    private readonly changeStatusTicketService: IChangeStatusTicketService,
   ) {}
 
   async execute(id: string, userId: string): Promise<TicketModel | null> {

@@ -153,6 +153,7 @@
   },
   "general": {
     "actions": {
+      "assign": "Vincular",
       "back": "Voltar",
       "cancel": "Cancelar",
       "close": "Fechar",
@@ -161,8 +162,7 @@
       "edit": "Editar",
       "refresh": "Atualizar",
       "retry": "Tentar novamente",
-      "save": "Salvar",
-      "assign": "Vincular"
+      "save": "Salvar"
     },
     "copyright": "© {{year}} Ticksy. Todos os direitos reservados",
     "errors": {
@@ -181,6 +181,7 @@
       },
       "next": "Próxima",
       "page": "Página {{current}} de {{total}}",
+      "placeholder": "Selecione uma opção",
       "previous": "Anterior",
       "rowsPerPage": "Linhas por página",
       "searchPlaceholder": "Buscar"
@@ -194,15 +195,73 @@
     },
     "tooltips": {
       "home": "Ir para a página inicial",
+      "myTickets": "Meus tickets",
       "newTicket": "Novo ticket",
       "profile": "Perfil",
       "tickets": "Ver tickets",
-      "myTickets": "Meus tickets",
       "users": "Gerenciar usuários"
     }
   },
   "ticket": {
+    "assign": {
+      "actions": {
+        "assigning": "Vinculando...",
+        "cancel": "Cancelar",
+        "confirm": "Vincular"
+      },
+      "description": "Selecione um técnico para vincular este ticket",
+      "messages": {
+        "failed": "Não foi possível vincular o ticket",
+        "success": "Ticket vinculador com sucesso"
+      },
+      "title": "Vincular ticket"
+    },
+    "create": {
+      "actions": {
+        "cancel": "Cancelar",
+        "submit": "Criar ticket"
+      },
+      "description": "Preencha as informações abaixo para registrar um novo ticket",
+      "messages": {
+        "failed": "Não foi possível criar o ticket",
+        "success": "Ticket criado com sucesso"
+      },
+      "title": "Novo ticket"
+    },
+    "delete": {
+      "actions": {
+        "cancel": "Cancelar",
+        "confirm": "Excluir",
+        "deleting": "Excluindo..."
+      },
+      "description": "Tem certeza que deseja excluir este ticket? Esta ação não pode ser desfeita",
+      "title": "Excluir ticket"
+    },
+    "edit": {
+      "actions": {
+        "cancel": "Cancelar",
+        "save": "Salvar alterações",
+        "saving": "Salvando..."
+      },
+      "description": "Atualize as informações do ticket",
+      "title": "Editar ticket"
+    },
+    "errors": {
+      "alreadyAssigned": "Este ticket já está vinculado a um usuário",
+      "createFailed": "Não foi possível criar o ticket",
+      "deleteAssigned": "Não é possível excluir um ticket que já foi atribuído",
+      "deleteFailed": "Não foi possível excluir o ticket",
+      "editNotAllowed": "Não é possível editar um ticket que já foi atribuído",
+      "updateFailed": "Não foi possível atualizar o ticket"
+    },
     "fields": {
+      "assignee": {
+        "label": "Responsável",
+        "placeholder": "Selecione o responsável",
+        "validations": {
+          "required": "O responsável é obrigatório"
+        }
+      },
       "description": {
         "label": "Descrição",
         "placeholder": "Descreva o problema ou solicitação com o máximo de detalhes possível",
@@ -236,47 +295,21 @@
         }
       }
     },
-    "create": {
-      "actions": {
-        "cancel": "Cancelar",
-        "submit": "Criar ticket"
-      },
-      "description": "Preencha as informações abaixo para registrar um novo ticket",
-      "messages": {
-        "failed": "Não foi possível criar o ticket",
-        "success": "Ticket criado com sucesso"
-      },
-      "title": "Novo ticket"
-    },
     "priority": {
       "high": "Alta",
       "low": "Baixa",
       "medium": "Média",
       "urgent": "Urgente"
     },
-    "edit": {
-      "actions": {
-        "cancel": "Cancelar",
-        "save": "Salvar alterações",
-        "saving": "Salvando..."
-      },
-      "description": "Atualize as informações do ticket",
-      "title": "Editar ticket"
-    },
-    "delete": {
-      "title": "Excluir ticket",
-      "description": "Tem certeza que deseja excluir este ticket? Esta ação não pode ser desfeita",
-      "actions": { "cancel": "Cancelar", "confirm": "Excluir", "deleting": "Excluindo..." }
-    },
     "status": {
       "inProgress": "Em andamento",
       "open": "Aberto",
       "resolved": "Resolvido"
     },
-    "errors": {
-      "createFailed": "Não foi possível criar o ticket",
-      "deleteFailed": "Não foi possível excluir o ticket",
-      "updateFailed": "Não foi possível atualizar o ticket"
+    "success": {
+      "created": "Ticket criado com sucesso",
+      "deleted": "Ticket excluído com sucesso",
+      "updated": "Ticket atualizado com sucesso"
     },
     "table": {
       "columns": {
@@ -291,14 +324,35 @@
       },
       "emptyMessage": "Nenhum ticket encontrado",
       "searchPlaceholder": "Buscar tickets"
-    },
-    "success": {
-      "created": "Ticket criado com sucesso",
-      "deleted": "Ticket excluído com sucesso",
-      "updated": "Ticket atualizado com sucesso"
     }
   },
   "user": {
+    "deactivate": {
+      "actions": {
+        "cancel": "Cancelar",
+        "confirm": "Desativar"
+      },
+      "description": "Tem certeza que deseja desativar o usuário {{name}}?",
+      "title": "Desativar usuário"
+    },
+    "edit": {
+      "actions": {
+        "cancel": "Cancelar",
+        "save": "Salvar alterações",
+        "saving": "Salvando..."
+      },
+      "description": "Atualize as informações do usuário",
+      "title": "Editar perfil"
+    },
+    "errors": {
+      "activateFailed": "Não foi possível ativar o usuário",
+      "createFailed": "Não foi possível criar o usuário",
+      "deactivateFailed": "Não foi possível desativar o usuário",
+      "deleteFailed": "Não foi possível excluir o usuário",
+      "loadFailed": "Não foi possível carregar os dados do usuário",
+      "notFound": "Usuário não encontrado",
+      "updateFailed": "Não foi possível atualizar o perfil"
+    },
     "fields": {
       "email": {
         "label": "E-mail",
@@ -329,36 +383,14 @@
         }
       }
     },
-    "deactivate": {
-      "title": "Desativar usuário",
-      "description": "Tem certeza que deseja desativar o usuário {{name}}?",
-      "actions": {
-        "cancel": "Cancelar",
-        "confirm": "Desativar"
-      }
-    },
-    "edit": {
-      "actions": {
-        "cancel": "Cancelar",
-        "save": "Salvar alterações",
-        "saving": "Salvando..."
-      },
-      "description": "Atualize as informações do usuário",
-      "title": "Editar perfil"
-    },
-    "errors": {
-      "activateFailed": "Não foi possível ativar o usuário",
-      "createFailed": "Não foi possível criar o usuário",
-      "deactivateFailed": "Não foi possível desativar o usuário",
-      "deleteFailed": "Não foi possível excluir o usuário",
-      "loadFailed": "Não foi possível carregar os dados do usuário",
-      "notFound": "Usuário não encontrado",
-      "updateFailed": "Não foi possível atualizar o perfil"
-    },
     "roles": {
       "admin": "Administrador",
       "employee": "Colaborador",
       "technicalAssistance": "Assistência Técnica"
+    },
+    "status": {
+      "disabled": "Desabilitado",
+      "enabled": "Habilitado"
     },
     "success": {
       "activated": "Usuário ativado com sucesso",
@@ -369,23 +401,19 @@
     },
     "table": {
       "actions": {
-        "edit": "Editar usuário",
-        "deactivate": "Desativar usuário"
+        "deactivate": "Desativar usuário",
+        "edit": "Editar usuário"
       },
       "columns": {
-        "isActive": "Status",
         "created_at": "Criado em",
         "email": "E-mail",
+        "isActive": "Status",
         "name": "Nome",
         "role": "Perfil",
         "updated_at": "Atualizado em"
       },
       "emptyMessage": "Nenhum usuário encontrado",
       "searchPlaceholder": "Buscar usuários"
-    },
-    "status": {
-      "disabled": "Desabilitado",
-      "enabled": "Habilitado"
     }
   }
 }

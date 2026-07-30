@@ -3,7 +3,7 @@ import { inject, injectable } from "inversify";
 import type { AxiosSingleton } from "@/lib/axios/axios-singleton";
 import { INFRASTRUCTURE_TOKENS } from "@/shared/di/tokens.infrastructure";
 import type { AppError } from "@/shared/errors/app-error";
-import { handleResponse } from "@/shared/errors/handle-response";
+import { handleResponseRepository } from "@/shared/errors/handle-response-repository";
 import type { IRegisterRepository } from "@/modules/auth/repositories/contracts/register";
 import type { CreateUserDto } from "@/modules/user/dto/create.dto";
 import type { RegisterResponse } from "@/modules/auth/dto/register-response";
@@ -22,6 +22,6 @@ export class RegisterRepository implements IRegisterRepository {
       `${this.basePath}/register`,
       data,
     );
-    return handleResponse(response);
+    return handleResponseRepository(response);
   }
 }

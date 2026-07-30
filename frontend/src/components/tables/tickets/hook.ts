@@ -91,8 +91,8 @@ export function useTicketsPagedTable() {
     return allColumns.filter((col) => !col.adminOnly || isAdmin);
   }, [t, priorityLabels, statusLabels, isAdmin]);
 
-  const actions = useMemo(
-    () => ({
+  const actions = useMemo(() => {
+    return {
       edit: (ticket: TicketPagedDto) => openEditTicket(ticket),
       delete: (ticket: TicketPagedDto) => openDeleteTicket(ticket),
       assign: (ticket: TicketPagedDto) => openAssignTicket(ticket),
@@ -109,11 +109,12 @@ export function useTicketsPagedTable() {
         delete: (ticket: TicketPagedDto) =>
           ticket.assignedToName ? t("ticket.errors.deleteAssigned") : t("general.actions.delete"),
         assign: (ticket: TicketPagedDto) =>
-          ticket.assignedToName ? t("ticket.errors.alreadyAssigned") : t("ticket.actions.assign"),
+          ticket.assignedToName
+            ? t("ticket.errors.alreadyAssigned")
+            : t("ticket.assign.actions.confirm"),
       },
-    }),
-    [isAdmin, user?.id, openDeleteTicket, openEditTicket, openAssignTicket, t],
-  );
+    };
+  }, [isAdmin, user?.id, openDeleteTicket, openEditTicket, openAssignTicket, t]);
 
   return {
     data,
