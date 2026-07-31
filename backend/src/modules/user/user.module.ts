@@ -16,6 +16,8 @@ import { GetUserByEmailRepository } from "./repositories/get-by-email.repository
 import { GetUserPagedRepository } from "./repositories/get-paged.repository";
 import { GetUserPagedService } from "./services/get-paged.service";
 import { CreateAdminUserService } from "./services/create-admin.service";
+import { GetAssignableUsersPagedService } from "./services/get-assignable-paged.service";
+import { GetAssignableUsersPagedRepository } from "./repositories/get-assignable-paged.repository";
 
 @Module({
   imports: [DrizzleModule],
@@ -56,6 +58,14 @@ import { CreateAdminUserService } from "./services/create-admin.service";
     {
       provide: REPOSITORY_TOKENS.GetUserPagedRepository,
       useClass: GetUserPagedRepository,
+    },
+    {
+      provide: SERVICE_TOKENS.GetAssignableUsersPagedService,
+      useClass: GetAssignableUsersPagedService,
+    },
+    {
+      provide: REPOSITORY_TOKENS.GetAssignableUsersPagedRepository,
+      useClass: GetAssignableUsersPagedRepository,
     },
     {
       provide: SERVICE_TOKENS.UpdateUserService,

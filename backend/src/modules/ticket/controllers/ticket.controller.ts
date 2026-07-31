@@ -26,6 +26,7 @@ import type { IGetTicketPagedService } from "../services/contracts/get-paged";
 import { UserModel } from "../../user/models/user-model";
 import type { IAssignTicketService } from "../services/contracts/assign";
 import { AssignTicketDto } from "../dtos/assign.dto";
+import type { IQueryOptions } from "../../../shared/types/query-options";
 
 @Controller("ticket")
 export class TicketController {
@@ -49,20 +50,13 @@ export class TicketController {
     return this.createTicketService.execute(data);
   }
 
-  @Get("paged")
+  @Get("get-paged")
   @UseGuards(AuthGuard("jwt"))
   async getPaged(
-    @Query("currentPage") currentPage: number,
-    @Query("pageSize") pageSize: number,
+    @Query() query: IQueryOptions,
     @Req() req: Request & { user: Omit<UserModel, "password"> },
-    @Query("sort") sort?: string,
-    @Query("order") order?: string,
-    @Query("search") search?: string,
   ) {
-    const result = await this.getTicketPagedService.execute(
-      { currentPage, pageSize, sort, order, search },
-      req.user,
-    );
+    const result = await this.getTicketPagedService.execute(query, req.user);
 
     return result;
   }

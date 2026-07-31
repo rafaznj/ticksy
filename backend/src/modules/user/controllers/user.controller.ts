@@ -8,6 +8,8 @@ import type { IUpdateUserService } from "../services/contracts/update";
 import type { IGetUserByEmailService } from "../services/contracts/get-by-email";
 import { UpdateUserDto } from "../dtos/update.dto";
 import type { IGetUserPagedService } from "../services/contracts/get-paged";
+import type { IQueryOptions } from "../../../shared/types/query-options";
+import type { IGetAssignableUsersPagedService } from "../services/contracts/get-assignable-paged";
 
 @Controller("user")
 export class UserController {
@@ -24,6 +26,8 @@ export class UserController {
     private readonly getUserByEmailService: IGetUserByEmailService,
     @Inject(SERVICE_TOKENS.GetUserPagedService)
     private readonly getUserPagedService: IGetUserPagedService,
+    @Inject(SERVICE_TOKENS.GetAssignableUsersPagedService)
+    private readonly getAssignableUsersPagedService: IGetAssignableUsersPagedService,
   ) {}
 
   @Post("")
@@ -31,23 +35,15 @@ export class UserController {
     return this.createUserService.execute(data);
   }
 
-  @Get("paged")
-  async getPaged(
-    @Query("currentPage") currentPage: number,
-    @Query("pageSize") pageSize: number,
-    @Query("sort") sort?: string,
-    @Query("order") order?: string,
-    @Query("search") search?: string,
-  ) {
-    const result = await this.getUserPagedService.execute({
-      currentPage,
-      pageSize,
-      sort,
-      order,
-      search,
-    });
-
+  @Get("get-paged")
+  async getPaged(@Query() query: IQueryOptions) {
+    const result = await this.getUserPagedService.execute(query);
     return result;
+  }
+
+  @Get("/get-assignable")
+  async getAssignable(@Query() query: IQueryOptions) {
+    return this.getAssignableUsersPagedService.execute(query);
   }
 
   @Get("get-by-email/:email")

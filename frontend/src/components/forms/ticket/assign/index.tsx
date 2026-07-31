@@ -5,7 +5,7 @@ export function AssignTicketForm() {
   const {
     t,
     form,
-    getUsersPagedService,
+    getAssignableUsersPagedService,
     isOpen,
     isBlurred,
     canSubmit,
@@ -29,7 +29,7 @@ export function AssignTicketForm() {
         <form.AppField name="userId">
           {(field) => (
             <field.AsyncSelectField
-              service={getUsersPagedService}
+              service={getAssignableUsersPagedService}
               bindValue="id"
               bindLabel="name"
               label={t("ticket.fields.assignee.label")}

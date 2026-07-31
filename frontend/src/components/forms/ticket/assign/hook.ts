@@ -6,19 +6,19 @@ import { useAppForm } from "@/hooks/use-form";
 import { container } from "@/lib/inversifyJS/index.container";
 import { useAssignTicket } from "@/modules/ticket/query-hooks/mutation/use-assign";
 import type { IAssignTicketService } from "@/modules/ticket/services/contracts/assign";
-import type { IGetUserPagedService } from "@/modules/user/services/contracts/get-paged";
 import type { TicketEntity } from "@/modules/ticket/entity/ticket.entity";
 import { DIALOG_KEYS } from "@/shared/constants/dialog-keys";
 import { SERVICE_TOKENS } from "@/shared/di/tokens.services";
 import { useStore } from "@tanstack/react-form";
 import { useTranslation } from "react-i18next";
+import type { IGetAssignableUsersPagedRepository } from "@/modules/user/repositories/contracts/get-assignable-paged";
 
 export function useAssignTicketForm() {
   const { t } = useTranslation();
   const { isOpen, data, close } = useDialog<TicketEntity>(DIALOG_KEYS.ASSIGN_TICKET);
 
-  const getUsersPagedService = container.get<IGetUserPagedService>(
-    SERVICE_TOKENS.GetUserPagedService,
+  const getAssignableUsersPagedService = container.get<IGetAssignableUsersPagedRepository>(
+    SERVICE_TOKENS.GetAssignableUsersPagedService,
   );
   const assignTicketService = container.get<IAssignTicketService>(
     SERVICE_TOKENS.AssignTicketService,
@@ -55,8 +55,6 @@ export function useAssignTicketForm() {
     state.isBlurred,
   ]);
 
-  console.log({ canSubmit, isSubmitting, isBlurred, errors: form.state.errors });
-
   const handleSubmit = async (event?: React.SubmitEvent<HTMLFormElement>) => {
     event?.preventDefault();
     event?.stopPropagation();
@@ -66,7 +64,7 @@ export function useAssignTicketForm() {
   return {
     form,
     t,
-    getUsersPagedService,
+    getAssignableUsersPagedService,
     isOpen,
     canSubmit,
     isSubmitting,

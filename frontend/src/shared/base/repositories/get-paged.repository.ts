@@ -16,7 +16,7 @@ export class BaseGetPagedRepository<T> implements IBaseGetPagedRepository<T> {
 
   async execute(params: PagedParamsQuery): Promise<PagedResponse<T> | AppError> {
     const response = await this.axiosSingleton.client.get<PagedResponse<T> | AppError>(
-      `${this.basePath}/paged`,
+      `${this.basePath}/get-paged`,
       {
         params,
       },

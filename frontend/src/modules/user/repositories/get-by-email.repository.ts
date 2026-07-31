@@ -8,12 +8,16 @@ import { handleResponseRepository } from "@/shared/errors/handle-response-reposi
 
 @injectable()
 export class GetUserByEmailRepository implements IGetUserByEmailRepository {
-  @inject(INFRASTRUCTURE_TOKENS.AxiosSingleton)
-  private axiosSingleton!: AxiosSingleton;
+  private readonly basePath = "user";
+
+  constructor(
+    @inject(INFRASTRUCTURE_TOKENS.AxiosSingleton)
+    private axiosSingleton: AxiosSingleton,
+  ) {}
 
   async execute(email: string): Promise<UserEntity | AppError> {
     const response = await this.axiosSingleton.client.get<UserEntity>(
-      `/user/get-by-email/${email}`,
+      `${this.basePath}/get-by-email/${email}`,
     );
     return handleResponseRepository(response);
   }
