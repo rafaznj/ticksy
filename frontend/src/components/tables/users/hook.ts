@@ -10,7 +10,7 @@ import { enumToLabels } from "@/shared/utils/enum-to-labels";
 import { DIALOG_KEYS } from "@/shared/constants/dialog-keys";
 import { SERVICE_TOKENS } from "@/shared/di/tokens.services";
 import { formatDate } from "@/shared/utils/format-date";
-import { UserRoleEnum } from "@/modules/user/enums/user-role.enum";
+import { UserRoleEnum } from "@/modules/user/enums/role.enum";
 import { useDialog } from "@/contexts/use-dialog";
 
 export function useUsersPagedTable() {
@@ -45,7 +45,6 @@ export function useUsersPagedTable() {
 
   const columns = useMemo<ColumnDef<UserEntity>[]>(
     () => [
-      { accessorKey: "id", header: t("user.table.columns.id") },
       { accessorKey: "name", header: t("user.table.columns.name") },
       { accessorKey: "email", header: t("user.table.columns.email") },
       {
@@ -62,6 +61,12 @@ export function useUsersPagedTable() {
         accessorKey: "updatedAt",
         header: t("user.table.columns.updated_at"),
         cell: ({ row }) => formatDate(row.original.updatedAt),
+      },
+      {
+        accessorKey: "isActive",
+        header: t("user.table.columns.isActive"),
+        cell: ({ row }) =>
+          row.original.deleted ? t("user.status.disabled") : t("user.status.enabled"),
       },
     ],
     [t, roleLabels],

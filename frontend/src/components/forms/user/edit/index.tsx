@@ -20,10 +20,9 @@ export function EditUserForm() {
         <form.AppField name="name">
           {(field) => (
             <field.TextField
-              label={t("user.edit.fields.name.label")}
-              placeholder={t("user.edit.fields.name.placeholder")}
+              label={t("user.fields.name.label")}
+              placeholder={t("user.fields.name.placeholder")}
               type="text"
-              required
             />
           )}
         </form.AppField>
@@ -31,9 +30,8 @@ export function EditUserForm() {
         <form.AppField name="email">
           {(field) => (
             <field.TextareaField
-              label={t("user.edit.fields.email.label")}
-              placeholder={t("user.edit.fields.email.placeholder")}
-              required
+              label={t("user.fields.email.label")}
+              placeholder={t("user.fields.email.placeholder")}
             />
           )}
         </form.AppField>
@@ -41,10 +39,9 @@ export function EditUserForm() {
         <form.AppField name="role">
           {(field) => (
             <field.SelectField
-              label={t("user.edit.fields.role.label")}
-              placeholder={t("user.edit.fields.role.placeholder")}
+              label={t("user.fields.role.label")}
+              placeholder={t("user.fields.role.placeholder")}
               options={roleOptions}
-              required
             />
           )}
         </form.AppField>

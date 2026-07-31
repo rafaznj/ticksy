@@ -1,15 +1,15 @@
 {
   "auth": {
     "errors": {
-      "emailAlreadyExists": "Já existe um usuário com este e-mail.",
-      "invalidCredentials": "E-mail ou senha inválidos. Verifique seus dados e tente novamente.",
-      "refreshTokenMissing": "Sua sessão expirou. Faça login novamente.",
-      "userNotFound": "Usuário não encontrado."
+      "emailAlreadyExists": "Já existe um usuário com este e-mail",
+      "invalidCredentials": "E-mail ou senha inválidos. Verifique seus dados e tente novamente",
+      "refreshTokenMissing": "Sua sessão expirou. Faça login novamente",
+      "userNotFound": "Usuário não encontrado"
     },
     "forgotPassword": {
       "actions": {
-        "submit": "Restaurar senha",
-        "submitting": "Restaurando senha..."
+        "submit": "Redefinir senha",
+        "submitting": "Redefinindo senha..."
       }
     },
     "login": {
@@ -20,33 +20,35 @@
         "submitting": "Entrando..."
       },
       "description": "Entre com seu e-mail e senha para continuar",
-      "failed": "Não foi possível realizar o login.",
       "fields": {
         "email": {
           "label": "E-mail",
           "placeholder": "seu@email.com",
           "validations": {
-            "invalid": "Digite um e-mail válido.",
-            "maxLength": "O e-mail deve ter no máximo {{max}} caracteres.",
-            "required": "O e-mail é obrigatório."
+            "invalid": "Digite um e-mail válido",
+            "maxLength": "O e-mail deve ter no máximo {{max}} caracteres",
+            "required": "O e-mail é obrigatório"
           }
         },
         "password": {
           "label": "Senha",
           "placeholder": "••••••••",
           "validations": {
-            "maxLength": "A senha deve ter no máximo {{max}} caracteres.",
-            "minLength": "A senha deve ter no mínimo {{min}} caracteres.",
-            "required": "A senha é obrigatória."
+            "maxLength": "A senha deve ter no máximo {{max}} caracteres",
+            "minLength": "A senha deve ter no mínimo {{min}} caracteres",
+            "required": "A senha é obrigatória"
           }
         }
       },
+      "messages": {
+        "failed": "Não foi possível realizar o login",
+        "success": "Login realizado com sucesso"
+      },
       "noAccount": "Ainda não possui uma conta?",
-      "success": "Login realizado com sucesso.",
       "title": "Acesse sua conta"
     },
     "logout": {
-      "error": "Não foi possível encerrar sua sessão. Tente novamente."
+      "error": "Não foi possível encerrar sua sessão. Tente novamente"
     },
     "register": {
       "actions": {
@@ -61,30 +63,30 @@
           "label": "E-mail",
           "placeholder": "seu@email.com",
           "validations": {
-            "invalid": "Digite um e-mail válido.",
-            "maxLength": "O e-mail deve ter no máximo {{max}} caracteres.",
-            "required": "O e-mail é obrigatório."
+            "invalid": "Digite um e-mail válido",
+            "maxLength": "O e-mail deve ter no máximo {{max}} caracteres",
+            "required": "O e-mail é obrigatório"
           }
         },
         "name": {
           "label": "Nome",
           "placeholder": "João da Silva",
           "validations": {
-            "maxLength": "O nome deve ter no máximo {{max}} caracteres.",
-            "required": "O nome é obrigatório."
+            "maxLength": "O nome deve ter no máximo {{max}} caracteres",
+            "required": "O nome é obrigatório"
           }
         },
         "password": {
           "label": "Senha",
           "placeholder": "••••••••",
           "validations": {
-            "lowerCaseLetter": "A senha deve conter pelo menos uma letra minúscula.",
-            "maxLength": "A senha deve ter no máximo {{max}} caracteres.",
-            "minLength": "A senha deve ter no mínimo {{min}} caracteres.",
-            "number": "A senha deve conter pelo menos um número.",
-            "required": "A senha é obrigatória.",
-            "specialCharacter": "A senha deve conter pelo menos um caractere especial (!@#$%).",
-            "upperCaseLetter": "A senha deve conter pelo menos uma letra maiúscula."
+            "lowerCaseLetter": "A senha deve conter pelo menos uma letra minúscula",
+            "maxLength": "A senha deve ter no máximo {{max}} caracteres",
+            "minLength": "A senha deve ter no mínimo {{min}} caracteres",
+            "number": "A senha deve conter pelo menos um número",
+            "required": "A senha é obrigatória",
+            "specialCharacter": "A senha deve conter pelo menos um caractere especial (!@#$%)",
+            "upperCaseLetter": "A senha deve conter pelo menos uma letra maiúscula"
           }
         }
       },
@@ -96,11 +98,11 @@
       "metrics": {
         "avgTime": {
           "description": "para resolução",
-          "title": "Tempo Médio"
+          "title": "Tempo médio"
         },
         "openTickets": {
           "description": "aguardando ação",
-          "title": "Tickets Abertos"
+          "title": "Tickets abertos"
         },
         "resolvedThisMonth": {
           "description": "vs. mês anterior",
@@ -108,7 +110,7 @@
         },
         "totalTickets": {
           "description": "vs. mês anterior",
-          "title": "Total de Tickets"
+          "title": "Total de tickets"
         }
       }
     },
@@ -116,7 +118,7 @@
       "metrics": {
         "myTickets": {
           "description": "no total",
-          "title": "Meus Tickets"
+          "title": "Meus tickets"
         },
         "open": {
           "description": "aguardando ação",
@@ -132,25 +134,26 @@
       "metrics": {
         "highPriority": {
           "description": "requerem atenção",
-          "title": "Alta Prioridade"
+          "title": "Alta prioridade"
         },
         "inProgress": {
           "description": "sendo trabalhados",
-          "title": "Em Andamento"
+          "title": "Em andamento"
         },
         "myTickets": {
           "description": "atribuídos a mim",
-          "title": "Meus Tickets"
+          "title": "Meus tickets"
         },
         "resolvedToday": {
           "description": "concluídos hoje",
-          "title": "Resolvidos Hoje"
+          "title": "Resolvidos hoje"
         }
       }
     }
   },
   "general": {
     "actions": {
+      "assign": "Vincular",
       "back": "Voltar",
       "cancel": "Cancelar",
       "close": "Fechar",
@@ -161,23 +164,24 @@
       "retry": "Tentar novamente",
       "save": "Salvar"
     },
-    "copyright": "© {{year}} Ticksy. Todos os direitos reservados.",
+    "copyright": "© {{year}} Ticksy. Todos os direitos reservados",
     "errors": {
-      "createFailed": "Não foi possível criar o registro.",
-      "recordNotFound": "Registro não encontrado.",
-      "unknownError": "Ocorreu um erro desconhecido."
+      "createFailed": "Não foi possível criar o registro",
+      "recordNotFound": "Registro não encontrado",
+      "unknownError": "Ocorreu um erro desconhecido"
     },
     "language": "Mudar o idioma para {{language}}",
     "notFoundRoute": "Esta rota não foi encontrada...",
     "settings": "Configurações",
     "table": {
-      "emptyMessage": "Nenhum registro encontrado.",
-      "errorMessage": "Erro ao carregar dados.",
+      "emptyMessage": "Nenhum registro encontrado",
+      "errorMessage": "Erro ao carregar dados",
       "header": {
         "actions": "Ações"
       },
       "next": "Próxima",
       "page": "Página {{current}} de {{total}}",
+      "placeholder": "Selecione uma opção",
       "previous": "Anterior",
       "rowsPerPage": "Linhas por página",
       "searchPlaceholder": "Buscar"
@@ -191,59 +195,105 @@
     },
     "tooltips": {
       "home": "Ir para a página inicial",
+      "myTickets": "Meus tickets",
       "newTicket": "Novo ticket",
       "profile": "Perfil",
       "tickets": "Ver tickets",
-      "myTickets": "Meus tickets",
       "users": "Gerenciar usuários"
     }
   },
   "ticket": {
+    "assign": {
+      "actions": {
+        "assigning": "Vinculando...",
+        "cancel": "Cancelar",
+        "confirm": "Vincular"
+      },
+      "description": "Selecione um técnico para vincular este ticket",
+      "messages": {
+        "failed": "Não foi possível vincular o ticket",
+        "success": "Ticket vinculador com sucesso"
+      },
+      "title": "Vincular ticket"
+    },
     "create": {
       "actions": {
         "cancel": "Cancelar",
         "submit": "Criar ticket"
       },
-      "description": "Preencha as informações abaixo para registrar um novo ticket.",
-      "fields": {
-        "description": {
-          "label": "Descrição",
-          "placeholder": "Descreva o problema ou solicitação com o máximo de detalhes possível.",
-          "validations": {
-            "maxLength": "A descrição deve ter no máximo {{max}} caracteres.",
-            "minLength": "A descrição deve ter pelo menos {{min}} caracteres.",
-            "required": "A descrição é obrigatória."
-          }
-        },
-        "priority": {
-          "label": "Prioridade",
-          "options": {
-            "high": "Alta",
-            "low": "Baixa",
-            "medium": "Média",
-            "urgent": "Urgente"
-          },
-          "placeholder": "Selecione a prioridade do ticket",
-          "validations": {
-            "invalid": "Selecione uma prioridade válida.",
-            "required": "A prioridade é obrigatória."
-          }
-        },
-        "title": {
-          "label": "Título",
-          "placeholder": "Ex.: Erro ao acessar o sistema",
-          "validations": {
-            "maxLength": "O título deve ter no máximo {{max}} caracteres.",
-            "minLength": "O título deve ter pelo menos {{min}} caracteres.",
-            "required": "O título é obrigatório."
-          }
-        }
-      },
+      "description": "Preencha as informações abaixo para registrar um novo ticket",
       "messages": {
-        "failed": "Não foi possível criar o ticket.",
-        "success": "Ticket criado com sucesso."
+        "failed": "Não foi possível criar o ticket",
+        "success": "Ticket criado com sucesso"
       },
       "title": "Novo ticket"
+    },
+    "delete": {
+      "actions": {
+        "cancel": "Cancelar",
+        "confirm": "Excluir",
+        "deleting": "Excluindo..."
+      },
+      "description": "Tem certeza que deseja excluir este ticket? Esta ação não pode ser desfeita",
+      "title": "Excluir ticket"
+    },
+    "edit": {
+      "actions": {
+        "cancel": "Cancelar",
+        "save": "Salvar alterações",
+        "saving": "Salvando..."
+      },
+      "description": "Atualize as informações do ticket",
+      "title": "Editar ticket"
+    },
+    "errors": {
+      "alreadyAssigned": "Este ticket já está vinculado a um usuário",
+      "createFailed": "Não foi possível criar o ticket",
+      "deleteAssigned": "Não é possível excluir um ticket que já foi atribuído",
+      "deleteFailed": "Não foi possível excluir o ticket",
+      "editNotAllowed": "Não é possível editar um ticket que já foi atribuído",
+      "updateFailed": "Não foi possível atualizar o ticket"
+    },
+    "fields": {
+      "assignee": {
+        "label": "Responsável",
+        "placeholder": "Selecione o responsável",
+        "validations": {
+          "required": "O responsável é obrigatório"
+        }
+      },
+      "description": {
+        "label": "Descrição",
+        "placeholder": "Descreva o problema ou solicitação com o máximo de detalhes possível",
+        "validations": {
+          "maxLength": "A descrição deve ter no máximo {{max}} caracteres",
+          "minLength": "A descrição deve ter pelo menos {{min}} caracteres",
+          "required": "A descrição é obrigatória"
+        }
+      },
+      "priority": {
+        "label": "Prioridade",
+        "options": {
+          "high": "Alta",
+          "low": "Baixa",
+          "medium": "Média",
+          "urgent": "Urgente"
+        },
+        "placeholder": "Selecione a prioridade do ticket",
+        "validations": {
+          "invalid": "Selecione uma prioridade válida",
+          "required": "A prioridade é obrigatória"
+        }
+      },
+      "title": {
+        "label": "Título",
+        "placeholder": "Ex.: Erro ao acessar o sistema",
+        "validations": {
+          "maxLength": "O título deve ter no máximo {{max}} caracteres",
+          "minLength": "O título deve ter pelo menos {{min}} caracteres",
+          "required": "O título é obrigatório"
+        }
+      }
     },
     "priority": {
       "high": "Alta",
@@ -252,9 +302,14 @@
       "urgent": "Urgente"
     },
     "status": {
-      "inProgress": "Em Andamento",
+      "inProgress": "Em andamento",
       "open": "Aberto",
       "resolved": "Resolvido"
+    },
+    "success": {
+      "created": "Ticket criado com sucesso",
+      "deleted": "Ticket excluído com sucesso",
+      "updated": "Ticket atualizado com sucesso"
     },
     "table": {
       "columns": {
@@ -262,17 +317,24 @@
         "created_at": "Criado em",
         "createdByName": "Criador",
         "description": "Descrição",
-        "id": "ID",
         "priority": "Prioridade",
         "status": "Status",
         "title": "Título",
         "updated_at": "Atualizado em"
       },
       "emptyMessage": "Nenhum ticket encontrado",
-      "searchPlaceholder": "Buscar ticket"
+      "searchPlaceholder": "Buscar tickets"
     }
   },
   "user": {
+    "deactivate": {
+      "actions": {
+        "cancel": "Cancelar",
+        "confirm": "Desativar"
+      },
+      "description": "Tem certeza que deseja desativar o usuário {{name}}?",
+      "title": "Desativar usuário"
+    },
     "edit": {
       "actions": {
         "cancel": "Cancelar",
@@ -280,82 +342,78 @@
         "saving": "Salvando..."
       },
       "description": "Atualize as informações do usuário",
-      "fields": {
-        "email": {
-          "label": "E-mail",
-          "placeholder": "Digite seu e-mail",
-          "validations": {
-            "invalid": "Informe um endereço de e-mail válido.",
-            "maxLength": "O e-mail deve ter no máximo {{max}} caracteres."
-          }
-        },
-        "name": {
-          "label": "Nome",
-          "placeholder": "Digite seu nome",
-          "validations": {
-            "maxLength": "O nome deve ter no máximo {{max}} caracteres.",
-            "minLength": "O nome deve ter no mínimo {{min}} caracteres."
-          }
-        },
-        "role": {
-          "label": "Perfil",
-          "options": {
-            "admin": "Administrador",
-            "employee": "Colaborador",
-            "technicalAssistance": "Assistência Técnica"
-          },
-          "placeholder": "Selecione o perfil",
-          "validations": {
-            "invalid": "Selecione um perfil válido."
-          }
-        }
-      },
       "title": "Editar perfil"
     },
-    "deactivate": {
-      "title": "Desativar usuário",
-      "description": "Tem certeza que deseja desativar o usuário {{name}}?",
-      "actions": {
-        "cancel": "Cancelar",
-        "confirm": "Desativar"
-      }
-    },
     "errors": {
-      "activateFailed": "Falha ao ativar o usuário.",
-      "createFailed": "Falha ao criar o usuário.",
-      "deactivateFailed": "Falha ao desativar o usuário.",
-      "deleteFailed": "Falha ao remover o usuário.",
-      "loadFailed": "Falha ao carregar os dados do usuário.",
-      "notFound": "Usuário não encontrado.",
-      "updateFailed": "Falha ao atualizar o perfil."
+      "activateFailed": "Não foi possível ativar o usuário",
+      "createFailed": "Não foi possível criar o usuário",
+      "deactivateFailed": "Não foi possível desativar o usuário",
+      "deleteFailed": "Não foi possível excluir o usuário",
+      "loadFailed": "Não foi possível carregar os dados do usuário",
+      "notFound": "Usuário não encontrado",
+      "updateFailed": "Não foi possível atualizar o perfil"
+    },
+    "fields": {
+      "email": {
+        "label": "E-mail",
+        "placeholder": "Digite seu e-mail",
+        "validations": {
+          "invalid": "Informe um endereço de e-mail válido",
+          "maxLength": "O e-mail deve ter no máximo {{max}} caracteres"
+        }
+      },
+      "name": {
+        "label": "Nome",
+        "placeholder": "Digite seu nome",
+        "validations": {
+          "maxLength": "O nome deve ter no máximo {{max}} caracteres",
+          "minLength": "O nome deve ter no mínimo {{min}} caracteres"
+        }
+      },
+      "role": {
+        "label": "Perfil",
+        "options": {
+          "admin": "Administrador",
+          "employee": "Colaborador",
+          "technicalAssistance": "Assistência Técnica"
+        },
+        "placeholder": "Selecione o perfil",
+        "validations": {
+          "invalid": "Selecione um perfil válido"
+        }
+      }
     },
     "roles": {
       "admin": "Administrador",
       "employee": "Colaborador",
       "technicalAssistance": "Assistência Técnica"
     },
+    "status": {
+      "disabled": "Desabilitado",
+      "enabled": "Habilitado"
+    },
     "success": {
-      "activated": "Usuário ativado com sucesso.",
-      "created": "Usuário criado com sucesso.",
-      "deactivated": "Usuário desativado com sucesso.",
-      "deleted": "Usuário removido com sucesso.",
-      "updated": "Perfil atualizado com sucesso."
+      "activated": "Usuário ativado com sucesso",
+      "created": "Usuário criado com sucesso",
+      "deactivated": "Usuário desativado com sucesso",
+      "deleted": "Usuário excluído com sucesso",
+      "updated": "Perfil atualizado com sucesso"
     },
     "table": {
       "actions": {
-        "edit": "Editar usuário",
-        "deactivate": "Desativar usuário"
+        "deactivate": "Desativar usuário",
+        "edit": "Editar usuário"
       },
       "columns": {
         "created_at": "Criado em",
         "email": "E-mail",
-        "id": "ID",
+        "isActive": "Status",
         "name": "Nome",
         "role": "Perfil",
         "updated_at": "Atualizado em"
       },
       "emptyMessage": "Nenhum usuário encontrado",
-      "searchPlaceholder": "Buscar usuário"
+      "searchPlaceholder": "Buscar usuários"
     }
   }
 }

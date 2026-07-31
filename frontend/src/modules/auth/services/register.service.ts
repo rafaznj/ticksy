@@ -3,10 +3,10 @@ import { inject, injectable } from "inversify";
 import { REPOSITORY_TOKENS } from "@/shared/di/tokens.repositories";
 import { AppError } from "@/shared/errors/app-error";
 import type { IRegisterService } from "@/modules/auth/services/contracts/register";
-import type { CreateUserDto } from "@/modules/user/dto/create-user.dto";
 import type { RegisterResponse } from "@/modules/auth/dto/register-response";
 import type { IRegisterRepository } from "@/modules/auth/repositories/contracts/register";
 import { useAuthStore } from "@/lib/zustand/use-auth";
+import type { CreateUserDto } from "@/modules/user/dto/create.dto";
 
 @injectable()
 export class RegisterService implements IRegisterService {

@@ -9,11 +9,13 @@ import { GetTicketByIdRepository } from "./repositories/get-by-id.repository";
 import { UpdateTicketRepository } from "./repositories/update.repository";
 import { UpdateTicketService } from "./services/update.service";
 import { AssignTicketService } from "./services/assign.service";
-import { ChangeTicketStatusService } from "./services/change-status.service";
+import { ChangeStatusTicketService } from "./services/change-status.service";
 import { DeleteTicketService } from "./services/delete.service";
 import { DeleteTicketRepository } from "./repositories/delete.repository";
 import { GetTicketPagedService } from "./services/get-paged.service";
 import { GetTicketPagedRepository } from "./repositories/get-paged.repository";
+import { AssignTicketRepository } from "./repositories/assign.repository";
+import { ChangeStatusTicketRepository } from "./repositories/change-status.repository";
 
 @Module({
   controllers: [TicketController],
@@ -62,15 +64,17 @@ import { GetTicketPagedRepository } from "./repositories/get-paged.repository";
       provide: SERVICE_TOKENS.AssignTicketService,
       useClass: AssignTicketService,
     },
-
     {
-      provide: SERVICE_TOKENS.UnassignTicketService,
-      useClass: AssignTicketService,
+      provide: REPOSITORY_TOKENS.AssignTicketRepository,
+      useClass: AssignTicketRepository,
     },
-
     {
-      provide: SERVICE_TOKENS.ChangeTicketStatusService,
-      useClass: ChangeTicketStatusService,
+      provide: SERVICE_TOKENS.ChangeStatusTicketService,
+      useClass: ChangeStatusTicketService,
+    },
+    {
+      provide: REPOSITORY_TOKENS.ChangeStatusTicketRepository,
+      useClass: ChangeStatusTicketRepository,
     },
   ],
 })

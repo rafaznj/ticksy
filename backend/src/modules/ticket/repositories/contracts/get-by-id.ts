@@ -1,4 +1,4 @@
 import { IBaseGetByIdRepository } from "../../../../shared/base/repositories/contracts/get-by-id";
-import { CreateTicketDto } from "../../dtos/create.dto";
+import { TicketModel } from "../../models/ticket";
 
-export type IGetTicketByIdRepository = IBaseGetByIdRepository<CreateTicketDto>;
+export type IGetTicketByIdRepository = IBaseGetByIdRepository<TicketModel>;

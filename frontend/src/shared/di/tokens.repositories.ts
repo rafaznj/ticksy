@@ -12,6 +12,7 @@ export const REPOSITORY_TOKENS = {
   GetUserByIdRepository: Symbol.for("GetUserByIdRepository"),
   GetUserByEmailRepository: Symbol.for("GetUserByEmailRepository"),
   GetUserPagedRepository: Symbol.for("GetUserPagedRepository"),
+  GetAssignableUsersPagedRepository: Symbol.for("GetAssignableUsersPagedRepository"),
 
   // Ticket
   CreateTicketRepository: Symbol.for("CreateTicketRepository"),
@@ -19,4 +20,5 @@ export const REPOSITORY_TOKENS = {
   GetTicketByIdRepository: Symbol.for("GetTicketByIdRepository"),
   UpdateTicketRepository: Symbol.for("UpdateTicketRepository"),
   DeleteTicketRepository: Symbol.for("DeleteTicketRepository"),
+  AssignTicketRepository: Symbol.for("AssignTicketRepository"),
 } as const;

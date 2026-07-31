@@ -1,6 +1,6 @@
 import { injectable, injectFromBase } from "inversify";
 import { BaseUpdateRepository } from "@/shared/base/repositories/update.repository";
-import type { UpdateUserDto } from "../dto/update-user.dto";
+import type { UpdateUserDto } from "../dto/update.dto";
 import type { IUpdateUserRepository } from "./contracts/update";
 
 @injectFromBase()

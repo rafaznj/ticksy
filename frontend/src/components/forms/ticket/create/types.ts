@@ -1,4 +1,4 @@
-import type { TicketPriorityEnum } from "@/modules/ticket/enums/ticket-priority.enum";
+import type { TicketPriorityEnum } from "@/modules/ticket/enums/priority.enum";
 
 export interface CreateTicketFormProps {
   title: string;

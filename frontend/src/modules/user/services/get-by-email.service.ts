@@ -4,6 +4,7 @@ import type { UserEntity } from "../entity/user.entity";
 import type { IGetUserByEmailRepository } from "../repositories/contracts/get-by-email";
 import type { IGetUserByEmailService } from "./contracts/get-by-email";
 import type { AppError } from "@/shared/errors/app-error";
+import { handleResponseService } from "@/shared/errors/handle-response-service";
 
 @injectable()
 export class GetUserByEmailService implements IGetUserByEmailService {
@@ -13,6 +14,8 @@ export class GetUserByEmailService implements IGetUserByEmailService {
   ) {}
 
   async execute(email: string): Promise<UserEntity | AppError> {
-    return this.repository.execute(email);
+    const response = await this.repository.execute(email);
+
+    return handleResponseService(response);
   }
 }

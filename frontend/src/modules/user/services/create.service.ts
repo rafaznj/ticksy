@@ -1,6 +1,6 @@
 import { BaseCreateService } from "@/shared/base/services/create.service";
 import { REPOSITORY_TOKENS } from "@/shared/di/tokens.repositories";
-import type { CreateUserDto } from "../dto/create-user.dto";
+import type { CreateUserDto } from "../dto/create.dto";
 import type { UserEntity } from "../entity/user.entity";
 import type { ICreateUserRepository } from "../repositories/contracts/create";
 import type { ICreateUserService } from "./contracts/create";

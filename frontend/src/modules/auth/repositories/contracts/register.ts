@@ -1,5 +1,5 @@
 import type { AppError } from "@/shared/errors/app-error";
-import type { CreateUserDto } from "@/modules/user/dto/create-user.dto";
+import type { CreateUserDto } from "@/modules/user/dto/create.dto";
 import type { RegisterResponse } from "@/modules/auth/dto/register-response";
 
 export interface IRegisterRepository {

@@ -1,3 +1,6 @@
+import { AssignTicketForm } from "@/components/forms/ticket/assign";
+import { DeleteTicketForm } from "@/components/forms/ticket/delete";
+import { EditTicketForm } from "@/components/forms/ticket/edit";
 import { PagedTable } from "@/components/PagedTable";
 import { useTicketsPagedTable } from "@/components/tables/tickets/hook";
 
@@ -23,25 +26,31 @@ export function TicketsPagedTable() {
   } = useTicketsPagedTable();
 
   return (
-    <PagedTable
-      columns={columns}
-      data={data}
-      search={search}
-      onSearchChange={setSearch}
-      sorting={sorting}
-      onSortingChange={onSortingChange}
-      pageSize={pageSize}
-      onPageSizeChange={setPageSize}
-      currentPage={currentPage}
-      totalPages={totalPages}
-      hasPrevious={hasPrevious}
-      hasNext={hasNext}
-      onNextPage={nextPage}
-      onPreviousPage={previousPage}
-      isLoading={isLoading}
-      isError={isError}
-      getRowId={(ticket) => ticket.id}
-      actions={actions}
-    />
+    <>
+      <PagedTable
+        columns={columns}
+        data={data}
+        search={search}
+        onSearchChange={setSearch}
+        sorting={sorting}
+        onSortingChange={onSortingChange}
+        pageSize={pageSize}
+        onPageSizeChange={setPageSize}
+        currentPage={currentPage}
+        totalPages={totalPages}
+        hasPrevious={hasPrevious}
+        hasNext={hasNext}
+        onNextPage={nextPage}
+        onPreviousPage={previousPage}
+        isLoading={isLoading}
+        isError={isError}
+        getRowId={(ticket) => ticket.id}
+        actions={actions}
+      />
+
+      <EditTicketForm />
+      <DeleteTicketForm />
+      <AssignTicketForm />
+    </>
   );
 }

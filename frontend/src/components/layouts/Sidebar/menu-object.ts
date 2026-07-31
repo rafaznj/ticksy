@@ -1,5 +1,5 @@
 import { Home, Ticket, Users } from "lucide-react";
-import { UserRoleEnum } from "@/modules/user/enums/user-role.enum";
+import { UserRoleEnum } from "@/modules/user/enums/role.enum";
 import type { TFunction } from "i18next";
 import type { SidebarMenuGroup } from "./types";
 

@@ -21,7 +21,7 @@ import { enumToLabels } from "@/shared/utils/enum-to-labels";
 import { useNavigate } from "@tanstack/react-router";
 import { ChevronsUpDown, User, LogOut } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { UserRoleEnum } from "@/modules/user/enums/user-role.enum";
+import { UserRoleEnum } from "@/modules/user/enums/role.enum";
 
 export function AppSidebarFooter() {
   const { t } = useTranslation();

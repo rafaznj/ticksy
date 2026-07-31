@@ -1,3 +1,5 @@
+import { AssignTicketRepository } from "@/modules/ticket/repositories/assign.repository";
+import type { IAssignTicketRepository } from "@/modules/ticket/repositories/contracts/assign";
 import type { ICreateTicketRepository } from "@/modules/ticket/repositories/contracts/create";
 import type { IDeleteTicketRepository } from "@/modules/ticket/repositories/contracts/delete";
 import type { IGetTicketByIdRepository } from "@/modules/ticket/repositories/contracts/get-by-id";
@@ -8,6 +10,8 @@ import { DeleteTicketRepository } from "@/modules/ticket/repositories/delete.rep
 import { GetTicketByIdRepository } from "@/modules/ticket/repositories/get-by-id.repository";
 import { GetTicketPagedRepository } from "@/modules/ticket/repositories/get-paged.repository";
 import { UpdateTicketRepository } from "@/modules/ticket/repositories/update.repository";
+import { AssignTicketService } from "@/modules/ticket/services/assign.service";
+import type { IAssignTicketService } from "@/modules/ticket/services/contracts/assign";
 import type { ICreateTicketService } from "@/modules/ticket/services/contracts/create";
 import type { IDeleteTicketService } from "@/modules/ticket/services/contracts/delete";
 import type { IGetTicketByIdService } from "@/modules/ticket/services/contracts/get-by-id";
@@ -46,5 +50,10 @@ export const ticketContainerModule = new ContainerModule(({ bind }: ContainerMod
   bind<IDeleteTicketService>(SERVICE_TOKENS.DeleteTicketService).to(DeleteTicketService);
   bind<IDeleteTicketRepository>(REPOSITORY_TOKENS.DeleteTicketRepository).to(
     DeleteTicketRepository,
+  );
+
+  bind<IAssignTicketService>(SERVICE_TOKENS.AssignTicketService).to(AssignTicketService);
+  bind<IAssignTicketRepository>(REPOSITORY_TOKENS.AssignTicketRepository).to(
+    AssignTicketRepository,
   );
 });

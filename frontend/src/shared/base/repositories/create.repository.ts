@@ -3,7 +3,7 @@ import { AxiosSingleton } from "@/lib/axios/axios-singleton";
 import type { IBaseCreateRepository } from "./contracts/create";
 import { INFRASTRUCTURE_TOKENS } from "@/shared/di/tokens.infrastructure";
 import type { AppError } from "@/shared/errors/app-error";
-import { handleResponse } from "@/shared/errors/handle-response";
+import { handleResponseRepository } from "@/shared/errors/handle-response-repository";
 
 @injectable()
 export class BaseCreateRepository<TInput, TOutput> implements IBaseCreateRepository<
@@ -17,6 +17,6 @@ export class BaseCreateRepository<TInput, TOutput> implements IBaseCreateReposit
 
   async execute(data: TInput): Promise<TOutput | AppError> {
     const response = await this.axiosSingleton.client.post<TOutput>(`${this.basePath}/`, data);
-    return handleResponse(response);
+    return handleResponseRepository(response);
   }
 }

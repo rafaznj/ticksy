@@ -2,7 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import { AppError } from "@/shared/errors/app-error";
 import { toast } from "sonner";
 import type { IRegisterService } from "@/modules/auth/services/contracts/register";
-import type { CreateUserDto } from "@/modules/user/dto/create-user.dto";
+import type { CreateUserDto } from "@/modules/user/dto/create.dto";
 
 export function useRegister(registerService: IRegisterService) {
   return useMutation({

@@ -23,10 +23,12 @@ export class BaseGetPagedRepository<T> implements IBaseGetPagedRepository<T> {
       this.table,
     );
 
+    const finalWhere = and(whereCondition, softDeleteCondition);
+
     const queryBuilder = this.db
       .select()
       .from(this.table)
-      .where(and(whereCondition, softDeleteCondition))
+      .where(finalWhere)
       .limit(limit)
       .offset(offset);
 
@@ -35,7 +37,7 @@ export class BaseGetPagedRepository<T> implements IBaseGetPagedRepository<T> {
     }
 
     const records = (await queryBuilder) as T[];
-    const totalRecords = await this.db.$count(this.table);
+    const totalRecords = await this.db.$count(this.table, finalWhere);
 
     return buildPagedReturn(records, limit, totalRecords);
   }

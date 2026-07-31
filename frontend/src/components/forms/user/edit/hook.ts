@@ -2,9 +2,9 @@ import { useEffect, useMemo } from "react";
 
 import { useAppForm } from "@/hooks/use-form";
 import { container } from "@/lib/inversifyJS/index.container";
-import { UserRoleEnum } from "@/modules/user/enums/user-role.enum";
+import { UserRoleEnum } from "@/modules/user/enums/role.enum";
 import type { UserEntity } from "@/modules/user/entity/user.entity";
-import { useUpdateUser } from "@/modules/user/query-hooks/mutation/use-update-user";
+import { useUpdateUser } from "@/modules/user/query-hooks/mutation/use-update";
 import type { IUpdateUserService } from "@/modules/user/services/contracts/update";
 import { DIALOG_KEYS } from "@/shared/constants/dialog-keys";
 import { SERVICE_TOKENS } from "@/shared/di/tokens.services";
@@ -40,7 +40,7 @@ export function useEditUserForm() {
       name: selectedUser?.name,
       email: selectedUser?.email,
       role: selectedUser?.role,
-    } satisfies EditUserFormProps,
+    } as EditUserFormProps,
     validators: {
       onBlur: editUserFormSchema(t),
     },

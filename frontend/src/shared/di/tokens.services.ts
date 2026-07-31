@@ -14,6 +14,7 @@ export const SERVICE_TOKENS = {
   GetUserByIdService: Symbol.for("GetUserByIdService"),
   GetUserByEmailService: Symbol.for("GetUserByEmailService"),
   GetUserPagedService: Symbol.for("GetUserPagedService"),
+  GetAssignableUsersPagedService: Symbol.for("GetAssignableUsersPagedService"),
 
   // Ticket
   CreateTicketService: Symbol.for("CreateTicketService"),

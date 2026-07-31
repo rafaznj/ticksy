@@ -1,3 +1,3 @@
 export interface IBaseGetByIdService<T> {
-  execute(id: string): Promise<T>;
+  execute(id: string): Promise<T | null>;
 }
