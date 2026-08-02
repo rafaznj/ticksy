@@ -74,7 +74,7 @@ export function useTicketsPagedTable() {
       {
         accessorKey: "assignedToName",
         header: t("ticket.table.columns.assignedToName"),
-        cell: ({ row }) => row.original.assignedToName,
+        cell: ({ row }) => row.original.assignedToName ?? t("ticket.table.unassigned"),
       },
       {
         accessorKey: "createdAt",
@@ -96,22 +96,15 @@ export function useTicketsPagedTable() {
       edit: (ticket: TicketPagedDto) => openEditTicket(ticket),
       delete: (ticket: TicketPagedDto) => openDeleteTicket(ticket),
       assign: (ticket: TicketPagedDto) => openAssignTicket(ticket),
-      disableAction: {
-        edit: (ticket: TicketPagedDto) => !(isAdmin || ticket.createdById === user?.id),
-        delete: (ticket: TicketPagedDto) => !!ticket.assignedToName,
-        assign: (ticket: TicketPagedDto) => !!ticket.assignedToName,
+      visibilityAction: {
+        edit: (ticket: TicketPagedDto) => ticket.createdById === user?.id || isAdmin,
+        delete: (ticket: TicketPagedDto) => !ticket.assignedToName,
+        assign: (ticket: TicketPagedDto) => !ticket.assignedToName && isAdmin,
       },
       tooltips: {
-        edit: (ticket: TicketPagedDto) =>
-          isAdmin || ticket.createdById === user?.id
-            ? t("general.actions.edit")
-            : t("ticket.errors.editNotAllowed"),
-        delete: (ticket: TicketPagedDto) =>
-          ticket.assignedToName ? t("ticket.errors.deleteAssigned") : t("general.actions.delete"),
-        assign: (ticket: TicketPagedDto) =>
-          ticket.assignedToName
-            ? t("ticket.errors.alreadyAssigned")
-            : t("ticket.assign.actions.confirm"),
+        edit: () => t("general.actions.edit"),
+        delete: () => t("general.actions.delete"),
+        assign: () => t("ticket.assign.actions.confirm"),
       },
     };
   }, [isAdmin, user?.id, openDeleteTicket, openEditTicket, openAssignTicket, t]);

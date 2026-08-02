@@ -123,29 +123,26 @@ export function PagedTable<T>({
         cell: ({ row }: { row: Row<T> }) => {
           const item = row.original;
 
-          const hasEdit = !!actions.edit;
-          const hasDeactivate = !!actions.deactivate;
-          const hasDelete = !!actions.delete;
-          const hasAssign = !!actions.assign;
+          const isEditVisible = actions.visibilityAction?.edit?.(item) !== false;
+          const isDeactivateVisible = actions.visibilityAction?.deactivate?.(item) !== false;
+          const isDeleteVisible = actions.visibilityAction?.delete?.(item) !== false;
+          const isAssignVisible = actions.visibilityAction?.assign?.(item) !== false;
 
-          if (!hasEdit && !hasDeactivate && !hasDelete && !hasAssign) return null;
+          const showEdit = !!actions.edit && isEditVisible;
+          const showDeactivate = !!actions.deactivate && isDeactivateVisible;
+          const showDelete = !!actions.delete && isDeleteVisible;
+          const showAssign = !!actions.assign && isAssignVisible;
 
-          const isEditDisabled =
-            actions.visibilityAction?.edit?.(item) === false ||
-            !!actions.disableAction?.edit?.(item);
-          const isDeactivateDisabled =
-            actions.visibilityAction?.deactivate?.(item) === false ||
-            !!actions.disableAction?.deactivate?.(item);
-          const isDeleteDisabled =
-            actions.visibilityAction?.delete?.(item) === false ||
-            !!actions.disableAction?.delete?.(item);
-          const isAssignDisabled =
-            actions.visibilityAction?.assign?.(item) === false ||
-            !!actions.disableAction?.assign?.(item);
+          if (!showEdit && !showDeactivate && !showDelete && !showAssign) return null;
+
+          const isEditDisabled = !!actions.disableAction?.edit?.(item);
+          const isDeactivateDisabled = !!actions.disableAction?.deactivate?.(item);
+          const isDeleteDisabled = !!actions.disableAction?.delete?.(item);
+          const isAssignDisabled = !!actions.disableAction?.assign?.(item);
 
           return (
             <div className="flex items-center gap-1">
-              {hasEdit && (
+              {showEdit && (
                 <TooltipProvider>
                   <Tooltip>
                     <TooltipTrigger asChild>
@@ -168,7 +165,7 @@ export function PagedTable<T>({
                 </TooltipProvider>
               )}
 
-              {hasDeactivate && (
+              {showDeactivate && (
                 <TooltipProvider>
                   <Tooltip>
                     <TooltipTrigger asChild>
@@ -195,7 +192,7 @@ export function PagedTable<T>({
                 </TooltipProvider>
               )}
 
-              {hasAssign && (
+              {showAssign && (
                 <TooltipProvider>
                   <Tooltip>
                     <TooltipTrigger asChild>
@@ -218,7 +215,7 @@ export function PagedTable<T>({
                 </TooltipProvider>
               )}
 
-              {hasDelete && (
+              {showDelete && (
                 <TooltipProvider>
                   <Tooltip>
                     <TooltipTrigger asChild>
