@@ -1,11 +1,11 @@
 import { useMutation } from "@tanstack/react-query";
-import { AppError } from "@/shared/errors/app-error";
 import { toast } from "sonner";
 import type { IUpdateUserService } from "@/modules/user/services/contracts/update";
 import type { UpdateUserDto } from "@/modules/user/dto/update.dto";
 import { handleMutationError } from "@/shared/errors/handle-mutation-error";
 import { useTranslation } from "react-i18next";
 import { useAuthStore } from "@/lib/zustand/use-auth";
+import handleMutationResponse from "@/shared/response/handle-mutation-response";
 
 interface UpdateUserParams {
   id: string;
@@ -19,11 +19,7 @@ export function useUpdateUser(updateUserService: IUpdateUserService) {
     mutationFn: async ({ id, data }: UpdateUserParams) => {
       const response = await updateUserService.execute(id, data);
 
-      if (response instanceof AppError) {
-        throw response;
-      }
-
-      return response;
+      return handleMutationResponse(response);
     },
     onSuccess: (updatedUser, { id }) => {
       const currentUser = useAuthStore.getState().user;

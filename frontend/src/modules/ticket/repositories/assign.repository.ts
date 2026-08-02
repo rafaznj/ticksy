@@ -3,7 +3,7 @@ import type { TicketEntity } from "@/modules/ticket/entity/ticket.entity";
 import type { IAssignTicketRepository } from "@/modules/ticket/repositories/contracts/assign";
 import { INFRASTRUCTURE_TOKENS } from "@/shared/di/tokens.infrastructure";
 import type { AppError } from "@/shared/errors/app-error";
-import { handleResponseRepository } from "@/shared/errors/handle-response-repository";
+import { handleRepositoryResponse } from "@/shared/response/handle-repository-response";
 import { inject } from "inversify";
 
 export class AssignTicketRepository implements IAssignTicketRepository {
@@ -18,6 +18,6 @@ export class AssignTicketRepository implements IAssignTicketRepository {
       userId,
     });
 
-    return handleResponseRepository(response);
+    return handleRepositoryResponse(response);
   }
 }

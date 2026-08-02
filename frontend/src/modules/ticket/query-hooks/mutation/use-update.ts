@@ -4,8 +4,8 @@ import { handleMutationError } from "@/shared/errors/handle-mutation-error";
 import { useTranslation } from "react-i18next";
 import type { UpdateTicketDto } from "@/modules/ticket/dtos/update.dto";
 import type { IUpdateTicketService } from "@/modules/ticket/services/contracts/update";
-import queryClient from "@/lib/query-client";
-import handleResponseMutation from "@/shared/errors/handle-response-mutation";
+import queryClient from "@/lib/tanstack/query-client";
+import handleMutationResponse from "@/shared/response/handle-mutation-response";
 
 interface UpdateTicketParams {
   id: string;
@@ -19,7 +19,7 @@ export function useUpdateTicket(updateTicketService: IUpdateTicketService) {
     mutationFn: async ({ id, data }: UpdateTicketParams) => {
       const response = await updateTicketService.execute(id, data);
 
-      return handleResponseMutation(response);
+      return handleMutationResponse(response);
     },
     onSuccess: () => {
       toast.success(t("ticket.success.updated"));

@@ -1,7 +1,7 @@
-import queryClient from "@/lib/query-client";
+import queryClient from "@/lib/tanstack/query-client";
 import type { IDeleteTicketService } from "@/modules/ticket/services/contracts/delete";
-import { AppError } from "@/shared/errors/app-error";
 import { handleMutationError } from "@/shared/errors/handle-mutation-error";
+import handleMutationResponse from "@/shared/response/handle-mutation-response";
 import { useMutation } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
@@ -13,10 +13,7 @@ export function useDeleteTicket(deleteRoleService: IDeleteTicketService) {
     mutationFn: async (id: string) => {
       const response = await deleteRoleService.execute(id);
 
-      if (response instanceof AppError) {
-        throw response;
-      }
-      return response;
+      return handleMutationResponse(response);
     },
     onSuccess: () => {
       toast.success(t("ticket.success.updated"));

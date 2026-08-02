@@ -5,7 +5,7 @@ import type { RefreshResponse } from "@/modules/auth/dto/refresh-response.dto";
 import type { IRefreshRepository } from "./contracts/refresh";
 import { INFRASTRUCTURE_TOKENS } from "@/shared/di/tokens.infrastructure";
 import type { AppError } from "@/shared/errors/app-error";
-import { handleResponseRepository } from "@/shared/errors/handle-response-repository";
+import { handleRepositoryResponse } from "@/shared/response/handle-repository-response";
 
 @injectable()
 export class RefreshRepository implements IRefreshRepository {
@@ -20,6 +20,7 @@ export class RefreshRepository implements IRefreshRepository {
     const response = await this.axiosSingleton.client.post<RefreshResponse>(
       `${this.basePath}/refresh`,
     );
-    return handleResponseRepository(response);
+
+    return handleRepositoryResponse(response);
   }
 }
