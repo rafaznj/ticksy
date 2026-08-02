@@ -4,7 +4,7 @@ import type { UserEntity } from "../entity/user.entity";
 import type { IGetUserByEmailRepository } from "./contracts/get-by-email";
 import { INFRASTRUCTURE_TOKENS } from "@/shared/di/tokens.infrastructure";
 import type { AppError } from "@/shared/errors/app-error";
-import { handleResponseRepository } from "@/shared/errors/handle-response-repository";
+import { handleRepositoryResponse } from "@/shared/response/handle-repository-response";
 
 @injectable()
 export class GetUserByEmailRepository implements IGetUserByEmailRepository {
@@ -19,6 +19,7 @@ export class GetUserByEmailRepository implements IGetUserByEmailRepository {
     const response = await this.axiosSingleton.client.get<UserEntity>(
       `${this.basePath}/get-by-email/${email}`,
     );
-    return handleResponseRepository(response);
+
+    return handleRepositoryResponse(response);
   }
 }

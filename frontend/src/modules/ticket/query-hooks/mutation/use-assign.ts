@@ -2,8 +2,8 @@ import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { handleMutationError } from "@/shared/errors/handle-mutation-error";
 import { useTranslation } from "react-i18next";
-import queryClient from "@/lib/query-client";
-import handleResponseMutation from "@/shared/errors/handle-response-mutation";
+import queryClient from "@/lib/tanstack/query-client";
+import handleMutationResponse from "@/shared/response/handle-mutation-response";
 import type { IAssignTicketService } from "@/modules/ticket/services/contracts/assign";
 
 interface AssignTicketParams {
@@ -18,7 +18,7 @@ export function useAssignTicket(assignTicketService: IAssignTicketService) {
     mutationFn: async ({ id, userId }: AssignTicketParams) => {
       const response = await assignTicketService.execute(id, userId);
 
-      return handleResponseMutation(response);
+      return handleMutationResponse(response);
     },
     onSuccess: () => {
       toast.success(t("ticket.success.updated"));

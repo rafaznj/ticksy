@@ -1,31 +1,29 @@
-import { Ticket, AlertCircle, CheckCircle } from "lucide-react";
+import { AlertCircle, CheckCircle, LoaderCircle } from "lucide-react";
 
 import { MetricCard, type MetricCardItem } from "@/components/MetricCard";
-import { PerformanceChart } from "@/components/PerformanceChart";
 import { RecentActivity } from "@/components/RecentActivity";
-import { RecentTicketsTable } from "@/components/RecentTicketsTable";
 
 const metrics: MetricCardItem[] = [
   {
-    title: "Meus Tickets",
+    title: "Abertos",
     value: "18",
-    description: "no total",
-    icon: Ticket,
+    description: "Aguardando atendimento",
+    icon: AlertCircle,
     iconColor: "text-blue-600 dark:text-blue-400",
     iconBg: "bg-blue-50 dark:bg-blue-950/50",
   },
   {
-    title: "Abertos",
+    title: "Em progresso",
     value: "5",
-    description: "aguardando ação",
-    icon: AlertCircle,
+    description: "Em atendimento",
+    icon: LoaderCircle,
     iconColor: "text-amber-600 dark:text-amber-400",
     iconBg: "bg-amber-50 dark:bg-amber-950/50",
   },
   {
     title: "Resolvidos",
     value: "13",
-    description: "no total",
+    description: "Atendidos com sucesso",
     icon: CheckCircle,
     iconColor: "text-emerald-600 dark:text-emerald-400",
     iconBg: "bg-emerald-50 dark:bg-emerald-950/50",
@@ -39,11 +37,8 @@ export function EmployeeMetrics() {
         <MetricCard metrics={metrics} className="lg:grid-cols-3" />
 
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-          <PerformanceChart />
           <RecentActivity />
         </div>
-
-        <RecentTicketsTable />
       </div>
     </div>
   );

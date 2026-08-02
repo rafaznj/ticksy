@@ -322,6 +322,7 @@
         "title": "Título",
         "updated_at": "Atualizado em"
       },
+      "unassigned": "Sem responsável",
       "emptyMessage": "Nenhum ticket encontrado",
       "searchPlaceholder": "Buscar tickets"
     }

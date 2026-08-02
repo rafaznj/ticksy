@@ -15,7 +15,7 @@ import GetUserByEmailService from "./services/get-by-email.service";
 import { GetUserByEmailRepository } from "./repositories/get-by-email.repository";
 import { GetUserPagedRepository } from "./repositories/get-paged.repository";
 import { GetUserPagedService } from "./services/get-paged.service";
-import { CreateAdminUserService } from "./services/create-admin.service";
+import { CreateDefaultUsersService } from "./services/create-default-users.service";
 import { GetAssignableUsersPagedService } from "./services/get-assignable-paged.service";
 import { GetAssignableUsersPagedRepository } from "./repositories/get-assignable-paged.repository";
 
@@ -28,8 +28,8 @@ import { GetAssignableUsersPagedRepository } from "./repositories/get-assignable
       useClass: CreateUserService,
     },
     {
-      provide: SERVICE_TOKENS.CreateAdminUserService,
-      useClass: CreateAdminUserService,
+      provide: SERVICE_TOKENS.CreateDefaultUsersService,
+      useClass: CreateDefaultUsersService,
     },
     {
       provide: REPOSITORY_TOKENS.CreateUserRepository,
@@ -85,7 +85,7 @@ import { GetAssignableUsersPagedRepository } from "./repositories/get-assignable
     },
   ],
   exports: [
-    SERVICE_TOKENS.CreateAdminUserService,
+    SERVICE_TOKENS.CreateDefaultUsersService,
     SERVICE_TOKENS.CreateUserService,
     SERVICE_TOKENS.GetUserByIdService,
     SERVICE_TOKENS.GetUserByEmailService,

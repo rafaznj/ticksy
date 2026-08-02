@@ -3,7 +3,7 @@ import type { IDeactivateUserRepository } from "./contracts/deactivate";
 import { INFRASTRUCTURE_TOKENS } from "@/shared/di/tokens.infrastructure";
 import type { AxiosSingleton } from "@/lib/axios/axios-singleton";
 import type { AppError } from "@/shared/errors/app-error";
-import { handleResponseRepository } from "@/shared/errors/handle-response-repository";
+import { handleRepositoryResponse } from "@/shared/response/handle-repository-response";
 
 @injectable()
 export class DeactivateUserRepository implements IDeactivateUserRepository {
@@ -12,6 +12,7 @@ export class DeactivateUserRepository implements IDeactivateUserRepository {
 
   async execute(id: string): Promise<boolean | AppError> {
     const response = await this.axiosSingleton.client.patch<boolean>(`/user/${id}`);
-    return handleResponseRepository(response);
+
+    return handleRepositoryResponse(response);
   }
 }

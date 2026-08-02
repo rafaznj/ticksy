@@ -1,9 +1,9 @@
 import { useMutation } from "@tanstack/react-query";
 import type { CreateUserDto } from "../../dto/create.dto";
 import type { ICreateUserService } from "@/modules/user/services/contracts/create";
-import { AppError } from "@/shared/errors/app-error";
 import { handleMutationError } from "@/shared/errors/handle-mutation-error";
 import { useTranslation } from "react-i18next";
+import handleMutationResponse from "@/shared/response/handle-mutation-response";
 
 export function useCreateUser(createUserService: ICreateUserService) {
   const { t } = useTranslation();
@@ -11,11 +11,7 @@ export function useCreateUser(createUserService: ICreateUserService) {
     mutationFn: async (data: CreateUserDto) => {
       const response = await createUserService.execute(data);
 
-      if (response instanceof AppError) {
-        throw response;
-      }
-
-      return response;
+      return handleMutationResponse(response);
     },
     onError: handleMutationError(t("user.errors.createFailed")),
   });

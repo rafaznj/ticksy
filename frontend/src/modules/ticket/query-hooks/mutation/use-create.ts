@@ -1,11 +1,11 @@
 import { useMutation } from "@tanstack/react-query";
-import { AppError } from "@/shared/errors/app-error";
 import { toast } from "sonner";
 import type { ICreateTicketService } from "@/modules/ticket/services/contracts/create";
 import type { CreateTicketDto } from "@/modules/ticket/dtos/create.dto";
 import { useTranslation } from "react-i18next";
 import { handleMutationError } from "@/shared/errors/handle-mutation-error";
-import queryClient from "@/lib/query-client";
+import queryClient from "@/lib/tanstack/query-client";
+import handleMutationResponse from "@/shared/response/handle-mutation-response";
 
 interface UseCreateTicketOptions {
   onSuccess?: () => void;
@@ -20,11 +20,7 @@ export function useCreateTicket(
     mutationFn: async (data: CreateTicketDto) => {
       const response = await createTicketService.execute(data);
 
-      if (response instanceof AppError) {
-        throw response;
-      }
-
-      return response;
+      return handleMutationResponse(response);
     },
     onSuccess: () => {
       toast.success(t("ticket.create.messages.success"));

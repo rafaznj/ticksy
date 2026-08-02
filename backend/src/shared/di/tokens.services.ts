@@ -7,7 +7,7 @@ export const SERVICE_TOKENS = {
   RefreshService: Symbol("RefreshService"),
 
   // User
-  CreateAdminUserService: Symbol.for("CreateAdminUserService"),
+  CreateDefaultUsersService: Symbol.for("CreateDefaultUsersService"),
   CreateUserService: Symbol.for("CreateUserService"),
   UpdateUserService: Symbol.for("UpdateUserService"),
   DeactivateUserService: Symbol.for("DeactivateUserService"),

@@ -5,6 +5,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 
 interface Activity {
   id: number;
+  title?: string;
   user: string;
   initials: string;
   action: string;
@@ -16,6 +17,7 @@ interface Activity {
 const activities: Activity[] = [
   {
     id: 1,
+    title: "Problemas no pc",
     user: "Rafael",
     initials: "RA",
     action: "resolveu o ticket",

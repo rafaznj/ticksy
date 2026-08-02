@@ -1,7 +1,7 @@
+import { AppError } from "@/shared/errors/app-error";
 import type { AxiosResponse } from "axios";
-import { AppError } from "./app-error";
 
-export function handleResponseRepository<T>(response: AxiosResponse<T> | AppError): T | AppError {
+export function handleRepositoryResponse<T>(response: AxiosResponse<T> | AppError): T | AppError {
   if (response instanceof AppError) {
     return response;
   }

@@ -6,7 +6,7 @@ import type { LoginResponse } from "@/modules/auth/dto/login-response";
 import type { ILoginRepository } from "./contracts/login";
 import { INFRASTRUCTURE_TOKENS } from "@/shared/di/tokens.infrastructure";
 import type { AppError } from "@/shared/errors/app-error";
-import { handleResponseRepository } from "@/shared/errors/handle-response-repository";
+import { handleRepositoryResponse } from "@/shared/response/handle-repository-response";
 
 @injectable()
 export class LoginRepository implements ILoginRepository {
@@ -22,6 +22,6 @@ export class LoginRepository implements ILoginRepository {
       `${this.basePath}/login`,
       dto,
     );
-    return handleResponseRepository(response);
+    return handleRepositoryResponse(response);
   }
 }

@@ -7,7 +7,7 @@ import ReactDOM from "react-dom/client";
 import { I18nextProvider } from "react-i18next";
 
 import { router } from "@/router";
-import tanStackQueryClient from "@/lib/query-client";
+import tanStackQueryClient from "@/lib/tanstack/query-client";
 import i18n from "@/assets/i18n";
 
 const rootElement = document.getElementById("root")!;

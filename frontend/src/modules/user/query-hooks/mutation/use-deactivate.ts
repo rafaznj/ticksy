@@ -1,6 +1,6 @@
 import type { IDeactivateUserService } from "@/modules/user/services/contracts/deactivate";
-import { AppError } from "@/shared/errors/app-error";
 import { handleMutationError } from "@/shared/errors/handle-mutation-error";
+import handleMutationResponse from "@/shared/response/handle-mutation-response";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 
@@ -12,11 +12,7 @@ export function useDeactivateUser(deactivateUserService: IDeactivateUserService)
     mutationFn: async (id: string) => {
       const response = await deactivateUserService.execute(id);
 
-      if (response instanceof AppError) {
-        throw response;
-      }
-
-      return response;
+      return handleMutationResponse(response);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["users", "paged"] });
