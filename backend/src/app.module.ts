@@ -6,7 +6,7 @@ import { UserModule } from "./modules/user/user.module";
 import { ConfigModule } from "@nestjs/config";
 import { jwtConfig } from "./shared/config/jwt.config";
 import { SERVICE_TOKENS } from "./shared/di/tokens.services";
-import type { ICreateAdminUserService } from "./modules/user/services/contracts/create-admin";
+import type { ICreateDefaultUsersService } from "./modules/user/services/contracts/create-default-users";
 
 @Module({
   imports: [
@@ -23,11 +23,11 @@ import type { ICreateAdminUserService } from "./modules/user/services/contracts/
 })
 export class AppModule implements OnModuleInit {
   constructor(
-    @Inject(SERVICE_TOKENS.CreateAdminUserService)
-    private readonly createAdminUserService: ICreateAdminUserService,
+    @Inject(SERVICE_TOKENS.CreateDefaultUsersService)
+    private readonly createDefaultUsersService: ICreateDefaultUsersService,
   ) {}
 
   async onModuleInit() {
-    await this.createAdminUserService.execute();
+    await this.createDefaultUsersService.execute();
   }
 }
