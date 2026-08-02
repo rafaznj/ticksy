@@ -16,7 +16,9 @@ interface RetryableConfig extends InternalAxiosRequestConfig {
 let isRefreshing = false;
 
 function isAuthEndpoint(url?: string): boolean {
-  return Boolean(url?.includes("auth/login") || url?.includes("auth/refresh"));
+  return Boolean(
+    url?.includes("auth/login") || url?.includes("auth/refresh") || url?.includes("auth/logout"),
+  );
 }
 
 export const onResponseFulfilled = (response: AxiosResponse) => response;

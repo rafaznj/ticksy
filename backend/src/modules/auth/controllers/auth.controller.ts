@@ -10,9 +10,10 @@ import type { IRefreshService } from "../services/contracts/refresh";
 import type { ILogoutService } from "../services/contracts/logout";
 import { AppException } from "../../../shared/exceptions/app-exception";
 import { setRefreshCookie } from "../../../shared/utils/set-refresh-cookie";
-import { CreateUserDto } from "../../user/dtos/create.dto";
 import type { IRegisterService } from "../services/contracts/register";
 import { UserModel } from "../../user/models/user-model";
+import { OptionalJwtAuthGuard } from "../guards/optional-jwt-auth.guard";
+import { CreateUserDto } from "../../user/dtos/create.dto";
 
 @Controller("auth")
 export class AuthController {
@@ -28,17 +29,6 @@ export class AuthController {
     private readonly logoutService: ILogoutService,
   ) {}
 
-  @Post("/login")
-  async login(@Body() dto: LoginDto, @Res({ passthrough: true }) res: Response) {
-    const { accessToken, refreshToken, user } = await this.loginService.execute(
-      dto.email,
-      dto.password,
-    );
-
-    setRefreshCookie(res, refreshToken, this.configService);
-    return { accessToken, user };
-  }
-
   @Post("/register")
   async register(@Body() dto: CreateUserDto, @Res({ passthrough: true }) res: Response) {
     const { accessToken, refreshToken, user } = await this.registerService.execute(dto);
@@ -51,6 +41,31 @@ export class AuthController {
     };
   }
 
+  @Post("/login")
+  async login(@Body() dto: LoginDto, @Res({ passthrough: true }) res: Response) {
+    const { accessToken, refreshToken, user } = await this.loginService.execute(
+      dto.email,
+      dto.password,
+    );
+
+    setRefreshCookie(res, refreshToken, this.configService);
+    return { accessToken, user };
+  }
+
+  @Post("/logout")
+  @UseGuards(OptionalJwtAuthGuard)
+  async logout(
+    @Req() req: Request & { user: { id: string } | null },
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    if (req.user?.id) {
+      await this.logoutService.execute(req.user.id);
+    }
+
+    res.clearCookie("refreshToken");
+    return { success: true };
+  }
+
   @Post("/refresh")
   async refresh(@Req() req: Request, @Res({ passthrough: true }) res: Response) {
     const refreshToken = req.cookies?.refreshToken;
@@ -58,27 +73,21 @@ export class AuthController {
       throw AppException.unauthorized("auth.errors.refreshTokenMissing");
     }
 
-    const { accessToken, refreshToken: newRefreshToken } =
-      await this.refreshService.execute(refreshToken);
+    try {
+      const { accessToken, refreshToken: newRefreshToken } =
+        await this.refreshService.execute(refreshToken);
 
-    setRefreshCookie(res, newRefreshToken, this.configService);
-    return { accessToken };
+      setRefreshCookie(res, newRefreshToken, this.configService);
+      return { accessToken };
+    } catch (error) {
+      res.clearCookie("refreshToken");
+      throw error;
+    }
   }
 
   @Get("/me")
   @UseGuards(AuthGuard("jwt"))
   async me(@Req() req: Request & { user: Omit<UserModel, "password"> }) {
     return req.user;
-  }
-
-  @Post("/logout")
-  @UseGuards(AuthGuard("jwt"))
-  async logout(
-    @Req() req: Request & { user: { id: string } },
-    @Res({ passthrough: true }) res: Response,
-  ) {
-    await this.logoutService.execute(req.user.id);
-    res.clearCookie("refreshToken");
-    return { success: true };
   }
 }
