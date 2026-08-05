@@ -56,7 +56,7 @@ export class GlobalExceptionFilter implements ExceptionFilter {
       return {
         success: false,
         errors: messages.map((msg) => ({
-          key: "validation.generic",
+          key: "general.errors.unknownError",
           params: { message: String(msg) },
         })),
         code: status,

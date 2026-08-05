@@ -56,6 +56,13 @@ interface ActionsConfig<T> {
   assign?: (item: T) => void;
 }
 
+export interface HeaderButtonConfig {
+  label: string;
+  onClick: () => void;
+  icon?: React.ReactNode;
+  variant?: React.ComponentProps<typeof Button>["variant"];
+}
+
 interface PagedTableProps<T> {
   columns: ColumnDef<T>[];
   data: T[];
@@ -70,7 +77,7 @@ interface PagedTableProps<T> {
   sorting?: SortingState;
   pageSize?: number;
   rowsPerPageOptions?: number[];
-  headerButton?: { label: string; onClick: () => void };
+  headerButtons?: HeaderButtonConfig[];
   onPageSizeChange?: (size: number) => void;
   onSearchChange: (value: string) => void;
   onNextPage: () => void;
@@ -102,7 +109,7 @@ export function PagedTable<T>({
   sorting,
   pageSize,
   rowsPerPageOptions = [10, 25, 50, 100],
-  headerButton,
+  headerButtons,
   onSearchChange,
   onNextPage,
   onPreviousPage,
@@ -266,7 +273,16 @@ export function PagedTable<T>({
           className="max-w-sm"
         />
 
-        {headerButton && <Button onClick={headerButton.onClick}>{headerButton.label}</Button>}
+        {headerButtons && headerButtons.length > 0 && (
+          <div className="flex items-center gap-2">
+            {headerButtons.map((btn, i) => (
+              <Button key={i} variant={btn.variant ?? "default"} onClick={btn.onClick}>
+                {btn.icon}
+                {btn.label}
+              </Button>
+            ))}
+          </div>
+        )}
       </div>
 
       <div className="rounded-md border">

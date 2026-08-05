@@ -9,12 +9,6 @@ import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { useGetTicketPaged } from "@/modules/ticket/query-hooks/use-get-paged";
 
-function getStartOfToday(): Date {
-  const date = new Date();
-  date.setHours(0, 0, 0, 0);
-  return date;
-}
-
 export function useTechnicalAssistanceMetrics() {
   const { t } = useTranslation();
   const getTicketPagedService = container.get<IGetTicketPagedService>(
@@ -29,17 +23,14 @@ export function useTechnicalAssistanceMetrics() {
   const tickets = useMemo(() => data?.result ?? [], [data]);
 
   const metrics: MetricCardItem[] = useMemo(() => {
-    const startOfToday = getStartOfToday();
-
     const myTicketsCount = tickets.length;
 
     const inProgressCount = tickets.filter(
       (ticket) => ticket.status === TicketStatusEnum.IN_PROGRESS,
     ).length;
 
-    const resolvedTodayCount = tickets.filter((ticket) => {
-      if (ticket.status !== TicketStatusEnum.RESOLVED) return false;
-      return new Date(ticket.updatedAt) >= startOfToday;
+    const resolvedCount = tickets.filter((ticket) => {
+      return ticket.status === TicketStatusEnum.RESOLVED;
     }).length;
 
     const highPriorityCount = tickets.filter(
@@ -68,7 +59,7 @@ export function useTechnicalAssistanceMetrics() {
       },
       {
         title: t("dashboard.technical_assistance.metrics.resolvedToday.title"),
-        value: String(resolvedTodayCount),
+        value: String(resolvedCount),
         description: t("dashboard.technical_assistance.metrics.resolvedToday.description"),
         icon: CheckCircle,
         iconColor: "text-emerald-600 dark:text-emerald-400",

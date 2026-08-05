@@ -50,7 +50,7 @@ export function usePagedQuery<T>(service: IBaseGetPagedService<T>, options: UseP
     placeholderData: (previousData) => previousData,
   });
 
-  const paging = data?.pagingInformation;
+  const totalPages = data?.totalPages ?? 0;
 
   const onSortingChange = (updater: Updater<SortingState>) => {
     setSorting((prev) => (typeof updater === "function" ? updater(prev) : updater));
@@ -59,10 +59,10 @@ export function usePagedQuery<T>(service: IBaseGetPagedService<T>, options: UseP
   return {
     data: data?.result ?? [],
     totalCount: data?.totalCount ?? 0,
-    totalPages: data?.totalPages ?? 0,
-    currentPage: paging?.currentPage ?? currentPage,
-    hasPrevious: paging?.hasPrevious ?? false,
-    hasNext: paging?.hasNext ?? false,
+    totalPages,
+    currentPage,
+    hasPrevious: currentPage > 1,
+    hasNext: currentPage < totalPages,
     isLoading,
     isFetching,
     isError,
@@ -73,7 +73,7 @@ export function usePagedQuery<T>(service: IBaseGetPagedService<T>, options: UseP
     pageSize,
     setPageSize,
     goToPage: setCurrentPage,
-    nextPage: () => setCurrentPage((p) => (paging?.hasNext ? p + 1 : p)),
-    previousPage: () => setCurrentPage((p) => (paging?.hasPrevious ? p - 1 : p)),
+    nextPage: () => setCurrentPage((p) => (p < totalPages ? p + 1 : p)),
+    previousPage: () => setCurrentPage((p) => (p > 1 ? p - 1 : p)),
   };
 }

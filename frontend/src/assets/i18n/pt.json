@@ -96,36 +96,32 @@
   "dashboard": {
     "admin": {
       "metrics": {
-        "avgTime": {
-          "description": "para resolução",
-          "title": "Tempo médio"
+        "inProgress": {
+          "description": "Em atendimento",
+          "title": "Em progresso"
         },
-        "openTickets": {
-          "description": "aguardando ação",
-          "title": "Tickets abertos"
-        },
-        "resolvedThisMonth": {
-          "description": "vs. mês anterior",
-          "title": "Resolvidos este mês"
+        "resolved": {
+          "description": "Resolvidos neste mês",
+          "title": "Resolvidos"
         },
         "totalTickets": {
-          "description": "vs. mês anterior",
+          "description": "Criados neste mês",
           "title": "Total de tickets"
         }
       }
     },
     "employee": {
       "metrics": {
-        "myTickets": {
-          "description": "no total",
-          "title": "Meus tickets"
+        "inProgress": {
+          "description": "Sendo atendidos",
+          "title": "Em andamento"
         },
         "open": {
-          "description": "aguardando ação",
+          "description": "Aguardando atendimento",
           "title": "Abertos"
         },
         "resolved": {
-          "description": "no total",
+          "description": "Atendidos com sucesso",
           "title": "Resolvidos"
         }
       }
@@ -322,9 +318,9 @@
         "title": "Título",
         "updated_at": "Atualizado em"
       },
-      "unassigned": "Sem responsável",
       "emptyMessage": "Nenhum ticket encontrado",
-      "searchPlaceholder": "Buscar tickets"
+      "searchPlaceholder": "Buscar tickets",
+      "unassigned": "Sem responsável"
     }
   },
   "user": {
@@ -368,7 +364,8 @@
         "placeholder": "Digite seu nome",
         "validations": {
           "maxLength": "O nome deve ter no máximo {{max}} caracteres",
-          "minLength": "O nome deve ter no mínimo {{min}} caracteres"
+          "minLength": "O nome deve ter no mínimo {{min}} caracteres",
+          "required": "O nome é obrigatório"
         }
       },
       "role": {

@@ -96,29 +96,25 @@
   "dashboard": {
     "admin": {
       "metrics": {
-        "avgTime": {
-          "description": "to resolution",
-          "title": "Average time"
+        "inProgress": {
+          "description": "Currently being handled",
+          "title": "In Progress"
         },
-        "openTickets": {
-          "description": "awaiting action",
-          "title": "Open tickets"
-        },
-        "resolvedThisMonth": {
-          "description": "vs. last month",
-          "title": "Resolved this month"
+        "resolved": {
+          "description": "Resolved this month",
+          "title": "Resolved"
         },
         "totalTickets": {
-          "description": "vs. last month",
-          "title": "Total tickets"
+          "description": "Created this month",
+          "title": "Total Tickets"
         }
       }
     },
     "employee": {
       "metrics": {
-        "myTickets": {
-          "description": "in total",
-          "title": "My tickets"
+        "inProgress": {
+          "description": "being worked on",
+          "title": "In progress"
         },
         "open": {
           "description": "awaiting action",
@@ -320,9 +316,9 @@
         "title": "Title",
         "updated_at": "Updated at"
       },
-      "unassigned": "Unassigned",
       "emptyMessage": "No tickets found",
-      "searchPlaceholder": "Search tickets"
+      "searchPlaceholder": "Search tickets",
+      "unassigned": "Unassigned"
     }
   },
   "user": {
@@ -366,7 +362,8 @@
         "placeholder": "Enter your name",
         "validations": {
           "maxLength": "Name must not exceed {{max}} characters",
-          "minLength": "Name must be at least {{min}} characters"
+          "minLength": "Name must be at least {{min}} characters",
+          "required": "Name is required"
         }
       },
       "role": {
