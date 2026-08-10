@@ -21,4 +21,5 @@ export const REPOSITORY_TOKENS = {
   UpdateTicketRepository: Symbol.for("UpdateTicketRepository"),
   DeleteTicketRepository: Symbol.for("DeleteTicketRepository"),
   AssignTicketRepository: Symbol.for("AssignTicketRepository"),
+  ResolvedTicketRepository: Symbol.for("ResolvedTicketRepository"),
 } as const;

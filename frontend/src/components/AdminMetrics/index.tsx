@@ -1,7 +1,6 @@
 import { useAdminMetrics } from "@/components/AdminMetrics/hook";
 import { MetricCard } from "@/components/MetricCard";
 import { RecentActivity } from "@/components/RecentActivity";
-import { RecentTicketsTable } from "@/components/RecentTicketsTable";
 
 export function AdminMetrics() {
   const { metrics } = useAdminMetrics();
@@ -13,7 +12,6 @@ export function AdminMetrics() {
 
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
           <RecentActivity />
-          <RecentTicketsTable />
         </div>
       </div>
     </div>

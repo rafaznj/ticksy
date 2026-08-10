@@ -8,7 +8,16 @@ import {
   type SortingState,
   type Updater,
 } from "@tanstack/react-table";
-import { ArrowDown, ArrowUp, ArrowUpDown, Minus, Pencil, Trash2, UserPlus } from "lucide-react";
+import {
+  ArrowDown,
+  ArrowUp,
+  ArrowUpDown,
+  Check,
+  Minus,
+  Pencil,
+  Trash2,
+  UserPlus,
+} from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -38,6 +47,7 @@ interface ActionVisibility<T> {
   deactivate?: (item: T) => boolean;
   delete?: (row: T) => boolean;
   assign?: (item: T) => boolean;
+  resolved?: (item: T) => boolean;
 }
 
 interface ActionsConfig<T> {
@@ -49,11 +59,13 @@ interface ActionsConfig<T> {
     deactivate?: TooltipValue<T>;
     delete?: TooltipValue<T>;
     assign?: TooltipValue<T>;
+    resolved?: TooltipValue<T>;
   };
   edit?: (item: T) => void;
   deactivate?: (item: T) => void;
   delete?: (item: T) => void;
   assign?: (item: T) => void;
+  resolved?: (item: T) => void;
 }
 
 export interface HeaderButtonConfig {
@@ -134,18 +146,22 @@ export function PagedTable<T>({
           const isDeactivateVisible = actions.visibilityAction?.deactivate?.(item) !== false;
           const isDeleteVisible = actions.visibilityAction?.delete?.(item) !== false;
           const isAssignVisible = actions.visibilityAction?.assign?.(item) !== false;
+          const isResolvedVisible = actions.visibilityAction?.resolved?.(item) !== false;
 
           const showEdit = !!actions.edit && isEditVisible;
           const showDeactivate = !!actions.deactivate && isDeactivateVisible;
           const showDelete = !!actions.delete && isDeleteVisible;
+          const showResolved = !!actions.resolved && isResolvedVisible;
           const showAssign = !!actions.assign && isAssignVisible;
 
-          if (!showEdit && !showDeactivate && !showDelete && !showAssign) return null;
+          if (!showEdit && !showDeactivate && !showDelete && !showAssign && !showResolved)
+            return null;
 
           const isEditDisabled = !!actions.disableAction?.edit?.(item);
           const isDeactivateDisabled = !!actions.disableAction?.deactivate?.(item);
           const isDeleteDisabled = !!actions.disableAction?.delete?.(item);
           const isAssignDisabled = !!actions.disableAction?.assign?.(item);
+          const isResolvedDisabled = !!actions.disableAction?.resolved?.(item);
 
           return (
             <div className="flex items-center gap-1">
@@ -240,6 +256,33 @@ export function PagedTable<T>({
                     </TooltipTrigger>
                     <TooltipContent>
                       {resolveTooltip(actions.tooltips?.delete, item, t("general.actions.delete"))}
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+              )}
+
+              {showResolved && (
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <span>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="h-8 w-8 cursor-pointer rounded-md bg-muted text-green-300 hover:bg-muted/80 hover:text-green-700 disabled:cursor-not-allowed disabled:opacity-50"
+                          disabled={isResolvedDisabled}
+                          onClick={() => actions.resolved!(item)}
+                        >
+                          <Check className="h-4 w-4" />
+                        </Button>
+                      </span>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      {resolveTooltip(
+                        actions.tooltips?.resolved,
+                        item,
+                        t("general.actions.resolved"),
+                      )}
                     </TooltipContent>
                   </Tooltip>
                 </TooltipProvider>

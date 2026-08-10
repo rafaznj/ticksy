@@ -4,11 +4,13 @@ import type { ICreateTicketRepository } from "@/modules/ticket/repositories/cont
 import type { IDeleteTicketRepository } from "@/modules/ticket/repositories/contracts/delete";
 import type { IGetTicketByIdRepository } from "@/modules/ticket/repositories/contracts/get-by-id";
 import type { IGetTicketPagedRepository } from "@/modules/ticket/repositories/contracts/get-paged";
+import type { IResolvedTicketRepository } from "@/modules/ticket/repositories/contracts/resolved";
 import type { IUpdateTicketRepository } from "@/modules/ticket/repositories/contracts/update";
 import { CreateTicketRepository } from "@/modules/ticket/repositories/create.repository";
 import { DeleteTicketRepository } from "@/modules/ticket/repositories/delete.repository";
 import { GetTicketByIdRepository } from "@/modules/ticket/repositories/get-by-id.repository";
 import { GetTicketPagedRepository } from "@/modules/ticket/repositories/get-paged.repository";
+import { ResolvedTicketRepository } from "@/modules/ticket/repositories/resolved.repository";
 import { UpdateTicketRepository } from "@/modules/ticket/repositories/update.repository";
 import { AssignTicketService } from "@/modules/ticket/services/assign.service";
 import type { IAssignTicketService } from "@/modules/ticket/services/contracts/assign";
@@ -16,11 +18,13 @@ import type { ICreateTicketService } from "@/modules/ticket/services/contracts/c
 import type { IDeleteTicketService } from "@/modules/ticket/services/contracts/delete";
 import type { IGetTicketByIdService } from "@/modules/ticket/services/contracts/get-by-id";
 import type { IGetTicketPagedService } from "@/modules/ticket/services/contracts/get-paged";
+import type { IResolvedTicketService } from "@/modules/ticket/services/contracts/resolved";
 import type { IUpdateTicketService } from "@/modules/ticket/services/contracts/update";
 import { CreateTicketService } from "@/modules/ticket/services/create.service";
 import { DeleteTicketService } from "@/modules/ticket/services/delete.service";
 import { GetTicketByIdService } from "@/modules/ticket/services/get-by-id.service";
 import { GetTicketPagedService } from "@/modules/ticket/services/get-paged.service";
+import { ResolvedTicketService } from "@/modules/ticket/services/resolved.service";
 import { UpdateTicketService } from "@/modules/ticket/services/update.service";
 import { REPOSITORY_TOKENS } from "@/shared/di/tokens.repositories";
 import { SERVICE_TOKENS } from "@/shared/di/tokens.services";
@@ -55,5 +59,10 @@ export const ticketContainerModule = new ContainerModule(({ bind }: ContainerMod
   bind<IAssignTicketService>(SERVICE_TOKENS.AssignTicketService).to(AssignTicketService);
   bind<IAssignTicketRepository>(REPOSITORY_TOKENS.AssignTicketRepository).to(
     AssignTicketRepository,
+  );
+
+  bind<IResolvedTicketService>(SERVICE_TOKENS.ResolvedTicketService).to(ResolvedTicketService);
+  bind<IResolvedTicketRepository>(REPOSITORY_TOKENS.ResolvedTicketRepository).to(
+    ResolvedTicketRepository,
   );
 });

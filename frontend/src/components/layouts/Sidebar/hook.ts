@@ -32,5 +32,5 @@ export function useAppSidebar() {
     onClick: () => navigate({ to: href }),
   });
 
-  return { groups: visibleGroups, getItemProps };
+  return { groups: visibleGroups, getItemProps, t };
 }

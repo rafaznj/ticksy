@@ -4,6 +4,7 @@
       "emailAlreadyExists": "Já existe um usuário com este e-mail",
       "invalidCredentials": "E-mail ou senha inválidos. Verifique seus dados e tente novamente",
       "refreshTokenMissing": "Sua sessão expirou. Faça login novamente",
+      "registerFailed": "Falha ao criar usuário",
       "userNotFound": "Usuário não encontrado"
     },
     "forgotPassword": {
@@ -94,56 +95,29 @@
     }
   },
   "dashboard": {
-    "admin": {
-      "metrics": {
-        "inProgress": {
-          "description": "Em atendimento",
-          "title": "Em progresso"
-        },
-        "resolved": {
-          "description": "Resolvidos neste mês",
-          "title": "Resolvidos"
-        },
-        "totalTickets": {
-          "description": "Criados neste mês",
-          "title": "Total de tickets"
-        }
-      }
-    },
-    "employee": {
-      "metrics": {
-        "inProgress": {
-          "description": "Sendo atendidos",
-          "title": "Em andamento"
-        },
-        "open": {
-          "description": "Aguardando atendimento",
-          "title": "Abertos"
-        },
-        "resolved": {
-          "description": "Atendidos com sucesso",
-          "title": "Resolvidos"
-        }
-      }
-    },
-    "technical_assistance": {
-      "metrics": {
-        "highPriority": {
-          "description": "requerem atenção",
-          "title": "Alta prioridade"
-        },
-        "inProgress": {
-          "description": "sendo trabalhados",
-          "title": "Em andamento"
-        },
-        "myTickets": {
-          "description": "atribuídos a mim",
-          "title": "Meus tickets"
-        },
-        "resolvedToday": {
-          "description": "concluídos hoje",
-          "title": "Resolvidos hoje"
-        }
+    "metrics": {
+      "open": {
+        "description": "Aguardando atendimento",
+        "title": "Abertos"
+      },
+      "highPriority": {
+        "description": "requerem atenção",
+        "title": "Alta prioridade"
+      },
+      "inProgress": {
+        "description": "sendo trabalhados",
+        "title": "Em andamento"
+      },
+      "myTickets": {
+        "description": "atribuídos a mim",
+        "title": "Meus tickets"
+      },
+      "resolved": {
+        "title": "Resolvidos"
+      },
+      "totalTickets": {
+        "description": "Criados neste mês",
+        "title": "Total de tickets"
       }
     }
   },
@@ -158,7 +132,8 @@
       "edit": "Editar",
       "refresh": "Atualizar",
       "retry": "Tentar novamente",
-      "save": "Salvar"
+      "save": "Salvar",
+      "resolved": "Resolver"
     },
     "copyright": "© {{year}} Ticksy. Todos os direitos reservados",
     "errors": {

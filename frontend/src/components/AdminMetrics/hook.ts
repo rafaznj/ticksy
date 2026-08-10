@@ -34,25 +34,22 @@ export function useAdminMetrics() {
 
     return [
       {
-        title: t("dashboard.admin.metrics.totalTickets.title"),
+        title: t("dashboard.metrics.totalTickets.title"),
         value: String(totalTickets),
-        description: t("dashboard.admin.metrics.totalTickets.description"),
         icon: Tickets,
         iconColor: "text-blue-600 dark:text-blue-400",
         iconBg: "bg-blue-50 dark:bg-blue-950/50",
       },
       {
-        title: t("dashboard.admin.metrics.inProgress.title"),
+        title: t("dashboard.metrics.inProgress.title"),
         value: String(inProgressCount),
-        description: t("dashboard.admin.metrics.inProgress.description"),
         icon: Loader2,
         iconColor: "text-purple-600 dark:text-purple-400",
         iconBg: "bg-purple-50 dark:bg-purple-950/50",
       },
       {
-        title: t("dashboard.admin.metrics.resolved.title"),
+        title: t("dashboard.metrics.resolved.title"),
         value: String(resolvedCount),
-        description: t("dashboard.admin.metrics.resolved.description"),
         icon: CheckCircle,
         iconColor: "text-emerald-600 dark:text-emerald-400",
         iconBg: "bg-emerald-50 dark:bg-emerald-950/50",
