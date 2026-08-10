@@ -4,6 +4,7 @@
       "emailAlreadyExists": "Já existe um usuário com este e-mail",
       "invalidCredentials": "E-mail ou senha inválidos. Verifique seus dados e tente novamente",
       "refreshTokenMissing": "Sua sessão expirou. Faça login novamente",
+      "registerFailed": "Falha ao criar usuário",
       "userNotFound": "Usuário não encontrado"
     },
     "forgotPassword": {
@@ -94,60 +95,29 @@
     }
   },
   "dashboard": {
-    "admin": {
-      "metrics": {
-        "avgTime": {
-          "description": "para resolução",
-          "title": "Tempo médio"
-        },
-        "openTickets": {
-          "description": "aguardando ação",
-          "title": "Tickets abertos"
-        },
-        "resolvedThisMonth": {
-          "description": "vs. mês anterior",
-          "title": "Resolvidos este mês"
-        },
-        "totalTickets": {
-          "description": "vs. mês anterior",
-          "title": "Total de tickets"
-        }
-      }
-    },
-    "employee": {
-      "metrics": {
-        "myTickets": {
-          "description": "no total",
-          "title": "Meus tickets"
-        },
-        "open": {
-          "description": "aguardando ação",
-          "title": "Abertos"
-        },
-        "resolved": {
-          "description": "no total",
-          "title": "Resolvidos"
-        }
-      }
-    },
-    "technical_assistance": {
-      "metrics": {
-        "highPriority": {
-          "description": "requerem atenção",
-          "title": "Alta prioridade"
-        },
-        "inProgress": {
-          "description": "sendo trabalhados",
-          "title": "Em andamento"
-        },
-        "myTickets": {
-          "description": "atribuídos a mim",
-          "title": "Meus tickets"
-        },
-        "resolvedToday": {
-          "description": "concluídos hoje",
-          "title": "Resolvidos hoje"
-        }
+    "metrics": {
+      "open": {
+        "description": "Aguardando atendimento",
+        "title": "Abertos"
+      },
+      "highPriority": {
+        "description": "requerem atenção",
+        "title": "Alta prioridade"
+      },
+      "inProgress": {
+        "description": "sendo trabalhados",
+        "title": "Em andamento"
+      },
+      "myTickets": {
+        "description": "atribuídos a mim",
+        "title": "Meus tickets"
+      },
+      "resolved": {
+        "title": "Resolvidos"
+      },
+      "totalTickets": {
+        "description": "Criados neste mês",
+        "title": "Total de tickets"
       }
     }
   },
@@ -162,7 +132,8 @@
       "edit": "Editar",
       "refresh": "Atualizar",
       "retry": "Tentar novamente",
-      "save": "Salvar"
+      "save": "Salvar",
+      "resolved": "Resolver"
     },
     "copyright": "© {{year}} Ticksy. Todos os direitos reservados",
     "errors": {
@@ -322,9 +293,9 @@
         "title": "Título",
         "updated_at": "Atualizado em"
       },
-      "unassigned": "Sem responsável",
       "emptyMessage": "Nenhum ticket encontrado",
-      "searchPlaceholder": "Buscar tickets"
+      "searchPlaceholder": "Buscar tickets",
+      "unassigned": "Sem responsável"
     }
   },
   "user": {
@@ -368,7 +339,8 @@
         "placeholder": "Digite seu nome",
         "validations": {
           "maxLength": "O nome deve ter no máximo {{max}} caracteres",
-          "minLength": "O nome deve ter no mínimo {{min}} caracteres"
+          "minLength": "O nome deve ter no mínimo {{min}} caracteres",
+          "required": "O nome é obrigatório"
         }
       },
       "role": {

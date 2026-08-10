@@ -15,30 +15,33 @@ import {
 } from "@/components/ui/sidebar";
 import { useDialog } from "@/contexts/use-dialog";
 import { cn } from "@/lib/utils";
+import { useAuthStore } from "@/lib/zustand/use-auth";
+import { UserRoleEnum } from "@/modules/user/enums/role.enum";
 import { DIALOG_KEYS } from "@/shared/constants/dialog-keys";
 import { Plus } from "lucide-react";
-import { useTranslation } from "react-i18next";
 
 export function AppSidebar() {
-  const { t } = useTranslation();
-  const { groups, getItemProps } = useAppSidebar();
+  const { groups, getItemProps, t } = useAppSidebar();
+  const { user } = useAuthStore();
   const { open: openCreateTicketDialog } = useDialog(DIALOG_KEYS.CREATE_TICKET);
 
   return (
     <Sidebar collapsible="icon" variant="floating">
-      <SidebarHeader className="px-2 pt-6 pb-4">
-        <SidebarMenu>
-          <SidebarMenuItem className="flex justify-center">
-            <SidebarMenuButton
-              tooltip={t("sidebar.tooltips.newTicket")}
-              onClick={openCreateTicketDialog}
-              className="h-10 gap-2 justify-center rounded-lg bg-primary text-sm text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground px-5 mx-auto group-data-[collapsible=icon]:w-10 group-data-[collapsible=icon]:p-0"
-            >
-              <Plus className="size-5 shrink-0" />
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-        </SidebarMenu>
-      </SidebarHeader>
+      {user?.role !== UserRoleEnum.TECHNICAL_ASSISTANCE && (
+        <SidebarHeader className="px-2 pt-6 pb-4">
+          <SidebarMenu>
+            <SidebarMenuItem className="flex justify-center">
+              <SidebarMenuButton
+                tooltip={t("sidebar.tooltips.newTicket")}
+                onClick={openCreateTicketDialog}
+                className="h-10 gap-2 justify-center rounded-lg bg-primary text-sm text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground px-5 mx-auto group-data-[collapsible=icon]:w-10 group-data-[collapsible=icon]:p-0"
+              >
+                <Plus className="size-5 shrink-0" />
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          </SidebarMenu>
+        </SidebarHeader>
+      )}
 
       <SidebarContent className="gap-6 py-3">
         {groups.map((group, index) => (

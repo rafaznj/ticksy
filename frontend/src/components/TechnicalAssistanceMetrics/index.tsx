@@ -1,7 +1,5 @@
 import { MetricCard } from "@/components/MetricCard";
-import { PerformanceChart } from "@/components/PerformanceChart";
 import { RecentActivity } from "@/components/RecentActivity";
-import { RecentTicketsTable } from "@/components/RecentTicketsTable";
 import { useTechnicalAssistanceMetrics } from "@/components/TechnicalAssistanceMetrics/hook";
 
 export function TechnicalAssistanceMetrics() {
@@ -13,11 +11,8 @@ export function TechnicalAssistanceMetrics() {
         <MetricCard metrics={metrics} className="lg:grid-cols-4" />
 
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-          <PerformanceChart />
           <RecentActivity />
         </div>
-
-        <RecentTicketsTable />
       </div>
     </div>
   );

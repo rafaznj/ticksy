@@ -25,5 +25,5 @@ export const SERVICE_TOKENS = {
   UpdateTicketService: Symbol.for("UpdateTicketService"),
   DeleteTicketService: Symbol.for("DeleteTicketService"),
   AssignTicketService: Symbol.for("AssignTicketService"),
-  ChangeStatusTicketService: Symbol.for("ChangeStatusTicketService"),
+  ResolvedTicketService: Symbol.for("ResolvedTicketService"),
 } as const;

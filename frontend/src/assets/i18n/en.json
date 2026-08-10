@@ -4,7 +4,8 @@
       "emailAlreadyExists": "A user with this email already exists",
       "invalidCredentials": "Invalid email or password. Please check your credentials and try again",
       "refreshTokenMissing": "Your session has expired. Please sign in again",
-      "userNotFound": "User not found"
+      "userNotFound": "User not found",
+      "registerFailed": "Failed to create user"
     },
     "forgotPassword": {
       "actions": {
@@ -94,60 +95,30 @@
     }
   },
   "dashboard": {
-    "admin": {
-      "metrics": {
-        "avgTime": {
-          "description": "to resolution",
-          "title": "Average time"
-        },
-        "openTickets": {
-          "description": "awaiting action",
-          "title": "Open tickets"
-        },
-        "resolvedThisMonth": {
-          "description": "vs. last month",
-          "title": "Resolved this month"
-        },
-        "totalTickets": {
-          "description": "vs. last month",
-          "title": "Total tickets"
-        }
-      }
-    },
-    "employee": {
-      "metrics": {
-        "myTickets": {
-          "description": "in total",
-          "title": "My tickets"
-        },
-        "open": {
-          "description": "awaiting action",
-          "title": "Open"
-        },
-        "resolved": {
-          "description": "in total",
-          "title": "Resolved"
-        }
-      }
-    },
-    "technical_assistance": {
-      "metrics": {
-        "highPriority": {
-          "description": "require attention",
-          "title": "High priority"
-        },
-        "inProgress": {
-          "description": "being worked on",
-          "title": "In progress"
-        },
-        "myTickets": {
-          "description": "assigned to me",
-          "title": "My tickets"
-        },
-        "resolvedToday": {
-          "description": "completed today",
-          "title": "Resolved today"
-        }
+    "metrics": {
+      "inProgress": {
+        "description": "Currently being handled",
+        "title": "In Progress"
+      },
+      "resolved": {
+        "description": "Resolved this month",
+        "title": "Resolved"
+      },
+      "totalTickets": {
+        "description": "Created this month",
+        "title": "Total Tickets"
+      },
+      "open": {
+        "description": "awaiting action",
+        "title": "Open"
+      },
+      "myTickets": {
+        "description": "assigned to me",
+        "title": "My tickets"
+      },
+      "highPriority": {
+        "description": "require attention",
+        "title": "High priority"
       }
     }
   },
@@ -160,7 +131,8 @@
       "deactivate": "Deactivate",
       "delete": "Delete",
       "edit": "Edit",
-      "save": "Save"
+      "save": "Save",
+      "resolved": "Resolved"
     },
     "copyright": "© {{year}} Ticksy. All rights reserved",
     "errors": {
@@ -320,9 +292,9 @@
         "title": "Title",
         "updated_at": "Updated at"
       },
-      "unassigned": "Unassigned",
       "emptyMessage": "No tickets found",
-      "searchPlaceholder": "Search tickets"
+      "searchPlaceholder": "Search tickets",
+      "unassigned": "Unassigned"
     }
   },
   "user": {
@@ -366,7 +338,8 @@
         "placeholder": "Enter your name",
         "validations": {
           "maxLength": "Name must not exceed {{max}} characters",
-          "minLength": "Name must be at least {{min}} characters"
+          "minLength": "Name must be at least {{min}} characters",
+          "required": "Name is required"
         }
       },
       "role": {

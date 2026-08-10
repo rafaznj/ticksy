@@ -27,6 +27,7 @@ import { UserModel } from "../../user/models/user-model";
 import type { IAssignTicketService } from "../services/contracts/assign";
 import { AssignTicketDto } from "../dtos/assign.dto";
 import type { IQueryOptions } from "../../../shared/types/query-options";
+import type { IResolvedTicketService } from "../services/contracts/resolved";
 
 @Controller("ticket")
 export class TicketController {
@@ -43,6 +44,8 @@ export class TicketController {
     private readonly deleteTicketService: IDeleteTicketService,
     @Inject(SERVICE_TOKENS.AssignTicketService)
     private readonly assignTicketService: IAssignTicketService,
+    @Inject(SERVICE_TOKENS.ResolvedTicketService)
+    private readonly resolvedTicketService: IResolvedTicketService,
   ) {}
 
   @Post("")
@@ -79,5 +82,10 @@ export class TicketController {
   @Patch("/assign")
   async assign(@Body() { id, userId }: AssignTicketDto) {
     return this.assignTicketService.execute(id, userId);
+  }
+
+  @Patch("/resolved/:id")
+  async resolved(@Param("id") id: string) {
+    return this.resolvedTicketService.execute(id);
   }
 }

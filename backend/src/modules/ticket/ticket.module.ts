@@ -9,13 +9,13 @@ import { GetTicketByIdRepository } from "./repositories/get-by-id.repository";
 import { UpdateTicketRepository } from "./repositories/update.repository";
 import { UpdateTicketService } from "./services/update.service";
 import { AssignTicketService } from "./services/assign.service";
-import { ChangeStatusTicketService } from "./services/change-status.service";
+import { ResolvedTicketService } from "./services/resolved.service";
 import { DeleteTicketService } from "./services/delete.service";
 import { DeleteTicketRepository } from "./repositories/delete.repository";
 import { GetTicketPagedService } from "./services/get-paged.service";
 import { GetTicketPagedRepository } from "./repositories/get-paged.repository";
 import { AssignTicketRepository } from "./repositories/assign.repository";
-import { ChangeStatusTicketRepository } from "./repositories/change-status.repository";
+import { ResolvedTicketRepository } from "./repositories/resolved.repository";
 
 @Module({
   controllers: [TicketController],
@@ -69,12 +69,12 @@ import { ChangeStatusTicketRepository } from "./repositories/change-status.repos
       useClass: AssignTicketRepository,
     },
     {
-      provide: SERVICE_TOKENS.ChangeStatusTicketService,
-      useClass: ChangeStatusTicketService,
+      provide: SERVICE_TOKENS.ResolvedTicketService,
+      useClass: ResolvedTicketService,
     },
     {
-      provide: REPOSITORY_TOKENS.ChangeStatusTicketRepository,
-      useClass: ChangeStatusTicketRepository,
+      provide: REPOSITORY_TOKENS.ResolvedTicketRepository,
+      useClass: ResolvedTicketRepository,
     },
   ],
 })
