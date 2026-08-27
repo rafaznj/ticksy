@@ -18,7 +18,7 @@ import { cn } from "@/lib/utils";
 import { useAuthStore } from "@/lib/zustand/use-auth";
 import { UserRoleEnum } from "@/modules/user/enums/role.enum";
 import { DIALOG_KEYS } from "@/shared/constants/dialog-keys";
-import { Plus } from "lucide-react";
+import { LuPlus } from "react-icons/lu";
 
 export function AppSidebar() {
   const { groups, getItemProps, t } = useAppSidebar();
@@ -36,7 +36,7 @@ export function AppSidebar() {
                 onClick={openCreateTicketDialog}
                 className="h-10 gap-2 justify-center rounded-lg bg-primary text-sm text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground px-5 mx-auto group-data-[collapsible=icon]:w-10 group-data-[collapsible=icon]:p-0"
               >
-                <Plus className="size-5 shrink-0" />
+                <LuPlus className="size-5 shrink-0" />
               </SidebarMenuButton>
             </SidebarMenuItem>
           </SidebarMenu>

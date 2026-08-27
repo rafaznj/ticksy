@@ -1,8 +1,8 @@
 import useLanguageToggle from "@/components/LanguageToggle/hook";
 import { Button } from "@/components/ui/button";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
-import { Languages } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { LuLanguages } from "react-icons/lu";
 
 export function LanguageToggle() {
   const { toggleLanguage, language } = useLanguageToggle();
@@ -19,7 +19,7 @@ export function LanguageToggle() {
           onClick={toggleLanguage}
           className="relative size-9 cursor-pointer"
         >
-          <Languages className="size-[1.1rem]" />
+          <LuLanguages className="size-[1.1rem]" />
         </Button>
       </TooltipTrigger>
       <TooltipContent>{t("general.language", { language: nextLanguage })}</TooltipContent>

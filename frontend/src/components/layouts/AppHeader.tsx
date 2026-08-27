@@ -1,9 +1,9 @@
-import { Bell } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { LanguageToggle } from "@/components/LanguageToggle";
+import { LuBell } from "react-icons/lu";
 
 const notifications = [
   {
@@ -40,7 +40,7 @@ export function AppHeader() {
           <Popover>
             <PopoverTrigger asChild>
               <Button variant="ghost" size="icon" className="relative size-9 cursor-pointer">
-                <Bell className="size-[1.1rem]" />
+                <LuBell className="size-[1.1rem]" />
                 {unreadCount > 0 && (
                   <Badge className="absolute -right-0.5 -top-0.5 flex size-4 items-center justify-center rounded-full p-0 text-[10px]">
                     {unreadCount}

@@ -3,10 +3,10 @@ import { container } from "@/lib/inversifyJS/index.container";
 import type { IGetTicketPagedService } from "@/modules/ticket/services/contracts/get-paged";
 import { TicketStatusEnum } from "@/modules/ticket/enums/status.enum";
 import { SERVICE_TOKENS } from "@/shared/di/tokens.services";
-import { AlertCircle, CheckCircle, Loader2 } from "lucide-react";
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { useGetTicketPaged } from "@/modules/ticket/query-hooks/use-get-paged";
+import { LuCircleCheck, LuLoader, LuCircleAlert } from "react-icons/lu";
 
 export function useEmployeeMetrics() {
   const { t } = useTranslation();
@@ -36,21 +36,21 @@ export function useEmployeeMetrics() {
       {
         title: t("dashboard.metrics.open.title"),
         value: String(openCount),
-        icon: AlertCircle,
+        icon: LuCircleAlert,
         iconColor: "text-blue-600 dark:text-blue-400",
         iconBg: "bg-blue-50 dark:bg-blue-950/50",
       },
       {
         title: t("dashboard.metrics.inProgress.title"),
         value: String(inProgressCount),
-        icon: Loader2,
+        icon: LuLoader,
         iconColor: "text-purple-600 dark:text-purple-400",
         iconBg: "bg-purple-50 dark:bg-purple-950/50",
       },
       {
         title: t("dashboard.metrics.resolved.title"),
         value: String(resolved),
-        icon: CheckCircle,
+        icon: LuCircleCheck,
         iconColor: "text-emerald-600 dark:text-emerald-400",
         iconBg: "bg-emerald-50 dark:bg-emerald-950/50",
       },

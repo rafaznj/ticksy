@@ -1,14 +1,14 @@
-import type { LucideIcon } from "lucide-react";
-
-import { TrendingUp, TrendingDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+
+import type { IconType } from "react-icons/lib";
+import { LuTrendingDown, LuTrendingUp } from "react-icons/lu";
 
 export interface MetricCardItem {
   title: string;
   value: string | number;
   description?: string;
-  icon: LucideIcon;
+  icon: IconType;
   trend?: "up" | "down";
   trendValue?: string;
   iconColor?: string;
@@ -66,9 +66,9 @@ function MetricCardItem({
               )}
             >
               {trend === "up" ? (
-                <TrendingUp className="size-3" />
+                <LuTrendingUp className="size-3" />
               ) : (
-                <TrendingDown className="size-3" />
+                <LuTrendingDown className="size-3" />
               )}
               {trendValue}
             </span>

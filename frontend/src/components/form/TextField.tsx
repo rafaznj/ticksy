@@ -1,5 +1,4 @@
 import { useState, type ComponentProps } from "react";
-import { Eye, EyeOff } from "lucide-react";
 
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -7,6 +6,7 @@ import { useFieldContext } from "@/hooks/use-form";
 import { FieldErrors } from "@/components/form/FieldErrors";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { LuEye, LuEyeOff } from "react-icons/lu";
 
 interface TextFieldProps extends Omit<
   ComponentProps<typeof Input>,
@@ -61,7 +61,7 @@ export function TextField({ label, required, type, ...props }: TextFieldProps) {
             className=" absolute inset-y-0 right-0 h-full w-11 rounded-none border-0 shadow-none hover:bg-transparent focus-visible:ring-0 active:translate-y-0 cursor-pointer"
           >
             {" "}
-            {showPassword ? <EyeOff className="size-4" /> : <Eye className="size-4" />}{" "}
+            {showPassword ? <LuEyeOff className="size-4" /> : <LuEye className="size-4" />}{" "}
           </Button>
         )}
       </div>

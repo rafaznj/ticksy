@@ -8,16 +8,6 @@ import {
   type SortingState,
   type Updater,
 } from "@tanstack/react-table";
-import {
-  ArrowDown,
-  ArrowUp,
-  ArrowUpDown,
-  Check,
-  Minus,
-  Pencil,
-  Trash2,
-  UserPlus,
-} from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -39,6 +29,16 @@ import {
 } from "@/components/ui/table";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { useTranslation } from "react-i18next";
+import {
+  LuArrowDown,
+  LuArrowUp,
+  LuArrowUpDown,
+  LuCheck,
+  LuMinus,
+  LuPencil,
+  LuTrash2,
+  LuUserPlus,
+} from "react-icons/lu";
 
 type TooltipValue<T> = string | ((item: T) => string);
 
@@ -177,7 +177,7 @@ export function PagedTable<T>({
                           disabled={isEditDisabled}
                           onClick={() => actions.edit!(item)}
                         >
-                          <Pencil className="h-4 w-4" />
+                          <LuPencil className="h-4 w-4" />
                         </Button>
                       </span>
                     </TooltipTrigger>
@@ -200,7 +200,7 @@ export function PagedTable<T>({
                           disabled={isDeactivateDisabled}
                           onClick={() => actions.deactivate!(item)}
                         >
-                          <Minus className="h-4 w-4" />
+                          <LuMinus className="h-4 w-4" />
                         </Button>
                       </span>
                     </TooltipTrigger>
@@ -227,7 +227,7 @@ export function PagedTable<T>({
                           disabled={isAssignDisabled}
                           onClick={() => actions.assign!(item)}
                         >
-                          <UserPlus className="h-4 w-4" />
+                          <LuUserPlus className="h-4 w-4" />
                         </Button>
                       </span>
                     </TooltipTrigger>
@@ -250,7 +250,7 @@ export function PagedTable<T>({
                           disabled={isDeleteDisabled}
                           onClick={() => actions.delete!(item)}
                         >
-                          <Trash2 className="h-4 w-4" />
+                          <LuTrash2 className="h-4 w-4" />
                         </Button>
                       </span>
                     </TooltipTrigger>
@@ -273,7 +273,7 @@ export function PagedTable<T>({
                           disabled={isResolvedDisabled}
                           onClick={() => actions.resolved!(item)}
                         >
-                          <Check className="h-4 w-4" />
+                          <LuCheck className="h-4 w-4" />
                         </Button>
                       </span>
                     </TooltipTrigger>
@@ -346,9 +346,9 @@ export function PagedTable<T>({
                           onClick={header.column.getToggleSortingHandler()}
                         >
                           {flexRender(header.column.columnDef.header, header.getContext())}
-                          {sortDirection === "asc" && <ArrowUp className="h-3.5 w-3.5" />}
-                          {sortDirection === "desc" && <ArrowDown className="h-3.5 w-3.5" />}
-                          {!sortDirection && <ArrowUpDown className="h-3.5 w-3.5 opacity-40" />}
+                          {sortDirection === "asc" && <LuArrowUp className="h-3.5 w-3.5" />}
+                          {sortDirection === "desc" && <LuArrowDown className="h-3.5 w-3.5" />}
+                          {!sortDirection && <LuArrowUpDown className="h-3.5 w-3.5 opacity-40" />}
                         </button>
                       ) : (
                         flexRender(header.column.columnDef.header, header.getContext())

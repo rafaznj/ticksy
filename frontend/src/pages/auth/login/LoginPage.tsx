@@ -4,6 +4,7 @@ import { useNavigate } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { LoginForm } from "@/pages/auth/login/form";
+import { DemoPreview } from "@/components/layouts/demo-preview";
 
 export default function LoginPage() {
   const { t } = useTranslation();
@@ -26,10 +27,10 @@ export default function LoginPage() {
         <div className="relative z-10 flex h-full flex-col justify-between p-12">
           <div>
             <h1 className="text-4xl font-bold tracking-tight text-white">Ticksy</h1>
+          </div>
 
-            <p className="mt-6 max-w-md text-lg leading-8 text-slate-300">
-              Manage your tickets with speed, organization and simplicity.
-            </p>
+          <div className="flex flex-1 items-center justify-center py-10">
+            <DemoPreview />
           </div>
 
           <p className="text-sm text-slate-400">{t("general.copyright", { year: 2026 })}</p>

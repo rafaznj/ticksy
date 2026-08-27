@@ -19,9 +19,9 @@ import { useAuthStore } from "@/lib/zustand/use-auth";
 import { useLogout } from "@/modules/auth/query-hooks/mutation/use-logout";
 import { enumToLabels } from "@/shared/utils/enum-to-labels";
 import { useNavigate } from "@tanstack/react-router";
-import { ChevronsUpDown, User, LogOut } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { UserRoleEnum } from "@/modules/user/enums/role.enum";
+import { LuChevronsUpDown, LuLogOut, LuUser } from "react-icons/lu";
 
 export function AppSidebarFooter() {
   const { t } = useTranslation();
@@ -59,7 +59,7 @@ export function AppSidebarFooter() {
                   </div>
                 )}
                 {!collapsed && (
-                  <ChevronsUpDown className="ml-auto size-4 shrink-0 text-sidebar-foreground/40" />
+                  <LuChevronsUpDown className="ml-auto size-4 shrink-0 text-sidebar-foreground/40" />
                 )}
               </SidebarMenuButton>
             </DropdownMenuTrigger>
@@ -82,7 +82,7 @@ export function AppSidebarFooter() {
                   })
                 }
               >
-                <User className="mr-2 size-4" />
+                <LuUser className="mr-2 size-4" />
                 {t("sidebar.labels.editProfile")}
               </DropdownMenuItem>
 
@@ -90,7 +90,7 @@ export function AppSidebarFooter() {
                 className="cursor-pointer hover:text-destructive focus:text-destructive data-highlighted:text-destructive"
                 onClick={() => handleLogout()}
               >
-                <LogOut className="mr-2 size-4" />
+                <LuLogOut className="mr-2 size-4" />
                 {t("sidebar.labels.logout")}
               </DropdownMenuItem>
             </DropdownMenuContent>

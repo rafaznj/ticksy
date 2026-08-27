@@ -1,5 +1,4 @@
 import { useRef } from "react";
-import { Check, ChevronsUpDown, Loader2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 import { Button } from "@/components/ui/button";
@@ -17,6 +16,7 @@ import { cn } from "@/lib/utils";
 import { FieldErrors } from "@/components/form/FieldErrors";
 import { useAsyncSelectField } from "@/hooks/use-async-select-field";
 import type { IBaseGetPagedService } from "@/shared/base/services/contracts/get-paged";
+import { LuCheck, LuChevronsUpDown, LuLoader } from "react-icons/lu";
 
 interface AsyncSelectFieldProps<T> {
   service: IBaseGetPagedService<T>;
@@ -111,7 +111,7 @@ export function AsyncSelectField<T>({
                 {selectedLabel ?? resolvedPlaceholder}
               </span>
 
-              <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+              <LuChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
             </Button>
           </PopoverTrigger>
 
@@ -138,7 +138,7 @@ export function AsyncSelectField<T>({
                       value={option.value}
                       onSelect={() => handleSelect(option)}
                     >
-                      <Check
+                      <LuCheck
                         className={cn(
                           "mr-2 h-4 w-4",
                           field.state.value === option.value ? "opacity-100" : "opacity-0",
@@ -152,7 +152,7 @@ export function AsyncSelectField<T>({
 
                 {isLoading && (
                   <div className="flex items-center justify-center py-3">
-                    <Loader2 className="h-4 w-4 animate-spin text-muted-foreground" />
+                    <LuLoader className="h-4 w-4 animate-spin text-muted-foreground" />
                   </div>
                 )}
               </CommandList>

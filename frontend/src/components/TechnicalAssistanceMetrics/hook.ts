@@ -4,10 +4,10 @@ import type { IGetTicketPagedService } from "@/modules/ticket/services/contracts
 import { TicketPriorityEnum } from "@/modules/ticket/enums/priority.enum";
 import { TicketStatusEnum } from "@/modules/ticket/enums/status.enum";
 import { SERVICE_TOKENS } from "@/shared/di/tokens.services";
-import { AlertTriangle, CheckCircle, Loader2, Ticket } from "lucide-react";
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { useGetTicketPaged } from "@/modules/ticket/query-hooks/use-get-paged";
+import { LuLoader, LuTicket, LuCircleCheck, LuTriangleAlert } from "react-icons/lu";
 
 export function useTechnicalAssistanceMetrics() {
   const { t } = useTranslation();
@@ -44,28 +44,28 @@ export function useTechnicalAssistanceMetrics() {
       {
         title: t("dashboard.metrics.myTickets.title"),
         value: String(myTicketsCount),
-        icon: Ticket,
+        icon: LuTicket,
         iconColor: "text-blue-600 dark:text-blue-400",
         iconBg: "bg-blue-50 dark:bg-blue-950/50",
       },
       {
         title: t("dashboard.metrics.inProgress.title"),
         value: String(inProgressCount),
-        icon: Loader2,
+        icon: LuLoader,
         iconColor: "text-purple-600 dark:text-purple-400",
         iconBg: "bg-purple-50 dark:bg-purple-950/50",
       },
       {
         title: t("dashboard.metrics.resolved.title"),
         value: String(resolvedCount),
-        icon: CheckCircle,
+        icon: LuCircleCheck,
         iconColor: "text-emerald-600 dark:text-emerald-400",
         iconBg: "bg-emerald-50 dark:bg-emerald-950/50",
       },
       {
         title: t("dashboard.metrics.highPriority.title"),
         value: String(highPriorityCount),
-        icon: AlertTriangle,
+        icon: LuTriangleAlert,
         iconColor: "text-red-600 dark:text-red-400",
         iconBg: "bg-red-50 dark:bg-red-950/50",
       },
