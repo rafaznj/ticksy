@@ -1,6 +1,7 @@
 import { AssignTicketForm } from "@/components/forms/ticket/assign";
 import { DeleteTicketForm } from "@/components/forms/ticket/delete";
 import { EditTicketForm } from "@/components/forms/ticket/edit";
+import { UnassignTicketForm } from "@/components/forms/ticket/unassign";
 import { PagedTable } from "@/components/PagedTable";
 import { useTicketsPagedTable } from "@/components/tables/tickets/hook";
 
@@ -51,6 +52,7 @@ export function TicketsPagedTable() {
       <EditTicketForm />
       <DeleteTicketForm />
       <AssignTicketForm />
+      <UnassignTicketForm />
     </>
   );
 }

@@ -37,6 +37,7 @@ import {
   LuMinus,
   LuPencil,
   LuTrash2,
+  LuUserMinus,
   LuUserPlus,
 } from "react-icons/lu";
 
@@ -47,6 +48,7 @@ interface ActionVisibility<T> {
   deactivate?: (item: T) => boolean;
   delete?: (row: T) => boolean;
   assign?: (item: T) => boolean;
+  unassign?: (item: T) => boolean;
   resolved?: (item: T) => boolean;
 }
 
@@ -59,12 +61,14 @@ interface ActionsConfig<T> {
     deactivate?: TooltipValue<T>;
     delete?: TooltipValue<T>;
     assign?: TooltipValue<T>;
+    unassign?: TooltipValue<T>;
     resolved?: TooltipValue<T>;
   };
   edit?: (item: T) => void;
   deactivate?: (item: T) => void;
   delete?: (item: T) => void;
   assign?: (item: T) => void;
+  unassign?: (item: T) => void;
   resolved?: (item: T) => void;
 }
 
@@ -146,6 +150,7 @@ export function PagedTable<T>({
           const isDeactivateVisible = actions.visibilityAction?.deactivate?.(item) !== false;
           const isDeleteVisible = actions.visibilityAction?.delete?.(item) !== false;
           const isAssignVisible = actions.visibilityAction?.assign?.(item) !== false;
+          const isUnassignVisible = actions.visibilityAction?.unassign?.(item) !== false;
           const isResolvedVisible = actions.visibilityAction?.resolved?.(item) !== false;
 
           const showEdit = !!actions.edit && isEditVisible;
@@ -153,14 +158,23 @@ export function PagedTable<T>({
           const showDelete = !!actions.delete && isDeleteVisible;
           const showResolved = !!actions.resolved && isResolvedVisible;
           const showAssign = !!actions.assign && isAssignVisible;
+          const showUnassign = !!actions.unassign && isUnassignVisible;
 
-          if (!showEdit && !showDeactivate && !showDelete && !showAssign && !showResolved)
+          if (
+            !showEdit &&
+            !showDeactivate &&
+            !showDelete &&
+            !showAssign &&
+            !showUnassign &&
+            !showResolved
+          )
             return null;
 
           const isEditDisabled = !!actions.disableAction?.edit?.(item);
           const isDeactivateDisabled = !!actions.disableAction?.deactivate?.(item);
           const isDeleteDisabled = !!actions.disableAction?.delete?.(item);
           const isAssignDisabled = !!actions.disableAction?.assign?.(item);
+          const isUnassignDisabled = !!actions.disableAction?.unassign?.(item);
           const isResolvedDisabled = !!actions.disableAction?.resolved?.(item);
 
           return (
@@ -233,6 +247,33 @@ export function PagedTable<T>({
                     </TooltipTrigger>
                     <TooltipContent>
                       {resolveTooltip(actions.tooltips?.assign, item, t("general.actions.assign"))}
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+              )}
+
+              {showUnassign && (
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <span>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="h-8 w-8 cursor-pointer rounded-md bg-muted text-blue-600 hover:bg-muted/80 hover:text-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
+                          disabled={isUnassignDisabled}
+                          onClick={() => actions.unassign!(item)}
+                        >
+                          <LuUserMinus className="h-4 w-4" />
+                        </Button>
+                      </span>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      {resolveTooltip(
+                        actions.tooltips?.unassign,
+                        item,
+                        t("general.actions.unassign"),
+                      )}
                     </TooltipContent>
                   </Tooltip>
                 </TooltipProvider>

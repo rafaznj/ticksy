@@ -9,6 +9,7 @@ export const DIALOG_KEYS = {
   UPDATE_TICKET: "update-ticket",
   DELETE_TICKET: "delete-ticket",
   ASSIGN_TICKET: "assign-ticket",
+  UNASSIGN_TICKET: "unassign-ticket",
 } as const;
 
 export type DialogKey = (typeof DIALOG_KEYS)[keyof typeof DIALOG_KEYS];

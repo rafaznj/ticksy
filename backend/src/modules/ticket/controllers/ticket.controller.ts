@@ -28,6 +28,8 @@ import type { IAssignTicketService } from "../services/contracts/assign";
 import { AssignTicketDto } from "../dtos/assign.dto";
 import type { IQueryOptions } from "../../../shared/types/query-options";
 import type { IResolvedTicketService } from "../services/contracts/resolved";
+import type { IUnassignTicketService } from "../services/contracts/unassign";
+import { UnassignTicketDto } from "../dtos/unassign.dto";
 
 @Controller("ticket")
 export class TicketController {
@@ -44,6 +46,8 @@ export class TicketController {
     private readonly deleteTicketService: IDeleteTicketService,
     @Inject(SERVICE_TOKENS.AssignTicketService)
     private readonly assignTicketService: IAssignTicketService,
+    @Inject(SERVICE_TOKENS.UnassignTicketService)
+    private readonly unassignTicketService: IUnassignTicketService,
     @Inject(SERVICE_TOKENS.ResolvedTicketService)
     private readonly resolvedTicketService: IResolvedTicketService,
   ) {}
@@ -82,6 +86,11 @@ export class TicketController {
   @Patch("/assign")
   async assign(@Body() { id, userId }: AssignTicketDto) {
     return this.assignTicketService.execute(id, userId);
+  }
+
+  @Patch("/unassign")
+  async unassign(@Body() { id }: UnassignTicketDto) {
+    return this.unassignTicketService.execute(id);
   }
 
   @Patch("/resolved/:id")

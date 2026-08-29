@@ -125,6 +125,7 @@
   "general": {
     "actions": {
       "assign": "Assign",
+      "unassign": "Unassign",
       "back": "Back",
       "cancel": "Cancel",
       "close": "Close",
@@ -175,16 +176,27 @@
   "ticket": {
     "assign": {
       "actions": {
-        "assigning": "Assigning...",
         "cancel": "Cancel",
         "confirm": "Assign"
       },
-      "description": "Selecione um técnico para vincular este ticket",
+      "description": "Select a technician to assign this ticket",
       "messages": {
         "failed": "Unable to assign the ticket",
         "success": "Ticket assigned successfully"
       },
       "title": "Assign ticket"
+    },
+    "unassign": {
+      "actions": {
+        "cancel": "Cancel",
+        "confirm": "Unassign"
+      },
+      "description": "Are you sure you want to unassign this ticket: {{user}}?",
+      "messages": {
+        "failed": "Unable to unassign the ticket",
+        "success": "Ticket unassigned successfully"
+      },
+      "title": "Unassign ticket"
     },
     "create": {
       "actions": {

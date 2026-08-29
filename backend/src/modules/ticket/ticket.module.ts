@@ -16,6 +16,8 @@ import { GetTicketPagedService } from "./services/get-paged.service";
 import { GetTicketPagedRepository } from "./repositories/get-paged.repository";
 import { AssignTicketRepository } from "./repositories/assign.repository";
 import { ResolvedTicketRepository } from "./repositories/resolved.repository";
+import { UnassignTicketService } from "./services/unassign.service";
+import { UnassignTicketRepository } from "./repositories/unassign.repository";
 
 @Module({
   controllers: [TicketController],
@@ -67,6 +69,14 @@ import { ResolvedTicketRepository } from "./repositories/resolved.repository";
     {
       provide: REPOSITORY_TOKENS.AssignTicketRepository,
       useClass: AssignTicketRepository,
+    },
+    {
+      provide: SERVICE_TOKENS.UnassignTicketService,
+      useClass: UnassignTicketService,
+    },
+    {
+      provide: REPOSITORY_TOKENS.UnassignTicketRepository,
+      useClass: UnassignTicketRepository,
     },
     {
       provide: SERVICE_TOKENS.ResolvedTicketService,

@@ -46,6 +46,7 @@ export function useTicketsPagedTable() {
   const { open: openEditTicket } = useDialog<TicketEntity>(DIALOG_KEYS.UPDATE_TICKET);
   const { open: openDeleteTicket } = useDialog<TicketEntity>(DIALOG_KEYS.DELETE_TICKET);
   const { open: openAssignTicket } = useDialog<TicketEntity>(DIALOG_KEYS.ASSIGN_TICKET);
+  const { open: openUnassignTicket } = useDialog<TicketEntity>(DIALOG_KEYS.UNASSIGN_TICKET);
 
   const resolvedTicketService = container.get<IResolvedTicketService>(
     SERVICE_TOKENS.ResolvedTicketService,
@@ -68,6 +69,7 @@ export function useTicketsPagedTable() {
       edit: (ticket: TicketPagedDto) => openEditTicket(ticket),
       delete: (ticket: TicketPagedDto) => openDeleteTicket(ticket),
       assign: (ticket: TicketPagedDto) => openAssignTicket(ticket),
+      unassign: (ticket: TicketPagedDto) => openUnassignTicket(ticket),
       resolved: (ticket: TicketPagedDto) => handleResolved(ticket.id),
       visibilityAction: {
         edit: (ticket: TicketPagedDto) =>
@@ -75,7 +77,8 @@ export function useTicketsPagedTable() {
           ticket.status !== TicketStatusEnum.RESOLVED,
         delete: (ticket: TicketPagedDto) =>
           !ticket.assignedToName || ticket.status !== TicketStatusEnum.RESOLVED,
-        assign: (ticket: TicketPagedDto) => !ticket.assignedToName && isAdmin,
+        assign: (ticket: TicketPagedDto) => isAdmin && ticket.assignedToId === null,
+        unassign: (ticket: TicketPagedDto) => isAdmin && ticket.assignedToId !== null,
         resolved: (ticket: TicketPagedDto) =>
           ticket.status !== TicketStatusEnum.RESOLVED &&
           (ticket.assignedToId === user?.id || isAdmin) &&
@@ -86,9 +89,19 @@ export function useTicketsPagedTable() {
         delete: () => t("general.actions.delete"),
         assign: () => t("general.actions.assign"),
         resolved: () => t("general.actions.resolved"),
+        unassign: () => t("general.actions.unassign"),
       },
     };
-  }, [openEditTicket, openDeleteTicket, openAssignTicket, handleResolved, user?.id, isAdmin, t]);
+  }, [
+    openEditTicket,
+    openDeleteTicket,
+    openAssignTicket,
+    openUnassignTicket,
+    handleResolved,
+    user?.id,
+    isAdmin,
+    t,
+  ]);
 
   return {
     data,
