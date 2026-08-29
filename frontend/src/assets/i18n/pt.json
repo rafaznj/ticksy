@@ -181,7 +181,6 @@
         "cancel": "Cancelar",
         "confirm": "Vincular"
       },
-      "description": "Selecione um técnico para vincular este ticket",
       "messages": {
         "failed": "Não foi possível vincular o ticket",
         "success": "Ticket vinculado com sucesso"

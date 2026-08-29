@@ -2,7 +2,7 @@ import { useUserProfileEditForm } from "@/components/forms/user/profile-edit/hoo
 import { Button } from "@/components/ui/button";
 
 export function UserProfileEditForm() {
-  const { form, t, isPending, redirect, handleSubmit, navigate } = useUserProfileEditForm();
+  const { form, t, isPending, handleSubmit, navigate } = useUserProfileEditForm();
 
   return (
     <form onSubmit={handleSubmit} className="space-y-8">
@@ -32,7 +32,7 @@ export function UserProfileEditForm() {
           type="button"
           variant="outline"
           className="min-w-32 cursor-pointer py-6 border-destructive text-base text-destructive hover:text-white hover:bg-destructive"
-          onClick={() => navigate({ to: redirect })}
+          onClick={() => navigate({ to: "/home" })}
         >
           {t("general.actions.cancel")}
         </Button>

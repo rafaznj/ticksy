@@ -21,7 +21,7 @@ import { enumToLabels } from "@/shared/utils/enum-to-labels";
 import { useNavigate } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import { UserRoleEnum } from "@/modules/user/enums/role.enum";
-import { LuChevronsUpDown, LuLogOut, LuUser } from "react-icons/lu";
+import { LuChevronsUpDown, LuLogOut, LuPencil } from "react-icons/lu";
 
 export function AppSidebarFooter() {
   const { t } = useTranslation();
@@ -72,7 +72,7 @@ export function AppSidebarFooter() {
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem
-                className="cursor-pointer hover:text-orange-500 focus:text-orange-500 data-highlighted:text-orange-500"
+                className="cursor-pointer hover:text-orange-500 focus:text-orange-500 data-highlighted:text-orange-500 transform transition-all duration-150"
                 onClick={() =>
                   navigate({
                     to: "/user/profile",
@@ -82,12 +82,12 @@ export function AppSidebarFooter() {
                   })
                 }
               >
-                <LuUser className="mr-2 size-4" />
+                <LuPencil className="mr-2 size-4" />
                 {t("sidebar.labels.editProfile")}
               </DropdownMenuItem>
 
               <DropdownMenuItem
-                className="cursor-pointer hover:text-destructive focus:text-destructive data-highlighted:text-destructive"
+                className="cursor-pointer hover:text-destructive focus:text-destructive data-highlighted:text-destructive transform transition-all duration-150 "
                 onClick={() => handleLogout()}
               >
                 <LuLogOut className="mr-2 size-4" />

@@ -10,6 +10,7 @@ export function AssignTicketForm() {
     isBlurred,
     canSubmit,
     isSubmitting,
+    data,
     handleSubmit,
     close,
   } = useAssignTicketForm();
@@ -21,7 +22,7 @@ export function AssignTicketForm() {
       onConfirm={handleSubmit}
       isConfirmDisabled={!isBlurred || !canSubmit || isSubmitting}
       title={t("ticket.assign.title")}
-      description={t("ticket.assign.description")}
+      description={data?.title}
       cancelText={t("ticket.assign.actions.cancel")}
       confirmText={t("ticket.assign.actions.confirm")}
     >

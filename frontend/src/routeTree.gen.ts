@@ -8,15 +8,24 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
+import { createFileRoute } from '@tanstack/react-router'
+
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as RegisterRouteImport } from './routes/register'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
 import { Route as AuthenticatedIndexRouteImport } from './routes/_authenticated/index'
-import { Route as AuthenticatedTicketsRouteImport } from './routes/_authenticated/tickets'
 import { Route as AuthenticatedHomeRouteImport } from './routes/_authenticated/home'
-import { Route as AuthenticatedUserUsersRouteImport } from './routes/_authenticated/user/users'
-import { Route as AuthenticatedUserProfileRouteImport } from './routes/_authenticated/user/profile'
+
+const AuthenticatedTicketsLazyRouteImport = createFileRoute(
+  '/_authenticated/tickets',
+)()
+const AuthenticatedUserUsersLazyRouteImport = createFileRoute(
+  '/_authenticated/user/users',
+)()
+const AuthenticatedUserProfileLazyRouteImport = createFileRoute(
+  '/_authenticated/user/profile',
+)()
 
 const RegisterRoute = RegisterRouteImport.update({
   id: '/register',
@@ -37,45 +46,53 @@ const AuthenticatedIndexRoute = AuthenticatedIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
-const AuthenticatedTicketsRoute = AuthenticatedTicketsRouteImport.update({
-  id: '/tickets',
-  path: '/tickets',
-  getParentRoute: () => AuthenticatedRoute,
-} as any)
+const AuthenticatedTicketsLazyRoute =
+  AuthenticatedTicketsLazyRouteImport.update({
+    id: '/tickets',
+    path: '/tickets',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any).lazy(() =>
+    import('./routes/_authenticated/tickets.lazy').then((d) => d.Route),
+  )
 const AuthenticatedHomeRoute = AuthenticatedHomeRouteImport.update({
   id: '/home',
   path: '/home',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
-const AuthenticatedUserUsersRoute = AuthenticatedUserUsersRouteImport.update({
-  id: '/user/users',
-  path: '/user/users',
-  getParentRoute: () => AuthenticatedRoute,
-} as any)
-const AuthenticatedUserProfileRoute =
-  AuthenticatedUserProfileRouteImport.update({
+const AuthenticatedUserUsersLazyRoute =
+  AuthenticatedUserUsersLazyRouteImport.update({
+    id: '/user/users',
+    path: '/user/users',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any).lazy(() =>
+    import('./routes/_authenticated/user/users.lazy').then((d) => d.Route),
+  )
+const AuthenticatedUserProfileLazyRoute =
+  AuthenticatedUserProfileLazyRouteImport.update({
     id: '/user/profile',
     path: '/user/profile',
     getParentRoute: () => AuthenticatedRoute,
-  } as any)
+  } as any).lazy(() =>
+    import('./routes/_authenticated/user/profile.lazy').then((d) => d.Route),
+  )
 
 export interface FileRoutesByFullPath {
   '/': typeof AuthenticatedIndexRoute
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
   '/home': typeof AuthenticatedHomeRoute
-  '/tickets': typeof AuthenticatedTicketsRoute
-  '/user/profile': typeof AuthenticatedUserProfileRoute
-  '/user/users': typeof AuthenticatedUserUsersRoute
+  '/tickets': typeof AuthenticatedTicketsLazyRoute
+  '/user/profile': typeof AuthenticatedUserProfileLazyRoute
+  '/user/users': typeof AuthenticatedUserUsersLazyRoute
 }
 export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
   '/home': typeof AuthenticatedHomeRoute
-  '/tickets': typeof AuthenticatedTicketsRoute
+  '/tickets': typeof AuthenticatedTicketsLazyRoute
   '/': typeof AuthenticatedIndexRoute
-  '/user/profile': typeof AuthenticatedUserProfileRoute
-  '/user/users': typeof AuthenticatedUserUsersRoute
+  '/user/profile': typeof AuthenticatedUserProfileLazyRoute
+  '/user/users': typeof AuthenticatedUserUsersLazyRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -83,10 +100,10 @@ export interface FileRoutesById {
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
   '/_authenticated/home': typeof AuthenticatedHomeRoute
-  '/_authenticated/tickets': typeof AuthenticatedTicketsRoute
+  '/_authenticated/tickets': typeof AuthenticatedTicketsLazyRoute
   '/_authenticated/': typeof AuthenticatedIndexRoute
-  '/_authenticated/user/profile': typeof AuthenticatedUserProfileRoute
-  '/_authenticated/user/users': typeof AuthenticatedUserUsersRoute
+  '/_authenticated/user/profile': typeof AuthenticatedUserProfileLazyRoute
+  '/_authenticated/user/users': typeof AuthenticatedUserUsersLazyRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -159,7 +176,7 @@ declare module '@tanstack/react-router' {
       id: '/_authenticated/tickets'
       path: '/tickets'
       fullPath: '/tickets'
-      preLoaderRoute: typeof AuthenticatedTicketsRouteImport
+      preLoaderRoute: typeof AuthenticatedTicketsLazyRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
     '/_authenticated/home': {
@@ -173,14 +190,14 @@ declare module '@tanstack/react-router' {
       id: '/_authenticated/user/users'
       path: '/user/users'
       fullPath: '/user/users'
-      preLoaderRoute: typeof AuthenticatedUserUsersRouteImport
+      preLoaderRoute: typeof AuthenticatedUserUsersLazyRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
     '/_authenticated/user/profile': {
       id: '/_authenticated/user/profile'
       path: '/user/profile'
       fullPath: '/user/profile'
-      preLoaderRoute: typeof AuthenticatedUserProfileRouteImport
+      preLoaderRoute: typeof AuthenticatedUserProfileLazyRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
   }
@@ -188,18 +205,18 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedRouteChildren {
   AuthenticatedHomeRoute: typeof AuthenticatedHomeRoute
-  AuthenticatedTicketsRoute: typeof AuthenticatedTicketsRoute
+  AuthenticatedTicketsLazyRoute: typeof AuthenticatedTicketsLazyRoute
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
-  AuthenticatedUserProfileRoute: typeof AuthenticatedUserProfileRoute
-  AuthenticatedUserUsersRoute: typeof AuthenticatedUserUsersRoute
+  AuthenticatedUserProfileLazyRoute: typeof AuthenticatedUserProfileLazyRoute
+  AuthenticatedUserUsersLazyRoute: typeof AuthenticatedUserUsersLazyRoute
 }
 
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedHomeRoute: AuthenticatedHomeRoute,
-  AuthenticatedTicketsRoute: AuthenticatedTicketsRoute,
+  AuthenticatedTicketsLazyRoute: AuthenticatedTicketsLazyRoute,
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
-  AuthenticatedUserProfileRoute: AuthenticatedUserProfileRoute,
-  AuthenticatedUserUsersRoute: AuthenticatedUserUsersRoute,
+  AuthenticatedUserProfileLazyRoute: AuthenticatedUserProfileLazyRoute,
+  AuthenticatedUserUsersLazyRoute: AuthenticatedUserUsersLazyRoute,
 }
 
 const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(

@@ -180,7 +180,6 @@
         "cancel": "Cancel",
         "confirm": "Assign"
       },
-      "description": "Select a technician to assign this ticket",
       "messages": {
         "failed": "Unable to assign the ticket",
         "success": "Ticket assigned successfully"

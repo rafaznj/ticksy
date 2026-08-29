@@ -69,6 +69,7 @@ export function useAssignTicketForm() {
     canSubmit,
     isSubmitting,
     isBlurred,
+    data,
     handleSubmit,
     close,
   };

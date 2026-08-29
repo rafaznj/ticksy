@@ -1,8 +1,9 @@
 import { UserRoleEnum } from "@/modules/user/enums/role.enum";
 import type { TFunction } from "i18next";
 import type { SidebarMenuGroup } from "./types";
-import { LuTicket, LuUsers } from "react-icons/lu";
-import { IoIosHome } from "react-icons/io";
+import { GrHomeRounded } from "react-icons/gr";
+import { PiUsers } from "react-icons/pi";
+import { LuTickets } from "react-icons/lu";
 
 const allUser = Object.values(UserRoleEnum);
 const adminOnly = [UserRoleEnum.ADMIN];
@@ -16,7 +17,7 @@ export function getSidebarMenuGroups(t: TFunction, role?: UserRoleEnum): Sidebar
         {
           href: "/home",
           tooltip: t("sidebar.tooltips.home"),
-          icon: IoIosHome,
+          icon: GrHomeRounded,
           allowedRoles: allUser,
         },
       ],
@@ -26,7 +27,7 @@ export function getSidebarMenuGroups(t: TFunction, role?: UserRoleEnum): Sidebar
         {
           href: "/tickets",
           tooltip: isAdmin ? t("sidebar.tooltips.tickets") : t("sidebar.tooltips.myTickets"),
-          icon: LuTicket,
+          icon: LuTickets,
           iconClassName: "text-blue-500 dark:text-blue-400",
           allowedRoles: allUser,
         },
@@ -38,7 +39,7 @@ export function getSidebarMenuGroups(t: TFunction, role?: UserRoleEnum): Sidebar
         {
           href: "/user/users",
           tooltip: t("sidebar.tooltips.users"),
-          icon: LuUsers,
+          icon: PiUsers,
           iconClassName: "text-purple-600 dark:text-purple-400",
           allowedRoles: adminOnly,
         },
