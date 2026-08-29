@@ -3,6 +3,7 @@ export const DIALOG_KEYS = {
   CREATE_USER: "create-user",
   UPDATE_USER: "update-user",
   DEACTIVATE_USER: "deactivate-user",
+  ACTIVATE_USER: "activate-user",
 
   // Ticket
   CREATE_TICKET: "create-ticket",

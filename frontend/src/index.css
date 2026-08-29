@@ -106,7 +106,6 @@
   }
 }
 
-/* ─── Light Mode ─── */
 :root {
   --radius: 0.625rem;
 
@@ -152,7 +151,6 @@
   --sidebar-primary-foreground: #ffffff;
 }
 
-/* ─── Dark Mode ─── */
 .dark {
   --background: #030712;
   --card: #0f172a;

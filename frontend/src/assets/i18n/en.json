@@ -4,8 +4,8 @@
       "emailAlreadyExists": "A user with this email already exists",
       "invalidCredentials": "Invalid email or password. Please check your credentials and try again",
       "refreshTokenMissing": "Your session has expired. Please sign in again",
-      "userNotFound": "User not found",
-      "registerFailed": "Failed to create user"
+      "registerFailed": "Failed to create user",
+      "userNotFound": "User not found"
     },
     "forgotPassword": {
       "actions": {
@@ -96,9 +96,21 @@
   },
   "dashboard": {
     "metrics": {
+      "highPriority": {
+        "description": "require attention",
+        "title": "High priority"
+      },
       "inProgress": {
         "description": "Currently being handled",
         "title": "In Progress"
+      },
+      "myTickets": {
+        "description": "assigned to me",
+        "title": "My tickets"
+      },
+      "open": {
+        "description": "awaiting action",
+        "title": "Open"
       },
       "resolved": {
         "description": "Resolved this month",
@@ -107,33 +119,22 @@
       "totalTickets": {
         "description": "Created this month",
         "title": "Total Tickets"
-      },
-      "open": {
-        "description": "awaiting action",
-        "title": "Open"
-      },
-      "myTickets": {
-        "description": "assigned to me",
-        "title": "My tickets"
-      },
-      "highPriority": {
-        "description": "require attention",
-        "title": "High priority"
       }
     }
   },
   "general": {
     "actions": {
+      "activate": "Activate",
       "assign": "Assign",
-      "unassign": "Unassign",
       "back": "Back",
       "cancel": "Cancel",
       "close": "Close",
       "deactivate": "Deactivate",
       "delete": "Delete",
       "edit": "Edit",
+      "resolved": "Resolved",
       "save": "Save",
-      "resolved": "Resolved"
+      "unassign": "Unassign"
     },
     "copyright": "© {{year}} Ticksy. All rights reserved",
     "errors": {
@@ -185,18 +186,6 @@
         "success": "Ticket assigned successfully"
       },
       "title": "Assign ticket"
-    },
-    "unassign": {
-      "actions": {
-        "cancel": "Cancel",
-        "confirm": "Unassign"
-      },
-      "description": "Are you sure you want to unassign this ticket: {{user}}?",
-      "messages": {
-        "failed": "Unable to unassign the ticket",
-        "success": "Ticket unassigned successfully"
-      },
-      "title": "Unassign ticket"
     },
     "create": {
       "actions": {
@@ -307,15 +296,35 @@
       "emptyMessage": "No tickets found",
       "searchPlaceholder": "Search tickets",
       "unassigned": "Unassigned"
+    },
+    "unassign": {
+      "actions": {
+        "cancel": "Cancel",
+        "confirm": "Unassign"
+      },
+      "description": "Are you sure you want to unassign this ticket: {{user}}?",
+      "messages": {
+        "failed": "Unable to unassign the ticket",
+        "success": "Ticket unassigned successfully"
+      },
+      "title": "Unassign ticket"
     }
   },
   "user": {
+    "activate": {
+      "actions": {
+        "cancel": "Cancel",
+        "confirm": "Activate"
+      },
+      "description": "Are you sure you want to activate the user: {{user}}?",
+      "title": "Activate user"
+    },
     "deactivate": {
       "actions": {
         "cancel": "Cancel",
         "confirm": "Deactivate"
       },
-      "description": "Are you sure you want to deactivate the user {{name}}?",
+      "description": "Are you sure you want to deactivate the user: {{name}}?",
       "title": "Deactivate user"
     },
     "edit": {
@@ -385,6 +394,7 @@
     },
     "table": {
       "actions": {
+        "activate": "Activate user",
         "deactivate": "Deactivate user",
         "edit": "Edit user"
       },

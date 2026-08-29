@@ -7,7 +7,7 @@ import { user } from "../../../database/drizzle/schema/user.schema";
 import { IDeactivateUserRepository } from "./contracts/deactivate";
 
 @Injectable()
-export class DeactivateUserRepository implements IDeactivateUserRepository {
+export class ActivateUserRepository implements IDeactivateUserRepository {
   @Inject(DATABASE_TOKENS.Drizzle)
   private readonly db!: NodePgDatabase;
 
@@ -15,7 +15,7 @@ export class DeactivateUserRepository implements IDeactivateUserRepository {
     const result = await this.db
       .update(user)
       .set({
-        deleted: true,
+        deleted: false,
       })
       .where(eq(user.id, id));
 

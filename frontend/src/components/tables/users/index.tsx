@@ -2,6 +2,7 @@ import { PagedTable } from "@/components/PagedTable";
 import { useUsersPagedTable } from "./hook";
 import { EditUserForm } from "@/components/forms/user/edit";
 import { DeactivateUserForm } from "@/components/forms/user/deactivate";
+import { ActivateUserForm } from "@/components/forms/user/activate";
 
 export function UsersPagedTable() {
   const {
@@ -48,6 +49,7 @@ export function UsersPagedTable() {
       />
 
       <EditUserForm />
+      <ActivateUserForm />
       <DeactivateUserForm />
     </>
   );

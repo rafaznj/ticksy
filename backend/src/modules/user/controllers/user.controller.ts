@@ -10,6 +10,7 @@ import { UpdateUserDto } from "../dtos/update.dto";
 import type { IGetUserPagedService } from "../services/contracts/get-paged";
 import type { IQueryOptions } from "../../../shared/types/query-options";
 import type { IGetAssignableUsersPagedService } from "../services/contracts/get-assignable-paged";
+import type { IActivateUserService } from "../services/contracts/activate";
 
 @Controller("user")
 export class UserController {
@@ -22,6 +23,8 @@ export class UserController {
     private readonly updateUserService: IUpdateUserService,
     @Inject(SERVICE_TOKENS.DeactivateUserService)
     private readonly deactivateUserService: IDeactivateUserService,
+    @Inject(SERVICE_TOKENS.ActivateUserService)
+    private readonly activateUserService: IActivateUserService,
     @Inject(SERVICE_TOKENS.GetUserByEmailService)
     private readonly getUserByEmailService: IGetUserByEmailService,
     @Inject(SERVICE_TOKENS.GetUserPagedService)
@@ -61,8 +64,13 @@ export class UserController {
     return this.updateUserService.execute(id, data);
   }
 
-  @Patch(":id")
+  @Patch(":id/deactivate")
   async deactivate(@Param("id") id: string) {
     return this.deactivateUserService.execute(id);
+  }
+
+  @Patch(":id/activate")
+  async activate(@Param("id") id: string) {
+    return this.activateUserService.execute(id);
   }
 }

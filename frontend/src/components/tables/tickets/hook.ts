@@ -75,10 +75,10 @@ export function useTicketsPagedTable() {
         edit: (ticket: TicketPagedDto) =>
           (ticket.createdById === user?.id || isAdmin) &&
           ticket.status !== TicketStatusEnum.RESOLVED,
-        delete: (ticket: TicketPagedDto) =>
-          !ticket.assignedToName || ticket.status !== TicketStatusEnum.RESOLVED,
+        delete: (ticket: TicketPagedDto) => !ticket.assignedToId,
         assign: (ticket: TicketPagedDto) => isAdmin && ticket.assignedToId === null,
-        unassign: (ticket: TicketPagedDto) => isAdmin && ticket.assignedToId !== null,
+        unassign: (ticket: TicketPagedDto) =>
+          isAdmin && ticket.assignedToId !== null && ticket.status !== TicketStatusEnum.RESOLVED,
         resolved: (ticket: TicketPagedDto) =>
           ticket.status !== TicketStatusEnum.RESOLVED &&
           (ticket.assignedToId === user?.id || isAdmin) &&

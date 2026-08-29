@@ -6,6 +6,7 @@ export const REPOSITORY_TOKENS = {
   CreateUserRepository: Symbol.for("CreateUserRepository"),
   UpdateUserRepository: Symbol.for("UpdateUserRepository"),
   DeactivateUserRepository: Symbol.for("DeactivateUserRepository"),
+  ActivateUserRepository: Symbol.for("ActivateUserRepository"),
   GetUserByIdRepository: Symbol.for("GetUserByIdRepository"),
   GetUserByEmailRepository: Symbol.for("GetUserByEmailRepository"),
   GetUserPagedRepository: Symbol.for("GetUserPagedRepository"),

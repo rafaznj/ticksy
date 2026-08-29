@@ -1,3 +1,5 @@
+// PagedTable.tsx
+
 import { useMemo } from "react";
 import {
   flexRender,
@@ -34,17 +36,19 @@ import {
   LuArrowUp,
   LuArrowUpDown,
   LuCheck,
-  LuMinus,
   LuPencil,
   LuTrash2,
+  LuUserCheck,
   LuUserMinus,
   LuUserPlus,
+  LuUserX,
 } from "react-icons/lu";
 
 type TooltipValue<T> = string | ((item: T) => string);
 
 interface ActionVisibility<T> {
   edit?: (row: T) => boolean;
+  activate?: (item: T) => boolean;
   deactivate?: (item: T) => boolean;
   delete?: (row: T) => boolean;
   assign?: (item: T) => boolean;
@@ -58,6 +62,7 @@ interface ActionsConfig<T> {
   disableAction?: ActionVisibility<T>;
   tooltips?: {
     edit?: TooltipValue<T>;
+    activate?: TooltipValue<T>;
     deactivate?: TooltipValue<T>;
     delete?: TooltipValue<T>;
     assign?: TooltipValue<T>;
@@ -65,6 +70,7 @@ interface ActionsConfig<T> {
     resolved?: TooltipValue<T>;
   };
   edit?: (item: T) => void;
+  activate?: (item: T) => void;
   deactivate?: (item: T) => void;
   delete?: (item: T) => void;
   assign?: (item: T) => void;
@@ -134,6 +140,7 @@ export function PagedTable<T>({
   onPageSizeChange,
 }: PagedTableProps<T>) {
   const { t } = useTranslation();
+
   const columnsWithActions = useMemo<ColumnDef<T>[]>(() => {
     if (!actions) return columns;
 
@@ -147,6 +154,7 @@ export function PagedTable<T>({
           const item = row.original;
 
           const isEditVisible = actions.visibilityAction?.edit?.(item) !== false;
+          const isActivateVisible = actions.visibilityAction?.activate?.(item) !== false;
           const isDeactivateVisible = actions.visibilityAction?.deactivate?.(item) !== false;
           const isDeleteVisible = actions.visibilityAction?.delete?.(item) !== false;
           const isAssignVisible = actions.visibilityAction?.assign?.(item) !== false;
@@ -154,23 +162,27 @@ export function PagedTable<T>({
           const isResolvedVisible = actions.visibilityAction?.resolved?.(item) !== false;
 
           const showEdit = !!actions.edit && isEditVisible;
+          const showActivate = !!actions.activate && isActivateVisible;
           const showDeactivate = !!actions.deactivate && isDeactivateVisible;
           const showDelete = !!actions.delete && isDeleteVisible;
-          const showResolved = !!actions.resolved && isResolvedVisible;
           const showAssign = !!actions.assign && isAssignVisible;
           const showUnassign = !!actions.unassign && isUnassignVisible;
+          const showResolved = !!actions.resolved && isResolvedVisible;
 
           if (
             !showEdit &&
+            !showActivate &&
             !showDeactivate &&
             !showDelete &&
             !showAssign &&
             !showUnassign &&
             !showResolved
-          )
+          ) {
             return null;
+          }
 
           const isEditDisabled = !!actions.disableAction?.edit?.(item);
+          const isActivateDisabled = !!actions.disableAction?.activate?.(item);
           const isDeactivateDisabled = !!actions.disableAction?.deactivate?.(item);
           const isDeleteDisabled = !!actions.disableAction?.delete?.(item);
           const isAssignDisabled = !!actions.disableAction?.assign?.(item);
@@ -187,7 +199,7 @@ export function PagedTable<T>({
                         <Button
                           variant="ghost"
                           size="icon"
-                          className="h-8 w-8 cursor-pointer rounded-md bg-muted text-amber-600 hover:bg-muted/80 hover:text-amber-700 disabled:cursor-not-allowed disabled:opacity-50"
+                          className="h-8 w-8 cursor-pointer rounded-md bg-muted text-amber-600 hover:bg-amber-100 hover:text-amber-700 dark:hover:bg-amber-950 dark:hover:text-amber-400 disabled:cursor-not-allowed disabled:opacity-50"
                           disabled={isEditDisabled}
                           onClick={() => actions.edit!(item)}
                         >
@@ -202,6 +214,33 @@ export function PagedTable<T>({
                 </TooltipProvider>
               )}
 
+              {showActivate && (
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <span>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="h-8 w-8 cursor-pointer rounded-md bg-muted text-green-600 hover:bg-green-100 hover:text-green-700 dark:hover:bg-green-950 dark:hover:text-green-400 disabled:cursor-not-allowed disabled:opacity-50"
+                          disabled={isActivateDisabled}
+                          onClick={() => actions.activate!(item)}
+                        >
+                          <LuUserCheck className="h-4 w-4" />
+                        </Button>
+                      </span>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      {resolveTooltip(
+                        actions.tooltips?.activate,
+                        item,
+                        t("general.actions.activate"),
+                      )}
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+              )}
+
               {showDeactivate && (
                 <TooltipProvider>
                   <Tooltip>
@@ -210,11 +249,11 @@ export function PagedTable<T>({
                         <Button
                           variant="ghost"
                           size="icon"
-                          className="h-8 w-8 cursor-pointer rounded-md bg-muted text-orange-600 hover:bg-muted/80 hover:text-orange-700 disabled:cursor-not-allowed disabled:opacity-50"
+                          className="h-8 w-8 cursor-pointer rounded-md bg-muted text-red-600 hover:bg-red-100 hover:text-red-700 dark:hover:bg-red-950 dark:hover:text-red-400 disabled:cursor-not-allowed disabled:opacity-50"
                           disabled={isDeactivateDisabled}
                           onClick={() => actions.deactivate!(item)}
                         >
-                          <LuMinus className="h-4 w-4" />
+                          <LuUserX className="h-4 w-4" />
                         </Button>
                       </span>
                     </TooltipTrigger>
@@ -237,7 +276,7 @@ export function PagedTable<T>({
                         <Button
                           variant="ghost"
                           size="icon"
-                          className="h-8 w-8 cursor-pointer rounded-md bg-muted text-blue-600 hover:bg-muted/80 hover:text-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
+                          className="h-8 w-8 cursor-pointer rounded-md bg-muted text-blue-600 hover:bg-blue-100 hover:text-blue-700 dark:hover:bg-blue-950 dark:hover:text-blue-400 disabled:cursor-not-allowed disabled:opacity-50"
                           disabled={isAssignDisabled}
                           onClick={() => actions.assign!(item)}
                         >
@@ -260,7 +299,7 @@ export function PagedTable<T>({
                         <Button
                           variant="ghost"
                           size="icon"
-                          className="h-8 w-8 cursor-pointer rounded-md bg-muted text-blue-600 hover:bg-muted/80 hover:text-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
+                          className="h-8 w-8 cursor-pointer rounded-md bg-muted text-blue-600 hover:bg-blue-100 hover:text-blue-700 dark:hover:bg-blue-950 dark:hover:text-blue-400 disabled:cursor-not-allowed disabled:opacity-50"
                           disabled={isUnassignDisabled}
                           onClick={() => actions.unassign!(item)}
                         >
@@ -287,7 +326,7 @@ export function PagedTable<T>({
                         <Button
                           variant="ghost"
                           size="icon"
-                          className="h-8 w-8 cursor-pointer rounded-md bg-muted text-red-600 hover:bg-muted/80 hover:text-red-700 disabled:cursor-not-allowed disabled:opacity-50"
+                          className="h-8 w-8 cursor-pointer rounded-md bg-muted text-red-600 hover:bg-red-100 hover:text-red-700 dark:hover:bg-red-950 dark:hover:text-red-400 disabled:cursor-not-allowed disabled:opacity-50"
                           disabled={isDeleteDisabled}
                           onClick={() => actions.delete!(item)}
                         >
@@ -310,7 +349,7 @@ export function PagedTable<T>({
                         <Button
                           variant="ghost"
                           size="icon"
-                          className="h-8 w-8 cursor-pointer rounded-md bg-muted text-green-300 hover:bg-muted/80 hover:text-green-700 disabled:cursor-not-allowed disabled:opacity-50"
+                          className="h-8 w-8 cursor-pointer rounded-md bg-muted text-green-600 hover:bg-green-100 hover:text-green-700 dark:hover:bg-green-950 dark:hover:text-green-400 disabled:cursor-not-allowed disabled:opacity-50"
                           disabled={isResolvedDisabled}
                           onClick={() => actions.resolved!(item)}
                         >
@@ -452,6 +491,7 @@ export function PagedTable<T>({
               <span className="text-sm text-muted-foreground">
                 {t("general.table.rowsPerPage")}
               </span>
+
               <Select
                 value={String(pageSize ?? rowsPerPageOptions[0])}
                 onValueChange={(value) => onPageSizeChange(Number(value))}
@@ -459,6 +499,7 @@ export function PagedTable<T>({
                 <SelectTrigger className="h-8 w-17.5">
                   <SelectValue />
                 </SelectTrigger>
+
                 <SelectContent>
                   {rowsPerPageOptions.map((option) => (
                     <SelectItem key={option} value={String(option)}>
@@ -478,10 +519,12 @@ export function PagedTable<T>({
               total: totalPages || 1,
             })}
           </span>
+
           <div className="flex gap-2">
             <Button variant="outline" size="sm" disabled={!hasPrevious} onClick={onPreviousPage}>
               {t("general.table.previous")}
             </Button>
+
             <Button variant="outline" size="sm" disabled={!hasNext} onClick={onNextPage}>
               {t("general.table.next")}
             </Button>

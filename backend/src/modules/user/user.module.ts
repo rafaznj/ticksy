@@ -18,6 +18,8 @@ import { GetUserPagedService } from "./services/get-paged.service";
 import { CreateDefaultUsersService } from "./services/create-default-users.service";
 import { GetAssignableUsersPagedService } from "./services/get-assignable-paged.service";
 import { GetAssignableUsersPagedRepository } from "./repositories/get-assignable-paged.repository";
+import { ActivateUserService } from "./services/activate.service";
+import { ActivateUserRepository } from "./repositories/activate.repository";
 
 @Module({
   imports: [DrizzleModule],
@@ -82,6 +84,14 @@ import { GetAssignableUsersPagedRepository } from "./repositories/get-assignable
     {
       provide: REPOSITORY_TOKENS.DeactivateUserRepository,
       useClass: DeactivateUserRepository,
+    },
+    {
+      provide: SERVICE_TOKENS.ActivateUserService,
+      useClass: ActivateUserService,
+    },
+    {
+      provide: REPOSITORY_TOKENS.ActivateUserRepository,
+      useClass: ActivateUserRepository,
     },
   ],
   exports: [

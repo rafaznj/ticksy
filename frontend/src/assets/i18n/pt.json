@@ -96,10 +96,6 @@
   },
   "dashboard": {
     "metrics": {
-      "open": {
-        "description": "Aguardando atendimento",
-        "title": "Abertos"
-      },
       "highPriority": {
         "description": "requerem atenção",
         "title": "Alta prioridade"
@@ -112,6 +108,10 @@
         "description": "atribuídos a mim",
         "title": "Meus tickets"
       },
+      "open": {
+        "description": "Aguardando atendimento",
+        "title": "Abertos"
+      },
       "resolved": {
         "title": "Resolvidos"
       },
@@ -123,8 +123,8 @@
   },
   "general": {
     "actions": {
+      "activate": "Ativar",
       "assign": "Vincular",
-      "unassign": "Desvincular",
       "back": "Voltar",
       "cancel": "Cancelar",
       "close": "Fechar",
@@ -132,9 +132,10 @@
       "delete": "Excluir",
       "edit": "Editar",
       "refresh": "Atualizar",
+      "resolved": "Resolver",
       "retry": "Tentar novamente",
       "save": "Salvar",
-      "resolved": "Resolver"
+      "unassign": "Desvincular"
     },
     "copyright": "© {{year}} Ticksy. Todos os direitos reservados",
     "errors": {
@@ -187,18 +188,6 @@
       },
       "title": "Vincular ticket"
     },
-    "unassign": {
-      "actions": {
-        "cancel": "Cancelar",
-        "confirm": "Desvincular"
-      },
-      "description": "Tem certeza que deseja desvincular este ticket do usuário: {{user}}?",
-      "messages": {
-        "failed": "Não foi possível desvincular o ticket",
-        "success": "Ticket desvinculado com sucesso"
-      },
-      "title": "Desvincular ticket"
-  },
     "create": {
       "actions": {
         "cancel": "Cancelar",
@@ -308,15 +297,35 @@
       "emptyMessage": "Nenhum ticket encontrado",
       "searchPlaceholder": "Buscar tickets",
       "unassigned": "Sem responsável"
+    },
+    "unassign": {
+      "actions": {
+        "cancel": "Cancelar",
+        "confirm": "Desvincular"
+      },
+      "description": "Tem certeza que deseja desvincular este ticket do usuário: {{user}}?",
+      "messages": {
+        "failed": "Não foi possível desvincular o ticket",
+        "success": "Ticket desvinculado com sucesso"
+      },
+      "title": "Desvincular ticket"
     }
   },
   "user": {
+    "activate": {
+      "actions": {
+        "cancel": "Cancelar",
+        "confirm": "Ativar"
+      },
+      "description": "Tem certeza que deseja ativar o usuário: {{user}}?",
+      "title": "Ativar usuário"
+    },
     "deactivate": {
       "actions": {
         "cancel": "Cancelar",
         "confirm": "Desativar"
       },
-      "description": "Tem certeza que deseja desativar o usuário {{name}}?",
+      "description": "Tem certeza que deseja desativar o usuário: {{name}}?",
       "title": "Desativar usuário"
     },
     "edit": {
@@ -386,6 +395,7 @@
     },
     "table": {
       "actions": {
+        "activate": "Ativar usuário",
         "deactivate": "Desativar usuário",
         "edit": "Editar usuário"
       },

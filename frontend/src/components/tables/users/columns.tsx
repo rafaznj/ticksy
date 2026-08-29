@@ -23,14 +23,10 @@ const activeStyles = {
 
 interface userTableColumnsParams {
   roleLabels: Record<string, string>;
-  isAdmin: boolean;
 }
 
-export function userTableColumns({
-  roleLabels,
-  isAdmin,
-}: userTableColumnsParams): ColumnDef<UserEntity>[] {
-  const columns: (ColumnDef<UserEntity> & { adminOnly?: boolean })[] = [
+export function userTableColumns({ roleLabels }: userTableColumnsParams): ColumnDef<UserEntity>[] {
+  const columns: ColumnDef<UserEntity>[] = [
     { accessorKey: "name", header: t("user.table.columns.name") },
     { accessorKey: "email", header: t("user.table.columns.email") },
     {
@@ -68,5 +64,5 @@ export function userTableColumns({
     },
   ];
 
-  return columns.filter((col) => !col.adminOnly || isAdmin);
+  return columns;
 }
