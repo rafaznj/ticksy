@@ -2,16 +2,19 @@ import { Inject } from "@nestjs/common";
 import { REPOSITORY_TOKENS } from "../../../shared/di/tokens.repositories";
 import { IQueryOptions } from "../../../shared/types/query-options";
 import { IPagedResult } from "../../../shared/types/paged-result";
-import { IGetTicketPagedService } from "./contracts/get-paged";
-import type { IGetTicketPagedRepository, TicketScope } from "../repositories/contracts/get-paged";
+import { IGetTicketPagedWithScopeService } from "./contracts/get-paged-with-scope";
+import type {
+  IGetTicketPagedWithScopeRepository,
+  TicketScope,
+} from "../repositories/contracts/get-paged-with-scope";
 import { TicketPagedModel } from "../models/ticket-paged";
 import { UserModel } from "../../user/models/user-model";
 import { UserRoleEnum } from "../../user/enums/roles.enum";
 
-export class GetTicketPagedService implements IGetTicketPagedService {
+export class GetTicketPagedWithScopeService implements IGetTicketPagedWithScopeService {
   constructor(
-    @Inject(REPOSITORY_TOKENS.GetTicketPagedRepository)
-    private getTicketPagedRepository: IGetTicketPagedRepository,
+    @Inject(REPOSITORY_TOKENS.GetTicketPagedWithScopeRepository)
+    private getTicketPagedRepository: IGetTicketPagedWithScopeRepository,
   ) {}
 
   async execute(

@@ -10,13 +10,13 @@ import { IQueryOptions } from "../../../shared/types/query-options";
 import buildPagedOptions from "../../../shared/utils/build-paged-options";
 import { customQueryConditions } from "../../../shared/utils/custom-conditions";
 import buildPagedReturn from "../../../shared/utils/build-paged-return";
-import { IGetTicketPagedRepository, TicketScope } from "./contracts/get-paged";
+import { IGetTicketPagedWithScopeRepository, TicketScope } from "./contracts/get-paged-with-scope";
 import { TicketPagedModel } from "../models/ticket-paged";
 
 const createdByUser = alias(user, "created_by_user");
 const assignedToUser = alias(user, "assigned_to_user");
 
-export class GetTicketPagedRepository implements IGetTicketPagedRepository {
+export class GetTicketPagedWithScopeRepository implements IGetTicketPagedWithScopeRepository {
   @Inject(DATABASE_TOKENS.Drizzle)
   private db!: NodePgDatabase;
 

@@ -12,12 +12,14 @@ import { AssignTicketService } from "./services/assign.service";
 import { ResolvedTicketService } from "./services/resolved.service";
 import { DeleteTicketService } from "./services/delete.service";
 import { DeleteTicketRepository } from "./repositories/delete.repository";
-import { GetTicketPagedService } from "./services/get-paged.service";
-import { GetTicketPagedRepository } from "./repositories/get-paged.repository";
+import { GetTicketPagedWithScopeService } from "./services/get-paged-with-scope.service";
+import { GetTicketPagedWithScopeRepository } from "./repositories/get-paged-with-scope.repository";
 import { AssignTicketRepository } from "./repositories/assign.repository";
 import { ResolvedTicketRepository } from "./repositories/resolved.repository";
 import { UnassignTicketService } from "./services/unassign.service";
 import { UnassignTicketRepository } from "./repositories/unassign.repository";
+import { GetTicketPagedCurrentMonthRepository } from "./repositories/get-paged-tickets-current-month.repository";
+import { GetTicketPagedCurrentMonthService } from "./services/get-paged-tickets-current-month.service";
 
 @Module({
   controllers: [TicketController],
@@ -39,12 +41,20 @@ import { UnassignTicketRepository } from "./repositories/unassign.repository";
       useClass: GetTicketByIdRepository,
     },
     {
-      provide: SERVICE_TOKENS.GetTicketPagedService,
-      useClass: GetTicketPagedService,
+      provide: SERVICE_TOKENS.GetTicketPagedWithScopeService,
+      useClass: GetTicketPagedWithScopeService,
     },
     {
-      provide: REPOSITORY_TOKENS.GetTicketPagedRepository,
-      useClass: GetTicketPagedRepository,
+      provide: REPOSITORY_TOKENS.GetTicketPagedWithScopeRepository,
+      useClass: GetTicketPagedWithScopeRepository,
+    },
+    {
+      provide: SERVICE_TOKENS.GetTicketPagedCurrentMonthService,
+      useClass: GetTicketPagedCurrentMonthService,
+    },
+    {
+      provide: REPOSITORY_TOKENS.GetTicketPagedCurrentMonthRepository,
+      useClass: GetTicketPagedCurrentMonthRepository,
     },
     {
       provide: SERVICE_TOKENS.UpdateTicketService,

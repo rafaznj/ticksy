@@ -3,7 +3,7 @@ import { IQueryOptions } from "../../../../shared/types/query-options";
 import { UserModel } from "../../../user/models/user-model";
 import { TicketPagedModel } from "../../models/ticket-paged";
 
-export interface IGetTicketPagedService {
+export interface IGetTicketPagedWithScopeService {
   execute(
     options: IQueryOptions,
     currentUser: Omit<UserModel, "password">,

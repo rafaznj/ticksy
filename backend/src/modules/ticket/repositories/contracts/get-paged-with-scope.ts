@@ -7,6 +7,6 @@ export interface TicketScope {
   assignedToId?: string;
 }
 
-export interface IGetTicketPagedRepository {
+export interface IGetTicketPagedWithScopeRepository {
   execute(options: IQueryOptions, scope?: TicketScope): Promise<IPagedResult<TicketPagedModel>>;
 }

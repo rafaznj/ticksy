@@ -22,7 +22,7 @@ import type { IGetTicketByIdService } from "../services/contracts/get-by-id";
 import type { IUpdateTicketService } from "../services/contracts/update";
 import { CreateTicketDto } from "../dtos/create.dto";
 import { UpdateTicketDto } from "../dtos/update.dto";
-import type { IGetTicketPagedService } from "../services/contracts/get-paged";
+import type { IGetTicketPagedWithScopeService } from "../services/contracts/get-paged-with-scope";
 import { UserModel } from "../../user/models/user-model";
 import type { IAssignTicketService } from "../services/contracts/assign";
 import { AssignTicketDto } from "../dtos/assign.dto";
@@ -30,6 +30,7 @@ import type { IQueryOptions } from "../../../shared/types/query-options";
 import type { IResolvedTicketService } from "../services/contracts/resolved";
 import type { IUnassignTicketService } from "../services/contracts/unassign";
 import { UnassignTicketDto } from "../dtos/unassign.dto";
+import type { IGetTicketPagedCurrentMonthService } from "../services/contracts/get-paged-tickets-current-month";
 
 @Controller("ticket")
 export class TicketController {
@@ -38,8 +39,10 @@ export class TicketController {
     private readonly createTicketService: ICreateTicketService,
     @Inject(SERVICE_TOKENS.GetTicketByIdService)
     private readonly getTicketByIdService: IGetTicketByIdService,
-    @Inject(SERVICE_TOKENS.GetTicketPagedService)
-    private readonly getTicketPagedService: IGetTicketPagedService,
+    @Inject(SERVICE_TOKENS.GetTicketPagedWithScopeService)
+    private readonly getTicketPagedWithScopeService: IGetTicketPagedWithScopeService,
+    @Inject(SERVICE_TOKENS.GetTicketPagedCurrentMonthService)
+    private readonly getTicketPagedCurrentMonthRepository: IGetTicketPagedCurrentMonthService,
     @Inject(SERVICE_TOKENS.UpdateTicketService)
     private readonly updateTicketService: IUpdateTicketService,
     @Inject(SERVICE_TOKENS.DeleteTicketService)
@@ -57,14 +60,20 @@ export class TicketController {
     return this.createTicketService.execute(data);
   }
 
-  @Get("get-paged")
+  @Get("get-paged-with-scope")
   @UseGuards(AuthGuard("jwt"))
   async getPaged(
     @Query() query: IQueryOptions,
     @Req() req: Request & { user: Omit<UserModel, "password"> },
   ) {
-    const result = await this.getTicketPagedService.execute(query, req.user);
+    const result = await this.getTicketPagedWithScopeService.execute(query, req.user);
 
+    return result;
+  }
+
+  @Get("get-paged-current-month")
+  async getPagedCurrentMonth(@Query() query: IQueryOptions) {
+    const result = await this.getTicketPagedCurrentMonthRepository.execute(query);
     return result;
   }
 
