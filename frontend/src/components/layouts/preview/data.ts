@@ -1,12 +1,12 @@
-import type { DemoTicket, DemoUser } from "@/components/layouts/demo-preview/types";
+import type { PreviewTicket, PreviewUser } from "@/components/layouts/preview/types";
 
-export const DEMO_USERS: DemoUser[] = [
+export const PREVIEW_USERS: PreviewUser[] = [
   { id: "u1", name: "Marina Alves" },
   { id: "u2", name: "Thiago Rocha" },
   { id: "u3", name: "Camila Duarte" },
 ];
 
-export const INITIAL_DEMO_TICKETS: DemoTicket[] = [
+export const INITIAL_PREVIEW_TICKETS: PreviewTicket[] = [
   {
     id: "t1",
     title: "Impressora da recepção não liga",
@@ -53,3 +53,34 @@ export const INITIAL_DEMO_TICKETS: DemoTicket[] = [
     createdAt: "2026-08-15",
   },
 ];
+
+const MOCK_NEW_TICKET_TITLES = [
+  "Solicitação de novo notebook",
+  "Erro ao emitir nota fiscal",
+  "Configurar VPN de acesso remoto",
+  "Substituir cabo de rede da sala 2",
+  "Reset de senha do sistema interno",
+  "Lentidão no computador da recepção",
+];
+
+const MOCK_NEW_TICKET_PRIORITIES: PreviewTicket["priority"][] = ["low", "medium", "high"];
+
+let mockTicketSequence = 0;
+
+export function createMockTicket(): PreviewTicket {
+  mockTicketSequence += 1;
+
+  const title = MOCK_NEW_TICKET_TITLES[Math.floor(Math.random() * MOCK_NEW_TICKET_TITLES.length)];
+  const priority =
+    MOCK_NEW_TICKET_PRIORITIES[Math.floor(Math.random() * MOCK_NEW_TICKET_PRIORITIES.length)];
+
+  return {
+    id: `demo-${Date.now()}-${mockTicketSequence}`,
+    title,
+    status: "open",
+    priority,
+    assignedToId: null,
+    assignedToName: null,
+    createdAt: new Date().toISOString().slice(0, 10),
+  };
+}

@@ -4,6 +4,7 @@ import { useNavigate } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { LoginForm } from "@/pages/auth/login/form";
+import { Preview } from "@/components/layouts/preview";
 
 export default function LoginPage() {
   const { t } = useTranslation();
@@ -22,7 +23,7 @@ export default function LoginPage() {
 
         <div className="relative z-10 flex h-full flex-col justify-between p-10">
           <div className="flex flex-1 items-center justify-center py-6">
-            {/* <DemoPreview /> */}
+            <Preview />
           </div>
         </div>
       </div>
