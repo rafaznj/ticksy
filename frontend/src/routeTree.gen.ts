@@ -15,11 +15,9 @@ import { Route as RegisterRouteImport } from './routes/register'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
 import { Route as AuthenticatedIndexRouteImport } from './routes/_authenticated/index'
+import { Route as AuthenticatedTicketsRouteImport } from './routes/_authenticated/tickets'
 import { Route as AuthenticatedHomeRouteImport } from './routes/_authenticated/home'
 
-const AuthenticatedTicketsLazyRouteImport = createFileRoute(
-  '/_authenticated/tickets',
-)()
 const AuthenticatedUserUsersLazyRouteImport = createFileRoute(
   '/_authenticated/user/users',
 )()
@@ -46,14 +44,11 @@ const AuthenticatedIndexRoute = AuthenticatedIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
-const AuthenticatedTicketsLazyRoute =
-  AuthenticatedTicketsLazyRouteImport.update({
-    id: '/tickets',
-    path: '/tickets',
-    getParentRoute: () => AuthenticatedRoute,
-  } as any).lazy(() =>
-    import('./routes/_authenticated/tickets.lazy').then((d) => d.Route),
-  )
+const AuthenticatedTicketsRoute = AuthenticatedTicketsRouteImport.update({
+  id: '/tickets',
+  path: '/tickets',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
 const AuthenticatedHomeRoute = AuthenticatedHomeRouteImport.update({
   id: '/home',
   path: '/home',
@@ -81,7 +76,7 @@ export interface FileRoutesByFullPath {
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
   '/home': typeof AuthenticatedHomeRoute
-  '/tickets': typeof AuthenticatedTicketsLazyRoute
+  '/tickets': typeof AuthenticatedTicketsRoute
   '/user/profile': typeof AuthenticatedUserProfileLazyRoute
   '/user/users': typeof AuthenticatedUserUsersLazyRoute
 }
@@ -89,7 +84,7 @@ export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
   '/home': typeof AuthenticatedHomeRoute
-  '/tickets': typeof AuthenticatedTicketsLazyRoute
+  '/tickets': typeof AuthenticatedTicketsRoute
   '/': typeof AuthenticatedIndexRoute
   '/user/profile': typeof AuthenticatedUserProfileLazyRoute
   '/user/users': typeof AuthenticatedUserUsersLazyRoute
@@ -100,7 +95,7 @@ export interface FileRoutesById {
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
   '/_authenticated/home': typeof AuthenticatedHomeRoute
-  '/_authenticated/tickets': typeof AuthenticatedTicketsLazyRoute
+  '/_authenticated/tickets': typeof AuthenticatedTicketsRoute
   '/_authenticated/': typeof AuthenticatedIndexRoute
   '/_authenticated/user/profile': typeof AuthenticatedUserProfileLazyRoute
   '/_authenticated/user/users': typeof AuthenticatedUserUsersLazyRoute
@@ -176,7 +171,7 @@ declare module '@tanstack/react-router' {
       id: '/_authenticated/tickets'
       path: '/tickets'
       fullPath: '/tickets'
-      preLoaderRoute: typeof AuthenticatedTicketsLazyRouteImport
+      preLoaderRoute: typeof AuthenticatedTicketsRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
     '/_authenticated/home': {
@@ -205,7 +200,7 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedRouteChildren {
   AuthenticatedHomeRoute: typeof AuthenticatedHomeRoute
-  AuthenticatedTicketsLazyRoute: typeof AuthenticatedTicketsLazyRoute
+  AuthenticatedTicketsRoute: typeof AuthenticatedTicketsRoute
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
   AuthenticatedUserProfileLazyRoute: typeof AuthenticatedUserProfileLazyRoute
   AuthenticatedUserUsersLazyRoute: typeof AuthenticatedUserUsersLazyRoute
@@ -213,7 +208,7 @@ interface AuthenticatedRouteChildren {
 
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedHomeRoute: AuthenticatedHomeRoute,
-  AuthenticatedTicketsLazyRoute: AuthenticatedTicketsLazyRoute,
+  AuthenticatedTicketsRoute: AuthenticatedTicketsRoute,
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
   AuthenticatedUserProfileLazyRoute: AuthenticatedUserProfileLazyRoute,
   AuthenticatedUserUsersLazyRoute: AuthenticatedUserUsersLazyRoute,

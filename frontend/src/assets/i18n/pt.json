@@ -95,28 +95,33 @@
     }
   },
   "dashboard": {
-    "metrics": {
-      "highPriority": {
-        "description": "requerem atenção",
-        "title": "Alta prioridade"
+    "cards": {
+      "assignedToMe": {
+        "description": "Sob minha responsabilidade",
+        "title": "Tickets atribuídos a mim"
       },
-      "inProgress": {
-        "description": "sendo trabalhados",
-        "title": "Em andamento"
+      "urgentPriorityTickets": {
+        "description": "Exigem atenção prioritária",
+        "title": "Tickets de alta prioridade"
       },
-      "myTickets": {
-        "description": "atribuídos a mim",
-        "title": "Meus tickets"
+      "inProgressTickets": {
+        "description": "Atualmente em atendimento",
+        "title": "Tickets em andamento"
       },
-      "open": {
+      "openTickets": {
         "description": "Aguardando atendimento",
-        "title": "Abertos"
+        "title": "Tickets abertos"
       },
-      "resolved": {
-        "title": "Resolvidos"
+      "resolutionRate": {
+        "description": "Percentual de resolvidos",
+        "title": "Taxa de resolução dos tickets"
+      },
+      "resolvedTickets": {
+        "description": "Foram solucionados",
+        "title": "Tickets resolvidos"
       },
       "totalTickets": {
-        "description": "Criados neste mês",
+        "description": "Registrados no sistema",
         "title": "Total de tickets"
       }
     }
@@ -147,6 +152,7 @@
     "notFoundRoute": "Esta rota não foi encontrada...",
     "settings": "Configurações",
     "table": {
+      "allOptions": "Todos as opções",
       "emptyMessage": "Nenhum registro encontrado",
       "errorMessage": "Erro ao carregar dados",
       "header": {
@@ -294,6 +300,7 @@
         "updated_at": "Atualizado em"
       },
       "emptyMessage": "Nenhum ticket encontrado",
+      "filterByStatus": "Filtrar por status",
       "searchPlaceholder": "Buscar tickets",
       "unassigned": "Sem responsável"
     },

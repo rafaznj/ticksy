@@ -10,10 +10,11 @@ interface UsePagedQueryOptions {
   queryKey: string;
   initialPageSize?: number;
   searchDebounceMs?: number;
+  filters?: Record<string, unknown>;
 }
 
 export function usePagedQuery<T>(service: IBaseGetPagedService<T>, options: UsePagedQueryOptions) {
-  const { queryKey, initialPageSize = 10, searchDebounceMs = 400 } = options;
+  const { queryKey, initialPageSize = 10, searchDebounceMs = 400, filters = {} } = options;
 
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(initialPageSize);
@@ -24,7 +25,7 @@ export function usePagedQuery<T>(service: IBaseGetPagedService<T>, options: UseP
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [debouncedSearch, pageSize, sorting]);
+  }, [debouncedSearch, pageSize, sorting, filters]);
 
   const sort = sorting[0];
 
@@ -34,6 +35,7 @@ export function usePagedQuery<T>(service: IBaseGetPagedService<T>, options: UseP
     search: debouncedSearch || undefined,
     sort: sort?.id,
     order: sort ? (sort.desc ? "desc" : "asc") : undefined,
+    ...filters,
   };
 
   const { data, isLoading, isFetching, isError } = useQuery({

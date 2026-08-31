@@ -1,5 +1,3 @@
-// PagedTable.tsx
-
 import { useMemo } from "react";
 import {
   flexRender,
@@ -85,6 +83,14 @@ export interface HeaderButtonConfig {
   variant?: React.ComponentProps<typeof Button>["variant"];
 }
 
+interface FilterConfig {
+  value: string;
+  onChange: (value: string) => void;
+  options: { value: string; label: string }[];
+  placeholder?: string;
+  allLabel?: string;
+}
+
 interface PagedTableProps<T> {
   columns: ColumnDef<T>[];
   data: T[];
@@ -100,6 +106,7 @@ interface PagedTableProps<T> {
   pageSize?: number;
   rowsPerPageOptions?: number[];
   headerButtons?: HeaderButtonConfig[];
+  filter?: FilterConfig;
   onPageSizeChange?: (size: number) => void;
   onSearchChange: (value: string) => void;
   onNextPage: () => void;
@@ -132,6 +139,7 @@ export function PagedTable<T>({
   pageSize,
   rowsPerPageOptions = [10, 25, 50, 100],
   headerButtons,
+  filter,
   onSearchChange,
   onNextPage,
   onPreviousPage,
@@ -396,16 +404,36 @@ export function PagedTable<T>({
           className="max-w-sm"
         />
 
-        {headerButtons && headerButtons.length > 0 && (
-          <div className="flex items-center gap-2">
-            {headerButtons.map((btn, i) => (
-              <Button key={i} variant={btn.variant ?? "default"} onClick={btn.onClick}>
-                {btn.icon}
-                {btn.label}
-              </Button>
-            ))}
-          </div>
-        )}
+        <div className="flex items-center gap-2">
+          {filter && (
+            <Select value={filter.value} onValueChange={filter.onChange}>
+              <SelectTrigger className="w-48">
+                <SelectValue placeholder={filter.placeholder} />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">
+                  {filter.allLabel ?? t("general.table.allOptions")}
+                </SelectItem>
+                {filter.options.map((option) => (
+                  <SelectItem key={option.value} value={option.value}>
+                    {option.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          )}
+
+          {headerButtons && headerButtons.length > 0 && (
+            <div className="flex items-center gap-2">
+              {headerButtons.map((btn, i) => (
+                <Button key={i} variant={btn.variant ?? "default"} onClick={btn.onClick}>
+                  {btn.icon}
+                  {btn.label}
+                </Button>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
 
       <div className="rounded-md border">

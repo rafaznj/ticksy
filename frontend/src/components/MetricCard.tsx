@@ -13,6 +13,7 @@ export interface MetricCardItem {
   trendValue?: string;
   iconColor?: string;
   iconBg?: string;
+  onClick?: () => void;
 }
 
 interface MetricCardProps {
@@ -22,7 +23,7 @@ interface MetricCardProps {
 
 export function MetricCard({ metrics, className }: MetricCardProps) {
   return (
-    <div className={cn("grid grid-cols-1 gap-4 sm:grid-cols-2", className)}>
+    <div className={cn("grid grid-cols-1 gap-6 sm:grid-cols-2", className)}>
       {metrics.map((metric) => (
         <MetricCardItem key={metric.title} {...metric} />
       ))}
@@ -39,41 +40,48 @@ function MetricCardItem({
   trendValue,
   iconColor = "text-blue-600",
   iconBg = "bg-blue-50 dark:bg-blue-950/50",
+  onClick,
 }: MetricCardItem) {
   return (
-    <Card className="group animate-slide-up transition-all duration-300 hover:shadow-md hover:-translate-y-0.5">
+    <Card
+      onClick={onClick}
+      className={cn(
+        "group flex min-h-40 flex-col justify-center ring-blue-200 animate-slide-up transition-all duration-300 hover:shadow-md hover:-translate-y-0.5 dark:ring-blue-900/40",
+        onClick && "cursor-pointer",
+      )}
+    >
       <CardHeader className="flex flex-row items-center justify-between pb-2">
-        <CardTitle className="text-sm font-medium text-muted-foreground">{title}</CardTitle>
+        <CardTitle className="text-base font-medium text-muted-foreground">{title}</CardTitle>
         <div
           className={cn(
-            "flex items-center justify-center rounded-lg p-2 transition-transform duration-300 group-hover:scale-110",
+            "flex items-center justify-center rounded-xl p-3 transition-transform duration-300 group-hover:scale-110",
             iconBg,
           )}
         >
-          <Icon className={cn("size-4", iconColor)} />
+          <Icon className={cn("size-6", iconColor)} />
         </div>
       </CardHeader>
-      <CardContent className="space-y-1">
-        <p className="text-2xl font-bold tracking-tight">{value}</p>
-        <div className="flex items-center gap-1.5">
+      <CardContent className="space-y-2">
+        <p className="text-4xl font-bold tracking-tight">{value}</p>
+        <div className="flex items-center gap-2">
           {trend && trendValue && (
             <span
               className={cn(
-                "inline-flex items-center gap-0.5 rounded-full px-1.5 py-0.5 text-xs font-medium",
+                "inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-sm font-medium",
                 trend === "up"
                   ? "bg-emerald-50 text-emerald-600 dark:bg-emerald-950/50 dark:text-emerald-400"
                   : "bg-red-50 text-red-600 dark:bg-red-950/50 dark:text-red-400",
               )}
             >
               {trend === "up" ? (
-                <LuTrendingUp className="size-3" />
+                <LuTrendingUp className="size-4" />
               ) : (
-                <LuTrendingDown className="size-3" />
+                <LuTrendingDown className="size-4" />
               )}
               {trendValue}
             </span>
           )}
-          {description && <p className="text-xs text-muted-foreground">{description}</p>}
+          {description && <p className="text-sm text-muted-foreground">{description}</p>}
         </div>
       </CardContent>
     </Card>

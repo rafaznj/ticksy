@@ -1,11 +1,11 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { usePagedQuery } from "@/components/PagedTable/hook";
 import { container } from "@/lib/inversifyJS/index.container";
 import { enumToLabels } from "@/shared/utils/enum-to-labels";
 import { SERVICE_TOKENS } from "@/shared/di/tokens.services";
-import type { IGetTicketPagedService } from "@/modules/ticket/services/contracts/get-paged";
+import type { IGetTicketPagedWithScopeService } from "@/modules/ticket/services/contracts/get-paged-with-scope";
 import { TicketPriorityEnum } from "@/modules/ticket/enums/priority.enum";
 import { TicketStatusEnum } from "@/modules/ticket/enums/status.enum";
 import type { TicketPagedDto } from "@/modules/ticket/dtos/paged.dto";
@@ -17,12 +17,18 @@ import { DIALOG_KEYS } from "@/shared/constants/dialog-keys";
 import { ticketTableColumns } from "@/components/tables/tickets/columns";
 import type { IResolvedTicketService } from "@/modules/ticket/services/contracts/resolved";
 import { useResolvedTicket } from "@/modules/ticket/query-hooks/mutation/use-resolved";
+import { getRouteApi } from "@tanstack/react-router";
 
 export function useTicketsPagedTable() {
   const { t } = useTranslation();
   const { user } = useAuthStore();
-  const getTicketPagedService = container.get<IGetTicketPagedService>(
-    SERVICE_TOKENS.GetTicketPagedService,
+  const ticketsRoute = getRouteApi("/_authenticated/tickets");
+  const { status: statusFromRoute } = ticketsRoute.useSearch();
+  const [status, setStatus] = useState<TicketStatusEnum | "all">(statusFromRoute ?? "all");
+  const filters = useMemo(() => (status === "all" ? {} : { status }), [status]);
+
+  const getTicketPagedService = container.get<IGetTicketPagedWithScopeService>(
+    SERVICE_TOKENS.GetTicketPagedWithScopeService,
   );
 
   const {
@@ -34,14 +40,14 @@ export function useTicketsPagedTable() {
     isLoading,
     isError,
     search,
-    setSearch,
     sorting,
-    onSortingChange,
     pageSize,
+    setSearch,
+    onSortingChange,
     setPageSize,
     nextPage,
     previousPage,
-  } = usePagedQuery(getTicketPagedService, { queryKey: "tickets" });
+  } = usePagedQuery(getTicketPagedService, { queryKey: "tickets", filters });
 
   const { open: openEditTicket } = useDialog<TicketEntity>(DIALOG_KEYS.UPDATE_TICKET);
   const { open: openDeleteTicket } = useDialog<TicketEntity>(DIALOG_KEYS.DELETE_TICKET);
@@ -56,6 +62,10 @@ export function useTicketsPagedTable() {
 
   const priorityLabels = useMemo(() => enumToLabels(TicketPriorityEnum, "ticket.priority", t), [t]);
   const statusLabels = useMemo(() => enumToLabels(TicketStatusEnum, "ticket.status", t), [t]);
+  const statusFilterOptions = useMemo(
+    () => Object.values(TicketStatusEnum).map((value) => ({ value, label: statusLabels[value] })),
+    [statusLabels],
+  );
 
   const isAdmin = user?.role === UserRoleEnum.ADMIN;
 
@@ -114,12 +124,17 @@ export function useTicketsPagedTable() {
     isLoading,
     isError,
     search,
-    setSearch,
     sorting,
-    onSortingChange,
     pageSize,
+    t,
+    status,
+    statusLabels,
+    statusFilterOptions,
+    setSearch,
+    onSortingChange,
     setPageSize,
     nextPage,
     previousPage,
+    setStatus,
   };
 }

@@ -1,5 +1,5 @@
 import { Inject } from "@nestjs/common";
-import { and } from "drizzle-orm";
+import { and, eq, getTableColumns } from "drizzle-orm";
 import { NodePgDatabase } from "drizzle-orm/node-postgres";
 import { PgTable } from "drizzle-orm/pg-core";
 import { DATABASE_TOKENS } from "../../../database/tokens";
@@ -23,7 +23,23 @@ export class BaseGetPagedRepository<T> implements IBaseGetPagedRepository<T> {
       this.table,
     );
 
-    const finalWhere = and(whereCondition, softDeleteCondition);
+    const columns = getTableColumns(this.table);
+
+    const deletedValue =
+      typeof options.deleted === "boolean"
+        ? options.deleted
+        : options.deleted === "true"
+          ? true
+          : options.deleted === "false"
+            ? false
+            : undefined;
+
+    const deletedCondition =
+      deletedValue !== undefined && "deleted" in columns
+        ? eq(columns.deleted, deletedValue)
+        : undefined;
+
+    const finalWhere = and(whereCondition, softDeleteCondition, deletedCondition);
 
     const queryBuilder = this.db
       .select()

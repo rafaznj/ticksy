@@ -4,7 +4,6 @@ import { useNavigate } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { LoginForm } from "@/pages/auth/login/form";
-import { DemoPreview } from "@/components/layouts/demo-preview";
 
 export default function LoginPage() {
   const { t } = useTranslation();
@@ -12,7 +11,7 @@ export default function LoginPage() {
 
   return (
     <div className="flex min-h-screen">
-      <div className="relative hidden overflow-hidden bg-linear-to-br from-slate-900 via-blue-950 to-slate-900 lg:flex lg:w-[55%]">
+      <div className="relative hidden overflow-hidden bg-slate-900 lg:flex lg:w-[55%]">
         <div
           className="absolute inset-0 opacity-[0.04]"
           style={{
@@ -21,19 +20,10 @@ export default function LoginPage() {
           }}
         />
 
-        <div className="absolute -right-32 -top-32 h-96 w-96 rounded-full bg-blue-500/10 blur-3xl" />
-        <div className="absolute -bottom-32 -left-32 h-96 w-96 rounded-full bg-cyan-500/10 blur-3xl" />
-
-        <div className="relative z-10 flex h-full flex-col justify-between p-12">
-          <div>
-            <h1 className="text-4xl font-bold tracking-tight text-white">Ticksy</h1>
+        <div className="relative z-10 flex h-full flex-col justify-between p-10">
+          <div className="flex flex-1 items-center justify-center py-6">
+            {/* <DemoPreview /> */}
           </div>
-
-          <div className="flex flex-1 items-center justify-center py-10">
-            <DemoPreview />
-          </div>
-
-          <p className="text-sm text-slate-400">{t("general.copyright", { year: 2026 })}</p>
         </div>
       </div>
 

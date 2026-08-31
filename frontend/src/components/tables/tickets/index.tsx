@@ -4,6 +4,7 @@ import { EditTicketForm } from "@/components/forms/ticket/edit";
 import { UnassignTicketForm } from "@/components/forms/ticket/unassign";
 import { PagedTable } from "@/components/PagedTable";
 import { useTicketsPagedTable } from "@/components/tables/tickets/hook";
+import { TicketStatusEnum } from "@/modules/ticket/enums/status.enum";
 
 export function TicketsPagedTable() {
   const {
@@ -11,19 +12,23 @@ export function TicketsPagedTable() {
     columns,
     actions,
     search,
-    setSearch,
     sorting,
-    onSortingChange,
     pageSize,
-    setPageSize,
     currentPage,
     totalPages,
     hasPrevious,
     hasNext,
-    nextPage,
-    previousPage,
     isLoading,
     isError,
+    t,
+    status,
+    statusFilterOptions,
+    onSortingChange,
+    setPageSize,
+    setSearch,
+    nextPage,
+    previousPage,
+    setStatus,
   } = useTicketsPagedTable();
 
   return (
@@ -47,6 +52,12 @@ export function TicketsPagedTable() {
         isError={isError}
         getRowId={(ticket) => ticket.id}
         actions={actions}
+        filter={{
+          value: status,
+          onChange: (value) => setStatus(value as TicketStatusEnum | "all"),
+          options: statusFilterOptions,
+          placeholder: t("ticket.table.filterByStatus"),
+        }}
       />
 
       <EditTicketForm />

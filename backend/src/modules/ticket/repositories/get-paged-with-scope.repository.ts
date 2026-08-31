@@ -12,6 +12,7 @@ import { customQueryConditions } from "../../../shared/utils/custom-conditions";
 import buildPagedReturn from "../../../shared/utils/build-paged-return";
 import { IGetTicketPagedWithScopeRepository, TicketScope } from "./contracts/get-paged-with-scope";
 import { TicketPagedModel } from "../models/ticket-paged";
+import { TicketStatusEnum } from "../enums/ticket-status.enum";
 
 const createdByUser = alias(user, "created_by_user");
 const assignedToUser = alias(user, "assigned_to_user");
@@ -33,6 +34,17 @@ export class GetTicketPagedWithScopeRepository implements IGetTicketPagedWithSco
         ? eq(ticket.createdById, scope.createdById)
         : undefined;
 
+    const statusCondition = options.status
+      ? eq(ticket.status, options.status as TicketStatusEnum)
+      : undefined;
+
+    const combinedCondition = and(
+      whereCondition,
+      softDeleteCondition,
+      scopeCondition,
+      statusCondition,
+    );
+
     const queryBuilder = this.db
       .select({
         id: ticket.id,
@@ -50,7 +62,7 @@ export class GetTicketPagedWithScopeRepository implements IGetTicketPagedWithSco
       .from(ticket)
       .innerJoin(createdByUser, eq(ticket.createdById, createdByUser.id))
       .leftJoin(assignedToUser, eq(ticket.assignedToId, assignedToUser.id))
-      .where(and(whereCondition, softDeleteCondition, scopeCondition))
+      .where(combinedCondition)
       .limit(limit)
       .offset(offset);
 
@@ -59,7 +71,7 @@ export class GetTicketPagedWithScopeRepository implements IGetTicketPagedWithSco
     }
 
     const records = (await queryBuilder) as TicketPagedModel[];
-    const totalRecords = await this.db.$count(ticket, scopeCondition);
+    const totalRecords = await this.db.$count(ticket, combinedCondition);
 
     return buildPagedReturn(records, limit, totalRecords);
   }

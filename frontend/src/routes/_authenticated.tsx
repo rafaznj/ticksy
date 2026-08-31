@@ -4,7 +4,7 @@ import { ThemeProvider } from "next-themes";
 import { useAuthStore } from "@/lib/zustand/use-auth";
 import { AppHeader } from "@/components/layouts/AppHeader";
 import { AppSidebar } from "@/components/layouts/Sidebar";
-import { SidebarProvider } from "@/components/ui/sidebar";
+import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { DialogProvider } from "@/contexts/dialog-provider";
 
@@ -24,19 +24,17 @@ function AuthenticatedLayout() {
     <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
       <TooltipProvider delayDuration={0}>
         <SidebarProvider open={false} onOpenChange={() => {}}>
-          <div className="flex min-h-screen w-full">
-            <DialogProvider>
-              <AppSidebar />
+          <DialogProvider>
+            <AppSidebar />
 
-              <main className="flex min-w-0 flex-1 flex-col">
-                <AppHeader />
+            <SidebarInset>
+              <AppHeader />
 
-                <div className="flex-1 px-4 py-6 md:px-6 lg:px-8">
-                  <Outlet />
-                </div>
-              </main>
-            </DialogProvider>
-          </div>
+              <div className="flex-1 px-4 py-6 md:px-6 lg:px-8">
+                <Outlet />
+              </div>
+            </SidebarInset>
+          </DialogProvider>
         </SidebarProvider>
       </TooltipProvider>
     </ThemeProvider>

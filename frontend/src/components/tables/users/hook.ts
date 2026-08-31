@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { usePagedQuery } from "@/components/PagedTable/hook";
@@ -14,6 +14,20 @@ import { userTableColumns } from "@/components/tables/users/columns";
 
 export function useUsersPagedTable() {
   const { t } = useTranslation();
+  const [deletedFilter, setDeletedFilter] = useState<"all" | "true" | "false">("all");
+
+  const filters = useMemo(
+    () => (deletedFilter === "all" ? {} : { deleted: deletedFilter === "true" }),
+    [deletedFilter],
+  );
+
+  const deletedFilterOptions = useMemo(
+    () => [
+      { value: "false", label: t("user.status.enabled") },
+      { value: "true", label: t("user.status.disabled") },
+    ],
+    [t],
+  );
 
   const getUserPagedService = container.get<IGetUserPagedService>(
     SERVICE_TOKENS.GetUserPagedService,
@@ -39,7 +53,7 @@ export function useUsersPagedTable() {
     setPageSize,
     nextPage,
     previousPage,
-  } = usePagedQuery(getUserPagedService, { queryKey: "users" });
+  } = usePagedQuery(getUserPagedService, { queryKey: "users", filters });
 
   const roleLabels = useMemo(() => enumToLabels(UserRoleEnum, "user.roles", t), [t]);
 
@@ -76,10 +90,14 @@ export function useUsersPagedTable() {
     search,
     sorting,
     pageSize,
+    t,
+    deletedFilter,
+    deletedFilterOptions,
     setSearch,
     onSortingChange,
     setPageSize,
     nextPage,
     previousPage,
+    setDeletedFilter,
   };
 }

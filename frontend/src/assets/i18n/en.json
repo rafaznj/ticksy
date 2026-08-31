@@ -95,30 +95,34 @@
     }
   },
   "dashboard": {
-    "metrics": {
-      "highPriority": {
-        "description": "require attention",
-        "title": "High priority"
+    "cards": {
+      "assignedToMe": {
+        "description": "Under my responsibility",
+        "title": "Tickets assigned to me"
       },
-      "inProgress": {
-        "description": "Currently being handled",
-        "title": "In Progress"
+      "urgentPriorityTickets": {
+        "description": "Requiring priority attention",
+        "title": "Tickets urgent-priority"
       },
-      "myTickets": {
-        "description": "assigned to me",
-        "title": "My tickets"
+      "inProgressTickets": {
+        "description": "Tickets currently being handled",
+        "title": "Tickets in progress"
       },
-      "open": {
-        "description": "awaiting action",
-        "title": "Open"
+      "openTickets": {
+        "description": "Awaiting support",
+        "title": "Open tickets"
       },
-      "resolved": {
-        "description": "Resolved this month",
-        "title": "Resolved"
+      "resolutionRate": {
+        "description": "Percentage of resolved tickets",
+        "title": "Resolution rate "
+      },
+      "resolvedTickets": {
+        "description": "Have been resolved",
+        "title": "Tickets resolved"
       },
       "totalTickets": {
-        "description": "Created this month",
-        "title": "Total Tickets"
+        "description": "Tickets registered in the system",
+        "title": "Total tickets"
       }
     }
   },
@@ -146,6 +150,7 @@
     "notFoundRoute": "This route was not found...",
     "settings": "Settings",
     "table": {
+      "allOptions": "All options",
       "emptyMessage": "No records found",
       "errorMessage": "Failed to load data",
       "header": {
@@ -293,6 +298,7 @@
         "updated_at": "Updated at"
       },
       "emptyMessage": "No tickets found",
+      "filterByStatus": "Filter by status",
       "searchPlaceholder": "Search tickets",
       "unassigned": "Unassigned"
     },
@@ -405,6 +411,7 @@
         "role": "Role",
         "updated_at": "Updated at"
       },
+      "filterByStatus": "Filter by status",
       "emptyMessage": "No users found",
       "searchPlaceholder": "Search users"
     }

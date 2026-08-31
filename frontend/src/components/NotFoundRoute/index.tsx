@@ -11,8 +11,6 @@ export const NotFoundRouteComponent = () => {
 
       <TbError404 className="size-32 text-white" strokeWidth={1.5} />
 
-      {/* <span className="text-center text-8xl font-bold leading-none text-white">404</span> */}
-
       <p className="text-center text-2xl font-semibold text-white">{t("general.notFoundRoute")}</p>
 
       <Button

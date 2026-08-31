@@ -18,11 +18,15 @@ export function UsersPagedTable() {
     hasNext,
     isLoading,
     isError,
+    t,
+    deletedFilter,
+    deletedFilterOptions,
     setPageSize,
     onSortingChange,
     setSearch,
     nextPage,
     previousPage,
+    setDeletedFilter,
   } = useUsersPagedTable();
 
   return (
@@ -46,6 +50,12 @@ export function UsersPagedTable() {
         isError={isError}
         getRowId={(user) => user.id}
         actions={actions}
+        filter={{
+          value: deletedFilter,
+          onChange: (value) => setDeletedFilter(value as "all" | "true" | "false"),
+          options: deletedFilterOptions,
+          placeholder: t("user.table.filterByStatus"),
+        }}
       />
 
       <EditUserForm />
