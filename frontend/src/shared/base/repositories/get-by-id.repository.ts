@@ -13,7 +13,9 @@ export class BaseGetByIdRepository<TOutput> implements IBaseGetByIdRepository<TO
   constructor(@unmanaged() private basePath: string) {}
 
   async execute(id: string): Promise<TOutput | AppError> {
-    const response = await this.axiosSingleton.client.get<TOutput>(`${this.basePath}/${id}`);
+    const response = await this.axiosSingleton.client.get<TOutput>(
+      `${this.basePath}/get-by-id/${id}`,
+    );
 
     return handleRepositoryResponse(response);
   }

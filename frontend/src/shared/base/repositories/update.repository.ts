@@ -12,7 +12,7 @@ export class BaseUpdateRepository<T> implements IBaseUpdateRepository<T> {
   constructor(@unmanaged() private basePath: string) {}
 
   async execute(id: string, data: T): Promise<T | AppError> {
-    const response = await this.axiosSingleton.client.put<T>(`${this.basePath}/${id}`, data);
+    const response = await this.axiosSingleton.client.put<T>(`${this.basePath}/update/${id}`, data);
 
     return handleRepositoryResponse(response);
   }

@@ -16,7 +16,10 @@ export class BaseCreateRepository<TInput, TOutput> implements IBaseCreateReposit
   constructor(@unmanaged() private basePath: string) {}
 
   async execute(data: TInput): Promise<TOutput | AppError> {
-    const response = await this.axiosSingleton.client.post<TOutput>(`${this.basePath}/`, data);
+    const response = await this.axiosSingleton.client.post<TOutput>(
+      `${this.basePath}/create`,
+      data,
+    );
 
     return handleRepositoryResponse(response);
   }
