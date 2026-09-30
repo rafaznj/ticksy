@@ -37,6 +37,10 @@ import { UpdateTicketService } from "@/modules/ticket/services/update.service";
 import { REPOSITORY_TOKENS } from "@/shared/di/tokens.repositories";
 import { SERVICE_TOKENS } from "@/shared/di/tokens.services";
 import { ContainerModule, type ContainerModuleLoadOptions } from "inversify";
+import type { IGetTicketStatusCountRepository } from "@/modules/ticket/repositories/contracts/get-status-count";
+import { GetTicketStatusCountRepository } from "@/modules/ticket/repositories/get-status-count.repository";
+import type { IGetTicketStatusCountService } from "@/modules/ticket/services/contracts/get-status-count";
+import { GetTicketStatusCountService } from "@/modules/ticket/services/get-status-count.service";
 
 export const ticketContainerModule = new ContainerModule(({ bind }: ContainerModuleLoadOptions) => {
   bind<ICreateTicketService>(SERVICE_TOKENS.CreateTicketService).to(CreateTicketService);
@@ -86,5 +90,12 @@ export const ticketContainerModule = new ContainerModule(({ bind }: ContainerMod
   bind<IResolvedTicketService>(SERVICE_TOKENS.ResolvedTicketService).to(ResolvedTicketService);
   bind<IResolvedTicketRepository>(REPOSITORY_TOKENS.ResolvedTicketRepository).to(
     ResolvedTicketRepository,
+  );
+
+  bind<IGetTicketStatusCountService>(SERVICE_TOKENS.GetTicketStatusCountService).to(
+    GetTicketStatusCountService,
+  );
+  bind<IGetTicketStatusCountRepository>(REPOSITORY_TOKENS.GetTicketStatusCountRepository).to(
+    GetTicketStatusCountRepository,
   );
 });

@@ -3,8 +3,8 @@ import { and, eq } from "drizzle-orm";
 import { alias } from "drizzle-orm/pg-core";
 import { NodePgDatabase } from "drizzle-orm/node-postgres";
 import { DATABASE_TOKENS } from "../../../database/tokens";
-import { ticket } from "../../../database/drizzle/schema/ticket.schema";
-import { user } from "../../../database/drizzle/schema/user.schema";
+import { tickets } from "../../../database/drizzle/schema/tickets.schema";
+import { users } from "../../../database/drizzle/schema/users.schema";
 import { IPagedResult } from "../../../shared/types/paged-result";
 import { IQueryOptions } from "../../../shared/types/query-options";
 import buildPagedOptions from "../../../shared/utils/build-paged-options";
@@ -14,8 +14,8 @@ import { IGetTicketPagedWithScopeRepository, TicketScope } from "./contracts/get
 import { TicketPagedModel } from "../models/ticket-paged";
 import { TicketStatusEnum } from "../enums/ticket-status.enum";
 
-const createdByUser = alias(user, "created_by_user");
-const assignedToUser = alias(user, "assigned_to_user");
+const createdByUser = alias(users, "created_by_user");
+const assignedToUser = alias(users, "assigned_to_user");
 
 export class GetTicketPagedWithScopeRepository implements IGetTicketPagedWithScopeRepository {
   constructor(
@@ -28,16 +28,16 @@ export class GetTicketPagedWithScopeRepository implements IGetTicketPagedWithSco
     scope?: TicketScope,
   ): Promise<IPagedResult<TicketPagedModel>> {
     const { limit, offset } = buildPagedOptions(options);
-    const { softDeleteCondition, sort, whereCondition } = customQueryConditions(options, ticket);
+    const { softDeleteCondition, sort, whereCondition } = customQueryConditions(options, tickets);
 
     const scopeCondition = scope?.assignedToId
-      ? eq(ticket.assignedToId, scope.assignedToId)
+      ? eq(tickets.assignedToId, scope.assignedToId)
       : scope?.createdById
-        ? eq(ticket.createdById, scope.createdById)
+        ? eq(tickets.createdById, scope.createdById)
         : undefined;
 
     const statusCondition = options.status
-      ? eq(ticket.status, options.status as TicketStatusEnum)
+      ? eq(tickets.status, options.status as TicketStatusEnum)
       : undefined;
 
     const combinedCondition = and(
@@ -49,23 +49,23 @@ export class GetTicketPagedWithScopeRepository implements IGetTicketPagedWithSco
 
     const queryBuilder = this.db
       .select({
-        id: ticket.id,
-        code: ticket.code,
-        title: ticket.title,
-        description: ticket.description,
-        category: ticket.category,
-        priority: ticket.priority,
-        status: ticket.status,
-        createdById: ticket.createdById,
-        assignedToId: ticket.assignedToId,
+        id: tickets.id,
+        code: tickets.code,
+        title: tickets.title,
+        description: tickets.description,
+        category: tickets.category,
+        priority: tickets.priority,
+        status: tickets.status,
+        createdById: tickets.createdById,
+        assignedToId: tickets.assignedToId,
         createdByName: createdByUser.name,
         assignedToName: assignedToUser.name,
-        createdAt: ticket.createdAt,
-        updatedAt: ticket.updatedAt,
+        createdAt: tickets.createdAt,
+        updatedAt: tickets.updatedAt,
       })
-      .from(ticket)
-      .innerJoin(createdByUser, eq(ticket.createdById, createdByUser.id))
-      .leftJoin(assignedToUser, eq(ticket.assignedToId, assignedToUser.id))
+      .from(tickets)
+      .innerJoin(createdByUser, eq(tickets.createdById, createdByUser.id))
+      .leftJoin(assignedToUser, eq(tickets.assignedToId, assignedToUser.id))
       .where(combinedCondition)
       .limit(limit)
       .offset(offset);
@@ -75,7 +75,7 @@ export class GetTicketPagedWithScopeRepository implements IGetTicketPagedWithSco
     }
 
     const records = (await queryBuilder) as TicketPagedModel[];
-    const totalRecords = await this.db.$count(ticket, combinedCondition);
+    const totalRecords = await this.db.$count(tickets, combinedCondition);
 
     return buildPagedReturn(records, limit, totalRecords);
   }

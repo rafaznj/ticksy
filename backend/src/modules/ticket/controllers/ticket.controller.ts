@@ -31,6 +31,7 @@ import type { IResolvedTicketService } from "../services/contracts/resolved";
 import type { IUnassignTicketService } from "../services/contracts/unassign";
 import { UnassignTicketDto } from "../dtos/unassign.dto";
 import type { IGetTicketPagedCurrentMonthService } from "../services/contracts/get-paged-tickets-current-month";
+import type { IGetTicketStatusCountService } from "../services/contracts/get-status-count";
 
 @Controller("ticket")
 export class TicketController {
@@ -53,16 +54,18 @@ export class TicketController {
     private readonly unassignTicketService: IUnassignTicketService,
     @Inject(SERVICE_TOKENS.ResolvedTicketService)
     private readonly resolvedTicketService: IResolvedTicketService,
+    @Inject(SERVICE_TOKENS.GetTicketStatusCountService)
+    private readonly getTicketStatusCountService: IGetTicketStatusCountService,
   ) {}
 
-  @Post("")
+  @Post("/create")
   async create(@Body() data: CreateTicketDto) {
     return this.createTicketService.execute(data);
   }
 
-  @Get("get-paged-with-scope")
+  @Get("/get-paged-with-scope")
   @UseGuards(AuthGuard("jwt"))
-  async getPaged(
+  async getPagedWithScope(
     @Query() query: IQueryOptions,
     @Req() req: Request & { user: Omit<UserModel, "password"> },
   ) {
@@ -71,23 +74,23 @@ export class TicketController {
     return result;
   }
 
-  @Get("get-paged-current-month")
+  @Get("/get-paged-current-month")
   async getPagedCurrentMonth(@Query() query: IQueryOptions) {
     const result = await this.getTicketPagedCurrentMonthRepository.execute(query);
     return result;
   }
 
-  @Get(":id")
+  @Get("/get-by-id/:id")
   async getById(@Param("id") id: string) {
     return this.getTicketByIdService.execute(id);
   }
 
-  @Put(":id")
+  @Put("/update/:id")
   async update(@Param("id") id: string, @Body() data: UpdateTicketDto) {
     return this.updateTicketService.execute(id, data);
   }
 
-  @Delete(":id")
+  @Delete("/delete/:id")
   async delete(@Param("id") id: string) {
     return this.deleteTicketService.execute(id);
   }
@@ -105,5 +108,10 @@ export class TicketController {
   @Patch("/resolved/:id")
   async resolved(@Param("id") id: string) {
     return this.resolvedTicketService.execute(id);
+  }
+
+  @Get("/get-status-count")
+  async getStatusCount() {
+    return this.getTicketStatusCountService.execute();
   }
 }

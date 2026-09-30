@@ -20,6 +20,8 @@ import { UnassignTicketService } from "./services/unassign.service";
 import { UnassignTicketRepository } from "./repositories/unassign.repository";
 import { GetTicketPagedCurrentMonthRepository } from "./repositories/get-paged-tickets-current-month.repository";
 import { GetTicketPagedCurrentMonthService } from "./services/get-paged-tickets-current-month.service";
+import { GetTicketStatusCountService } from "./services/get-status-count.service";
+import { GetTicketStatusCountRepository } from "./repositories/get-status-count.repository";
 
 @Module({
   controllers: [TicketController],
@@ -95,6 +97,14 @@ import { GetTicketPagedCurrentMonthService } from "./services/get-paged-tickets-
     {
       provide: REPOSITORY_TOKENS.ResolvedTicketRepository,
       useClass: ResolvedTicketRepository,
+    },
+    {
+      provide: SERVICE_TOKENS.GetTicketStatusCountService,
+      useClass: GetTicketStatusCountService,
+    },
+    {
+      provide: REPOSITORY_TOKENS.GetTicketStatusCountRepository,
+      useClass: GetTicketStatusCountRepository,
     },
   ],
 })

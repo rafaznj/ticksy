@@ -5,13 +5,13 @@ import { DEFAULT_RETRY_COUNT } from "@/lib/tanstack/query-client";
 
 interface Params<T> {
   response: T | AppError;
-  context: QueryContext;
+  context?: QueryContext;
   onSuccess?: (response: T) => void;
   onError?: (err: AppError) => void;
   disableRetryCheck?: boolean;
 }
 
-function shouldHandleError(context: QueryContext, disableRetryCheck?: boolean): boolean {
+function shouldHandleError(context?: QueryContext, disableRetryCheck?: boolean): boolean {
   if (disableRetryCheck) {
     return true;
   }
