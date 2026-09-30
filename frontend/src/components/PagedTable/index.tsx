@@ -35,12 +35,16 @@ import {
   LuArrowUpDown,
   LuCheck,
   LuPencil,
+  LuSearch,
   LuTrash2,
   LuUserCheck,
   LuUserMinus,
   LuUserPlus,
   LuUserX,
+  LuX,
 } from "react-icons/lu";
+import { GrNext, GrPrevious } from "react-icons/gr";
+import { TbFilter } from "react-icons/tb";
 
 type TooltipValue<T> = string | ((item: T) => string);
 
@@ -397,30 +401,48 @@ export function PagedTable<T>({
   return (
     <div className="flex flex-col gap-4">
       <div className="flex items-center justify-between gap-4">
-        <Input
-          placeholder={t("general.table.searchPlaceholder")}
-          value={search}
-          onChange={(e) => onSearchChange(e.target.value)}
-          className="max-w-sm"
-        />
+        <div className="relative w-full max-w-sm">
+          <Input
+            placeholder={t("general.table.searchPlaceholder")}
+            value={search}
+            onChange={(e) => onSearchChange(e.target.value)}
+            className="pl-8"
+          />
+          <LuSearch className="pointer-events-none absolute top-1/2 right-2.5 size-4 -translate-y-1/2 text-muted-foreground" />
+        </div>
 
         <div className="flex items-center gap-2">
           {filter && (
-            <Select value={filter.value} onValueChange={filter.onChange}>
-              <SelectTrigger className="w-48">
-                <SelectValue placeholder={filter.placeholder} />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">
-                  {filter.allLabel ?? t("general.table.allOptions")}
-                </SelectItem>
-                {filter.options.map((option) => (
-                  <SelectItem key={option.value} value={option.value}>
-                    {option.label}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+            <>
+              <TbFilter />
+              <div className="relative">
+                <Select value={filter.value} onValueChange={filter.onChange}>
+                  <SelectTrigger className="w-48">
+                    <SelectValue placeholder={filter.placeholder} />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">
+                      {filter.allLabel ?? t("general.table.allOptions")}
+                    </SelectItem>
+                    {filter.options.map((option) => (
+                      <SelectItem key={option.value} value={option.value}>
+                        {option.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+
+                {filter.value !== "all" && (
+                  <button
+                    type="button"
+                    onClick={() => filter.onChange("all")}
+                    className="absolute top-1/2 right-7 -translate-y-1/2 rounded-sm p-0.5 text-muted-foreground hover:text-foreground"
+                  >
+                    <LuX className="size-3.5" />
+                  </button>
+                )}
+              </div>
+            </>
           )}
 
           {headerButtons && headerButtons.length > 0 && (
@@ -436,9 +458,9 @@ export function PagedTable<T>({
         </div>
       </div>
 
-      <div className="rounded-md border">
+      <div className="max-h-[70vh] overflow-auto rounded-md border [&>div]:overflow-visible">
         <Table>
-          <TableHeader>
+          <TableHeader className="sticky top-0 z-10 bg-background">
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
@@ -446,11 +468,11 @@ export function PagedTable<T>({
                   const sortDirection = header.column.getIsSorted();
 
                   return (
-                    <TableHead key={header.id}>
+                    <TableHead key={header.id} className="text-justify">
                       {header.isPlaceholder ? null : canSort ? (
                         <button
                           type="button"
-                          className="flex items-center gap-1 hover:text-foreground"
+                          className="mx-auto flex items-center justify-center gap-1 hover:text-foreground"
                           onClick={header.column.getToggleSortingHandler()}
                         >
                           {flexRender(header.column.columnDef.header, header.getContext())}
@@ -550,11 +572,13 @@ export function PagedTable<T>({
 
           <div className="flex gap-2">
             <Button variant="outline" size="sm" disabled={!hasPrevious} onClick={onPreviousPage}>
+              <GrPrevious />
               {t("general.table.previous")}
             </Button>
 
             <Button variant="outline" size="sm" disabled={!hasNext} onClick={onNextPage}>
               {t("general.table.next")}
+              <GrNext />
             </Button>
           </div>
         </div>

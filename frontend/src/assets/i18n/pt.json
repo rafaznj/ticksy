@@ -100,10 +100,6 @@
         "description": "Sob minha responsabilidade",
         "title": "Tickets atribuídos a mim"
       },
-      "urgentPriorityTickets": {
-        "description": "Exigem atenção prioritária",
-        "title": "Tickets de alta prioridade"
-      },
       "inProgressTickets": {
         "description": "Atualmente em atendimento",
         "title": "Tickets em andamento"
@@ -123,6 +119,10 @@
       "totalTickets": {
         "description": "Registrados no sistema",
         "title": "Total de tickets"
+      },
+      "urgentPriorityTickets": {
+        "description": "Exigem atenção prioritária",
+        "title": "Tickets de alta prioridade"
       }
     }
   },
@@ -152,7 +152,7 @@
     "notFoundRoute": "Esta rota não foi encontrada...",
     "settings": "Configurações",
     "table": {
-      "allOptions": "Todos as opções",
+      "allOptions": "Todas as opções",
       "emptyMessage": "Nenhum registro encontrado",
       "errorMessage": "Erro ao carregar dados",
       "header": {
@@ -192,6 +192,21 @@
         "success": "Ticket vinculado com sucesso"
       },
       "title": "Vincular ticket"
+    },
+    "category": {
+      "access": "Acesso",
+      "account": "Conta",
+      "hardware": "Hardware",
+      "other": "Outro",
+      "software": "Software"
+    },
+    "chart": {
+      "labels": {
+        "inProgress": "Em andamento",
+        "open": "Aberto",
+        "resolved": "Resolvido"
+      },
+      "title": "Status dos tickets"
     },
     "create": {
       "actions": {
@@ -239,6 +254,21 @@
           "required": "O responsável é obrigatório"
         }
       },
+      "category": {
+        "label": "Categoria",
+        "options": {
+          "access": "Acesso",
+          "account": "Conta",
+          "hardware": "Hardware",
+          "other": "Outro",
+          "software": "Software"
+        },
+        "placeholder": "Selecione a categoria",
+        "validations": {
+          "invalid": "Selecione uma categoria válida",
+          "required": "A categoria é obrigatória"
+        }
+      },
       "description": {
         "label": "Descrição",
         "placeholder": "Descreva o problema ou solicitação com o máximo de detalhes possível",
@@ -256,7 +286,7 @@
           "medium": "Média",
           "urgent": "Urgente"
         },
-        "placeholder": "Selecione a prioridade do ticket",
+        "placeholder": "Selecione a prioridade",
         "validations": {
           "invalid": "Selecione uma prioridade válida",
           "required": "A prioridade é obrigatória"
@@ -291,6 +321,8 @@
     "table": {
       "columns": {
         "assignedToName": "Responsável",
+        "category": "Categoria",
+        "code": "Código",
         "created_at": "Criado em",
         "createdByName": "Criador",
         "description": "Descrição",
@@ -301,6 +333,9 @@
       },
       "emptyMessage": "Nenhum ticket encontrado",
       "filterByStatus": "Filtrar por status",
+      "monthlyAssociatedTickets": "Tickets associados este mês",
+      "monthlyCreatedTickets": "Tickets criados este mês",
+      "myMonthlyTickets": "Meus tickets deste mês",
       "searchPlaceholder": "Buscar tickets",
       "unassigned": "Sem responsável"
     },

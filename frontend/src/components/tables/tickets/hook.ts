@@ -18,6 +18,7 @@ import { ticketTableColumns } from "@/components/tables/tickets/columns";
 import type { IResolvedTicketService } from "@/modules/ticket/services/contracts/resolved";
 import { useResolvedTicket } from "@/modules/ticket/query-hooks/mutation/use-resolved";
 import { getRouteApi } from "@tanstack/react-router";
+import { TicketCategoryEnum } from "@/modules/ticket/enums/category.enum";
 
 export function useTicketsPagedTable() {
   const { t } = useTranslation();
@@ -27,7 +28,7 @@ export function useTicketsPagedTable() {
   const [status, setStatus] = useState<TicketStatusEnum | "all">(statusFromRoute ?? "all");
   const filters = useMemo(() => (status === "all" ? {} : { status }), [status]);
 
-  const getTicketPagedService = container.get<IGetTicketPagedWithScopeService>(
+  const getTicketPagedWithScopeService = container.get<IGetTicketPagedWithScopeService>(
     SERVICE_TOKENS.GetTicketPagedWithScopeService,
   );
 
@@ -47,7 +48,7 @@ export function useTicketsPagedTable() {
     setPageSize,
     nextPage,
     previousPage,
-  } = usePagedQuery(getTicketPagedService, { queryKey: "tickets", filters });
+  } = usePagedQuery(getTicketPagedWithScopeService, { queryKey: "tickets", filters });
 
   const { open: openEditTicket } = useDialog<TicketEntity>(DIALOG_KEYS.UPDATE_TICKET);
   const { open: openDeleteTicket } = useDialog<TicketEntity>(DIALOG_KEYS.DELETE_TICKET);
@@ -60,6 +61,7 @@ export function useTicketsPagedTable() {
 
   const { mutate: handleResolved } = useResolvedTicket(resolvedTicketService);
 
+  const categoryLabels = useMemo(() => enumToLabels(TicketCategoryEnum, "ticket.category", t), [t]);
   const priorityLabels = useMemo(() => enumToLabels(TicketPriorityEnum, "ticket.priority", t), [t]);
   const statusLabels = useMemo(() => enumToLabels(TicketStatusEnum, "ticket.status", t), [t]);
   const statusFilterOptions = useMemo(
@@ -68,10 +70,18 @@ export function useTicketsPagedTable() {
   );
 
   const isAdmin = user?.role === UserRoleEnum.ADMIN;
+  const isTechnicalAssistance = user?.role === UserRoleEnum.TECHNICAL_ASSISTANCE;
 
   const columns = useMemo(
-    () => ticketTableColumns({ priorityLabels, statusLabels, isAdmin }),
-    [priorityLabels, statusLabels, isAdmin],
+    () =>
+      ticketTableColumns({
+        categoryLabels,
+        priorityLabels,
+        statusLabels,
+        isAdmin,
+        isTechnicalAssistance,
+      }),
+    [categoryLabels, priorityLabels, statusLabels, isAdmin, isTechnicalAssistance],
   );
 
   const actions = useMemo(() => {

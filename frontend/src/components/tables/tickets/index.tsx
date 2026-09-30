@@ -56,7 +56,7 @@ export function TicketsPagedTable() {
           value: status,
           onChange: (value) => setStatus(value as TicketStatusEnum | "all"),
           options: statusFilterOptions,
-          placeholder: t("ticket.table.filterByStatus"),
+          allLabel: t("ticket.table.filterByStatus"),
         }}
       />
 

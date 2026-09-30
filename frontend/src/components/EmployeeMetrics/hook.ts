@@ -5,9 +5,12 @@ import { TicketStatusEnum } from "@/modules/ticket/enums/status.enum";
 import { SERVICE_TOKENS } from "@/shared/di/tokens.services";
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { useGetTicketPagedWithScope } from "@/modules/ticket/query-hooks/use-get-paged-with-scope";
+import { useGetTicketPagedWithScope } from "@/modules/ticket/query-hooks/query/use-get-paged-with-scope";
 import { LuCircleCheck, LuLoaderCircle, LuFolderOpen } from "react-icons/lu";
 import { useNavigate } from "@tanstack/react-router";
+import { TicketCategoryEnum } from "@/modules/ticket/enums/category.enum";
+import { TicketPriorityEnum } from "@/modules/ticket/enums/priority.enum";
+import { enumToLabels } from "@/shared/utils/enum-to-labels";
 
 export function useEmployeeMetrics() {
   const { t } = useTranslation();
@@ -71,10 +74,48 @@ export function useEmployeeMetrics() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tickets, t]);
 
+  const statusLabels = useMemo(() => enumToLabels(TicketStatusEnum, "ticket.status", t), [t]);
+  const priorityLabels = useMemo(() => enumToLabels(TicketPriorityEnum, "ticket.priority", t), [t]);
+  const categoryLabels = useMemo(() => enumToLabels(TicketCategoryEnum, "ticket.category", t), [t]);
+
+  const statusClassName: Record<TicketStatusEnum, string> = {
+    [TicketStatusEnum.OPEN]: "bg-blue-50 text-blue-700 dark:bg-blue-950/50 dark:text-blue-400",
+    [TicketStatusEnum.IN_PROGRESS]:
+      "bg-purple-50 text-purple-700 dark:bg-purple-950/50 dark:text-purple-400",
+    [TicketStatusEnum.RESOLVED]:
+      "bg-emerald-50 text-emerald-700 dark:bg-emerald-950/50 dark:text-emerald-400",
+  };
+  const priorityClassName: Record<TicketPriorityEnum, string> = {
+    [TicketPriorityEnum.LOW]: "bg-slate-50 text-slate-700 dark:bg-slate-900 dark:text-slate-400",
+    [TicketPriorityEnum.MEDIUM]:
+      "bg-amber-50 text-amber-700 dark:bg-amber-950/50 dark:text-amber-400",
+    [TicketPriorityEnum.HIGH]:
+      "bg-orange-50 text-orange-700 dark:bg-orange-950/50 dark:text-orange-400",
+    [TicketPriorityEnum.URGENT]: "bg-red-50 text-red-700 dark:bg-red-950/50 dark:text-red-400",
+  };
+
+  const categoryClassName: Record<TicketCategoryEnum, string> = {
+    [TicketCategoryEnum.ACCESS]: "bg-red-50 text-red-700 dark:bg-red-950/50 dark:text-red-400",
+    [TicketCategoryEnum.ACCOUNT]: "bg-blue-50 text-blue-700 dark:bg-blue-950/50 dark:text-blue-400",
+    [TicketCategoryEnum.HARDWARE]:
+      "bg-green-50 text-green-700 dark:bg-green-950/50 dark:text-green-400",
+    [TicketCategoryEnum.SOFTWARE]:
+      "bg-purple-50 text-purple-700 dark:bg-purple-950/50 dark:text-purple-400",
+    [TicketCategoryEnum.OTHER]: "bg-slate-50 text-slate-700 dark:bg-slate-900 dark:text-slate-400",
+  };
+
   return {
     t,
     metrics,
     isLoading,
     isError,
+    tickets,
+    getTicketPagedWithScopeService,
+    statusLabels,
+    priorityLabels,
+    categoryLabels,
+    statusClassName,
+    priorityClassName,
+    categoryClassName,
   };
 }

@@ -27,7 +27,7 @@ export function AppSidebar() {
 
   return (
     <Sidebar collapsible="icon" variant="floating">
-      {user?.role !== UserRoleEnum.TECHNICAL_ASSISTANCE && (
+      {user?.role === UserRoleEnum.EMPLOYEE && (
         <SidebarHeader className="px-2 pt-6 pb-4">
           <SidebarMenu>
             <SidebarMenuItem className="flex justify-center">

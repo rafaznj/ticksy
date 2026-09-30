@@ -100,10 +100,6 @@
         "description": "Under my responsibility",
         "title": "Tickets assigned to me"
       },
-      "urgentPriorityTickets": {
-        "description": "Requiring priority attention",
-        "title": "Tickets urgent-priority"
-      },
       "inProgressTickets": {
         "description": "Tickets currently being handled",
         "title": "Tickets in progress"
@@ -123,6 +119,10 @@
       "totalTickets": {
         "description": "Tickets registered in the system",
         "title": "Total tickets"
+      },
+      "urgentPriorityTickets": {
+        "description": "Requiring priority attention",
+        "title": "Tickets urgent-priority"
       }
     }
   },
@@ -191,6 +191,21 @@
       },
       "title": "Assign ticket"
     },
+    "category": {
+      "access": "Access",
+      "account": "Account",
+      "hardware": "Hardware",
+      "other": "Other",
+      "software": "Software"
+    },
+    "chart": {
+      "labels": {
+        "inProgress": "In progress",
+        "open": "Open",
+        "resolved": "Resolved"
+      },
+      "title": "Ticket status"
+    },
     "create": {
       "actions": {
         "cancel": "Cancel",
@@ -237,6 +252,21 @@
           "required": "Assignee is required"
         }
       },
+      "category": {
+        "label": "Category",
+        "options": {
+          "access": "Access",
+          "account": "Account",
+          "hardware": "Hardware",
+          "other": "Other",
+          "software": "Software"
+        },
+        "placeholder": "Select the category",
+        "validations": {
+          "invalid": "Please select a valid category",
+          "required": "Category is required"
+        }
+      },
       "description": {
         "label": "Description",
         "placeholder": "Describe the issue or request in as much detail as possible",
@@ -254,7 +284,7 @@
           "medium": "Medium",
           "urgent": "Urgent"
         },
-        "placeholder": "Select the ticket priority",
+        "placeholder": "Select the priority",
         "validations": {
           "invalid": "Please select a valid priority",
           "required": "Priority is required"
@@ -289,6 +319,8 @@
     "table": {
       "columns": {
         "assignedToName": "Assignee",
+        "category": "Category",
+        "code": "Code",
         "created_at": "Created at",
         "createdByName": "Creator",
         "description": "Description",
@@ -299,6 +331,9 @@
       },
       "emptyMessage": "No tickets found",
       "filterByStatus": "Filter by status",
+      "monthlyAssociatedTickets": "Tickets associated this month",
+      "monthlyCreatedTickets": "Tickets created this month",
+      "myMonthlyTickets": "My tickets this month",
       "searchPlaceholder": "Search tickets",
       "unassigned": "Unassigned"
     },
@@ -411,8 +446,8 @@
         "role": "Role",
         "updated_at": "Updated at"
       },
-      "filterByStatus": "Filter by status",
       "emptyMessage": "No users found",
+      "filterByStatus": "Filter by status",
       "searchPlaceholder": "Search users"
     }
   }
