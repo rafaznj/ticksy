@@ -8,9 +8,13 @@ import { LuCircleCheck, LuFolderOpen, LuLoaderCircle } from "react-icons/lu";
 import { FiLayers } from "react-icons/fi";
 import { TicketPriorityEnum } from "@/modules/ticket/enums/priority.enum";
 import type { IGetTicketPagedWithScopeService } from "@/modules/ticket/services/contracts/get-paged-with-scope";
-import { useGetTicketPagedWithScope } from "@/modules/ticket/query-hooks/use-get-paged-with-scope";
+import { useGetTicketPagedWithScope } from "@/modules/ticket/query-hooks/query/use-get-paged-with-scope";
 import type { IGetTicketPagedCurrentMonthService } from "@/modules/ticket/services/contracts/get-paged-current-month";
 import { useNavigate } from "@tanstack/react-router";
+import { TicketCategoryEnum } from "@/modules/ticket/enums/category.enum";
+import { useGetTicketStatusCount } from "@/modules/ticket/query-hooks/query/use-get-status-count";
+import type { IGetTicketStatusCountService } from "@/modules/ticket/services/contracts/get-status-count";
+import { enumToLabels } from "@/shared/utils/enum-to-labels";
 
 export function useAdminMetrics() {
   const { t } = useTranslation();
@@ -21,6 +25,9 @@ export function useAdminMetrics() {
   );
   const getTicketPagedCurrentMonthService = container.get<IGetTicketPagedCurrentMonthService>(
     SERVICE_TOKENS.GetTicketPagedCurrentMonthService,
+  );
+  const getTicketStatusCountService = container.get<IGetTicketStatusCountService>(
+    SERVICE_TOKENS.GetTicketStatusCountService,
   );
 
   const { data, isLoading, isError } = useGetTicketPagedWithScope({
@@ -102,6 +109,24 @@ export function useAdminMetrics() {
     [TicketPriorityEnum.URGENT]: "bg-red-50 text-red-700 dark:bg-red-950/50 dark:text-red-400",
   };
 
+  const categoryClassName: Record<TicketCategoryEnum, string> = {
+    [TicketCategoryEnum.ACCESS]: "bg-red-50 text-red-700 dark:bg-red-950/50 dark:text-red-400",
+    [TicketCategoryEnum.ACCOUNT]: "bg-blue-50 text-blue-700 dark:bg-blue-950/50 dark:text-blue-400",
+    [TicketCategoryEnum.HARDWARE]:
+      "bg-green-50 text-green-700 dark:bg-green-950/50 dark:text-green-400",
+    [TicketCategoryEnum.SOFTWARE]:
+      "bg-purple-50 text-purple-700 dark:bg-purple-950/50 dark:text-purple-400",
+    [TicketCategoryEnum.OTHER]: "bg-slate-50 text-slate-700 dark:bg-slate-900 dark:text-slate-400",
+  };
+
+  const statusLabels = useMemo(() => enumToLabels(TicketStatusEnum, "ticket.status", t), [t]);
+  const priorityLabels = useMemo(() => enumToLabels(TicketPriorityEnum, "ticket.priority", t), [t]);
+  const categoryLabels = useMemo(() => enumToLabels(TicketCategoryEnum, "ticket.category", t), [t]);
+
+  const { data: statusCount, isLoading: isStatusCountLoading } = useGetTicketStatusCount(
+    getTicketStatusCountService,
+  );
+
   return {
     t,
     metrics,
@@ -110,5 +135,11 @@ export function useAdminMetrics() {
     getTicketPagedCurrentMonthService,
     statusClassName,
     priorityClassName,
+    categoryClassName,
+    statusCount,
+    isStatusCountLoading,
+    statusLabels,
+    priorityLabels,
+    categoryLabels,
   };
 }
