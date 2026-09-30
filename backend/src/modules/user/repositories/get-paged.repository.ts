@@ -1,4 +1,4 @@
-import { user } from "../../../database/drizzle/schema";
+import { users } from "../../../database/drizzle/schema";
 import { BaseGetPagedRepository } from "../../../shared/base/repositories/get-paged.repository";
 import { UserModel } from "../models/user-model";
 import { IGetUserPagedRepository } from "./contracts/get-paged";
@@ -8,6 +8,6 @@ export class GetUserPagedRepository
   implements IGetUserPagedRepository
 {
   constructor() {
-    super(user);
+    super(users);
   }
 }

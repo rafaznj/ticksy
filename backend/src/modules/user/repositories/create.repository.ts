@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { user } from "../../../database/drizzle/schema/user.schema";
+import { users } from "../../../database/drizzle/schema/users.schema";
 import { ICreateUserRepository } from "./contracts/create";
 import { BaseCreateRepository } from "../../../shared/base/repositories/create.repository";
 import { CreateUserDto } from "../dtos/create.dto";
@@ -11,6 +11,6 @@ export class CreateUserRepository
   implements ICreateUserRepository
 {
   constructor() {
-    super(user);
+    super(users);
   }
 }

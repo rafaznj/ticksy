@@ -2,7 +2,7 @@ import { Inject } from "@nestjs/common";
 import { and, eq } from "drizzle-orm";
 import { NodePgDatabase } from "drizzle-orm/node-postgres";
 import { DATABASE_TOKENS } from "../../../database/tokens";
-import { user } from "../../../database/drizzle/schema";
+import { users } from "../../../database/drizzle/schema";
 import { IPagedResult } from "../../../shared/types/paged-result";
 import { IQueryOptions } from "../../../shared/types/query-options";
 import buildPagedOptions from "../../../shared/utils/build-paged-options";
@@ -21,20 +21,20 @@ export class GetAssignableUsersPagedRepository implements IGetAssignableUsersPag
   async execute(options: IQueryOptions): Promise<IPagedResult<UserModel>> {
     const { limit, offset } = buildPagedOptions(options);
 
-    const { softDeleteCondition, sort, whereCondition } = customQueryConditions(options, user);
+    const { softDeleteCondition, sort, whereCondition } = customQueryConditions(options, users);
 
-    const roleCondition = eq(user.role, UserRoleEnum.TECHNICAL_ASSISTANCE);
+    const roleCondition = eq(users.role, UserRoleEnum.TECHNICAL_ASSISTANCE);
 
     const finalWhere = and(whereCondition, softDeleteCondition, roleCondition);
 
-    const queryBuilder = this.db.select().from(user).where(finalWhere).limit(limit).offset(offset);
+    const queryBuilder = this.db.select().from(users).where(finalWhere).limit(limit).offset(offset);
 
     if (sort) {
       queryBuilder.orderBy(sort);
     }
 
     const records = (await queryBuilder) as UserModel[];
-    const totalRecords = await this.db.$count(user, finalWhere);
+    const totalRecords = await this.db.$count(users, finalWhere);
 
     return buildPagedReturn(records, limit, totalRecords);
   }

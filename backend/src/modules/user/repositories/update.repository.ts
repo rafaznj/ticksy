@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import type { IUpdateUserRepository } from "./contracts/update";
-import { user } from "../../../database/drizzle/schema";
+import { users } from "../../../database/drizzle/schema";
 import { BaseUpdateRepository } from "../../../shared/base/repositories/update.repository";
 import { UpdateUserDto } from "../dtos/update.dto";
 
@@ -10,6 +10,6 @@ export class UpdateUserRepository
   implements IUpdateUserRepository
 {
   constructor() {
-    super(user);
+    super(users);
   }
 }

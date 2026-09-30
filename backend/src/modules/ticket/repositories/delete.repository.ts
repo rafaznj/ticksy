@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { ticket } from "../../../database/drizzle/schema";
+import { tickets } from "../../../database/drizzle/schema";
 import { BaseDeleteRepository } from "../../../shared/base/repositories/delete.repository";
 import { IDeleteTicketRepository } from "./contracts/delete";
 
@@ -9,6 +9,6 @@ export class DeleteTicketRepository
   implements IDeleteTicketRepository
 {
   constructor() {
-    super(ticket);
+    super(tickets);
   }
 }

@@ -3,7 +3,7 @@ import { and, eq, isNull } from "drizzle-orm";
 import { DATABASE_TOKENS } from "../../../database/tokens";
 import { IAssignTicketRepository } from "./contracts/assign";
 import { NodePgDatabase } from "drizzle-orm/node-postgres";
-import { ticket } from "../../../database/drizzle/schema";
+import { tickets } from "../../../database/drizzle/schema";
 import { TicketModel } from "../models/ticket";
 import { TicketStatusEnum } from "../enums/ticket-status.enum";
 
@@ -15,9 +15,9 @@ export class AssignTicketRepository implements IAssignTicketRepository {
 
   async execute(id: string, userId: string): Promise<TicketModel | null> {
     const [result] = await this.db
-      .update(ticket)
+      .update(tickets)
       .set({ assignedToId: userId, status: TicketStatusEnum.IN_PROGRESS })
-      .where(and(eq(ticket.id, id), isNull(ticket.assignedToId)))
+      .where(and(eq(tickets.id, id), isNull(tickets.assignedToId)))
       .returning();
 
     return result ?? null;

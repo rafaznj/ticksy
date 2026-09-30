@@ -3,7 +3,7 @@ import { eq } from "drizzle-orm";
 import { NodePgDatabase } from "drizzle-orm/node-postgres";
 
 import { DATABASE_TOKENS } from "../../../database/tokens";
-import { user } from "../../../database/drizzle/schema/user.schema";
+import { users } from "../../../database/drizzle/schema/users.schema";
 import { IDeactivateUserRepository } from "./contracts/deactivate";
 
 @Injectable()
@@ -13,11 +13,11 @@ export class ActivateUserRepository implements IDeactivateUserRepository {
 
   async execute(id: string): Promise<boolean> {
     const result = await this.db
-      .update(user)
+      .update(users)
       .set({
         deleted: false,
       })
-      .where(eq(user.id, id));
+      .where(eq(users.id, id));
 
     return !!result.rowCount;
   }

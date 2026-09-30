@@ -18,8 +18,8 @@ export class GetUserByEmailRepository implements IGetUserByEmailRepository {
   async execute(email: string): Promise<UserModel | null> {
     const [user] = await this.db
       .select()
-      .from(schema.user)
-      .where(eq(schema.user.email, email))
+      .from(schema.users)
+      .where(eq(schema.users.email, email))
       .limit(1);
 
     return user ?? null;

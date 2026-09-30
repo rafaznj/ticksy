@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { IGetTicketByIdRepository } from "./contracts/get-by-id";
-import { ticket } from "../../../database/drizzle/schema";
+import { tickets } from "../../../database/drizzle/schema";
 import { BaseGetByIdRepository } from "../../../shared/base/repositories/get-by-id.repository";
 import { TicketModel } from "../models/ticket";
 
@@ -10,6 +10,6 @@ export class GetTicketByIdRepository
   implements IGetTicketByIdRepository
 {
   constructor() {
-    super(ticket);
+    super(tickets);
   }
 }
