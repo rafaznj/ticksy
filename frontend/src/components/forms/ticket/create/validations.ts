@@ -1,6 +1,7 @@
 import { z } from "zod";
 import type { TFunction } from "i18next";
 import { TicketPriorityEnum } from "@/modules/ticket/enums/priority.enum";
+import { TicketCategoryEnum } from "@/modules/ticket/enums/category.enum";
 
 export const createTicketFormSchema = (t: TFunction) => {
   return z.object({
@@ -19,6 +20,10 @@ export const createTicketFormSchema = (t: TFunction) => {
           max: 5000,
         }),
       ),
+
+    category: z.enum(TicketCategoryEnum, {
+      error: () => t("ticket.fields.category.validations.required"),
+    }),
 
     priority: z.enum(TicketPriorityEnum, {
       error: () => t("ticket.fields.priority.validations.required"),

@@ -13,6 +13,7 @@ import { useUpdateTicket } from "@/modules/ticket/query-hooks/mutation/use-updat
 import type { EditTicketFormProps } from "@/components/forms/ticket/edit/types";
 import { editTicketFormSchema } from "@/components/forms/ticket/edit/validations";
 import { TicketPriorityEnum } from "@/modules/ticket/enums/priority.enum";
+import { TicketCategoryEnum } from "@/modules/ticket/enums/category.enum";
 
 export function useEditTicketForm() {
   const { t } = useTranslation();
@@ -28,6 +29,26 @@ export function useEditTicketForm() {
   );
 
   const { mutateAsync: updateTicket } = useUpdateTicket(updateTicketService);
+
+  const categoryOptions = useMemo(
+    () => [
+      { value: TicketCategoryEnum.ACCESS, label: t("ticket.fields.category.options.access") },
+      {
+        value: TicketCategoryEnum.ACCOUNT,
+        label: t("ticket.fields.category.options.account"),
+      },
+      { value: TicketCategoryEnum.HARDWARE, label: t("ticket.fields.category.options.hardware") },
+      {
+        value: TicketCategoryEnum.SOFTWARE,
+        label: t("ticket.fields.category.options.software"),
+      },
+      {
+        value: TicketCategoryEnum.OTHER,
+        label: t("ticket.fields.category.options.other"),
+      },
+    ],
+    [t],
+  );
 
   const priorityOptions = useMemo(
     () => [
@@ -86,6 +107,7 @@ export function useEditTicketForm() {
     t,
     isOpen,
     form,
+    categoryOptions,
     priorityOptions,
     canSubmit,
     isSubmitting,

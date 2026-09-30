@@ -10,6 +10,8 @@ import type { AxiosSingleton } from "@/lib/axios/axios-singleton";
 
 @injectable()
 export class GetTicketPagedWithScopeRepository implements IGetTicketPagedWithScopeRepository {
+  private readonly basePath = "ticket";
+
   constructor(
     @inject(INFRASTRUCTURE_TOKENS.AxiosSingleton)
     private axiosSingleton: AxiosSingleton,
@@ -17,7 +19,7 @@ export class GetTicketPagedWithScopeRepository implements IGetTicketPagedWithSco
 
   async execute(params: PagedParamsQuery): Promise<PagedResponse<TicketPagedDto> | AppError> {
     const response = await this.axiosSingleton.client.get<PagedResponse<TicketPagedDto>>(
-      "ticket/get-paged-with-scope",
+      `${this.basePath}/get-paged-with-scope`,
       {
         params,
       },

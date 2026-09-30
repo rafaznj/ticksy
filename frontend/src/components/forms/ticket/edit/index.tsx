@@ -6,6 +6,7 @@ export function EditTicketForm() {
     t,
     isOpen,
     form,
+    categoryOptions,
     priorityOptions,
     isBlurred,
     canSubmit,
@@ -24,8 +25,9 @@ export function EditTicketForm() {
       description={t("ticket.edit.description")}
       cancelText={t("ticket.edit.actions.cancel")}
       confirmText={t("ticket.edit.actions.save")}
+      width="lg"
     >
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+      <form onSubmit={handleSubmit} className="flex w-full min-w-0 flex-col gap-4">
         <form.AppField name="title">
           {(field) => (
             <field.TextField
@@ -45,15 +47,33 @@ export function EditTicketForm() {
           )}
         </form.AppField>
 
-        <form.AppField name="priority">
-          {(field) => (
-            <field.SelectField
-              label={t("ticket.fields.priority.label")}
-              placeholder={t("ticket.fields.priority.placeholder")}
-              options={priorityOptions}
-            />
-          )}
-        </form.AppField>
+        <div className="flex w-full min-w-0 gap-4">
+          <div className="min-w-0 flex-1">
+            <form.AppField name="category">
+              {(field) => (
+                <field.SelectField
+                  label={t("ticket.fields.category.label")}
+                  placeholder={t("ticket.fields.category.placeholder")}
+                  options={categoryOptions}
+                  required
+                />
+              )}
+            </form.AppField>
+          </div>
+
+          <div className="min-w-0 flex-1">
+            <form.AppField name="priority">
+              {(field) => (
+                <field.SelectField
+                  label={t("ticket.fields.priority.label")}
+                  placeholder={t("ticket.fields.priority.placeholder")}
+                  options={priorityOptions}
+                  required
+                />
+              )}
+            </form.AppField>
+          </div>
+        </div>
       </form>
     </ComplexDialog>
   );

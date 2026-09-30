@@ -4,6 +4,7 @@ import { useDialog } from "@/contexts/use-dialog";
 import { useAppForm } from "@/hooks/use-form";
 import { container } from "@/lib/inversifyJS/index.container";
 import { useAuthStore } from "@/lib/zustand/use-auth";
+import { TicketCategoryEnum } from "@/modules/ticket/enums/category.enum";
 import { TicketPriorityEnum } from "@/modules/ticket/enums/priority.enum";
 import { useCreateTicket } from "@/modules/ticket/query-hooks/mutation/use-create";
 import type { ICreateTicketService } from "@/modules/ticket/services/contracts/create";
@@ -20,6 +21,26 @@ export function useCreateTicketForm() {
 
   const createTicketService = container.get<ICreateTicketService>(
     SERVICE_TOKENS.CreateTicketService,
+  );
+
+  const categoryOptions = useMemo(
+    () => [
+      { value: TicketCategoryEnum.ACCESS, label: t("ticket.fields.category.options.access") },
+      {
+        value: TicketCategoryEnum.ACCOUNT,
+        label: t("ticket.fields.category.options.account"),
+      },
+      { value: TicketCategoryEnum.HARDWARE, label: t("ticket.fields.category.options.hardware") },
+      {
+        value: TicketCategoryEnum.SOFTWARE,
+        label: t("ticket.fields.category.options.software"),
+      },
+      {
+        value: TicketCategoryEnum.OTHER,
+        label: t("ticket.fields.category.options.other"),
+      },
+    ],
+    [t],
   );
 
   const priorityOptions = useMemo(
@@ -71,6 +92,7 @@ export function useCreateTicketForm() {
     isOpen,
     form,
     priorityOptions,
+    categoryOptions,
     canSubmit,
     isSubmitting,
     isBlurred,

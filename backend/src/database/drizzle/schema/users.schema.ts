@@ -7,7 +7,7 @@ export const userRoleEnum = pgEnum(
   Object.values(UserRoleEnum) as [UserRoleEnum, ...UserRoleEnum[]],
 );
 
-export const user = pgTable("user", {
+export const users = pgTable("users", {
   id: uuid().defaultRandom().primaryKey(),
   name: varchar({ length: 256 }).notNull(),
   email: varchar({ length: 254 }).notNull(),

@@ -26,7 +26,7 @@ export class GetTicketPagedWithScopeService implements IGetTicketPagedWithScopeS
     return this.getTicketPagedRepository.execute(
       {
         ...options,
-        columnsComparison: ["title", "description"],
+        columnsComparison: ["code", "title"],
         softDeleteFilter: true,
       },
       scope,

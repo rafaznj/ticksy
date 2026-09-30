@@ -37,10 +37,13 @@ export class GetTicketPagedCurrentMonthRepository implements IGetTicketPagedCurr
     const queryBuilder = this.db
       .select({
         id: ticket.id,
+        code: ticket.code,
         title: ticket.title,
+        description: ticket.description,
         createdByName: createdByUser.name,
-        priority: ticket.priority,
         status: ticket.status,
+        priority: ticket.priority,
+        category: ticket.category,
         createdAt: ticket.createdAt,
         updatedAt: ticket.updatedAt,
       })

@@ -18,8 +18,10 @@ const createdByUser = alias(user, "created_by_user");
 const assignedToUser = alias(user, "assigned_to_user");
 
 export class GetTicketPagedWithScopeRepository implements IGetTicketPagedWithScopeRepository {
-  @Inject(DATABASE_TOKENS.Drizzle)
-  private db!: NodePgDatabase;
+  constructor(
+    @Inject(DATABASE_TOKENS.Drizzle)
+    private readonly db: NodePgDatabase,
+  ) {}
 
   async execute(
     options: IQueryOptions,
@@ -48,8 +50,10 @@ export class GetTicketPagedWithScopeRepository implements IGetTicketPagedWithSco
     const queryBuilder = this.db
       .select({
         id: ticket.id,
+        code: ticket.code,
         title: ticket.title,
         description: ticket.description,
+        category: ticket.category,
         priority: ticket.priority,
         status: ticket.status,
         createdById: ticket.createdById,
