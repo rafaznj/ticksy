@@ -83,7 +83,7 @@ export function AsyncSelectField<T>({
   const resolvedEmptyMessage = emptyMessage ?? t("general.table.emptyMessage");
 
   return (
-    <div className="flex w-full min-w-0 flex-col gap-1.5">
+    <div className="flex w-full min-w-0 flex-col gap-3">
       <div className="flex w-full min-w-0 items-center justify-start gap-3">
         {label && (
           <Label htmlFor={field.name} className="flex shrink-0 items-center gap-0.5">

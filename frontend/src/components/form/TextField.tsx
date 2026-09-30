@@ -24,7 +24,7 @@ export function TextField({ label, required, type, ...props }: TextFieldProps) {
   const inputType = isPassword ? (showPassword ? "text" : "password") : type;
 
   return (
-    <div className="flex flex-col gap-1.5">
+    <div className="flex flex-col gap-3">
       {label && (
         <Label htmlFor={field.name} className="flex items-center gap-0.5">
           {label}

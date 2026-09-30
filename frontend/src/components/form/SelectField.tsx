@@ -25,36 +25,37 @@ export function SelectField({ label, required, placeholder, options }: SelectFie
   const field = useFieldContext<string>();
 
   return (
-    <div className="flex flex-col gap-1.5">
-      <div className="flex items-center justify-start gap-3">
-        {label && (
-          <Label htmlFor={field.name} className="flex items-center gap-0.5">
-            {label}
-            {required && (
-              <span className="text-blue-700 font-semibold select-none" aria-hidden="true">
-                *
-              </span>
-            )}
-          </Label>
-        )}
+    <div className="flex min-w-0 flex-col gap-3">
+      {label && (
+        <Label htmlFor={field.name} className="flex items-center gap-0.5">
+          {label}
 
-        <Select value={field.state.value ?? ""} onValueChange={field.handleChange}>
-          <SelectTrigger
-            id={field.name}
-            onBlur={field.handleBlur}
-            aria-invalid={field.state.meta.isTouched && field.state.meta.errors.length > 0}
-          >
-            <SelectValue placeholder={placeholder} />
-          </SelectTrigger>
-          <SelectContent position="popper">
-            {options.map((option) => (
-              <SelectItem key={option.value} value={option.value}>
-                {option.label}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-      </div>
+          {required && (
+            <span className="font-semibold text-blue-700 select-none" aria-hidden="true">
+              *
+            </span>
+          )}
+        </Label>
+      )}
+
+      <Select value={field.state.value ?? ""} onValueChange={field.handleChange}>
+        <SelectTrigger
+          id={field.name}
+          className="w-full min-w-0"
+          onBlur={field.handleBlur}
+          aria-invalid={field.state.meta.isTouched && field.state.meta.errors.length > 0}
+        >
+          <SelectValue placeholder={placeholder} />
+        </SelectTrigger>
+
+        <SelectContent position="popper">
+          {options.map((option) => (
+            <SelectItem key={option.value} value={option.value}>
+              {option.label}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
 
       <FieldErrors />
     </div>

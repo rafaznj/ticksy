@@ -1,5 +1,4 @@
 import { cn } from "@/lib/utils";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 import type { IconType } from "react-icons/lib";
 import { LuTrendingDown, LuTrendingUp } from "react-icons/lu";
@@ -12,7 +11,6 @@ export interface MetricCardItem {
   trend?: "up" | "down";
   trendValue?: string;
   iconColor?: string;
-  iconBg?: string;
   onClick?: () => void;
 }
 
@@ -23,7 +21,12 @@ interface MetricCardProps {
 
 export function MetricCard({ metrics, className }: MetricCardProps) {
   return (
-    <div className={cn("grid grid-cols-1 gap-6 sm:grid-cols-2", className)}>
+    <div
+      className={cn(
+        "grid grid-cols-1 gap-px overflow-hidden rounded-lg border border-blue-200 bg-blue-200 dark:border-blue-900/40 dark:bg-blue-900/40",
+        className,
+      )}
+    >
       {metrics.map((metric) => (
         <MetricCardItem key={metric.title} {...metric} />
       ))}
@@ -39,51 +42,52 @@ function MetricCardItem({
   trend,
   trendValue,
   iconColor = "text-blue-600",
-  iconBg = "bg-blue-50 dark:bg-blue-950/50",
   onClick,
 }: MetricCardItem) {
-  return (
-    <Card
-      onClick={onClick}
-      className={cn(
-        "group flex min-h-40 flex-col justify-center ring-blue-200 animate-slide-up transition-all duration-300 hover:shadow-md hover:-translate-y-0.5 dark:ring-blue-900/40",
-        onClick && "cursor-pointer",
-      )}
-    >
-      <CardHeader className="flex flex-row items-center justify-between pb-2">
-        <CardTitle className="text-base font-medium text-muted-foreground">{title}</CardTitle>
-        <div
-          className={cn(
-            "flex items-center justify-center rounded-xl p-3 transition-transform duration-300 group-hover:scale-110",
-            iconBg,
-          )}
-        >
-          <Icon className={cn("size-6", iconColor)} />
-        </div>
-      </CardHeader>
-      <CardContent className="space-y-2">
-        <p className="text-4xl font-bold tracking-tight">{value}</p>
-        <div className="flex items-center gap-2">
-          {trend && trendValue && (
-            <span
-              className={cn(
-                "inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-sm font-medium",
-                trend === "up"
-                  ? "bg-emerald-50 text-emerald-600 dark:bg-emerald-950/50 dark:text-emerald-400"
-                  : "bg-red-50 text-red-600 dark:bg-red-950/50 dark:text-red-400",
-              )}
-            >
-              {trend === "up" ? (
-                <LuTrendingUp className="size-4" />
-              ) : (
-                <LuTrendingDown className="size-4" />
-              )}
-              {trendValue}
-            </span>
-          )}
-          {description && <p className="text-sm text-muted-foreground">{description}</p>}
-        </div>
-      </CardContent>
-    </Card>
+  const cellClassName = cn(
+    "flex w-full flex-col gap-1.5 bg-card px-4 py-3 text-left",
+    onClick &&
+      "cursor-pointer transition-colors hover:bg-muted/50 focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none focus-visible:ring-inset",
+  );
+
+  const content = (
+    <>
+      <div className="flex items-center justify-between gap-2">
+        <span className="truncate text-sm text-muted-foreground">{title}</span>
+        <Icon className={cn("size-4 shrink-0", iconColor)} aria-hidden />
+      </div>
+
+      <div className="flex flex-wrap items-baseline gap-x-2">
+        <span className="text-2xl font-semibold tracking-tight tabular-nums">{value}</span>
+
+        {trend && trendValue && (
+          <span
+            className={cn(
+              "inline-flex items-center gap-0.5 text-xs font-medium",
+              trend === "up"
+                ? "text-emerald-600 dark:text-emerald-400"
+                : "text-red-600 dark:text-red-400",
+            )}
+          >
+            {trend === "up" ? (
+              <LuTrendingUp className="size-3.5" />
+            ) : (
+              <LuTrendingDown className="size-3.5" />
+            )}
+            {trendValue}
+          </span>
+        )}
+
+        {description && <span className="text-xs text-muted-foreground">{description}</span>}
+      </div>
+    </>
+  );
+
+  return onClick ? (
+    <button type="button" onClick={onClick} className={cellClassName}>
+      {content}
+    </button>
+  ) : (
+    <div className={cellClassName}>{content}</div>
   );
 }
