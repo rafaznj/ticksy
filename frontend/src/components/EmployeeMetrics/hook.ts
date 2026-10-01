@@ -11,6 +11,7 @@ import { useNavigate } from "@tanstack/react-router";
 import { TicketCategoryEnum } from "@/modules/ticket/enums/category.enum";
 import { TicketPriorityEnum } from "@/modules/ticket/enums/priority.enum";
 import { enumToLabels } from "@/shared/utils/enum-to-labels";
+import type { IGetTicketPagedLastSevenDaysService } from "@/modules/ticket/services/contracts/get-paged-last-seven-days";
 
 export function useEmployeeMetrics() {
   const { t } = useTranslation();
@@ -18,6 +19,9 @@ export function useEmployeeMetrics() {
 
   const getTicketPagedWithScopeService = container.get<IGetTicketPagedWithScopeService>(
     SERVICE_TOKENS.GetTicketPagedWithScopeService,
+  );
+  const getTicketPagedLastSevenDaysService = container.get<IGetTicketPagedLastSevenDaysService>(
+    SERVICE_TOKENS.GetTicketPagedLastSevenDaysService,
   );
 
   const { data, isLoading, isError } = useGetTicketPagedWithScope({
@@ -111,6 +115,7 @@ export function useEmployeeMetrics() {
     isError,
     tickets,
     getTicketPagedWithScopeService,
+    getTicketPagedLastSevenDaysService,
     statusLabels,
     priorityLabels,
     categoryLabels,

@@ -18,7 +18,7 @@ export const REPOSITORY_TOKENS = {
   DeleteTicketRepository: Symbol.for("DeleteTicketRepository"),
   GetTicketByIdRepository: Symbol.for("GetTicketByIdRepository"),
   GetTicketPagedWithScopeRepository: Symbol.for("GetTicketPagedWithScopeRepository"),
-  GetTicketPagedCurrentMonthRepository: Symbol.for("GetTicketPagedCurrentMonthRepository"),
+  GetTicketPagedLastSevenDaysRepository: Symbol.for("GetTicketPagedLastSevenDaysRepository"),
   AssignTicketRepository: Symbol.for("AssignTicketRepository"),
   UnassignTicketRepository: Symbol.for("UnassignTicketRepository"),
   ResolvedTicketRepository: Symbol.for("ResolvedTicketRepository"),

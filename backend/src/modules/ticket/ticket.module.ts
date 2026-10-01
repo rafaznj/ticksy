@@ -18,10 +18,10 @@ import { AssignTicketRepository } from "./repositories/assign.repository";
 import { ResolvedTicketRepository } from "./repositories/resolved.repository";
 import { UnassignTicketService } from "./services/unassign.service";
 import { UnassignTicketRepository } from "./repositories/unassign.repository";
-import { GetTicketPagedCurrentMonthRepository } from "./repositories/get-paged-tickets-current-month.repository";
-import { GetTicketPagedCurrentMonthService } from "./services/get-paged-tickets-current-month.service";
+import { GetTicketPagedLastSevenDaysRepository } from "./repositories/get-paged-last-seven-days.repository";
 import { GetTicketStatusCountService } from "./services/get-status-count.service";
 import { GetTicketStatusCountRepository } from "./repositories/get-status-count.repository";
+import { GetTicketPagedLastSevenDaysService } from "./services/get-paged-last-seven-days";
 
 @Module({
   controllers: [TicketController],
@@ -51,12 +51,12 @@ import { GetTicketStatusCountRepository } from "./repositories/get-status-count.
       useClass: GetTicketPagedWithScopeRepository,
     },
     {
-      provide: SERVICE_TOKENS.GetTicketPagedCurrentMonthService,
-      useClass: GetTicketPagedCurrentMonthService,
+      provide: SERVICE_TOKENS.GetTicketPagedLastSevenDaysService,
+      useClass: GetTicketPagedLastSevenDaysService,
     },
     {
-      provide: REPOSITORY_TOKENS.GetTicketPagedCurrentMonthRepository,
-      useClass: GetTicketPagedCurrentMonthRepository,
+      provide: REPOSITORY_TOKENS.GetTicketPagedLastSevenDaysRepository,
+      useClass: GetTicketPagedLastSevenDaysRepository,
     },
     {
       provide: SERVICE_TOKENS.UpdateTicketService,

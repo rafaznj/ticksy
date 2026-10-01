@@ -1,30 +1,30 @@
 import { Inject } from "@nestjs/common";
+import type { IGetTicketPagedLastSevenDaysRepository } from "../repositories/contracts/get-paged-last-seven-days";
 import { REPOSITORY_TOKENS } from "../../../shared/di/tokens.repositories";
 import { IQueryOptions } from "../../../shared/types/query-options";
 import { IPagedResult } from "../../../shared/types/paged-result";
-import { IGetTicketPagedWithScopeService } from "./contracts/get-paged-with-scope";
-import type { IGetTicketPagedWithScopeRepository } from "../repositories/contracts/get-paged-with-scope";
-import { TicketPagedModel } from "../models/ticket-paged";
-import { UserModel } from "../../user/models/user-model";
+import { TicketPagedLastSevenDaysModel } from "../models/ticket-paged-last-seven-day";
 import { UserRoleEnum } from "../../user/enums/roles.enum";
 import { TicketScope } from "../models/ticket-scope";
+import { UserModel } from "../../user/models/user-model";
+import { IGetTicketPagedLastSevenDaysService } from "./contracts/get-paged-last-seven-days";
 
-export class GetTicketPagedWithScopeService implements IGetTicketPagedWithScopeService {
+export class GetTicketPagedLastSevenDaysService implements IGetTicketPagedLastSevenDaysService {
   constructor(
-    @Inject(REPOSITORY_TOKENS.GetTicketPagedWithScopeRepository)
-    private getTicketPagedRepository: IGetTicketPagedWithScopeRepository,
+    @Inject(REPOSITORY_TOKENS.GetTicketPagedLastSevenDaysRepository)
+    private readonly getTicketPagedLastSevenDaysRepository: IGetTicketPagedLastSevenDaysRepository,
   ) {}
 
   async execute(
     options: IQueryOptions,
     currentUser: Omit<UserModel, "password">,
-  ): Promise<IPagedResult<TicketPagedModel>> {
+  ): Promise<IPagedResult<TicketPagedLastSevenDaysModel>> {
     const scope = this.buildScope(currentUser);
 
-    return this.getTicketPagedRepository.execute(
+    return this.getTicketPagedLastSevenDaysRepository.execute(
       {
         ...options,
-        columnsComparison: ["code", "title"],
+        columnsComparison: ["createdByName", "title"],
         softDeleteFilter: true,
       },
       scope,

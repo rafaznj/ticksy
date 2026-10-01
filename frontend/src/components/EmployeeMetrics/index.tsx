@@ -2,14 +2,14 @@ import { useEmployeeMetrics } from "@/components/EmployeeMetrics/hook";
 import { InfiniteList } from "@/components/InfiniteList";
 import { MetricCard } from "@/components/MetricCard";
 import { Badge } from "@/components/ui/badge";
-import type { TicketPagedDto } from "@/modules/ticket/dtos/paged.dto";
+import type { TicketPagedLastSevenDaysDTO } from "@/modules/ticket/dtos/paged-last-seven-day";
 import { formatDate } from "@/shared/utils/format-date";
 import { t } from "i18next";
 
 export function EmployeeMetrics() {
   const {
     metrics,
-    getTicketPagedWithScopeService,
+    getTicketPagedLastSevenDaysService,
     statusLabels,
     categoryLabels,
     priorityLabels,
@@ -24,9 +24,9 @@ export function EmployeeMetrics() {
         <MetricCard metrics={metrics} className="lg:grid-cols-3" />
 
         <div className="grid grid-cols-1 gap-6">
-          <InfiniteList<TicketPagedDto>
+          <InfiniteList<TicketPagedLastSevenDaysDTO>
             title={t("ticket.table.myMonthlyTickets")}
-            service={getTicketPagedWithScopeService}
+            service={getTicketPagedLastSevenDaysService}
             queryKey="tickets"
             hasSearch
             pageSize={20}
@@ -43,9 +43,9 @@ export function EmployeeMetrics() {
                   </span>
                 </div>
 
-                <div className="min-w-0 space-y-1">
-                  <p className="line-clamp-1 text-base font-medium">{ticket.title}</p>
-                  <p className="line-clamp-2 min-h-10 text-sm text-muted-foreground">
+                <div className="min-w-0 space-y-1.5">
+                  <p className="line-clamp-1 text-base font-semibold">{ticket.title}</p>
+                  <p className="line-clamp-2 min-h-10 text-sm text-foreground/70">
                     {ticket.description}
                   </p>
                 </div>
@@ -55,19 +55,19 @@ export function EmployeeMetrics() {
                     className={`${statusClassName[ticket.status]} px-2 py-0.5 text-xs`}
                     variant="outline"
                   >
-                    {statusLabels[ticket.status]}
+                    {t("ticket.table.columns.status")}: {statusLabels[ticket.status]}
                   </Badge>
                   <Badge
                     className={`${priorityClassName[ticket.priority]} px-2 py-0.5 text-xs`}
                     variant="outline"
                   >
-                    {priorityLabels[ticket.priority]}
+                    {t("ticket.table.columns.priority")}: {priorityLabels[ticket.priority]}
                   </Badge>
                   <Badge
                     className={`${categoryClassName[ticket.category]} px-2 py-0.5 text-xs`}
                     variant="outline"
                   >
-                    {categoryLabels[ticket.category]}
+                    {t("ticket.table.columns.category")}: {categoryLabels[ticket.category]}
                   </Badge>
                 </div>
               </div>

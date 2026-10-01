@@ -30,7 +30,7 @@ import type { IQueryOptions } from "../../../shared/types/query-options";
 import type { IResolvedTicketService } from "../services/contracts/resolved";
 import type { IUnassignTicketService } from "../services/contracts/unassign";
 import { UnassignTicketDto } from "../dtos/unassign.dto";
-import type { IGetTicketPagedCurrentMonthService } from "../services/contracts/get-paged-tickets-current-month";
+import type { IGetTicketPagedLastSevenDaysService } from "../services/contracts/get-paged-last-seven-days";
 import type { IGetTicketStatusCountService } from "../services/contracts/get-status-count";
 
 @Controller("ticket")
@@ -42,8 +42,8 @@ export class TicketController {
     private readonly getTicketByIdService: IGetTicketByIdService,
     @Inject(SERVICE_TOKENS.GetTicketPagedWithScopeService)
     private readonly getTicketPagedWithScopeService: IGetTicketPagedWithScopeService,
-    @Inject(SERVICE_TOKENS.GetTicketPagedCurrentMonthService)
-    private readonly getTicketPagedCurrentMonthRepository: IGetTicketPagedCurrentMonthService,
+    @Inject(SERVICE_TOKENS.GetTicketPagedLastSevenDaysService)
+    private readonly getTicketPagedLastSevenDaysRepository: IGetTicketPagedLastSevenDaysService,
     @Inject(SERVICE_TOKENS.UpdateTicketService)
     private readonly updateTicketService: IUpdateTicketService,
     @Inject(SERVICE_TOKENS.DeleteTicketService)
@@ -74,9 +74,14 @@ export class TicketController {
     return result;
   }
 
-  @Get("/get-paged-current-month")
-  async getPagedCurrentMonth(@Query() query: IQueryOptions) {
-    const result = await this.getTicketPagedCurrentMonthRepository.execute(query);
+  @Get("/get-paged-last-seven-days")
+  @UseGuards(AuthGuard("jwt"))
+  async getPagedLastSevenDays(
+    @Query() query: IQueryOptions,
+    @Req() req: Request & { user: Omit<UserModel, "password"> },
+  ) {
+    const result = await this.getTicketPagedLastSevenDaysRepository.execute(query, req.user);
+
     return result;
   }
 

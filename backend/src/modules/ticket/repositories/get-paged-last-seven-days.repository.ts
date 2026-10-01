@@ -1,5 +1,5 @@
 import { Inject } from "@nestjs/common";
-import { and, eq, gte, lt } from "drizzle-orm";
+import { and, eq, gte } from "drizzle-orm";
 import { alias } from "drizzle-orm/pg-core";
 import { NodePgDatabase } from "drizzle-orm/node-postgres";
 import { DATABASE_TOKENS } from "../../../database/tokens";
@@ -10,29 +10,39 @@ import { IQueryOptions } from "../../../shared/types/query-options";
 import buildPagedOptions from "../../../shared/utils/build-paged-options";
 import { customQueryConditions } from "../../../shared/utils/custom-conditions";
 import buildPagedReturn from "../../../shared/utils/build-paged-return";
-import { IGetTicketPagedCurrentMonthRepository } from "./contracts/get-paged-current-month";
-import { TicketPagedCurrentMonthModel } from "../models/ticket-paged-current-month";
+import { IGetTicketPagedLastSevenDaysRepository } from "./contracts/get-paged-last-seven-days";
+import { TicketPagedLastSevenDaysModel } from "../models/ticket-paged-last-seven-day";
+import { TicketScope } from "../models/ticket-scope";
 
 const createdByUser = alias(users, "created_by_user");
 
-export class GetTicketPagedCurrentMonthRepository implements IGetTicketPagedCurrentMonthRepository {
+export class GetTicketPagedLastSevenDaysRepository implements IGetTicketPagedLastSevenDaysRepository {
   @Inject(DATABASE_TOKENS.Drizzle)
   private db!: NodePgDatabase;
 
-  async execute(options: IQueryOptions): Promise<IPagedResult<TicketPagedCurrentMonthModel>> {
+  async execute(
+    options: IQueryOptions,
+    scope?: TicketScope,
+  ): Promise<IPagedResult<TicketPagedLastSevenDaysModel>> {
     const { limit, offset } = buildPagedOptions(options);
     const { softDeleteCondition, sort, whereCondition } = customQueryConditions(options, tickets);
 
     const now = new Date();
-    const firstDayOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
-    const firstDayOfNextMonth = new Date(now.getFullYear(), now.getMonth() + 1, 1);
+    const sevenDaysAgo = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 6);
+    const lastSevenDaysCondition = gte(tickets.createdAt, sevenDaysAgo);
 
-    const currentMonthCondition = and(
-      gte(tickets.createdAt, firstDayOfMonth),
-      lt(tickets.createdAt, firstDayOfNextMonth),
+    const scopeCondition = scope?.assignedToId
+      ? eq(tickets.assignedToId, scope.assignedToId)
+      : scope?.createdById
+        ? eq(tickets.createdById, scope.createdById)
+        : undefined;
+
+    const combinedCondition = and(
+      whereCondition,
+      softDeleteCondition,
+      lastSevenDaysCondition,
+      scopeCondition,
     );
-
-    const combinedCondition = and(whereCondition, softDeleteCondition, currentMonthCondition);
 
     const queryBuilder = this.db
       .select({
@@ -57,7 +67,7 @@ export class GetTicketPagedCurrentMonthRepository implements IGetTicketPagedCurr
       queryBuilder.orderBy(sort);
     }
 
-    const records = (await queryBuilder) as TicketPagedCurrentMonthModel[];
+    const records = (await queryBuilder) as TicketPagedLastSevenDaysModel[];
     const totalRecords = await this.db.$count(tickets, combinedCondition);
 
     return buildPagedReturn(records, limit, totalRecords);

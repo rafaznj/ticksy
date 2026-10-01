@@ -8,7 +8,7 @@ import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { useGetTicketPagedWithScope } from "@/modules/ticket/query-hooks/query/use-get-paged-with-scope";
 import { LuCircleCheck, LuLoaderCircle, LuCircleAlert } from "react-icons/lu";
-import type { IGetTicketPagedCurrentMonthService } from "@/modules/ticket/services/contracts/get-paged-current-month";
+import type { IGetTicketPagedLastSevenDaysService } from "@/modules/ticket/services/contracts/get-paged-last-seven-days";
 import { useNavigate } from "@tanstack/react-router";
 import { TicketCategoryEnum } from "@/modules/ticket/enums/category.enum";
 import { enumToLabels } from "@/shared/utils/enum-to-labels";
@@ -17,11 +17,11 @@ export function useTechnicalAssistanceMetrics() {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
-  const getTicketPagedService = container.get<IGetTicketPagedWithScopeService>(
+  const getTicketPagedWithScopeService = container.get<IGetTicketPagedWithScopeService>(
     SERVICE_TOKENS.GetTicketPagedWithScopeService,
   );
-  const getTicketPagedCurrentMonthService = container.get<IGetTicketPagedCurrentMonthService>(
-    SERVICE_TOKENS.GetTicketPagedCurrentMonthService,
+  const getTicketPagedLastSevenDaysService = container.get<IGetTicketPagedLastSevenDaysService>(
+    SERVICE_TOKENS.GetTicketPagedLastSevenDaysService,
   );
 
   const {
@@ -29,7 +29,7 @@ export function useTechnicalAssistanceMetrics() {
     isLoading,
     isError,
   } = useGetTicketPagedWithScope({
-    getTicketPagedWithScopeService: getTicketPagedService,
+    getTicketPagedWithScopeService,
     params: { currentPage: 1, pageSize: 9999 },
   });
 
@@ -117,7 +117,7 @@ export function useTechnicalAssistanceMetrics() {
     metrics,
     isLoading,
     isError,
-    getTicketPagedCurrentMonthService,
+    getTicketPagedLastSevenDaysService,
     statusLabels,
     priorityLabels,
     categoryLabels,

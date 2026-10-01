@@ -10,9 +10,10 @@ import { IQueryOptions } from "../../../shared/types/query-options";
 import buildPagedOptions from "../../../shared/utils/build-paged-options";
 import { customQueryConditions } from "../../../shared/utils/custom-conditions";
 import buildPagedReturn from "../../../shared/utils/build-paged-return";
-import { IGetTicketPagedWithScopeRepository, TicketScope } from "./contracts/get-paged-with-scope";
+import { IGetTicketPagedWithScopeRepository } from "./contracts/get-paged-with-scope";
 import { TicketPagedModel } from "../models/ticket-paged";
 import { TicketStatusEnum } from "../enums/ticket-status.enum";
+import { TicketScope } from "../models/ticket-scope";
 
 const createdByUser = alias(users, "created_by_user");
 const assignedToUser = alias(users, "assigned_to_user");

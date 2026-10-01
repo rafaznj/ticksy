@@ -9,7 +9,7 @@ import { FiLayers } from "react-icons/fi";
 import { TicketPriorityEnum } from "@/modules/ticket/enums/priority.enum";
 import type { IGetTicketPagedWithScopeService } from "@/modules/ticket/services/contracts/get-paged-with-scope";
 import { useGetTicketPagedWithScope } from "@/modules/ticket/query-hooks/query/use-get-paged-with-scope";
-import type { IGetTicketPagedCurrentMonthService } from "@/modules/ticket/services/contracts/get-paged-current-month";
+import type { IGetTicketPagedLastSevenDaysService } from "@/modules/ticket/services/contracts/get-paged-last-seven-days";
 import { useNavigate } from "@tanstack/react-router";
 import { TicketCategoryEnum } from "@/modules/ticket/enums/category.enum";
 import { useGetTicketStatusCount } from "@/modules/ticket/query-hooks/query/use-get-status-count";
@@ -23,8 +23,8 @@ export function useAdminMetrics() {
   const getTicketPagedWithScopeService = container.get<IGetTicketPagedWithScopeService>(
     SERVICE_TOKENS.GetTicketPagedWithScopeService,
   );
-  const getTicketPagedCurrentMonthService = container.get<IGetTicketPagedCurrentMonthService>(
-    SERVICE_TOKENS.GetTicketPagedCurrentMonthService,
+  const getTicketPagedLastSevenDaysService = container.get<IGetTicketPagedLastSevenDaysService>(
+    SERVICE_TOKENS.GetTicketPagedLastSevenDaysService,
   );
   const getTicketStatusCountService = container.get<IGetTicketStatusCountService>(
     SERVICE_TOKENS.GetTicketStatusCountService,
@@ -132,7 +132,7 @@ export function useAdminMetrics() {
     metrics,
     isLoading,
     isError,
-    getTicketPagedCurrentMonthService,
+    getTicketPagedLastSevenDaysService,
     statusClassName,
     priorityClassName,
     categoryClassName,

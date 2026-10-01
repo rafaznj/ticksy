@@ -20,7 +20,7 @@ export const SERVICE_TOKENS = {
   // Ticket
   CreateTicketService: Symbol.for("CreateTicketService"),
   GetTicketPagedWithScopeService: Symbol.for("GetTicketPagedWithScopeService"),
-  GetTicketPagedCurrentMonthService: Symbol.for("GetTicketPagedCurrentMonthService"),
+  GetTicketPagedLastSevenDaysService: Symbol.for("GetTicketPagedLastSevenDaysService"),
   GetTicketByIdService: Symbol.for("GetTicketByIdService"),
   UpdateTicketService: Symbol.for("UpdateTicketService"),
   DeleteTicketService: Symbol.for("DeleteTicketService"),

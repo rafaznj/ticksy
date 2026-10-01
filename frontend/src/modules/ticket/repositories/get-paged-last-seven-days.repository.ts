@@ -5,11 +5,11 @@ import type { AppError } from "@/shared/errors/app-error";
 import { handleRepositoryResponse } from "@/shared/response/handle-repository-response";
 import { INFRASTRUCTURE_TOKENS } from "@/shared/di/tokens.infrastructure";
 import type { AxiosSingleton } from "@/lib/axios/axios-singleton";
-import type { IGetTicketPagedCurrentMonthRepository } from "@/modules/ticket/repositories/contracts/get-paged-current-month";
-import type { TicketPagedCurrentMonthDto } from "@/modules/ticket/dtos/paged-current-month.dto";
+import type { IGetTicketPagedLastSevenDaysRepository } from "@/modules/ticket/repositories/contracts/get-paged-last-seven-days";
+import type { TicketPagedLastSevenDaysDTO } from "@/modules/ticket/dtos/paged-last-seven-day";
 
 @injectable()
-export class GetTicketPagedCurrentMonthRepository implements IGetTicketPagedCurrentMonthRepository {
+export class GetTicketPagedLastSevenDaysRepository implements IGetTicketPagedLastSevenDaysRepository {
   constructor(
     @inject(INFRASTRUCTURE_TOKENS.AxiosSingleton)
     private axiosSingleton: AxiosSingleton,
@@ -17,10 +17,10 @@ export class GetTicketPagedCurrentMonthRepository implements IGetTicketPagedCurr
 
   async execute(
     params: PagedParamsQuery,
-  ): Promise<PagedResponse<TicketPagedCurrentMonthDto> | AppError> {
+  ): Promise<PagedResponse<TicketPagedLastSevenDaysDTO> | AppError> {
     const response = await this.axiosSingleton.client.get<
-      PagedResponse<TicketPagedCurrentMonthDto>
-    >("ticket/get-paged-current-month", {
+      PagedResponse<TicketPagedLastSevenDaysDTO>
+    >("ticket/get-paged-last-seven-days", {
       params,
     });
 

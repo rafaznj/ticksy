@@ -3,7 +3,7 @@ import type { IAssignTicketRepository } from "@/modules/ticket/repositories/cont
 import type { ICreateTicketRepository } from "@/modules/ticket/repositories/contracts/create";
 import type { IDeleteTicketRepository } from "@/modules/ticket/repositories/contracts/delete";
 import type { IGetTicketByIdRepository } from "@/modules/ticket/repositories/contracts/get-by-id";
-import type { IGetTicketPagedCurrentMonthRepository } from "@/modules/ticket/repositories/contracts/get-paged-current-month";
+import type { IGetTicketPagedLastSevenDaysRepository } from "@/modules/ticket/repositories/contracts/get-paged-last-seven-days";
 import type { IGetTicketPagedWithScopeRepository } from "@/modules/ticket/repositories/contracts/get-paged-with-scope";
 import type { IResolvedTicketRepository } from "@/modules/ticket/repositories/contracts/resolved";
 import type { IUnassignTicketRepository } from "@/modules/ticket/repositories/contracts/unassign";
@@ -11,7 +11,7 @@ import type { IUpdateTicketRepository } from "@/modules/ticket/repositories/cont
 import { CreateTicketRepository } from "@/modules/ticket/repositories/create.repository";
 import { DeleteTicketRepository } from "@/modules/ticket/repositories/delete.repository";
 import { GetTicketByIdRepository } from "@/modules/ticket/repositories/get-by-id.repository";
-import { GetTicketPagedCurrentMonthRepository } from "@/modules/ticket/repositories/get-paged-current-month.repository.ts";
+import { GetTicketPagedLastSevenDaysRepository } from "@/modules/ticket/repositories/get-paged-last-seven-days.repository";
 import { GetTicketPagedWithScopeRepository } from "@/modules/ticket/repositories/get-paged-with-scope.repository";
 import { ResolvedTicketRepository } from "@/modules/ticket/repositories/resolved.repository";
 import { UnassignTicketRepository } from "@/modules/ticket/repositories/unassign.repository";
@@ -22,14 +22,14 @@ import type { ICreateTicketService } from "@/modules/ticket/services/contracts/c
 import type { IDeleteTicketService } from "@/modules/ticket/services/contracts/delete";
 import type { IGetTicketByIdService } from "@/modules/ticket/services/contracts/get-by-id";
 import type { IGetTicketPagedWithScopeService } from "@/modules/ticket/services/contracts/get-paged-with-scope";
-import type { IGetTicketPagedCurrentMonthService } from "@/modules/ticket/services/contracts/get-paged-current-month";
+import type { IGetTicketPagedLastSevenDaysService } from "@/modules/ticket/services/contracts/get-paged-last-seven-days";
 import type { IResolvedTicketService } from "@/modules/ticket/services/contracts/resolved";
 import type { IUnassignTicketService } from "@/modules/ticket/services/contracts/unassign";
 import type { IUpdateTicketService } from "@/modules/ticket/services/contracts/update";
 import { CreateTicketService } from "@/modules/ticket/services/create.service";
 import { DeleteTicketService } from "@/modules/ticket/services/delete.service";
 import { GetTicketByIdService } from "@/modules/ticket/services/get-by-id.service";
-import { GetTicketPagedCurrentMonthService } from "@/modules/ticket/services/get-paged-current-month.service";
+import { GetTicketPagedLastSevenDaysService } from "@/modules/ticket/services/get-paged-last-seven-days.service";
 import { GetTicketPagedWithScopeService } from "@/modules/ticket/services/get-paged-with-scope.service";
 import { ResolvedTicketService } from "@/modules/ticket/services/resolved.service";
 import { UnassignTicketService } from "@/modules/ticket/services/unassign.service";
@@ -55,12 +55,12 @@ export const ticketContainerModule = new ContainerModule(({ bind }: ContainerMod
     GetTicketPagedWithScopeRepository,
   );
 
-  bind<IGetTicketPagedCurrentMonthService>(SERVICE_TOKENS.GetTicketPagedCurrentMonthService).to(
-    GetTicketPagedCurrentMonthService,
+  bind<IGetTicketPagedLastSevenDaysService>(SERVICE_TOKENS.GetTicketPagedLastSevenDaysService).to(
+    GetTicketPagedLastSevenDaysService,
   );
-  bind<IGetTicketPagedCurrentMonthRepository>(
-    REPOSITORY_TOKENS.GetTicketPagedCurrentMonthRepository,
-  ).to(GetTicketPagedCurrentMonthRepository);
+  bind<IGetTicketPagedLastSevenDaysRepository>(
+    REPOSITORY_TOKENS.GetTicketPagedLastSevenDaysRepository,
+  ).to(GetTicketPagedLastSevenDaysRepository);
 
   bind<IGetTicketByIdService>(SERVICE_TOKENS.GetTicketByIdService).to(GetTicketByIdService);
   bind<IGetTicketByIdRepository>(REPOSITORY_TOKENS.GetTicketByIdRepository).to(

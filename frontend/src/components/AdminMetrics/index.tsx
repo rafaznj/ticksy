@@ -2,15 +2,16 @@ import { useAdminMetrics } from "@/components/AdminMetrics/hook";
 import { InfiniteList } from "@/components/InfiniteList";
 import { MetricCard } from "@/components/MetricCard";
 import { Badge } from "@/components/ui/badge";
-import type { TicketPagedCurrentMonthDto } from "@/modules/ticket/dtos/paged-current-month.dto";
+import type { TicketPagedLastSevenDaysDTO } from "@/modules/ticket/dtos/paged-last-seven-day";
 import { TicketStatusChart } from "@/components/TicketStatusChart";
 import { formatDate } from "@/shared/utils/format-date";
 import { t } from "i18next";
+import { LuUser } from "react-icons/lu";
 
 export function AdminMetrics() {
   const {
     metrics,
-    getTicketPagedCurrentMonthService,
+    getTicketPagedLastSevenDaysService,
     statusClassName,
     priorityClassName,
     categoryClassName,
@@ -29,9 +30,9 @@ export function AdminMetrics() {
         <TicketStatusChart data={statusCount} isLoading={isStatusCountLoading} />
 
         <div className="grid grid-cols-1 gap-6">
-          <InfiniteList<TicketPagedCurrentMonthDto>
+          <InfiniteList<TicketPagedLastSevenDaysDTO>
             title={t("ticket.table.monthlyCreatedTickets")}
-            service={getTicketPagedCurrentMonthService}
+            service={getTicketPagedLastSevenDaysService}
             queryKey="tickets"
             hasSearch
             pageSize={20}
@@ -48,9 +49,13 @@ export function AdminMetrics() {
                   </span>
                 </div>
 
-                <div className="min-w-0 space-y-1">
-                  <p className="line-clamp-1 text-base font-medium">{ticket.title}</p>
-                  <p className="line-clamp-2 min-h-10 text-sm text-muted-foreground">
+                <div className="min-w-0 space-y-1.5">
+                  <p className="flex items-center gap-1.5 text-sm font-medium">
+                    <LuUser className="size-3.5 shrink-0 text-primary" />
+                    <span className="truncate">{ticket.createdByName}</span>
+                  </p>
+                  <p className="line-clamp-1 text-base font-semibold">{ticket.title}</p>
+                  <p className="line-clamp-2 min-h-10 text-sm text-foreground/70">
                     {ticket.description}
                   </p>
                 </div>
@@ -60,19 +65,19 @@ export function AdminMetrics() {
                     className={`${statusClassName[ticket.status]} px-2 py-0.5 text-xs`}
                     variant="outline"
                   >
-                    {statusLabels[ticket.status]}
+                    {t("ticket.table.columns.status")}: {statusLabels[ticket.status]}
                   </Badge>
                   <Badge
                     className={`${priorityClassName[ticket.priority]} px-2 py-0.5 text-xs`}
                     variant="outline"
                   >
-                    {priorityLabels[ticket.priority]}
+                    {t("ticket.table.columns.priority")}: {priorityLabels[ticket.priority]}
                   </Badge>
                   <Badge
                     className={`${categoryClassName[ticket.category]} px-2 py-0.5 text-xs`}
                     variant="outline"
                   >
-                    {categoryLabels[ticket.category]}
+                    {t("ticket.table.columns.category")}: {categoryLabels[ticket.category]}
                   </Badge>
                 </div>
               </div>
