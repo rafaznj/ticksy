@@ -8,12 +8,14 @@ import reactHooks from "eslint-plugin-react-hooks";
 import reactRefresh from "eslint-plugin-react-refresh";
 import importPlugin from "eslint-plugin-import";
 
-import { defineConfig } from "eslint/config";
+import pluginRouter from "@tanstack/eslint-plugin-router";
+
+import { defineConfig, globalIgnores } from "eslint/config";
 
 export default defineConfig(
-  {
-    ignores: ["**/dist/**", "**/node_modules/**", "**/coverage/**"],
-  },
+  globalIgnores(["**/dist/**", "**/node_modules/**", "**/coverage/**"]),
+  globalIgnores(["frontend/src/routeTree.gen.ts"]),
+  globalIgnores(["backend/src/database/drizzle/migrations/**"]),
 
   js.configs.recommended,
 
@@ -22,7 +24,7 @@ export default defineConfig(
   prettier,
 
   {
-    files: ["**/*.{ts,tsx,js,jsx}"],
+    files: ["**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"],
 
     languageOptions: {
       ecmaVersion: "latest",
@@ -62,6 +64,7 @@ export default defineConfig(
       react,
       "react-hooks": reactHooks,
       "react-refresh": reactRefresh,
+      "@tanstack/router": pluginRouter,
     },
 
     settings: {
@@ -84,6 +87,8 @@ export default defineConfig(
           allowConstantExport: true,
         },
       ],
+
+      "@tanstack/router/create-route-property-order": "error",
     },
   },
 
@@ -91,18 +96,6 @@ export default defineConfig(
     files: ["frontend/src/routes/**/*.{ts,tsx}"],
     rules: {
       "react-refresh/only-export-components": "off",
-    },
-  },
-
-  {
-    files: ["backend/**/*.ts"],
-
-    languageOptions: {
-      globals: globals.node,
-    },
-
-    rules: {
-      "no-console": "warn",
     },
   },
 
