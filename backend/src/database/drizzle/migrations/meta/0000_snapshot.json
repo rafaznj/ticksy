@@ -1,5 +1,5 @@
 {
-  "id": "175a73f6-cca9-436d-9f70-50b648508c2a",
+  "id": "fc487cff-34be-46a1-899b-280ebf51ea3d",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -64,7 +64,7 @@
           "typeSchema": "public",
           "primaryKey": false,
           "notNull": true,
-          "default": "'OPEN'"
+          "default": "'open'"
         },
         "created_by_id": {
           "name": "created_by_id",
@@ -161,7 +161,7 @@
           "typeSchema": "public",
           "primaryKey": false,
           "notNull": true,
-          "default": "'EMPLOYEE'"
+          "default": "'employee'"
         },
         "deleted": {
           "name": "deleted",
@@ -259,22 +259,22 @@
     "public.ticket_category": {
       "name": "ticket_category",
       "schema": "public",
-      "values": ["HARDWARE", "SOFTWARE", "ACCOUNT", "ACCESS", "OTHER"]
+      "values": ["hardware", "software", "account", "access", "other"]
     },
     "public.ticket_priority": {
       "name": "ticket_priority",
       "schema": "public",
-      "values": ["LOW", "MEDIUM", "HIGH", "URGENT"]
+      "values": ["low", "medium", "high", "urgent"]
     },
     "public.ticket_status": {
       "name": "ticket_status",
       "schema": "public",
-      "values": ["OPEN", "IN_PROGRESS", "RESOLVED"]
+      "values": ["open", "in_progress", "resolved"]
     },
     "public.role": {
       "name": "role",
       "schema": "public",
-      "values": ["EMPLOYEE", "ADMIN", "TECHNICAL_ASSISTANCE"]
+      "values": ["employee", "admin", "technical_assistance"]
     }
   },
   "schemas": {},

@@ -1,7 +1,7 @@
-CREATE TYPE "public"."ticket_category" AS ENUM('HARDWARE', 'SOFTWARE', 'ACCOUNT', 'ACCESS', 'OTHER');--> statement-breakpoint
-CREATE TYPE "public"."ticket_priority" AS ENUM('LOW', 'MEDIUM', 'HIGH', 'URGENT');--> statement-breakpoint
-CREATE TYPE "public"."ticket_status" AS ENUM('OPEN', 'IN_PROGRESS', 'RESOLVED');--> statement-breakpoint
-CREATE TYPE "public"."role" AS ENUM('EMPLOYEE', 'ADMIN', 'TECHNICAL_ASSISTANCE');--> statement-breakpoint
+CREATE TYPE "public"."ticket_category" AS ENUM('hardware', 'software', 'account', 'access', 'other');--> statement-breakpoint
+CREATE TYPE "public"."ticket_priority" AS ENUM('low', 'medium', 'high', 'urgent');--> statement-breakpoint
+CREATE TYPE "public"."ticket_status" AS ENUM('open', 'in_progress', 'resolved');--> statement-breakpoint
+CREATE TYPE "public"."role" AS ENUM('employee', 'admin', 'technical_assistance');--> statement-breakpoint
 CREATE TABLE "tickets" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"code" integer GENERATED ALWAYS AS IDENTITY (sequence name "tickets_code_seq" INCREMENT BY 1 MINVALUE 1 MAXVALUE 2147483647 START WITH 1 CACHE 1),
@@ -9,7 +9,7 @@ CREATE TABLE "tickets" (
 	"description" text NOT NULL,
 	"category" "ticket_category" NOT NULL,
 	"priority" "ticket_priority" NOT NULL,
-	"status" "ticket_status" DEFAULT 'OPEN' NOT NULL,
+	"status" "ticket_status" DEFAULT 'open' NOT NULL,
 	"created_by_id" uuid NOT NULL,
 	"assigned_to_id" uuid,
 	"created_at" timestamp DEFAULT now() NOT NULL,
@@ -22,7 +22,7 @@ CREATE TABLE "users" (
 	"name" varchar(256) NOT NULL,
 	"email" varchar(254) NOT NULL,
 	"password" text NOT NULL,
-	"role" "role" DEFAULT 'EMPLOYEE' NOT NULL,
+	"role" "role" DEFAULT 'employee' NOT NULL,
 	"deleted" boolean DEFAULT false NOT NULL,
 	"created_at" timestamp DEFAULT now() NOT NULL,
 	"updated_at" timestamp DEFAULT now() NOT NULL

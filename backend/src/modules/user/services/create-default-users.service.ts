@@ -18,22 +18,28 @@ export class CreateDefaultUsersService implements ICreateDefaultUsersService {
   async execute(): Promise<void> {
     const seedUsers: CreateUserDto[] = [
       {
-        name: "Administrator",
-        email: "admin@email.com",
+        name: "John Doe",
+        email: "john.doe@email.com",
         password: "@Aa12345",
-        role: UserRoleEnum.ADMIN,
+        role: UserRoleEnum.employee,
       },
       {
         name: "Employee",
         email: "employee@email.com",
         password: "@Aa12345",
-        role: UserRoleEnum.EMPLOYEE,
+        role: UserRoleEnum.employee,
       },
       {
         name: "Technical Assistance",
         email: "technical_assistance@email.com",
         password: "@Aa12345",
-        role: UserRoleEnum.TECHNICAL_ASSISTANCE,
+        role: UserRoleEnum.technical_assistance,
+      },
+      {
+        name: "Administrator",
+        email: "admin@email.com",
+        password: "@Aa12345",
+        role: UserRoleEnum.admin,
       },
     ];
 
