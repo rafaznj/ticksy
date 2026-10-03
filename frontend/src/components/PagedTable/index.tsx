@@ -373,7 +373,7 @@ export function PagedTable<T>({
                       {resolveTooltip(
                         actions.tooltips?.resolved,
                         item,
-                        t("general.actions.resolved"),
+                        t("general.actions.resolve"),
                       )}
                     </TooltipContent>
                   </Tooltip>
@@ -399,7 +399,7 @@ export function PagedTable<T>({
   });
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex w-full min-w-0 flex-col gap-4">
       <div className="flex items-center justify-between gap-4">
         <div className="relative w-full max-w-sm">
           <Input

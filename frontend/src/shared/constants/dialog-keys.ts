@@ -2,6 +2,7 @@ export const DIALOG_KEYS = {
   // User
   CREATE_USER: "create-user",
   UPDATE_USER: "update-user",
+  PROFILE_EDIT: "profile-edit",
   DEACTIVATE_USER: "deactivate-user",
   ACTIVATE_USER: "activate-user",
 
@@ -11,6 +12,7 @@ export const DIALOG_KEYS = {
   DELETE_TICKET: "delete-ticket",
   ASSIGN_TICKET: "assign-ticket",
   UNASSIGN_TICKET: "unassign-ticket",
-} as const;
 
-export type DialogKey = (typeof DIALOG_KEYS)[keyof typeof DIALOG_KEYS];
+  // Preferences
+  PREFERENCES: "preferences",
+} as const;

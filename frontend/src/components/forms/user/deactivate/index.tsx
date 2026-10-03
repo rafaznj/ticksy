@@ -12,8 +12,7 @@ export function DeactivateUserForm() {
       isConfirmDisabled={isSubmitting}
       title={t("user.deactivate.title")}
       description={t("user.deactivate.description", { name: selectedUser?.name })}
-      cancelText={t("user.deactivate.actions.cancel")}
-      confirmText={t("user.deactivate.actions.confirm")}
+      confirmText={t("general.actions.deactivate")}
     />
   );
 }

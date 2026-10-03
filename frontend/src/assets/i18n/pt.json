@@ -133,13 +133,15 @@
       "back": "Voltar",
       "cancel": "Cancelar",
       "close": "Fechar",
+      "create": "Criar",
       "deactivate": "Desativar",
       "delete": "Excluir",
       "edit": "Editar",
       "refresh": "Atualizar",
-      "resolved": "Resolver",
+      "resolve": "Resolver",
       "retry": "Tentar novamente",
       "save": "Salvar",
+      "submit": "Enviar",
       "unassign": "Desvincular"
     },
     "copyright": "© {{year}} Ticksy. Todos os direitos reservados",
@@ -170,12 +172,14 @@
   "sidebar": {
     "labels": {
       "editProfile": "Editar perfil",
-      "logout": "Sair"
+      "logout": "Sair",
+      "preferences": "Preferências"
     },
     "tooltips": {
       "home": "Ir para a página inicial",
       "myTickets": "Meus tickets",
       "newTicket": "Novo ticket",
+      "notifications": "Notificações",
       "profile": "Perfil",
       "tickets": "Ver tickets",
       "users": "Gerenciar usuários"
@@ -183,10 +187,6 @@
   },
   "ticket": {
     "assign": {
-      "actions": {
-        "cancel": "Cancelar",
-        "confirm": "Vincular"
-      },
       "messages": {
         "failed": "Não foi possível vincular o ticket",
         "success": "Ticket vinculado com sucesso"
@@ -209,10 +209,6 @@
       "title": "Status dos tickets"
     },
     "create": {
-      "actions": {
-        "cancel": "Cancelar",
-        "submit": "Criar ticket"
-      },
       "description": "Preencha as informações abaixo para registrar um novo ticket",
       "messages": {
         "failed": "Não foi possível criar o ticket",
@@ -221,20 +217,10 @@
       "title": "Novo ticket"
     },
     "delete": {
-      "actions": {
-        "cancel": "Cancelar",
-        "confirm": "Excluir",
-        "deleting": "Excluindo..."
-      },
       "description": "Tem certeza que deseja excluir este ticket? Esta ação não pode ser desfeita",
       "title": "Excluir ticket"
     },
     "edit": {
-      "actions": {
-        "cancel": "Cancelar",
-        "save": "Salvar alterações",
-        "saving": "Salvando..."
-      },
       "description": "Atualize as informações do ticket",
       "title": "Editar ticket"
     },
@@ -333,11 +319,11 @@
       },
       "emptyMessage": "Nenhum ticket encontrado",
       "filterByStatus": "Filtrar por status",
-      "monthlyAssociatedTickets": "Tickets associados este mês",
-      "monthlyCreatedTickets": "Tickets criados este mês",
-      "myMonthlyTickets": "Meus tickets deste mês",
+      "myWeeklyTickets": "Meus tickets nos últimos 7 dias",
       "searchPlaceholder": "Buscar tickets",
-      "unassigned": "Sem responsável"
+      "unassigned": "Sem responsável",
+      "weeklyAssociatedTickets": "Tickets associados nos últimos 7 dias",
+      "weeklyCreatedTickets": "Tickets criados nos últimos 7 dias"
     },
     "unassign": {
       "actions": {
@@ -354,27 +340,14 @@
   },
   "user": {
     "activate": {
-      "actions": {
-        "cancel": "Cancelar",
-        "confirm": "Ativar"
-      },
       "description": "Tem certeza que deseja ativar o usuário: {{user}}?",
       "title": "Ativar usuário"
     },
     "deactivate": {
-      "actions": {
-        "cancel": "Cancelar",
-        "confirm": "Desativar"
-      },
       "description": "Tem certeza que deseja desativar o usuário: {{name}}?",
       "title": "Desativar usuário"
     },
     "edit": {
-      "actions": {
-        "cancel": "Cancelar",
-        "save": "Salvar alterações",
-        "saving": "Salvando..."
-      },
       "description": "Atualize as informações do usuário",
       "title": "Editar perfil"
     },
@@ -417,6 +390,57 @@
           "invalid": "Selecione um perfil válido"
         }
       }
+    },
+    "preferences": {
+      "description": "Personalize sua experiência no sistema",
+      "language": {
+        "description": "Escolha o idioma do sistema",
+        "label": "Idioma",
+        "options": {
+          "enUS": "English",
+          "ptBR": "Português (Brasil)"
+        }
+      },
+      "theme": {
+        "description": "Escolha como o sistema deve ser exibido",
+        "label": "Tema",
+        "options": {
+          "dark": "Escuro",
+          "light": "Claro",
+          "system": "Sistema"
+        }
+      },
+      "title": "Preferências"
+    },
+    "profile": {
+      "description": "Atualize suas informações pessoais",
+      "errors": {
+        "loadFailed": "Não foi possível carregar seus dados",
+        "updateFailed": "Não foi possível atualizar seu perfil"
+      },
+      "fields": {
+        "email": {
+          "label": "E-mail",
+          "placeholder": "Digite seu e-mail",
+          "validations": {
+            "invalid": "Informe um endereço de e-mail válido",
+            "maxLength": "O e-mail deve ter no máximo {{max}} caracteres"
+          }
+        },
+        "name": {
+          "label": "Nome",
+          "placeholder": "Digite seu nome",
+          "validations": {
+            "maxLength": "O nome deve ter no máximo {{max}} caracteres",
+            "minLength": "O nome deve ter no mínimo {{min}} caracteres",
+            "required": "O nome é obrigatório"
+          }
+        }
+      },
+      "success": {
+        "updated": "Perfil atualizado com sucesso"
+      },
+      "title": "Editar perfil"
     },
     "roles": {
       "admin": "Administrador",

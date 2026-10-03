@@ -23,8 +23,7 @@ export function AssignTicketForm() {
       isConfirmDisabled={!isBlurred || !canSubmit || isSubmitting}
       title={t("ticket.assign.title")}
       description={data?.title}
-      cancelText={t("ticket.assign.actions.cancel")}
-      confirmText={t("ticket.assign.actions.confirm")}
+      confirmText={t("general.actions.assign")}
     >
       <form>
         <form.AppField name="userId">

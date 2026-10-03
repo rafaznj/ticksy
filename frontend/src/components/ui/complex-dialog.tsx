@@ -8,6 +8,7 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog";
+import { t } from "i18next";
 import type { ReactNode } from "react";
 
 type DialogWidth = "sm" | "md" | "lg" | "xl" | "xxl";
@@ -45,8 +46,8 @@ export function ComplexDialog({
   title,
   description,
   children,
-  cancelText = "Cancel",
-  confirmText = "Save",
+  cancelText = t("general.actions.cancel"),
+  confirmText = t("general.actions.save"),
   isConfirmDisabled,
   hideFooter,
   hideCancelBtn,

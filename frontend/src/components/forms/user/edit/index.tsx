@@ -13,8 +13,7 @@ export function EditUserForm() {
       isConfirmDisabled={!isBlurred || !canSubmit || isSubmitting}
       title={t("user.edit.title")}
       description={t("user.edit.description")}
-      cancelText={t("user.edit.actions.cancel")}
-      confirmText={t("user.edit.actions.save")}
+      confirmText={t("general.actions.edit")}
     >
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <form.AppField name="name">

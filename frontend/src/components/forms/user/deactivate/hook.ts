@@ -16,13 +16,13 @@ export function useDeactivateUserForm() {
     SERVICE_TOKENS.DeactivateUserService,
   );
 
-  const { mutateAsync: deactivateUser, isPending: isSubmitting } =
+  const { mutateAsync: handleDeactivateUser, isPending: isSubmitting } =
     useDeactivateUser(deactivateUserService);
 
   const handleConfirm = async () => {
     if (!selectedUser?.id) return;
 
-    await deactivateUser(selectedUser.id);
+    await handleDeactivateUser(selectedUser.id);
     close();
   };
 

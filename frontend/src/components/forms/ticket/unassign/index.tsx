@@ -13,8 +13,7 @@ export function UnassignTicketForm() {
       isConfirmDisabled={!canSubmit || isSubmitting}
       title={t("ticket.unassign.title")}
       description={t("ticket.unassign.description", { user: assignedToName })}
-      cancelText={t("ticket.unassign.actions.cancel")}
-      confirmText={t("ticket.unassign.actions.confirm")}
+      confirmText={t("general.actions.unassign")}
     />
   );
 }

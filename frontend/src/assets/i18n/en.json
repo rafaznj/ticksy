@@ -133,11 +133,13 @@
       "back": "Back",
       "cancel": "Cancel",
       "close": "Close",
+      "create": "Create",
       "deactivate": "Deactivate",
       "delete": "Delete",
       "edit": "Edit",
-      "resolved": "Resolved",
+      "resolve": "Resolve",
       "save": "Save",
+      "submit": "Submit",
       "unassign": "Unassign"
     },
     "copyright": "© {{year}} Ticksy. All rights reserved",
@@ -168,12 +170,14 @@
   "sidebar": {
     "labels": {
       "editProfile": "Edit profile",
-      "logout": "Log out"
+      "logout": "Log out",
+      "preferences": "Preferences"
     },
     "tooltips": {
       "home": "Go to the home page",
       "myTickets": "My tickets",
       "newTicket": "New ticket",
+      "notifications": "Notifications",
       "profile": "Profile",
       "tickets": "View tickets",
       "users": "Manage users"
@@ -181,10 +185,6 @@
   },
   "ticket": {
     "assign": {
-      "actions": {
-        "cancel": "Cancel",
-        "confirm": "Assign"
-      },
       "messages": {
         "failed": "Unable to assign the ticket",
         "success": "Ticket assigned successfully"
@@ -207,10 +207,6 @@
       "title": "Ticket status"
     },
     "create": {
-      "actions": {
-        "cancel": "Cancel",
-        "submit": "Create ticket"
-      },
       "description": "Fill out the information below to create a new ticket",
       "messages": {
         "failed": "Unable to create the ticket",
@@ -219,20 +215,10 @@
       "title": "New ticket"
     },
     "delete": {
-      "actions": {
-        "cancel": "Cancel",
-        "confirm": "Delete",
-        "deleting": "Deleting..."
-      },
       "description": "Are you sure you want to delete ticket? This action cannot be undone",
       "title": "Delete ticket"
     },
     "edit": {
-      "actions": {
-        "cancel": "Cancel",
-        "save": "Save changes",
-        "saving": "Saving..."
-      },
       "description": "Update the ticket information",
       "title": "Edit ticket"
     },
@@ -331,17 +317,13 @@
       },
       "emptyMessage": "No tickets found",
       "filterByStatus": "Filter by status",
-      "monthlyAssociatedTickets": "Tickets associated this month",
-      "monthlyCreatedTickets": "Tickets created this month",
-      "myMonthlyTickets": "My tickets this month",
+      "myWeeklyTickets": "My tickets in the last 7 days",
       "searchPlaceholder": "Search tickets",
-      "unassigned": "Unassigned"
+      "unassigned": "Unassigned",
+      "weeklyAssociatedTickets": "Tickets assigned in the last 7 days",
+      "weeklyCreatedTickets": "Tickets created in the last 7 days"
     },
     "unassign": {
-      "actions": {
-        "cancel": "Cancel",
-        "confirm": "Unassign"
-      },
       "description": "Are you sure you want to unassign this ticket: {{user}}?",
       "messages": {
         "failed": "Unable to unassign the ticket",
@@ -352,27 +334,14 @@
   },
   "user": {
     "activate": {
-      "actions": {
-        "cancel": "Cancel",
-        "confirm": "Activate"
-      },
       "description": "Are you sure you want to activate the user: {{user}}?",
       "title": "Activate user"
     },
     "deactivate": {
-      "actions": {
-        "cancel": "Cancel",
-        "confirm": "Deactivate"
-      },
       "description": "Are you sure you want to deactivate the user: {{name}}?",
       "title": "Deactivate user"
     },
     "edit": {
-      "actions": {
-        "cancel": "Cancel",
-        "save": "Save changes",
-        "saving": "Saving..."
-      },
       "description": "Update the user information",
       "title": "Edit profile"
     },
@@ -415,6 +384,57 @@
           "invalid": "Please select a valid role"
         }
       }
+    },
+    "preferences": {
+      "description": "Customize your experience in the system",
+      "language": {
+        "description": "Choose the system language",
+        "label": "Language",
+        "options": {
+          "enUS": "English",
+          "ptBR": "Português (Brasil)"
+        }
+      },
+      "theme": {
+        "description": "Choose how the system should be displayed",
+        "label": "Theme",
+        "options": {
+          "dark": "Dark",
+          "light": "Light",
+          "system": "System"
+        }
+      },
+      "title": "Preferences"
+    },
+    "profile": {
+      "description": "Update your personal information",
+      "errors": {
+        "loadFailed": "Unable to load your profile data",
+        "updateFailed": "Unable to update your profile"
+      },
+      "fields": {
+        "email": {
+          "label": "Email",
+          "placeholder": "Enter your email",
+          "validations": {
+            "invalid": "Please enter a valid email address",
+            "maxLength": "Email must not exceed {{max}} characters"
+          }
+        },
+        "name": {
+          "label": "Name",
+          "placeholder": "Enter your name",
+          "validations": {
+            "maxLength": "Name must not exceed {{max}} characters",
+            "minLength": "Name must be at least {{min}} characters",
+            "required": "Name is required"
+          }
+        }
+      },
+      "success": {
+        "updated": "Profile updated successfully"
+      },
+      "title": "Edit profile"
     },
     "roles": {
       "admin": "Administrator",

@@ -94,7 +94,7 @@ export function PreviewAssignDialog({
                 onClick={onClose}
                 disabled={isSubmitting}
               >
-                {t("ticket.assign.actions.cancel")}
+                {t("general.actions.cancel")}
               </Button>
               <Button
                 type="button"
@@ -103,7 +103,7 @@ export function PreviewAssignDialog({
                 disabled={!selectedUserId || isSubmitting}
               >
                 {isSubmitting && <LuLoader className="mr-1.5 size-3.5 animate-spin" />}
-                {t("ticket.assign.actions.confirm")}
+                {t("general.actions.assign")}
               </Button>
             </div>
           </motion.div>

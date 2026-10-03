@@ -11,9 +11,8 @@ export function DeleteTicketForm() {
       onConfirm={handleConfirm}
       isConfirmDisabled={isSubmitting}
       title={t("ticket.delete.title")}
-      description={t("ticket.edit.description")}
-      cancelText={t("ticket.delete.actions.cancel")}
-      confirmText={t("ticket.delete.actions.confirm")}
+      description={t("ticket.delete.description")}
+      confirmText={t("general.actions.delete")}
     />
   );
 }

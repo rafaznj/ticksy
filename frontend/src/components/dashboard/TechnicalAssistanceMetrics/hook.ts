@@ -1,4 +1,5 @@
 import type { MetricCardItem } from "@/components/MetricCard";
+
 import { container } from "@/lib/inversifyJS/index.container";
 import type { IGetTicketPagedWithScopeService } from "@/modules/ticket/services/contracts/get-paged-with-scope";
 import { TicketPriorityEnum } from "@/modules/ticket/enums/priority.enum";
@@ -86,32 +87,6 @@ export function useTechnicalAssistanceMetrics() {
   const priorityLabels = useMemo(() => enumToLabels(TicketPriorityEnum, "ticket.priority", t), [t]);
   const categoryLabels = useMemo(() => enumToLabels(TicketCategoryEnum, "ticket.category", t), [t]);
 
-  const statusClassName: Record<TicketStatusEnum, string> = {
-    [TicketStatusEnum.OPEN]: "bg-blue-50 text-blue-700 dark:bg-blue-950/50 dark:text-blue-400",
-    [TicketStatusEnum.IN_PROGRESS]:
-      "bg-purple-50 text-purple-700 dark:bg-purple-950/50 dark:text-purple-400",
-    [TicketStatusEnum.RESOLVED]:
-      "bg-emerald-50 text-emerald-700 dark:bg-emerald-950/50 dark:text-emerald-400",
-  };
-  const priorityClassName: Record<TicketPriorityEnum, string> = {
-    [TicketPriorityEnum.LOW]: "bg-slate-50 text-slate-700 dark:bg-slate-900 dark:text-slate-400",
-    [TicketPriorityEnum.MEDIUM]:
-      "bg-amber-50 text-amber-700 dark:bg-amber-950/50 dark:text-amber-400",
-    [TicketPriorityEnum.HIGH]:
-      "bg-orange-50 text-orange-700 dark:bg-orange-950/50 dark:text-orange-400",
-    [TicketPriorityEnum.URGENT]: "bg-red-50 text-red-700 dark:bg-red-950/50 dark:text-red-400",
-  };
-
-  const categoryClassName: Record<TicketCategoryEnum, string> = {
-    [TicketCategoryEnum.ACCESS]: "bg-red-50 text-red-700 dark:bg-red-950/50 dark:text-red-400",
-    [TicketCategoryEnum.ACCOUNT]: "bg-blue-50 text-blue-700 dark:bg-blue-950/50 dark:text-blue-400",
-    [TicketCategoryEnum.HARDWARE]:
-      "bg-green-50 text-green-700 dark:bg-green-950/50 dark:text-green-400",
-    [TicketCategoryEnum.SOFTWARE]:
-      "bg-purple-50 text-purple-700 dark:bg-purple-950/50 dark:text-purple-400",
-    [TicketCategoryEnum.OTHER]: "bg-slate-50 text-slate-700 dark:bg-slate-900 dark:text-slate-400",
-  };
-
   return {
     t,
     metrics,
@@ -121,8 +96,5 @@ export function useTechnicalAssistanceMetrics() {
     statusLabels,
     priorityLabels,
     categoryLabels,
-    statusClassName,
-    priorityClassName,
-    categoryClassName,
   };
 }

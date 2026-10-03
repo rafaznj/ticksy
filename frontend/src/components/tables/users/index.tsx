@@ -3,6 +3,7 @@ import { useUsersPagedTable } from "./hook";
 import { EditUserForm } from "@/components/forms/user/edit";
 import { DeactivateUserForm } from "@/components/forms/user/deactivate";
 import { ActivateUserForm } from "@/components/forms/user/activate";
+import { LuUserPlus } from "react-icons/lu";
 
 export function UsersPagedTable() {
   const {
@@ -56,6 +57,13 @@ export function UsersPagedTable() {
           options: deletedFilterOptions,
           placeholder: t("user.table.filterByStatus"),
         }}
+        headerButtons={[
+          {
+            label: t("user.table.actions.activate"),
+            icon: <LuUserPlus />,
+            onClick: () => console.log("Activate user button clicked"),
+          },
+        ]}
       />
 
       <EditUserForm />

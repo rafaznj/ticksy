@@ -45,7 +45,7 @@ function MetricCardItem({
   onClick,
 }: MetricCardItem) {
   const cellClassName = cn(
-    "flex w-full flex-col gap-1.5 bg-card px-4 py-3 text-left",
+    "flex w-full flex-col gap-1.5 bg-card px-5 py-4 text-left",
     onClick &&
       "cursor-pointer transition-colors hover:bg-muted/50 focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none focus-visible:ring-inset",
   );
@@ -54,7 +54,7 @@ function MetricCardItem({
     <>
       <div className="flex items-center justify-between gap-2">
         <span className="truncate text-sm text-muted-foreground">{title}</span>
-        <Icon className={cn("size-4 shrink-0", iconColor)} aria-hidden />
+        <Icon className={cn("size-5 shrink-0", iconColor)} aria-hidden />
       </div>
 
       <div className="flex flex-wrap items-baseline gap-x-2">

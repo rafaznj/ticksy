@@ -4,25 +4,25 @@ import { DIALOG_KEYS } from "@/shared/constants/dialog-keys";
 import { SERVICE_TOKENS } from "@/shared/di/tokens.services";
 import { useTranslation } from "react-i18next";
 import { useDialog } from "@/contexts/use-dialog";
-import type { IDeactivateUserService } from "@/modules/user/services/contracts/deactivate";
-import { useDeactivateUser } from "@/modules/user/query-hooks/mutation/use-deactivate";
+import type { IActivateUserService } from "@/modules/user/services/contracts/activate";
+import { useActivateUser } from "@/modules/user/query-hooks/mutation/use-activate";
 
 export function useActivateUserForm() {
   const { t } = useTranslation();
 
   const { isOpen, data: selectedUser, close } = useDialog<UserEntity>(DIALOG_KEYS.ACTIVATE_USER);
 
-  const deactivateUserService = container.get<IDeactivateUserService>(
-    SERVICE_TOKENS.DeactivateUserService,
+  const activateUserService = container.get<IActivateUserService>(
+    SERVICE_TOKENS.ActivateUserService,
   );
 
-  const { mutateAsync: deactivateUser, isPending: isSubmitting } =
-    useDeactivateUser(deactivateUserService);
+  const { mutateAsync: handleActivateUser, isPending: isSubmitting } =
+    useActivateUser(activateUserService);
 
   const handleConfirm = async () => {
     if (!selectedUser?.id) return;
 
-    await deactivateUser(selectedUser.id);
+    await handleActivateUser(selectedUser.id);
     close();
   };
 

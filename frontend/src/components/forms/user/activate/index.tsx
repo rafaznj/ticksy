@@ -12,8 +12,7 @@ export function ActivateUserForm() {
       isConfirmDisabled={isSubmitting}
       title={t("user.activate.title")}
       description={t("user.activate.description", { user: selectedUser?.name })}
-      cancelText={t("user.activate.actions.cancel")}
-      confirmText={t("user.activate.actions.confirm")}
+      confirmText={t("general.actions.activate")}
     />
   );
 }

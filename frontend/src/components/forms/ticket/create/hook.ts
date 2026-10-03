@@ -25,18 +25,18 @@ export function useCreateTicketForm() {
 
   const categoryOptions = useMemo(
     () => [
-      { value: TicketCategoryEnum.ACCESS, label: t("ticket.fields.category.options.access") },
+      { value: TicketCategoryEnum.access, label: t("ticket.fields.category.options.access") },
       {
-        value: TicketCategoryEnum.ACCOUNT,
+        value: TicketCategoryEnum.account,
         label: t("ticket.fields.category.options.account"),
       },
-      { value: TicketCategoryEnum.HARDWARE, label: t("ticket.fields.category.options.hardware") },
+      { value: TicketCategoryEnum.hardware, label: t("ticket.fields.category.options.hardware") },
       {
-        value: TicketCategoryEnum.SOFTWARE,
+        value: TicketCategoryEnum.software,
         label: t("ticket.fields.category.options.software"),
       },
       {
-        value: TicketCategoryEnum.OTHER,
+        value: TicketCategoryEnum.other,
         label: t("ticket.fields.category.options.other"),
       },
     ],
@@ -45,14 +45,14 @@ export function useCreateTicketForm() {
 
   const priorityOptions = useMemo(
     () => [
-      { value: TicketPriorityEnum.LOW, label: t("ticket.fields.priority.options.low") },
+      { value: TicketPriorityEnum.low, label: t("ticket.fields.priority.options.low") },
       {
-        value: TicketPriorityEnum.MEDIUM,
+        value: TicketPriorityEnum.medium,
         label: t("ticket.fields.priority.options.medium"),
       },
-      { value: TicketPriorityEnum.HIGH, label: t("ticket.fields.priority.options.high") },
+      { value: TicketPriorityEnum.high, label: t("ticket.fields.priority.options.high") },
       {
-        value: TicketPriorityEnum.URGENT,
+        value: TicketPriorityEnum.urgent,
         label: t("ticket.fields.priority.options.urgent"),
       },
     ],
@@ -67,8 +67,9 @@ export function useCreateTicketForm() {
     defaultValues: {
       createdById: user?.id,
     } as CreateTicketFormProps,
-    onSubmit: async (value) => {
-      await handleCreateTicket(value.value);
+    onSubmit: async ({ value, formApi }) => {
+      await handleCreateTicket(value);
+      formApi.reset();
     },
     validators: {
       onBlur: createTicketFormSchema(t),

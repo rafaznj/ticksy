@@ -23,8 +23,7 @@ export function EditTicketForm() {
       isConfirmDisabled={!isBlurred || !canSubmit || isSubmitting}
       title={t("ticket.edit.title")}
       description={t("ticket.edit.description")}
-      cancelText={t("ticket.edit.actions.cancel")}
-      confirmText={t("ticket.edit.actions.save")}
+      confirmText={t("general.actions.edit")}
       width="lg"
     >
       <form onSubmit={handleSubmit} className="flex w-full min-w-0 flex-col gap-4">

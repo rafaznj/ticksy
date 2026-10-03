@@ -23,8 +23,7 @@ export function CreateTicketForm() {
       isConfirmDisabled={!isBlurred || !canSubmit || isSubmitting}
       title={t("ticket.create.title")}
       description={t("ticket.create.description")}
-      cancelText={t("ticket.create.actions.cancel")}
-      confirmText={t("ticket.create.actions.submit")}
+      confirmText={t("general.actions.create")}
       width="lg"
     >
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">

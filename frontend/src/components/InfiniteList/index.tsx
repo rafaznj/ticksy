@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
+import { cn } from "@/lib/utils";
 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -22,6 +23,8 @@ interface InfiniteListProps<T> {
   title?: string;
   getItemKey?: (item: T, index: number) => string;
   renderItem: (item: T, index: number) => React.ReactNode;
+  className?: string;
+  listClassName?: string;
 }
 
 export function InfiniteList<T>({
@@ -37,6 +40,8 @@ export function InfiniteList<T>({
   title,
   getItemKey,
   renderItem,
+  className,
+  listClassName,
 }: InfiniteListProps<T>) {
   const { t } = useTranslation();
   const {
@@ -70,7 +75,7 @@ export function InfiniteList<T>({
   }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className={cn("flex flex-col gap-4", className)}>
       <div className="flex items-center justify-between gap-4 pr-4">
         {title && <h2 className="text-xl font-semibold">{title}</h2>}
 
@@ -97,8 +102,11 @@ export function InfiniteList<T>({
       </div>
 
       <ul
-        className="grid grid-cols-1 gap-3 overflow-y-auto overflow-x-hidden pr-2 md:grid-cols-2 xl:grid-cols-3 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-border [&::-webkit-scrollbar-track]:bg-transparent"
-        style={{ maxHeight }}
+        className={cn(
+          "grid grid-cols-1 gap-3 overflow-y-auto overflow-x-hidden pr-2 md:grid-cols-2 xl:grid-cols-3 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-border [&::-webkit-scrollbar-track]:bg-transparent",
+          listClassName,
+        )}
+        style={{ maxHeight: maxHeight === "100%" ? undefined : maxHeight }}
       >
         {isLoading ? (
           Array.from({ length: skeletonCount }).map((_, i) => (

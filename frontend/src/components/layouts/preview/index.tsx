@@ -6,6 +6,7 @@ import { LuCircleCheck, LuFolderOpen, LuLoaderCircle, LuTicket } from "react-ico
 
 import { MetricCard, type MetricCardItem } from "@/components/MetricCard";
 import { PagedTable } from "@/components/PagedTable";
+import { TruncatedCell } from "@/components/TruncatedCell";
 import { PreviewAssignDialog } from "@/components/layouts/preview/dialog";
 import {
   PRIORITY_STYLES,
@@ -88,11 +89,7 @@ export function Preview() {
       {
         accessorKey: "title",
         header: t("ticket.fields.title.label"),
-        cell: ({ row }) => (
-          <div className="line-clamp-2 min-w-0 wrap-break-word" title={row.original.title}>
-            {row.original.title}
-          </div>
-        ),
+        cell: ({ row }) => <TruncatedCell text={row.original.title} maxLength={20} />,
       },
       {
         accessorKey: "status",
