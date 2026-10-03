@@ -1,4 +1,4 @@
-import { type ComponentProps } from "react";
+import { useEffect, type ComponentProps } from "react";
 
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
@@ -15,6 +15,12 @@ interface TextareaFieldProps extends Omit<
 
 export function TextareaField({ label, required, ...props }: TextareaFieldProps) {
   const field = useFieldContext<string>();
+
+  useEffect(() => {
+    if (field.state.value === undefined) {
+      field.handleChange("");
+    }
+  }, [field]);
 
   return (
     <div className="flex flex-col gap-3">

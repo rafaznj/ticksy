@@ -11,6 +11,7 @@ import type { IGetUserPagedService } from "../services/contracts/get-paged";
 import type { IQueryOptions } from "../../../shared/types/query-options";
 import type { IGetAssignableUsersPagedService } from "../services/contracts/get-assignable-paged";
 import type { IActivateUserService } from "../services/contracts/activate";
+import type { IUserQueryOptions } from "../types/user-query-options-paged";
 
 @Controller("user")
 export class UserController {
@@ -39,7 +40,7 @@ export class UserController {
   }
 
   @Get("get-paged")
-  async getPaged(@Query() query: IQueryOptions) {
+  async getPaged(@Query() query: IUserQueryOptions) {
     const result = await this.getUserPagedService.execute(query);
     return result;
   }

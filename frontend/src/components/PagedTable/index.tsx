@@ -110,7 +110,7 @@ interface PagedTableProps<T> {
   pageSize?: number;
   rowsPerPageOptions?: number[];
   headerButtons?: HeaderButtonConfig[];
-  filter?: FilterConfig;
+  filters?: FilterConfig[];
   onPageSizeChange?: (size: number) => void;
   onSearchChange: (value: string) => void;
   onNextPage: () => void;
@@ -143,7 +143,7 @@ export function PagedTable<T>({
   pageSize,
   rowsPerPageOptions = [10, 25, 50, 100],
   headerButtons,
-  filter,
+  filters,
   onSearchChange,
   onNextPage,
   onPreviousPage,
@@ -399,51 +399,19 @@ export function PagedTable<T>({
   });
 
   return (
-    <div className="flex w-full min-w-0 flex-col gap-4">
-      <div className="flex items-center justify-between gap-4">
-        <div className="relative w-full max-w-sm">
-          <Input
-            placeholder={t("general.table.searchPlaceholder")}
-            value={search}
-            onChange={(e) => onSearchChange(e.target.value)}
-            className="pl-8"
-          />
-          <LuSearch className="pointer-events-none absolute top-1/2 right-2.5 size-4 -translate-y-1/2 text-muted-foreground" />
-        </div>
-
+    <div className="flex w-full min-w-0 max-h-[calc(100vh-10rem)] flex-col gap-4">
+      <div className="flex shrink-0 items-center justify-between gap-4">
         <div className="flex items-center gap-2">
-          {filter && (
-            <>
-              <TbFilter />
-              <div className="relative">
-                <Select value={filter.value} onValueChange={filter.onChange}>
-                  <SelectTrigger className="w-48">
-                    <SelectValue placeholder={filter.placeholder} />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">
-                      {filter.allLabel ?? t("general.table.allOptions")}
-                    </SelectItem>
-                    {filter.options.map((option) => (
-                      <SelectItem key={option.value} value={option.value}>
-                        {option.label}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+          <div className="relative w-full max-w-sm">
+            <Input
+              placeholder={t("general.table.searchPlaceholder")}
+              value={search}
+              onChange={(e) => onSearchChange(e.target.value)}
+              className="pl-8"
+            />
 
-                {filter.value !== "all" && (
-                  <button
-                    type="button"
-                    onClick={() => filter.onChange("all")}
-                    className="absolute top-1/2 right-7 -translate-y-1/2 rounded-sm p-0.5 text-muted-foreground hover:text-foreground"
-                  >
-                    <LuX className="size-3.5" />
-                  </button>
-                )}
-              </div>
-            </>
-          )}
+            <LuSearch className="pointer-events-none absolute top-1/2 right-2.5 size-4 -translate-y-1/2 text-muted-foreground" />
+          </div>
 
           {headerButtons && headerButtons.length > 0 && (
             <div className="flex items-center gap-2">
@@ -456,9 +424,46 @@ export function PagedTable<T>({
             </div>
           )}
         </div>
+
+        <div className="flex items-center gap-2">
+          {filters && filters.length > 0 && (
+            <>
+              <TbFilter className="text-muted-foreground" />
+              {filters.map((f, i) => (
+                <div key={i} className="relative">
+                  <Select value={f.value} onValueChange={f.onChange}>
+                    <SelectTrigger className="w-48">
+                      <SelectValue placeholder={f.placeholder} />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="all">
+                        {f.allLabel ?? t("general.table.allOptions")}
+                      </SelectItem>
+                      {f.options.map((option) => (
+                        <SelectItem key={option.value} value={option.value}>
+                          {option.label}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+
+                  {f.value !== "all" && (
+                    <button
+                      type="button"
+                      onClick={() => f.onChange("all")}
+                      className="absolute top-1/2 right-7 -translate-y-1/2 rounded-sm p-0.5 text-muted-foreground hover:text-foreground"
+                    >
+                      <LuX className="size-3.5" />
+                    </button>
+                  )}
+                </div>
+              ))}
+            </>
+          )}
+        </div>
       </div>
 
-      <div className="max-h-[70vh] overflow-auto rounded-md border [&>div]:overflow-visible">
+      <div className="min-h-0 flex-1 overflow-auto rounded-md border [&>div]:overflow-visible">
         <Table>
           <TableHeader className="sticky top-0 z-10 bg-background">
             {table.getHeaderGroups().map((headerGroup) => (
@@ -534,7 +539,7 @@ export function PagedTable<T>({
         </Table>
       </div>
 
-      <div className="flex items-center justify-between">
+      <div className="flex shrink-0 items-center justify-between">
         <div className="flex items-center gap-2">
           {onPageSizeChange && (
             <>

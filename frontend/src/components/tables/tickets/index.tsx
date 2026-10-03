@@ -52,12 +52,14 @@ export function TicketsPagedTable() {
         isError={isError}
         getRowId={(ticket) => ticket.id}
         actions={actions}
-        filter={{
-          value: status,
-          onChange: (value) => setStatus(value as TicketStatusEnum | "all"),
-          options: statusFilterOptions,
-          allLabel: t("ticket.table.filterByStatus"),
-        }}
+        filters={[
+          {
+            value: status,
+            onChange: (value) => setStatus(value as TicketStatusEnum | "all"),
+            options: statusFilterOptions,
+            allLabel: t("ticket.table.filterByStatus"),
+          },
+        ]}
       />
 
       <EditTicketForm />

@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 
 import { Button } from "@/components/ui/button";
@@ -81,6 +81,12 @@ export function AsyncSelectField<T>({
   const resolvedPlaceholder = placeholder ?? t("general.table.placeholder");
   const resolvedSearchPlaceholder = searchPlaceholder ?? t("general.table.searchPlaceholder");
   const resolvedEmptyMessage = emptyMessage ?? t("general.table.emptyMessage");
+
+  useEffect(() => {
+    if (field.state.value === undefined) {
+      field.handleChange("");
+    }
+  }, [field]);
 
   return (
     <div className="flex w-full min-w-0 flex-col gap-3">

@@ -14,11 +14,27 @@ import { userTableColumns } from "@/components/tables/users/columns";
 
 export function useUsersPagedTable() {
   const { t } = useTranslation();
+  const [roleFilter, setRoleFilter] = useState<UserRoleEnum | "all">("all");
   const [deletedFilter, setDeletedFilter] = useState<"all" | "true" | "false">("all");
 
-  const filters = useMemo(
-    () => (deletedFilter === "all" ? {} : { deleted: deletedFilter === "true" }),
-    [deletedFilter],
+  const filters = useMemo(() => {
+    const filter: Record<string, unknown> = {};
+    if (roleFilter !== "all") {
+      filter.role = roleFilter;
+    }
+    if (deletedFilter !== "all") {
+      filter.deleted = deletedFilter === "true";
+    }
+    return filter;
+  }, [roleFilter, deletedFilter]);
+
+  const roleFilterOptions = useMemo(
+    () => [
+      { value: UserRoleEnum.employee, label: t("user.roles.employee") },
+      { value: UserRoleEnum.admin, label: t("user.roles.admin") },
+      { value: UserRoleEnum.technical_assistance, label: t("user.roles.technicalAssistance") },
+    ],
+    [t],
   );
 
   const deletedFilterOptions = useMemo(
@@ -33,6 +49,7 @@ export function useUsersPagedTable() {
     SERVICE_TOKENS.GetUserPagedService,
   );
 
+  const { open: openCreateUser } = useDialog<UserEntity>(DIALOG_KEYS.CREATE_USER);
   const { open: openEditUser } = useDialog<UserEntity>(DIALOG_KEYS.UPDATE_USER);
   const { open: openActivateUser } = useDialog<UserEntity>(DIALOG_KEYS.ACTIVATE_USER);
   const { open: openDeactivateUser } = useDialog<UserEntity>(DIALOG_KEYS.DEACTIVATE_USER);
@@ -91,7 +108,9 @@ export function useUsersPagedTable() {
     sorting,
     pageSize,
     t,
+    roleFilter,
     deletedFilter,
+    roleFilterOptions,
     deletedFilterOptions,
     setSearch,
     onSortingChange,
@@ -99,5 +118,7 @@ export function useUsersPagedTable() {
     nextPage,
     previousPage,
     setDeletedFilter,
+    setRoleFilter,
+    openCreateUser,
   };
 }

@@ -1,4 +1,4 @@
-import { useState, type ComponentProps } from "react";
+import { useState, useEffect, type ComponentProps } from "react";
 
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -22,6 +22,12 @@ export function TextField({ label, required, type, ...props }: TextFieldProps) {
 
   const isPassword = type === "password";
   const inputType = isPassword ? (showPassword ? "text" : "password") : type;
+
+  useEffect(() => {
+    if (field.state.value === undefined) {
+      field.handleChange("");
+    }
+  }, [field]);
 
   return (
     <div className="flex flex-col gap-3">
