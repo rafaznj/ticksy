@@ -1,48 +1,53 @@
 import { useUserProfileEditForm } from "@/components/forms/user/profile-edit/hook";
-import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { ComplexDialog } from "@/components/ui/complex-dialog";
+import { useAuthStore } from "@/lib/zustand/use-auth";
 
 export function UserProfileEditForm() {
-  const { form, t, isPending, handleSubmit, navigate } = useUserProfileEditForm();
+  const { user } = useAuthStore();
+  const { form, t, handleSubmit, isOpen, close, isBlurred, canSubmit, isSubmitting, isDirty } =
+    useUserProfileEditForm();
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-8">
-      <form.AppField name="name">
-        {(field) => (
-          <field.TextField
-            label={t("user.fields.name.label")}
-            placeholder={t("user.fields.name.placeholder")}
-            type="text"
+    <ComplexDialog
+      open={isOpen}
+      onOpenChange={(open) => !open && close()}
+      onConfirm={handleSubmit}
+      isConfirmDisabled={!isBlurred || !canSubmit || isSubmitting || !isDirty}
+      title={t("user.profile.title")}
+      description={t("user.profile.description")}
+      confirmText={t("general.actions.edit")}
+    >
+      <div className="flex justify-center">
+        <Avatar className="size-20 rounded-2xl">
+          <AvatarFallback
+            name={user?.name}
+            className="rounded-2xl bg-primary/10 text-2xl font-bold text-primary"
           />
-        )}
-      </form.AppField>
-
-      <form.AppField name="email">
-        {(field) => (
-          <field.TextField
-            className="h-12 text-base"
-            label={t("user.fields.email.label")}
-            placeholder={t("user.fields.email.placeholder")}
-            type="email"
-          />
-        )}
-      </form.AppField>
-
-      <div className="flex justify-end gap-3">
-        <Button
-          type="button"
-          variant="outline"
-          className="min-w-32 cursor-pointer py-6 border-destructive text-base text-destructive hover:text-white hover:bg-destructive"
-          onClick={() => navigate({ to: "/home" })}
-        >
-          {t("general.actions.cancel")}
-        </Button>
-
-        <form.AppForm>
-          <form.SubmitButton className="min-w-48 cursor-pointer py-6 text-base">
-            {isPending ? t("user.edit.actions.saving") : t("user.edit.actions.save")}
-          </form.SubmitButton>
-        </form.AppForm>
+        </Avatar>
       </div>
-    </form>
+      <form onSubmit={handleSubmit} className="space-y-8">
+        <form.AppField name="name">
+          {(field) => (
+            <field.TextField
+              label={t("user.fields.name.label")}
+              placeholder={t("user.fields.name.placeholder")}
+              type="text"
+            />
+          )}
+        </form.AppField>
+
+        <form.AppField name="email">
+          {(field) => (
+            <field.TextField
+              className="h-12 text-base"
+              label={t("user.fields.email.label")}
+              placeholder={t("user.fields.email.placeholder")}
+              type="email"
+            />
+          )}
+        </form.AppField>
+      </form>
+    </ComplexDialog>
   );
 }

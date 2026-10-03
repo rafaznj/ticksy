@@ -1,5 +1,5 @@
 import { CreateTicketForm } from "@/components/forms/ticket/create";
-import { AppSidebarFooter } from "@/components/layouts/AppSidebarFooter";
+import { AppSidebarFooter } from "@/components/layouts/Sidebar/footer";
 import { useAppSidebar } from "@/components/layouts/Sidebar/hook";
 import {
   Sidebar,
@@ -27,7 +27,7 @@ export function AppSidebar() {
 
   return (
     <Sidebar collapsible="icon" variant="floating">
-      {user?.role === UserRoleEnum.EMPLOYEE && (
+      {user?.role !== UserRoleEnum.technical_assistance && (
         <SidebarHeader className="px-2 pt-6 pb-4">
           <SidebarMenu>
             <SidebarMenuItem className="flex justify-center">

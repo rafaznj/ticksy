@@ -1,15 +1,16 @@
 import { UserRoleEnum } from "@/modules/user/enums/role.enum";
 import type { TFunction } from "i18next";
 import type { SidebarMenuGroup } from "./types";
-import { GrHomeRounded } from "react-icons/gr";
-import { PiUsers } from "react-icons/pi";
-import { LuTickets } from "react-icons/lu";
+import { LuHouse, LuTickets, LuUsers } from "react-icons/lu";
+import { GrNotification } from "react-icons/gr";
+
+const iconClassName = "text-sidebar-foreground/70";
 
 const allUser = Object.values(UserRoleEnum);
-const adminOnly = [UserRoleEnum.ADMIN];
+const adminOnly = [UserRoleEnum.admin];
 
 export function getSidebarMenuGroups(t: TFunction, role?: UserRoleEnum): SidebarMenuGroup[] {
-  const isAdmin = role === UserRoleEnum.ADMIN;
+  const isAdmin = role === UserRoleEnum.admin;
 
   return [
     {
@@ -17,7 +18,8 @@ export function getSidebarMenuGroups(t: TFunction, role?: UserRoleEnum): Sidebar
         {
           href: "/home",
           tooltip: t("sidebar.tooltips.home"),
-          icon: GrHomeRounded,
+          icon: LuHouse,
+          iconClassName,
           allowedRoles: allUser,
         },
       ],
@@ -28,19 +30,29 @@ export function getSidebarMenuGroups(t: TFunction, role?: UserRoleEnum): Sidebar
           href: "/tickets",
           tooltip: isAdmin ? t("sidebar.tooltips.tickets") : t("sidebar.tooltips.myTickets"),
           icon: LuTickets,
-          iconClassName: "text-blue-500 dark:text-blue-400",
+          iconClassName,
           allowedRoles: allUser,
         },
       ],
     },
     {
-      tooltip: t("sidebar.tooltips.users"),
       items: [
         {
-          href: "/user/users",
+          href: "/users",
           tooltip: t("sidebar.tooltips.users"),
-          icon: PiUsers,
-          iconClassName: "text-purple-600 dark:text-purple-400",
+          icon: LuUsers,
+          iconClassName,
+          allowedRoles: adminOnly,
+        },
+      ],
+    },
+    {
+      items: [
+        {
+          href: "/notifications",
+          tooltip: t("sidebar.tooltips.notifications"),
+          icon: GrNotification,
+          iconClassName,
           allowedRoles: adminOnly,
         },
       ],

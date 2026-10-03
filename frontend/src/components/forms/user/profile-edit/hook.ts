@@ -9,14 +9,21 @@ import { useUpdateUser } from "../../../../modules/user/query-hooks/mutation/use
 import { useAuthStore } from "@/lib/zustand/use-auth";
 import type { UserProfileEditProps } from "@/components/forms/user/profile-edit/types";
 import { userProfileEditFormSchema } from "@/components/forms/user/profile-edit/validations";
+import { DIALOG_KEYS } from "@/shared/constants/dialog-keys";
+import type { UserEntity } from "@/modules/user/entity/user.entity";
+import { useDialog } from "@/contexts/use-dialog";
+import { useStore } from "@tanstack/react-form";
 
 export function useUserProfileEditForm() {
   const { user } = useAuthStore();
   const navigate = useNavigate();
   const { t } = useTranslation();
+
+  const { isOpen, close } = useDialog<UserEntity>(DIALOG_KEYS.PROFILE_EDIT);
+
   const updateUserService = container.get<IUpdateUserService>(SERVICE_TOKENS.UpdateUserService);
 
-  const { mutate: handleUpdateUser, isPending } = useUpdateUser(updateUserService);
+  const { mutateAsync: handleUpdateUser, isPending } = useUpdateUser(updateUserService);
 
   const form = useAppForm({
     defaultValues: {
@@ -25,31 +32,30 @@ export function useUserProfileEditForm() {
       email: user?.email,
     } as UserProfileEditProps,
     onSubmit: async (value) => {
-      handleUpdateUser(
-        {
-          id: user!.id,
-          data: {
-            name: value.value.name,
-            email: value.value.email,
-          },
+      handleUpdateUser({
+        id: user!.id,
+        data: {
+          name: value.value.name,
+          email: value.value.email,
         },
-        {
-          onSuccess: () => {
-            navigate({
-              to: "/home",
-            });
-          },
-        },
-      );
+      });
+      close();
     },
     validators: {
       onBlur: userProfileEditFormSchema(t),
     },
   });
 
-  const handleSubmit = async (event: React.SubmitEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    event.stopPropagation();
+  const [canSubmit, isSubmitting, isBlurred, isDirty] = useStore(form.store, (state) => [
+    state.canSubmit,
+    state.isSubmitting,
+    state.isBlurred,
+    state.isDirty,
+  ]);
+
+  const handleSubmit = async (event?: React.FormEvent<HTMLFormElement>) => {
+    event?.preventDefault();
+    event?.stopPropagation();
     await form.handleSubmit();
   };
 
@@ -57,7 +63,13 @@ export function useUserProfileEditForm() {
     form,
     t,
     isPending,
+    isOpen,
+    isBlurred,
+    canSubmit,
+    isSubmitting,
+    isDirty,
     navigate,
     handleSubmit,
+    close,
   };
 }
