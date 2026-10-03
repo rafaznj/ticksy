@@ -1,24 +1,64 @@
 import useNotFoundRoute from "./hook";
 import { Button } from "@/components/ui/button";
-import { TbError404 } from "react-icons/tb";
+import { LuHouse } from "react-icons/lu";
 
 export const NotFoundRouteComponent = () => {
   const { navigate, t } = useNotFoundRoute();
 
   return (
-    <div className="relative flex min-h-screen flex-col items-center justify-center gap-6 bg-blue-300 px-4">
-      <img src="/logo.png" className="absolute left-6 top-6 h-10 w-auto" />
+    <main className="relative flex min-h-screen flex-col bg-background">
+      <header className="absolute left-0 top-0 w-full px-6 py-6 md:px-10">
+        <img src="/logo.png" alt="Logo" className="h-9 w-auto" />
+      </header>
 
-      <TbError404 className="size-32 text-white" strokeWidth={1.5} />
+      <section className="flex flex-1 items-center justify-center px-6">
+        <div className="relative flex w-full max-w-xl flex-col items-center text-center">
+          <span className="absolute -top-20 select-none font-mono text-[9rem] font-bold leading-none tracking-tighter text-foreground/5 md:-top-28 md:text-[12rem]">
+            404
+          </span>
 
-      <p className="text-center text-2xl font-semibold text-white">{t("general.notFoundRoute")}</p>
+          <div className="relative flex flex-col items-center text-center">
+            <h1 className="mt-6 text-4xl font-bold tracking-tight text-foreground md:text-5xl">
+              {t("general.notFoundRoute.title")}
+            </h1>
 
-      <Button
-        className="cursor-pointer rounded-lg bg-white px-6 py-6 text-xl font-semibold text-blue-600 transition-colors hover:bg-blue-50"
-        onClick={() => navigate({ to: "/home" })}
-      >
-        {t("general.actions.back")}
-      </Button>
-    </div>
+            <p className="mx-auto mt-4 max-w-md text-center text-base leading-7 text-muted-foreground md:text-lg">
+              {t("general.notFoundRoute.description")}
+            </p>
+
+            <Button
+              className="mt-8 cursor-pointer px-6 py-6"
+              onClick={() => navigate({ to: "/home" })}
+            >
+              <LuHouse />
+              {t("general.actions.back")}
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      <footer className="fixed bottom-3 left-4 z-10 font-mono text-xs text-muted-foreground">
+        <div>
+          {t("general.copyright", {
+            year: new Date().getFullYear(),
+          })}
+        </div>
+
+        <div className="mt-1">
+          <span className="font-semibold text-foreground/70">Rafael Sena</span>
+
+          <span className="mx-1.5 text-muted-foreground/50">·</span>
+
+          <a
+            href="https://rafaelsena.dev"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="transition-colors hover:text-foreground"
+          >
+            @rafaznj
+          </a>
+        </div>
+      </footer>
+    </main>
   );
 };

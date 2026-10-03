@@ -4,6 +4,7 @@ import { Suspense, useEffect } from "react";
 import { NotFoundRouteComponent } from "@/components/NotFoundRoute";
 import { Toaster } from "@/components/ui/sonner";
 import { useAuthStore } from "@/lib/zustand/use-auth";
+import { ThemeProvider } from "next-themes";
 
 function RootComponent() {
   const router = useRouter();
@@ -15,11 +16,11 @@ function RootComponent() {
   }, [router]);
 
   return (
-    <>
+    <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
       <Outlet />
       <Toaster />
       <Suspense />
-    </>
+    </ThemeProvider>
   );
 }
 

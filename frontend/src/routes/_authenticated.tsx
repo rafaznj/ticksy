@@ -1,5 +1,4 @@
 import { Outlet, createFileRoute, redirect } from "@tanstack/react-router";
-import { ThemeProvider } from "next-themes";
 
 import { useAuthStore } from "@/lib/zustand/use-auth";
 import { AppSidebar } from "@/components/layouts/Sidebar";
@@ -20,20 +19,18 @@ export const Route = createFileRoute("/_authenticated")({
 
 function AuthenticatedLayout() {
   return (
-    <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
-      <TooltipProvider delayDuration={0}>
-        <SidebarProvider open={false} onOpenChange={() => {}}>
-          <DialogProvider>
-            <AppSidebar />
+    <TooltipProvider delayDuration={0}>
+      <SidebarProvider open={false} onOpenChange={() => {}}>
+        <DialogProvider>
+          <AppSidebar />
 
-            <SidebarInset className="bg-slate-50 dark:bg-background flex flex-col h-svh overflow-hidden">
-              <div className="flex flex-1 flex-col min-w-0 min-h-0 p-4 md:p-6 lg:p-8">
-                <Outlet />
-              </div>
-            </SidebarInset>
-          </DialogProvider>
-        </SidebarProvider>
-      </TooltipProvider>
-    </ThemeProvider>
+          <SidebarInset className="flex h-svh min-w-0 flex-col overflow-hidden bg-background">
+            <div className="flex flex-1 flex-col min-w-0 min-h-0 p-4 md:p-6 lg:p-8">
+              <Outlet />
+            </div>
+          </SidebarInset>
+        </DialogProvider>
+      </SidebarProvider>
+    </TooltipProvider>
   );
 }

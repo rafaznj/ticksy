@@ -148,8 +148,10 @@
       "recordNotFound": "Record not found",
       "unknownError": "An unknown error occurred"
     },
-    "language": "Switch to the {{language}} language",
-    "notFoundRoute": "This route was not found...",
+    "notFoundRoute": {
+      "title": "Ops! Page not found",
+      "description": "The page you are looking for does not exist or has been moved. Please check the address and try again."
+    },
     "settings": "Settings",
     "table": {
       "allOptions": "All options",
@@ -164,8 +166,7 @@
       "previous": "Previous",
       "rowsPerPage": "Rows per page",
       "searchPlaceholder": "Search"
-    },
-    "theme": "Switch to the {{theme}} theme"
+    }
   },
   "sidebar": {
     "labels": {

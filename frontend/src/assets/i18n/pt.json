@@ -144,14 +144,17 @@
       "submit": "Enviar",
       "unassign": "Desvincular"
     },
-    "copyright": "© {{year}} Ticksy. Todos os direitos reservados",
+    "copyright": "©{{year}} Ticksy. Todos os direitos reservados",
     "errors": {
       "createFailed": "Não foi possível criar o registro",
       "recordNotFound": "Registro não encontrado",
       "unknownError": "Ocorreu um erro desconhecido"
     },
     "language": "Mudar o idioma para {{language}}",
-    "notFoundRoute": "Esta rota não foi encontrada...",
+    "notFoundRoute": {
+      "title": "Ops! Página não encontrada",
+      "description": "A página que você está procurando não existe ou foi movida. Por favor, verifique o endereço e tente novamente."
+    },
     "settings": "Configurações",
     "table": {
       "allOptions": "Todas as opções",
