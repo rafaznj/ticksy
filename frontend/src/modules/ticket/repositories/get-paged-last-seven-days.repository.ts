@@ -10,6 +10,8 @@ import type { TicketPagedLastSevenDaysDTO } from "@/modules/ticket/dtos/paged-la
 
 @injectable()
 export class GetTicketPagedLastSevenDaysRepository implements IGetTicketPagedLastSevenDaysRepository {
+  private readonly basePath = "ticket";
+
   constructor(
     @inject(INFRASTRUCTURE_TOKENS.AxiosSingleton)
     private axiosSingleton: AxiosSingleton,
@@ -20,7 +22,7 @@ export class GetTicketPagedLastSevenDaysRepository implements IGetTicketPagedLas
   ): Promise<PagedResponse<TicketPagedLastSevenDaysDTO> | AppError> {
     const response = await this.axiosSingleton.client.get<
       PagedResponse<TicketPagedLastSevenDaysDTO>
-    >("ticket/get-paged-last-seven-days", {
+    >(`${this.basePath}/get-paged-last-seven-days`, {
       params,
     });
 

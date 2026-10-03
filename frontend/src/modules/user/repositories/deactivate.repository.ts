@@ -7,11 +7,17 @@ import { handleRepositoryResponse } from "@/shared/response/handle-repository-re
 
 @injectable()
 export class DeactivateUserRepository implements IDeactivateUserRepository {
-  @inject(INFRASTRUCTURE_TOKENS.AxiosSingleton)
-  private axiosSingleton!: AxiosSingleton;
+  private readonly basePath = "user";
+
+  constructor(
+    @inject(INFRASTRUCTURE_TOKENS.AxiosSingleton)
+    private axiosSingleton: AxiosSingleton,
+  ) {}
 
   async execute(id: string): Promise<boolean | AppError> {
-    const response = await this.axiosSingleton.client.patch<boolean>(`/user/${id}/deactivate`);
+    const response = await this.axiosSingleton.client.patch<boolean>(
+      `${this.basePath}/deactivate/${id}`,
+    );
 
     return handleRepositoryResponse(response);
   }

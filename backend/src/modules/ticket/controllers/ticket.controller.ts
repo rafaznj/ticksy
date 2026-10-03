@@ -25,13 +25,12 @@ import { UpdateTicketDto } from "../dtos/update.dto";
 import type { IGetTicketPagedWithScopeService } from "../services/contracts/get-paged-with-scope";
 import { UserModel } from "../../user/models/user-model";
 import type { IAssignTicketService } from "../services/contracts/assign";
-import { AssignTicketDto } from "../dtos/assign.dto";
 import type { IQueryOptions } from "../../../shared/types/query-options";
 import type { IResolvedTicketService } from "../services/contracts/resolved";
 import type { IUnassignTicketService } from "../services/contracts/unassign";
-import { UnassignTicketDto } from "../dtos/unassign.dto";
 import type { IGetTicketPagedLastSevenDaysService } from "../services/contracts/get-paged-last-seven-days";
 import type { IGetTicketStatusCountService } from "../services/contracts/get-status-count";
+import { AssignTicketDto } from "../dtos/assign.dto";
 
 @Controller("ticket")
 export class TicketController {
@@ -100,13 +99,13 @@ export class TicketController {
     return this.deleteTicketService.execute(id);
   }
 
-  @Patch("/assign")
-  async assign(@Body() { id, userId }: AssignTicketDto) {
-    return this.assignTicketService.execute(id, userId);
+  @Patch("/assign/:ticketId")
+  async assign(@Param("ticketId") ticketId: string, @Body() { userId }: AssignTicketDto) {
+    return this.assignTicketService.execute(ticketId, userId);
   }
 
-  @Patch("/unassign")
-  async unassign(@Body() { id }: UnassignTicketDto) {
+  @Patch("/unassign/:id")
+  async unassign(@Param("id") id: string) {
     return this.unassignTicketService.execute(id);
   }
 

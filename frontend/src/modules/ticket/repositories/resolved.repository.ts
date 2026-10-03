@@ -7,13 +7,17 @@ import { handleRepositoryResponse } from "@/shared/response/handle-repository-re
 import { inject } from "inversify";
 
 export class ResolvedTicketRepository implements IResolvedTicketRepository {
+  private readonly basePath = "ticket";
+
   constructor(
     @inject(INFRASTRUCTURE_TOKENS.AxiosSingleton)
     private axiosSingleton: AxiosSingleton,
   ) {}
 
   async execute(id: string): Promise<TicketEntity | AppError> {
-    const response = await this.axiosSingleton.client.patch<TicketEntity>(`ticket/resolved/${id}`);
+    const response = await this.axiosSingleton.client.patch<TicketEntity>(
+      `${this.basePath}/resolved/${id}`,
+    );
 
     return handleRepositoryResponse(response);
   }

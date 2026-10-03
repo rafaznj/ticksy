@@ -1,3 +1,5 @@
+import { ActivateUserRepository } from "@/modules/user/repositories/activate.repository";
+import type { IActivateUserRepository } from "@/modules/user/repositories/contracts/activate";
 import type { ICreateUserRepository } from "@/modules/user/repositories/contracts/create";
 import type { IDeactivateUserRepository } from "@/modules/user/repositories/contracts/deactivate";
 import type { IGetAssignableUsersPagedRepository } from "@/modules/user/repositories/contracts/get-assignable-paged";
@@ -12,6 +14,8 @@ import { GetUserByEmailRepository } from "@/modules/user/repositories/get-by-ema
 import { GetUserByIdRepository } from "@/modules/user/repositories/get-by-id.repository";
 import { GetUserPagedRepository } from "@/modules/user/repositories/get-paged.repository";
 import { UpdateUserRepository } from "@/modules/user/repositories/update.repository";
+import { ActivateUserService } from "@/modules/user/services/activate.service";
+import type { IActivateUserService } from "@/modules/user/services/contracts/activate";
 import type { ICreateUserService } from "@/modules/user/services/contracts/create";
 import type { IDeactivateUserService } from "@/modules/user/services/contracts/deactivate";
 import type { IGetAssignableUsersPagedService } from "@/modules/user/services/contracts/get-assignable-paged";
@@ -56,6 +60,11 @@ export const userContainerModule = new ContainerModule(({ bind }: ContainerModul
 
   bind<IUpdateUserService>(SERVICE_TOKENS.UpdateUserService).to(UpdateUserService);
   bind<IUpdateUserRepository>(REPOSITORY_TOKENS.UpdateUserRepository).to(UpdateUserRepository);
+
+  bind<IActivateUserService>(SERVICE_TOKENS.ActivateUserService).to(ActivateUserService);
+  bind<IActivateUserRepository>(REPOSITORY_TOKENS.ActivateUserRepository).to(
+    ActivateUserRepository,
+  );
 
   bind<IDeactivateUserService>(SERVICE_TOKENS.DeactivateUserService).to(DeactivateUserService);
   bind<IDeactivateUserRepository>(REPOSITORY_TOKENS.DeactivateUserRepository).to(

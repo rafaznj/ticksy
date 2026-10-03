@@ -7,15 +7,17 @@ import { handleRepositoryResponse } from "@/shared/response/handle-repository-re
 import { inject } from "inversify";
 
 export class UnassignTicketRepository implements IUnassignTicketRepository {
+  private readonly basePath = "ticket";
+
   constructor(
     @inject(INFRASTRUCTURE_TOKENS.AxiosSingleton)
     private axiosSingleton: AxiosSingleton,
   ) {}
 
   async execute(id: string): Promise<TicketEntity | AppError> {
-    const response = await this.axiosSingleton.client.patch<TicketEntity>("ticket/unassign", {
-      id,
-    });
+    const response = await this.axiosSingleton.client.patch<TicketEntity>(
+      `${this.basePath}/unassign/${id}`,
+    );
 
     return handleRepositoryResponse(response);
   }

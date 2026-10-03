@@ -1,25 +1,27 @@
-import { IsEnum, IsNotEmpty, IsString, IsUUID } from "class-validator";
+import { IsEnum, IsNotEmpty, IsString, IsUUID, MaxLength } from "class-validator";
 import { TicketPriorityEnum } from "../enums/ticket-priority.enum";
 import { TicketCategoryEnum } from "../enums/ticket-category.enum";
 
 export class CreateTicketDto {
-  @IsString()
   @IsNotEmpty()
+  @IsString()
+  @MaxLength(100)
   title!: string;
 
-  @IsString()
   @IsNotEmpty()
+  @IsString()
+  @MaxLength(5000)
   description!: string;
 
-  @IsEnum(TicketCategoryEnum)
   @IsNotEmpty()
+  @IsEnum(TicketCategoryEnum)
   category!: TicketCategoryEnum;
 
-  @IsEnum(TicketPriorityEnum)
   @IsNotEmpty()
+  @IsEnum(TicketPriorityEnum)
   priority!: TicketPriorityEnum;
 
-  @IsUUID()
   @IsNotEmpty()
+  @IsUUID()
   createdById!: string;
 }

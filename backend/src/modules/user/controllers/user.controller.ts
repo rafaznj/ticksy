@@ -33,7 +33,7 @@ export class UserController {
     private readonly getAssignableUsersPagedService: IGetAssignableUsersPagedService,
   ) {}
 
-  @Post("")
+  @Post("/create")
   async create(@Body() data: CreateUserDto) {
     return this.createUserService.execute(data);
   }
@@ -49,27 +49,27 @@ export class UserController {
     return this.getAssignableUsersPagedService.execute(query);
   }
 
-  @Get("get-by-email/:email")
+  @Get("/get-by-email/:email")
   async getByEmail(@Param("email") email: string) {
     return this.getUserByEmailService.execute(email);
   }
 
-  @Get(":id")
+  @Get("/get-by-id/:id")
   getById(@Param("id") id: string) {
     return this.getUserByIdService.execute(id);
   }
 
-  @Put(":id")
+  @Put("/update/:id")
   async update(@Param("id") id: string, @Body() data: UpdateUserDto) {
     return this.updateUserService.execute(id, data);
   }
 
-  @Patch(":id/deactivate")
+  @Patch("/deactivate/:id")
   async deactivate(@Param("id") id: string) {
     return this.deactivateUserService.execute(id);
   }
 
-  @Patch(":id/activate")
+  @Patch("/activate/:id")
   async activate(@Param("id") id: string) {
     return this.activateUserService.execute(id);
   }
