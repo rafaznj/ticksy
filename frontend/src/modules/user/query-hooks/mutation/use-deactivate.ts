@@ -3,6 +3,7 @@ import { handleMutationError } from "@/shared/errors/handle-mutation-error";
 import handleMutationResponse from "@/shared/response/handle-mutation-response";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
+import { toast } from "sonner";
 
 export function useDeactivateUser(deactivateUserService: IDeactivateUserService) {
   const { t } = useTranslation();
@@ -15,8 +16,10 @@ export function useDeactivateUser(deactivateUserService: IDeactivateUserService)
       return handleMutationResponse(response);
     },
     onSuccess: () => {
+      toast.success(t("user.messages.deactivated"));
+
       queryClient.invalidateQueries({ queryKey: ["users", "paged"] });
     },
-    onError: handleMutationError(t("user.errors.deactivateFailed")),
+    onError: handleMutationError(t("user.messages.errors.deactivateFailed")),
   });
 }

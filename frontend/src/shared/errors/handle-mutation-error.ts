@@ -11,7 +11,7 @@ function toAppError(error: unknown): AppError {
 export function handleMutationError(fallbackMessage?: string, onError?: (error: AppError) => void) {
   return (error: unknown) => {
     const appError = toAppError(error);
-    const isGenericError = appError.errors[0]?.key === "general.errors.unknownError";
+    const isGenericError = appError.errors[0]?.key === "general.errors.defaultError";
 
     const message = isGenericError && fallbackMessage ? fallbackMessage : appError.message;
 

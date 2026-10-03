@@ -51,12 +51,12 @@ export class GlobalExceptionFilter implements ExceptionFilter {
       }
 
       const rawMessage = typeof body === "string" ? body : (body as { message?: unknown }).message;
-      const messages = Array.isArray(rawMessage) ? rawMessage : [rawMessage ?? "Unknown error"];
+      const messages = Array.isArray(rawMessage) ? rawMessage : [rawMessage];
 
       return {
         success: false,
         errors: messages.map((msg) => ({
-          key: "general.errors.unknownError",
+          key: "general.errors.defaultError",
           params: { message: String(msg) },
         })),
         code: status,
@@ -65,7 +65,7 @@ export class GlobalExceptionFilter implements ExceptionFilter {
 
     return {
       success: false,
-      errors: [{ key: "general.errors.unknownError" }],
+      errors: [{ key: "general.errors.defaultError" }],
       code: HttpStatus.INTERNAL_SERVER_ERROR,
     };
   }

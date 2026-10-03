@@ -20,17 +20,17 @@ export class AssignTicketService implements IAssignTicketService {
     const ticket = await this.getTicketByIdService.execute(id);
 
     if (!ticket) {
-      throw AppException.notFound("ticket.errors.notFound");
+      throw AppException.notFound("ticket.messages.errors.notFound");
     }
 
     if (ticket.assignedToId) {
-      throw AppException.conflict("ticket.errors.alreadyAssigned");
+      throw AppException.conflict("ticket.messages.errors.alreadyAssigned");
     }
 
     const response = await this.assignTicketRepository.execute(id, userId);
 
     if (!response) {
-      throw AppException.notFound("ticket.errors.notFound");
+      throw AppException.notFound("ticket.messages.errors.assignFailed");
     }
 
     return response;

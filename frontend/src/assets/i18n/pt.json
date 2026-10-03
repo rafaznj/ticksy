@@ -1,12 +1,5 @@
 {
   "auth": {
-    "errors": {
-      "emailAlreadyExists": "Já existe um usuário com este e-mail",
-      "invalidCredentials": "E-mail ou senha inválidos. Verifique seus dados e tente novamente",
-      "refreshTokenMissing": "Sua sessão expirou. Faça login novamente",
-      "registerFailed": "Falha ao criar usuário",
-      "userNotFound": "Usuário não encontrado"
-    },
     "forgotPassword": {
       "actions": {
         "submit": "Redefinir senha",
@@ -41,15 +34,19 @@
           }
         }
       },
-      "messages": {
-        "failed": "Não foi possível realizar o login",
-        "success": "Login realizado com sucesso"
-      },
       "noAccount": "Ainda não possui uma conta?",
       "title": "Acesse sua conta"
     },
-    "logout": {
-      "error": "Não foi possível encerrar sua sessão. Tente novamente"
+    "messages": {
+      "errors": {
+        "emailAlreadyExists": "Já existe um usuário cadastrado com este e-mail",
+        "invalidCredentials": "E-mail ou senha inválidos. Verifique seus dados e tente novamente",
+        "logoutFailed": "Falha ao sair. Por favor, tente novamente",
+        "refreshTokenMissing": "Sua sessão expirou. Faça login novamente",
+        "registerFailed": "Falha ao criar usuário",
+        "userNotFound": "Usuário não encontrado"
+      },
+      "registered": "Usuário registrado com sucesso"
     },
     "register": {
       "actions": {
@@ -142,18 +139,19 @@
       "retry": "Tentar novamente",
       "save": "Salvar",
       "submit": "Enviar",
-      "unassign": "Desvincular"
+      "unassign": "Desvincular",
+      "view": "Visualizar"
     },
     "copyright": "©{{year}} Ticksy. Todos os direitos reservados",
     "errors": {
       "createFailed": "Não foi possível criar o registro",
-      "recordNotFound": "Registro não encontrado",
-      "unknownError": "Ocorreu um erro desconhecido"
+      "defaultError": "Ocorreu um erro. Por favor, tente novamente",
+      "recordNotFound": "Registro não encontrado"
     },
     "language": "Mudar o idioma para {{language}}",
     "notFoundRoute": {
-      "title": "Ops! Página não encontrada",
-      "description": "A página que você está procurando não existe ou foi movida. Por favor, verifique o endereço e tente novamente."
+      "description": "A página que você está procurando não existe ou foi movida. Por favor, verifique o endereço e tente novamente.",
+      "title": "Ops! Página não encontrada"
     },
     "settings": "Configurações",
     "table": {
@@ -190,10 +188,6 @@
   },
   "ticket": {
     "assign": {
-      "messages": {
-        "failed": "Não foi possível vincular o ticket",
-        "success": "Ticket vinculado com sucesso"
-      },
       "title": "Vincular ticket"
     },
     "category": {
@@ -213,10 +207,6 @@
     },
     "create": {
       "description": "Preencha as informações abaixo para registrar um novo ticket",
-      "messages": {
-        "failed": "Não foi possível criar o ticket",
-        "success": "Ticket criado com sucesso"
-      },
       "title": "Novo ticket"
     },
     "delete": {
@@ -226,14 +216,6 @@
     "edit": {
       "description": "Atualize as informações do ticket",
       "title": "Editar ticket"
-    },
-    "errors": {
-      "alreadyAssigned": "Este ticket já está vinculado a um usuário",
-      "createFailed": "Não foi possível criar o ticket",
-      "deleteAssigned": "Não é possível excluir um ticket que já foi atribuído",
-      "deleteFailed": "Não foi possível excluir o ticket",
-      "editNotAllowed": "Não é possível editar um ticket que já foi atribuído",
-      "updateFailed": "Não foi possível atualizar o ticket"
     },
     "fields": {
       "assignee": {
@@ -291,6 +273,26 @@
         }
       }
     },
+    "messages": {
+      "assigned": "Ticket vinculado com sucesso",
+      "created": "Ticket criado com sucesso",
+      "deleted": "Ticket excluído com sucesso",
+      "errors": {
+        "alreadyAssigned": "Este ticket já está vinculado a um usuário",
+        "assignFailed": "Não foi possível vincular o ticket",
+        "createFailed": "Não foi possível criar o ticket",
+        "deleteAssigned": "Não é possível excluir um ticket que já foi atribuído",
+        "deleteFailed": "Não foi possível excluir o ticket",
+        "editNotAllowed": "Não é possível editar um ticket que já foi atribuído",
+        "notFound": "Ticket não encontrado",
+        "resolveFailed": "Não foi possível resolver o ticket",
+        "unassignFailed": "Não foi possível desvincular o ticket",
+        "updateFailed": "Não foi possível atualizar o ticket"
+      },
+      "resolved": "Ticket resolvido com sucesso",
+      "unassigned": "Ticket desvinculado com sucesso",
+      "updated": "Ticket atualizado com sucesso"
+    },
     "priority": {
       "high": "Alta",
       "low": "Baixa",
@@ -301,11 +303,6 @@
       "inProgress": "Em andamento",
       "open": "Aberto",
       "resolved": "Resolvido"
-    },
-    "success": {
-      "created": "Ticket criado com sucesso",
-      "deleted": "Ticket excluído com sucesso",
-      "updated": "Ticket atualizado com sucesso"
     },
     "table": {
       "columns": {
@@ -329,15 +326,7 @@
       "weeklyCreatedTickets": "Tickets criados nos últimos 7 dias"
     },
     "unassign": {
-      "actions": {
-        "cancel": "Cancelar",
-        "confirm": "Desvincular"
-      },
       "description": "Tem certeza que deseja desvincular este ticket do usuário: {{user}}?",
-      "messages": {
-        "failed": "Não foi possível desvincular o ticket",
-        "success": "Ticket desvinculado com sucesso"
-      },
       "title": "Desvincular ticket"
     }
   },
@@ -346,6 +335,10 @@
       "description": "Tem certeza que deseja ativar o usuário: {{user}}?",
       "title": "Ativar usuário"
     },
+    "create": {
+      "description": "Preencha as informações abaixo para criar um novo usuário",
+      "title": "Criar usuário"
+    },
     "deactivate": {
       "description": "Tem certeza que deseja desativar o usuário: {{name}}?",
       "title": "Desativar usuário"
@@ -353,15 +346,6 @@
     "edit": {
       "description": "Atualize as informações do usuário",
       "title": "Editar perfil"
-    },
-    "errors": {
-      "activateFailed": "Não foi possível ativar o usuário",
-      "createFailed": "Não foi possível criar o usuário",
-      "deactivateFailed": "Não foi possível desativar o usuário",
-      "deleteFailed": "Não foi possível excluir o usuário",
-      "loadFailed": "Não foi possível carregar os dados do usuário",
-      "notFound": "Usuário não encontrado",
-      "updateFailed": "Não foi possível atualizar o perfil"
     },
     "fields": {
       "email": {
@@ -390,9 +374,25 @@
         },
         "placeholder": "Selecione o perfil",
         "validations": {
-          "invalid": "Selecione um perfil válido"
+          "required": "O perfil é obrigatório"
         }
       }
+    },
+    "messages": {
+      "activated": "Usuário ativado com sucesso",
+      "created": "Usuário criado com sucesso",
+      "deactivated": "Usuário desativado com sucesso",
+      "deleted": "Usuário excluído com sucesso",
+      "errors": {
+        "activateFailed": "Não foi possível ativar o usuário",
+        "createFailed": "Não foi possível criar o usuário",
+        "deactivateFailed": "Não foi possível desativar o usuário",
+        "deleteFailed": "Não foi possível excluir o usuário",
+        "loadFailed": "Não foi possível carregar os dados do usuário",
+        "notFound": "Usuário não encontrado",
+        "updateFailed": "Não foi possível atualizar o perfil"
+      },
+      "updated": "Perfil atualizado com sucesso"
     },
     "preferences": {
       "description": "Personalize sua experiência no sistema",
@@ -440,9 +440,6 @@
           }
         }
       },
-      "success": {
-        "updated": "Perfil atualizado com sucesso"
-      },
       "title": "Editar perfil"
     },
     "roles": {
@@ -454,16 +451,10 @@
       "disabled": "Desabilitado",
       "enabled": "Habilitado"
     },
-    "success": {
-      "activated": "Usuário ativado com sucesso",
-      "created": "Usuário criado com sucesso",
-      "deactivated": "Usuário desativado com sucesso",
-      "deleted": "Usuário excluído com sucesso",
-      "updated": "Perfil atualizado com sucesso"
-    },
     "table": {
       "actions": {
         "activate": "Ativar usuário",
+        "create": "Criar usuário",
         "deactivate": "Desativar usuário",
         "edit": "Editar usuário"
       },
@@ -476,6 +467,8 @@
         "updated_at": "Atualizado em"
       },
       "emptyMessage": "Nenhum usuário encontrado",
+      "filterByRole": "Filtrar por perfil",
+      "filterByStatus": "Filtrar por status",
       "searchPlaceholder": "Buscar usuários"
     }
   }

@@ -29,7 +29,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     const response = await this.getUserByIdService.execute(payload.sub);
 
     if (!response) {
-      throw new UnauthorizedException("auth.errors.userNotFound");
+      throw new UnauthorizedException("auth.messages.errors.userNotFound");
     }
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars

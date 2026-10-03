@@ -20,17 +20,13 @@ export class UnassignTicketService implements IUnassignTicketService {
     const ticket = await this.getTicketByIdService.execute(id);
 
     if (!ticket) {
-      throw AppException.notFound("ticket.errors.notFound");
-    }
-
-    if (!ticket.assignedToId) {
-      throw AppException.conflict("ticket.errors.notAssigned");
+      throw AppException.notFound("ticket.messages.errors.notFound");
     }
 
     const response = await this.unassignTicketRepository.execute(id);
 
     if (!response) {
-      throw AppException.notFound("ticket.errors.notFound");
+      throw AppException.notFound("ticket.messages.errors.unassignFailed");
     }
 
     return response;

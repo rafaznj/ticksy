@@ -23,13 +23,13 @@ export class RefreshService implements IRefreshService {
     const stored = await this.jwtTokenService.findActiveByUserId(payload.sub);
 
     if (!stored || !(await argon2.verify(stored.tokenHash, refreshToken))) {
-      throw AppException.unauthorized("auth.errors.refreshTokenMissing");
+      throw AppException.unauthorized("auth.messages.errors.refreshTokenMissing");
     }
 
     const user = await this.getUserByIdService.execute(payload.sub);
 
     if (!user) {
-      throw AppException.unauthorized("auth.errors.userNotFound");
+      throw AppException.unauthorized("auth.messages.errors.userNotFound");
     }
 
     await this.jwtTokenService.revoke(user.id);

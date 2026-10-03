@@ -21,9 +21,9 @@ export function useAssignTicket(assignTicketService: IAssignTicketService) {
       return handleMutationResponse(response);
     },
     onSuccess: () => {
-      toast.success(t("ticket.success.updated"));
+      toast.success(t("ticket.messages.assigned"));
       queryClient.invalidateQueries({ queryKey: ["tickets"] });
     },
-    onError: handleMutationError(t("ticket.errors.updateFailed")),
+    onError: handleMutationError(t("ticket.messages.errors.updateFailed")),
   });
 }

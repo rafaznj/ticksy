@@ -52,7 +52,10 @@ export class CreateDefaultUsersService implements ICreateDefaultUsersService {
     try {
       return await this.createUserService.execute(dto);
     } catch (error) {
-      if (error instanceof AppException && error.hasKey("auth.errors.emailAlreadyExists")) {
+      if (
+        error instanceof AppException &&
+        error.hasKey("auth.messages.errors.emailAlreadyExists")
+      ) {
         return null;
       }
       throw error;

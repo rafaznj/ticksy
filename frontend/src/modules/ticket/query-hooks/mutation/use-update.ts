@@ -22,9 +22,9 @@ export function useUpdateTicket(updateTicketService: IUpdateTicketService) {
       return handleMutationResponse(response);
     },
     onSuccess: () => {
-      toast.success(t("ticket.success.updated"));
+      toast.success(t("ticket.messages.updated"));
       queryClient.invalidateQueries({ queryKey: ["tickets"] });
     },
-    onError: handleMutationError(t("ticket.errors.updateFailed")),
+    onError: handleMutationError(t("ticket.messages.errors.updateFailed")),
   });
 }

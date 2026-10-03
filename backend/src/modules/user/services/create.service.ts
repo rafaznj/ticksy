@@ -29,7 +29,7 @@ export class CreateUserService
     const existingUser = await this.getUserByEmailService.execute(data.email);
 
     if (existingUser?.email) {
-      throw AppException.conflict("auth.errors.emailAlreadyExists");
+      throw AppException.conflict("auth.messages.errors.emailAlreadyExists");
     }
 
     const hashedPassword = await argon2.hash(data.password);

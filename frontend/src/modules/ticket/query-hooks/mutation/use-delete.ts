@@ -16,9 +16,9 @@ export function useDeleteTicket(deleteRoleService: IDeleteTicketService) {
       return handleMutationResponse(response);
     },
     onSuccess: () => {
-      toast.success(t("ticket.success.updated"));
+      toast.success(t("ticket.messages.deleted"));
       queryClient.invalidateQueries({ queryKey: ["tickets"] });
     },
-    onError: handleMutationError(t("ticket.errors.deleteFailed")),
+    onError: handleMutationError(t("ticket.messages.errors.deleteFailed")),
   });
 }

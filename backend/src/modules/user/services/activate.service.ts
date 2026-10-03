@@ -14,7 +14,7 @@ export class ActivateUserService implements IActivateUserService {
     const activated = await this.activateUserRepository.execute(id);
 
     if (!activated) {
-      throw AppException.internalServerError("user.errors.activateFailed");
+      throw AppException.internalServerError("user.messages.errors.activateFailed");
     }
 
     return activated;

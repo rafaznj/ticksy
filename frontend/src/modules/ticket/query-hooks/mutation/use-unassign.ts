@@ -16,9 +16,9 @@ export function useUnassignTicket(unassignTicketService: IUnassignTicketService)
       return handleMutationResponse(response);
     },
     onSuccess: () => {
-      toast.success(t("ticket.success.updated"));
+      toast.success(t("ticket.messages.unassigned"));
       queryClient.invalidateQueries({ queryKey: ["tickets"] });
     },
-    onError: handleMutationError(t("ticket.errors.updateFailed")),
+    onError: handleMutationError(t("ticket.messages.errors.unassignFailed")),
   });
 }

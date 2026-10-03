@@ -1,12 +1,5 @@
 {
   "auth": {
-    "errors": {
-      "emailAlreadyExists": "A user with this email already exists",
-      "invalidCredentials": "Invalid email or password. Please check your credentials and try again",
-      "refreshTokenMissing": "Your session has expired. Please sign in again",
-      "registerFailed": "Failed to create user",
-      "userNotFound": "User not found"
-    },
     "forgotPassword": {
       "actions": {
         "submit": "Reset password",
@@ -41,15 +34,19 @@
           }
         }
       },
-      "messages": {
-        "failed": "Unable to sign in",
-        "success": "Successfully signed in"
-      },
       "noAccount": "Don't have an account?",
       "title": "Sign in to your account"
     },
-    "logout": {
-      "error": "Unable to sign you out. Please try again"
+    "messages": {
+      "errors": {
+        "emailAlreadyExists": "A user with this email is already registered",
+        "invalidCredentials": "Invalid email or password. Please check your credentials and try again",
+        "logoutFailed": "Failed to log out. Please try again",
+        "refreshTokenMissing": "Your session has expired. Please sign in again",
+        "registerFailed": "Failed to create user",
+        "userNotFound": "User not found"
+      },
+      "registered": "User registered successfully"
     },
     "register": {
       "actions": {
@@ -140,17 +137,18 @@
       "resolve": "Resolve",
       "save": "Save",
       "submit": "Submit",
-      "unassign": "Unassign"
+      "unassign": "Unassign",
+      "view": "View"
     },
     "copyright": "© {{year}} Ticksy. All rights reserved",
     "errors": {
       "createFailed": "Could not create the record",
-      "recordNotFound": "Record not found",
-      "unknownError": "An unknown error occurred"
+      "defaultError": "An error occurred. Please try again",
+      "recordNotFound": "Record not found"
     },
     "notFoundRoute": {
-      "title": "Ops! Page not found",
-      "description": "The page you are looking for does not exist or has been moved. Please check the address and try again."
+      "description": "The page you are looking for does not exist or has been moved. Please check the address and try again.",
+      "title": "Ops! Page not found"
     },
     "settings": "Settings",
     "table": {
@@ -186,10 +184,6 @@
   },
   "ticket": {
     "assign": {
-      "messages": {
-        "failed": "Unable to assign the ticket",
-        "success": "Ticket assigned successfully"
-      },
       "title": "Assign ticket"
     },
     "category": {
@@ -209,10 +203,6 @@
     },
     "create": {
       "description": "Fill out the information below to create a new ticket",
-      "messages": {
-        "failed": "Unable to create the ticket",
-        "success": "Ticket created successfully"
-      },
       "title": "New ticket"
     },
     "delete": {
@@ -222,14 +212,6 @@
     "edit": {
       "description": "Update the ticket information",
       "title": "Edit ticket"
-    },
-    "errors": {
-      "alreadyAssigned": "This ticket is already assigned to a user",
-      "createFailed": "Unable to create the ticket",
-      "deleteAssigned": "You cannot delete a ticket that has already been assigned",
-      "deleteFailed": "Unable to delete the ticket",
-      "editNotAllowed": "You cannot edit a ticket that has already been assigned",
-      "updateFailed": "Unable to update the ticket"
     },
     "fields": {
       "assignee": {
@@ -287,6 +269,26 @@
         }
       }
     },
+    "messages": {
+      "assigned": "Ticket assigned successfully",
+      "created": "Ticket created successfully",
+      "deleted": "Ticket deleted successfully",
+      "errors": {
+        "alreadyAssigned": "This ticket is already assigned to a user",
+        "assignFailed": "Unable to assign the ticket",
+        "createFailed": "Unable to create the ticket",
+        "deleteAssigned": "You cannot delete a ticket that has already been assigned",
+        "deleteFailed": "Unable to delete the ticket",
+        "editNotAllowed": "You cannot edit a ticket that has already been assigned",
+        "notFound": "Ticket not found",
+        "resolveFailed": "Unable to resolve the ticket",
+        "unassignFailed": "Unable to unassign the ticket",
+        "updateFailed": "Unable to update the ticket"
+      },
+      "resolved": "Ticket resolved successfully",
+      "unassigned": "Ticket unassigned successfully",
+      "updated": "Ticket updated successfully"
+    },
     "priority": {
       "high": "High",
       "low": "Low",
@@ -338,6 +340,10 @@
       "description": "Are you sure you want to activate the user: {{user}}?",
       "title": "Activate user"
     },
+    "create": {
+      "description": "Fill out the information below to create a new user",
+      "title": "Create user"
+    },
     "deactivate": {
       "description": "Are you sure you want to deactivate the user: {{name}}?",
       "title": "Deactivate user"
@@ -345,15 +351,6 @@
     "edit": {
       "description": "Update the user information",
       "title": "Edit profile"
-    },
-    "errors": {
-      "activateFailed": "Unable to activate the user",
-      "createFailed": "Unable to create the user",
-      "deactivateFailed": "Unable to deactivate the user",
-      "deleteFailed": "Unable to delete the user",
-      "loadFailed": "Unable to load user data",
-      "notFound": "User not found",
-      "updateFailed": "Unable to update the profile"
     },
     "fields": {
       "email": {
@@ -382,9 +379,25 @@
         },
         "placeholder": "Select the role",
         "validations": {
-          "invalid": "Please select a valid role"
+          "required": "Role is required"
         }
       }
+    },
+    "messages": {
+      "activated": "User activated successfully",
+      "created": "User created successfully",
+      "deactivated": "User deactivated successfully",
+      "deleted": "User deleted successfully",
+      "errors": {
+        "activateFailed": "Unable to activate the user",
+        "createFailed": "Unable to create the user",
+        "deactivateFailed": "Unable to deactivate the user",
+        "deleteFailed": "Unable to delete the user",
+        "loadFailed": "Unable to load user data",
+        "notFound": "User not found",
+        "updateFailed": "Unable to update the profile"
+      },
+      "updated": "Profile updated successfully"
     },
     "preferences": {
       "description": "Customize your experience in the system",
@@ -409,10 +422,6 @@
     },
     "profile": {
       "description": "Update your personal information",
-      "errors": {
-        "loadFailed": "Unable to load your profile data",
-        "updateFailed": "Unable to update your profile"
-      },
       "fields": {
         "email": {
           "label": "Email",
@@ -446,16 +455,10 @@
       "disabled": "Disabled",
       "enabled": "Enabled"
     },
-    "success": {
-      "activated": "User activated successfully",
-      "created": "User created successfully",
-      "deactivated": "User deactivated successfully",
-      "deleted": "User deleted successfully",
-      "updated": "Profile updated successfully"
-    },
     "table": {
       "actions": {
         "activate": "Activate user",
+        "create": "Create user",
         "deactivate": "Deactivate user",
         "edit": "Edit user"
       },
@@ -468,6 +471,7 @@
         "updated_at": "Updated at"
       },
       "emptyMessage": "No users found",
+      "filterByRole": "Filter by role",
       "filterByStatus": "Filter by status",
       "searchPlaceholder": "Search users"
     }

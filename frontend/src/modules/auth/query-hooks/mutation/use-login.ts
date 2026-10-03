@@ -1,6 +1,7 @@
 import type { LoginDto } from "@/modules/auth/dto/login.dto";
 import type { ILoginService } from "@/modules/auth/services/contracts/login";
 import { AppError } from "@/shared/errors/app-error";
+import handleMutationResponse from "@/shared/response/handle-mutation-response";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
 import { toast } from "sonner";
@@ -11,13 +12,8 @@ export function useLoginMutation(loginService: ILoginService) {
     mutationFn: async (data: LoginDto) => {
       const response = await loginService.execute(data);
 
-      if (response instanceof AppError) {
-        throw response;
-      }
-
       await navigate({ to: "/home" });
-
-      return response;
+      return handleMutationResponse(response);
     },
     onError: (error: AppError) => {
       toast.error(error.message);

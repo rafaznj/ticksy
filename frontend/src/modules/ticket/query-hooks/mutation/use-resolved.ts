@@ -16,9 +16,9 @@ export function useResolvedTicket(resolvedTicketService: IResolvedTicketService)
       return handleMutationResponse(response);
     },
     onSuccess: () => {
-      toast.success(t("ticket.success.updated"));
+      toast.success(t("ticket.messages.resolved"));
       queryClient.invalidateQueries({ queryKey: ["tickets"] });
     },
-    onError: handleMutationError(t("ticket.errors.updateFailed")),
+    onError: handleMutationError(t("ticket.messages.errors.resolveFailed")),
   });
 }

@@ -4,6 +4,8 @@ import type { ICreateUserService } from "@/modules/user/services/contracts/creat
 import { handleMutationError } from "@/shared/errors/handle-mutation-error";
 import { useTranslation } from "react-i18next";
 import handleMutationResponse from "@/shared/response/handle-mutation-response";
+import queryClient from "@/lib/tanstack/query-client";
+import { toast } from "sonner";
 
 export function useCreateUser(createUserService: ICreateUserService) {
   const { t } = useTranslation();
@@ -13,6 +15,11 @@ export function useCreateUser(createUserService: ICreateUserService) {
 
       return handleMutationResponse(response);
     },
-    onError: handleMutationError(t("user.errors.createFailed")),
+    onSuccess: () => {
+      toast.success(t("user.messages.created"));
+
+      queryClient.invalidateQueries({ queryKey: ["users", "paged"] });
+    },
+    onError: handleMutationError(t("user.messages.errors.createFailed")),
   });
 }

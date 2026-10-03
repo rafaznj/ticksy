@@ -23,11 +23,11 @@ export function useCreateTicket(
       return handleMutationResponse(response);
     },
     onSuccess: () => {
-      toast.success(t("ticket.create.messages.success"));
+      toast.success(t("ticket.messages.created"));
       options?.onSuccess?.();
 
       queryClient.invalidateQueries({ queryKey: ["tickets"] });
     },
-    onError: handleMutationError(t("ticket.create.messages.failed")),
+    onError: handleMutationError(t("ticket.messages.errors.createFailed")),
   });
 }

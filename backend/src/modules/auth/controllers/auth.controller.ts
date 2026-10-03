@@ -70,7 +70,7 @@ export class AuthController {
   async refresh(@Req() req: Request, @Res({ passthrough: true }) res: Response) {
     const refreshToken = req.cookies?.refreshToken;
     if (!refreshToken) {
-      throw AppException.unauthorized("auth.errors.refreshTokenMissing");
+      throw AppException.unauthorized("auth.messages.errors.refreshTokenMissing");
     }
 
     try {

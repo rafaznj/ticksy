@@ -32,8 +32,8 @@ export function useUpdateUser(updateUserService: IUpdateUserService) {
         });
       }
 
-      toast.success(t("user.success.updated"));
+      toast.success(t("user.messages.updated"));
     },
-    onError: handleMutationError(t("user.errors.updateFailed")),
+    onError: handleMutationError(t("user.messages.errors.updateFailed")),
   });
 }
