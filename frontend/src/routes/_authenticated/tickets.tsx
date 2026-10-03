@@ -1,5 +1,5 @@
-import { TicketsPagedTable } from "@/components/tables/tickets";
 import { TicketStatusEnum } from "@/modules/ticket/enums/status.enum";
+import { ListTicketsPage } from "@/pages/tickets/ListTickets";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/_authenticated/tickets")({
@@ -8,5 +8,5 @@ export const Route = createFileRoute("/_authenticated/tickets")({
       ? (search.status as TicketStatusEnum)
       : undefined,
   }),
-  component: TicketsPagedTable,
+  component: ListTicketsPage,
 });

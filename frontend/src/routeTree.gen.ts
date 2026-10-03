@@ -16,11 +16,13 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
 import { Route as AuthenticatedIndexRouteImport } from './routes/_authenticated/index'
 import { Route as AuthenticatedTicketsRouteImport } from './routes/_authenticated/tickets'
-import { Route as AuthenticatedNotificationsRouteImport } from './routes/_authenticated/notifications'
 import { Route as AuthenticatedHomeRouteImport } from './routes/_authenticated/home'
 
 const AuthenticatedUsersLazyRouteImport = createFileRoute(
   '/_authenticated/users',
+)()
+const AuthenticatedNotificationsLazyRouteImport = createFileRoute(
+  '/_authenticated/notifications',
 )()
 
 const RegisterRoute = RegisterRouteImport.update({
@@ -49,17 +51,19 @@ const AuthenticatedUsersLazyRoute = AuthenticatedUsersLazyRouteImport.update({
 } as any).lazy(() =>
   import('./routes/_authenticated/users.lazy').then((d) => d.Route),
 )
+const AuthenticatedNotificationsLazyRoute =
+  AuthenticatedNotificationsLazyRouteImport.update({
+    id: '/notifications',
+    path: '/notifications',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any).lazy(() =>
+    import('./routes/_authenticated/notifications.lazy').then((d) => d.Route),
+  )
 const AuthenticatedTicketsRoute = AuthenticatedTicketsRouteImport.update({
   id: '/tickets',
   path: '/tickets',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
-const AuthenticatedNotificationsRoute =
-  AuthenticatedNotificationsRouteImport.update({
-    id: '/notifications',
-    path: '/notifications',
-    getParentRoute: () => AuthenticatedRoute,
-  } as any)
 const AuthenticatedHomeRoute = AuthenticatedHomeRouteImport.update({
   id: '/home',
   path: '/home',
@@ -71,16 +75,16 @@ export interface FileRoutesByFullPath {
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
   '/home': typeof AuthenticatedHomeRoute
-  '/notifications': typeof AuthenticatedNotificationsRoute
   '/tickets': typeof AuthenticatedTicketsRoute
+  '/notifications': typeof AuthenticatedNotificationsLazyRoute
   '/users': typeof AuthenticatedUsersLazyRoute
 }
 export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
   '/home': typeof AuthenticatedHomeRoute
-  '/notifications': typeof AuthenticatedNotificationsRoute
   '/tickets': typeof AuthenticatedTicketsRoute
+  '/notifications': typeof AuthenticatedNotificationsLazyRoute
   '/users': typeof AuthenticatedUsersLazyRoute
   '/': typeof AuthenticatedIndexRoute
 }
@@ -90,8 +94,8 @@ export interface FileRoutesById {
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
   '/_authenticated/home': typeof AuthenticatedHomeRoute
-  '/_authenticated/notifications': typeof AuthenticatedNotificationsRoute
   '/_authenticated/tickets': typeof AuthenticatedTicketsRoute
+  '/_authenticated/notifications': typeof AuthenticatedNotificationsLazyRoute
   '/_authenticated/users': typeof AuthenticatedUsersLazyRoute
   '/_authenticated/': typeof AuthenticatedIndexRoute
 }
@@ -102,16 +106,16 @@ export interface FileRouteTypes {
     | '/login'
     | '/register'
     | '/home'
-    | '/notifications'
     | '/tickets'
+    | '/notifications'
     | '/users'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/login'
     | '/register'
     | '/home'
-    | '/notifications'
     | '/tickets'
+    | '/notifications'
     | '/users'
     | '/'
   id:
@@ -120,8 +124,8 @@ export interface FileRouteTypes {
     | '/login'
     | '/register'
     | '/_authenticated/home'
-    | '/_authenticated/notifications'
     | '/_authenticated/tickets'
+    | '/_authenticated/notifications'
     | '/_authenticated/users'
     | '/_authenticated/'
   fileRoutesById: FileRoutesById
@@ -169,18 +173,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedUsersLazyRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/_authenticated/notifications': {
+      id: '/_authenticated/notifications'
+      path: '/notifications'
+      fullPath: '/notifications'
+      preLoaderRoute: typeof AuthenticatedNotificationsLazyRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
     '/_authenticated/tickets': {
       id: '/_authenticated/tickets'
       path: '/tickets'
       fullPath: '/tickets'
       preLoaderRoute: typeof AuthenticatedTicketsRouteImport
-      parentRoute: typeof AuthenticatedRoute
-    }
-    '/_authenticated/notifications': {
-      id: '/_authenticated/notifications'
-      path: '/notifications'
-      fullPath: '/notifications'
-      preLoaderRoute: typeof AuthenticatedNotificationsRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
     '/_authenticated/home': {
@@ -195,16 +199,16 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedRouteChildren {
   AuthenticatedHomeRoute: typeof AuthenticatedHomeRoute
-  AuthenticatedNotificationsRoute: typeof AuthenticatedNotificationsRoute
   AuthenticatedTicketsRoute: typeof AuthenticatedTicketsRoute
+  AuthenticatedNotificationsLazyRoute: typeof AuthenticatedNotificationsLazyRoute
   AuthenticatedUsersLazyRoute: typeof AuthenticatedUsersLazyRoute
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
 }
 
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedHomeRoute: AuthenticatedHomeRoute,
-  AuthenticatedNotificationsRoute: AuthenticatedNotificationsRoute,
   AuthenticatedTicketsRoute: AuthenticatedTicketsRoute,
+  AuthenticatedNotificationsLazyRoute: AuthenticatedNotificationsLazyRoute,
   AuthenticatedUsersLazyRoute: AuthenticatedUsersLazyRoute,
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
 }

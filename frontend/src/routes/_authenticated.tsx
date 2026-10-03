@@ -26,8 +26,8 @@ function AuthenticatedLayout() {
           <DialogProvider>
             <AppSidebar />
 
-            <SidebarInset>
-              <div className="flex-1 px-4 py-6 md:px-6 lg:px-8">
+            <SidebarInset className="bg-slate-50 dark:bg-background flex flex-col h-svh overflow-hidden">
+              <div className="flex flex-1 flex-col min-w-0 min-h-0 p-4 md:p-6 lg:p-8">
                 <Outlet />
               </div>
             </SidebarInset>
