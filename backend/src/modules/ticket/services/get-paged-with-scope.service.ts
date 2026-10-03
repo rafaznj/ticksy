@@ -33,11 +33,11 @@ export class GetTicketPagedWithScopeService implements IGetTicketPagedWithScopeS
 
   private buildScope(currentUser: Omit<UserModel, "password">): TicketScope | undefined {
     switch (currentUser.role) {
-      case UserRoleEnum.ADMIN:
+      case UserRoleEnum.admin:
         return undefined;
-      case UserRoleEnum.TECHNICAL_ASSISTANCE:
+      case UserRoleEnum.technical_assistance:
         return { assignedToId: currentUser.id };
-      case UserRoleEnum.EMPLOYEE:
+      case UserRoleEnum.employee:
         return { createdById: currentUser.id };
       default:
         return { createdById: currentUser.id };

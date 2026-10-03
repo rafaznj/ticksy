@@ -12,7 +12,7 @@ export const users = pgTable("users", {
   name: varchar({ length: 256 }).notNull(),
   email: varchar({ length: 254 }).notNull(),
   password: text().notNull(),
-  role: userRoleEnum().default(UserRoleEnum.EMPLOYEE).notNull(),
+  role: userRoleEnum().default(UserRoleEnum.employee).notNull(),
   deleted: boolean().default(false).notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at")

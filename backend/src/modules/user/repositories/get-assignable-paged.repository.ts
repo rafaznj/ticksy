@@ -23,7 +23,7 @@ export class GetAssignableUsersPagedRepository implements IGetAssignableUsersPag
 
     const { softDeleteCondition, sort, whereCondition } = customQueryConditions(options, users);
 
-    const roleCondition = eq(users.role, UserRoleEnum.TECHNICAL_ASSISTANCE);
+    const roleCondition = eq(users.role, UserRoleEnum.technical_assistance);
 
     const finalWhere = and(whereCondition, softDeleteCondition, roleCondition);
 

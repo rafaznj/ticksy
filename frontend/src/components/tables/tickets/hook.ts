@@ -69,8 +69,8 @@ export function useTicketsPagedTable() {
     [statusLabels],
   );
 
-  const isAdmin = user?.role === UserRoleEnum.ADMIN;
-  const isTechnicalAssistance = user?.role === UserRoleEnum.TECHNICAL_ASSISTANCE;
+  const isAdmin = user?.role === UserRoleEnum.admin;
+  const isTechnicalAssistance = user?.role === UserRoleEnum.technical_assistance;
 
   const columns = useMemo(
     () =>
@@ -108,7 +108,7 @@ export function useTicketsPagedTable() {
         edit: () => t("general.actions.edit"),
         delete: () => t("general.actions.delete"),
         assign: () => t("general.actions.assign"),
-        resolved: () => t("general.actions.resolved"),
+        resolved: () => t("general.actions.resolve"),
         unassign: () => t("general.actions.unassign"),
       },
     };

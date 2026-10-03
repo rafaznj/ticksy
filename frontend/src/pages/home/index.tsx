@@ -1,14 +1,14 @@
-import { AdminMetrics } from "@/components/AdminMetrics";
-import { EmployeeMetrics } from "@/components/EmployeeMetrics";
-import { TechnicalAssistanceMetrics } from "@/components/TechnicalAssistanceMetrics";
+import { AdminMetrics } from "@/components/dashboard/AdminMetrics";
+import { EmployeeMetrics } from "@/components/dashboard/EmployeeMetrics";
+import { TechnicalAssistanceMetrics } from "@/components/dashboard/TechnicalAssistanceMetrics";
 import { useAuthStore } from "@/lib/zustand/use-auth";
 import { UserRoleEnum } from "@/modules/user/enums/role.enum";
 import type { JSX } from "react/jsx-runtime";
 
 const HOME_PAGE_BY_ROLE: Record<UserRoleEnum, () => JSX.Element> = {
-  [UserRoleEnum.ADMIN]: AdminMetrics,
-  [UserRoleEnum.EMPLOYEE]: EmployeeMetrics,
-  [UserRoleEnum.TECHNICAL_ASSISTANCE]: TechnicalAssistanceMetrics,
+  [UserRoleEnum.admin]: AdminMetrics,
+  [UserRoleEnum.employee]: EmployeeMetrics,
+  [UserRoleEnum.technical_assistance]: TechnicalAssistanceMetrics,
 };
 
 export default function HomePage() {
