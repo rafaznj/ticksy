@@ -134,6 +134,7 @@
       "deactivate": "Deactivate",
       "delete": "Delete",
       "edit": "Edit",
+      "markAsRead": "Mark as read",
       "resolve": "Resolve",
       "save": "Save",
       "submit": "Submit",
@@ -164,6 +165,34 @@
       "previous": "Previous",
       "rowsPerPage": "Rows per page",
       "searchPlaceholder": "Search"
+    }
+  },
+  "notifications": {
+    "actions": {
+      "markAllAsRead": "Mark all as read"
+    },
+    "messages": {
+      "markAllAsRead": "All notifications marked as read",
+      "markAsRead": "Notification marked as read",
+      "types": {
+        "ticket_assigned": "Ticket <ticket>\"{{title}}\"</ticket> has been assigned to you",
+        "ticket_created": "<highlight>{{userName}}</highlight> created ticket <ticket>\"{{title}}\"</ticket>",
+        "ticket_status_changed": "<highlight>{{userName}}</highlight> changed the status of ticket <ticket>\"{{title}}\"</ticket> to <status>{{status}}</status>",
+        "ticket_unassigned": "Your assignment to ticket <ticket>\"{{title}}\"</ticket> has been removed"
+      }
+    },
+    "table": {
+      "columns": {
+        "date": "Date",
+        "title": "Title"
+      },
+      "emptyMessage": "No notifications found",
+      "unknownTicket": "Unknown ticket"
+    },
+    "ticketStatus": {
+      "inProgress": "in progress",
+      "open": "open",
+      "resolved": "resolved"
     }
   },
   "sidebar": {

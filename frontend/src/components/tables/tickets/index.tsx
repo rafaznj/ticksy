@@ -50,6 +50,7 @@ export function TicketsPagedTable() {
         onPreviousPage={previousPage}
         isLoading={isLoading}
         isError={isError}
+        emptyMessage={t("ticket.table.emptyMessage")}
         getRowId={(ticket) => ticket.id}
         actions={actions}
         filters={[

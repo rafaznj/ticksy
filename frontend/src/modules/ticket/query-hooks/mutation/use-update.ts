@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import type { UpdateTicketDto } from "@/modules/ticket/dtos/update.dto";
 import type { IUpdateTicketService } from "@/modules/ticket/services/contracts/update";
 import queryClient from "@/lib/tanstack/query-client";
+import { TANSTACK_QUERY_KEYS } from "@/lib/tanstack/query-keys";
 import handleMutationResponse from "@/shared/response/handle-mutation-response";
 
 interface UpdateTicketParams {
@@ -21,9 +22,22 @@ export function useUpdateTicket(updateTicketService: IUpdateTicketService) {
 
       return handleMutationResponse(response);
     },
-    onSuccess: () => {
+    onSuccess: async () => {
       toast.success(t("ticket.messages.updated"));
-      queryClient.invalidateQueries({ queryKey: ["tickets"] });
+      await Promise.all([
+        queryClient.invalidateQueries({
+          queryKey: [TANSTACK_QUERY_KEYS.GET_TICKET_PAGED],
+        }),
+        queryClient.invalidateQueries({
+          queryKey: [TANSTACK_QUERY_KEYS.GET_TICKET_PAGED_WITH_SCOPE],
+        }),
+        queryClient.invalidateQueries({
+          queryKey: [TANSTACK_QUERY_KEYS.GET_TICKET_PAGED_LAST_SEVEN_DAYS],
+        }),
+        queryClient.invalidateQueries({
+          queryKey: [TANSTACK_QUERY_KEYS.GET_TICKET_STATUS_COUNT],
+        }),
+      ]);
     },
     onError: handleMutationError(t("ticket.messages.errors.updateFailed")),
   });

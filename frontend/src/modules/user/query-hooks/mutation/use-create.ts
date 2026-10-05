@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import handleMutationResponse from "@/shared/response/handle-mutation-response";
 import queryClient from "@/lib/tanstack/query-client";
 import { toast } from "sonner";
+import { TANSTACK_QUERY_KEYS } from "@/lib/tanstack/query-keys";
 
 export function useCreateUser(createUserService: ICreateUserService) {
   const { t } = useTranslation();
@@ -18,7 +19,7 @@ export function useCreateUser(createUserService: ICreateUserService) {
     onSuccess: () => {
       toast.success(t("user.messages.created"));
 
-      queryClient.invalidateQueries({ queryKey: ["users", "paged"] });
+      queryClient.invalidateQueries({ queryKey: [TANSTACK_QUERY_KEYS.GET_USER_PAGED] });
     },
     onError: handleMutationError(t("user.messages.errors.createFailed")),
   });

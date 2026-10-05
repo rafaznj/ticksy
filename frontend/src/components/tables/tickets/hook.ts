@@ -19,6 +19,7 @@ import type { IResolvedTicketService } from "@/modules/ticket/services/contracts
 import { useResolvedTicket } from "@/modules/ticket/query-hooks/mutation/use-resolved";
 import { getRouteApi } from "@tanstack/react-router";
 import { TicketCategoryEnum } from "@/modules/ticket/enums/category.enum";
+import { TANSTACK_QUERY_KEYS } from "@/lib/tanstack/query-keys";
 
 export function useTicketsPagedTable() {
   const { t } = useTranslation();
@@ -48,7 +49,10 @@ export function useTicketsPagedTable() {
     setPageSize,
     nextPage,
     previousPage,
-  } = usePagedQuery(getTicketPagedWithScopeService, { queryKey: "tickets", filters });
+  } = usePagedQuery(getTicketPagedWithScopeService, {
+    queryKey: TANSTACK_QUERY_KEYS.GET_TICKET_PAGED,
+    filters,
+  });
 
   const { open: openEditTicket } = useDialog<TicketEntity>(DIALOG_KEYS.UPDATE_TICKET);
   const { open: openDeleteTicket } = useDialog<TicketEntity>(DIALOG_KEYS.DELETE_TICKET);
@@ -69,8 +73,8 @@ export function useTicketsPagedTable() {
     [statusLabels],
   );
 
-  const isAdmin = user?.role === UserRoleEnum.admin;
-  const isTechnicalAssistance = user?.role === UserRoleEnum.technical_assistance;
+  const isAdmin = user?.role === UserRoleEnum.ADMIN;
+  const isTechnicalAssistance = user?.role === UserRoleEnum.TECHNICAL_ASSISTANCE;
 
   const columns = useMemo(
     () =>

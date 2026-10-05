@@ -10,7 +10,7 @@ import { customQueryConditions } from "../../../shared/utils/custom-conditions";
 import buildPagedReturn from "../../../shared/utils/build-paged-return";
 import { UserModel } from "../models/user-model";
 import { IGetAssignableUsersPagedRepository } from "./contracts/get-assignable-paged";
-import { UserRoleEnum } from "../enums/roles.enum";
+import { UserRoleEnum } from "../enums/role.enum";
 
 export class GetAssignableUsersPagedRepository implements IGetAssignableUsersPagedRepository {
   constructor(
@@ -23,7 +23,7 @@ export class GetAssignableUsersPagedRepository implements IGetAssignableUsersPag
 
     const { softDeleteCondition, sort, whereCondition } = customQueryConditions(options, users);
 
-    const roleCondition = eq(users.role, UserRoleEnum.technical_assistance);
+    const roleCondition = eq(users.role, UserRoleEnum.TECHNICAL_ASSISTANCE);
 
     const finalWhere = and(whereCondition, softDeleteCondition, roleCondition);
 

@@ -19,15 +19,26 @@ import { useAuthStore } from "@/lib/zustand/use-auth";
 import { UserRoleEnum } from "@/modules/user/enums/role.enum";
 import { DIALOG_KEYS } from "@/shared/constants/dialog-keys";
 import { LuPlus } from "react-icons/lu";
+import { container } from "@/lib/inversifyJS/index.container";
+import { SERVICE_TOKENS } from "@/shared/di/tokens.services";
+import type { IGetUnreadNotificationCountService } from "@/modules/notifications/services/contracts/get-unread-count";
+import { useGetUnreadNotificationCount } from "@/modules/notifications/query-hooks/query/use-get-unread-count";
 
 export function AppSidebar() {
   const { groups, getItemProps, t } = useAppSidebar();
   const { user } = useAuthStore();
   const { open: openCreateTicketDialog } = useDialog(DIALOG_KEYS.CREATE_TICKET);
+  const getUnreadNotificationCountService = container.get<IGetUnreadNotificationCountService>(
+    SERVICE_TOKENS.GetUnreadNotificationCountService,
+  );
+  const { data } = useGetUnreadNotificationCount({
+    getUnreadNotificationCountService,
+    enabled: !!user,
+  });
 
   return (
     <Sidebar collapsible="icon" variant="floating">
-      {user?.role !== UserRoleEnum.technical_assistance && (
+      {user?.role !== UserRoleEnum.TECHNICAL_ASSISTANCE && (
         <SidebarHeader className="px-2 pt-6 pb-4">
           <SidebarMenu>
             <SidebarMenuItem className="flex justify-center">
@@ -64,12 +75,21 @@ export function AppSidebar() {
                         tooltip={item.tooltip}
                         onClick={onClick}
                         isActive={isActive}
-                        className="h-12 gap-3 rounded-lg px-3 text-base transition-all hover:bg-sidebar-accent hover:text-sidebar-accent-foreground data-active:bg-sidebar-accent data-active:ring-1 data-active:ring-blue-300 dark:data-active:ring-blue-800/60"
+                        className="relative h-12 gap-3 rounded-lg px-3 text-base transition-all hover:bg-sidebar-accent hover:text-sidebar-accent-foreground data-active:bg-sidebar-accent data-active:ring-1 data-active:ring-blue-300 dark:data-active:ring-blue-800/60"
                       >
                         <Icon className={cn("size-6", item.iconClassName)} />
+
                         <span className="truncate text-[15px] font-medium group-data-[collapsible=icon]:hidden">
                           {item.tooltip}
                         </span>
+
+                        {item.href === "/notifications" &&
+                          data?.count !== undefined &&
+                          data.count > 0 && (
+                            <span className="absolute left-7 top-1 text-xs font-bold text-blue-600 dark:text-blue-400">
+                              {data.count}
+                            </span>
+                          )}
                       </SidebarMenuButton>
                     </SidebarMenuItem>
                   );

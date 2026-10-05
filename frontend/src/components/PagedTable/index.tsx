@@ -56,6 +56,7 @@ interface ActionVisibility<T> {
   assign?: (item: T) => boolean;
   unassign?: (item: T) => boolean;
   resolved?: (item: T) => boolean;
+  markAsRead?: (item: T) => boolean;
 }
 
 interface ActionsConfig<T> {
@@ -70,6 +71,7 @@ interface ActionsConfig<T> {
     assign?: TooltipValue<T>;
     unassign?: TooltipValue<T>;
     resolved?: TooltipValue<T>;
+    markAsRead?: TooltipValue<T>;
   };
   edit?: (item: T) => void;
   activate?: (item: T) => void;
@@ -78,6 +80,7 @@ interface ActionsConfig<T> {
   assign?: (item: T) => void;
   unassign?: (item: T) => void;
   resolved?: (item: T) => void;
+  markAsRead?: (item: T) => void;
 }
 
 export interface HeaderButtonConfig {
@@ -105,11 +108,14 @@ interface PagedTableProps<T> {
   hasNext: boolean;
   isLoading?: boolean;
   isError?: boolean;
+  emptyMessage?: React.ReactNode;
   actions?: ActionsConfig<T>;
   sorting?: SortingState;
   pageSize?: number;
   rowsPerPageOptions?: number[];
   headerButtons?: HeaderButtonConfig[];
+  headerDynamicComponent?: React.ReactNode;
+  showSearch?: boolean;
   filters?: FilterConfig[];
   onPageSizeChange?: (size: number) => void;
   onSearchChange: (value: string) => void;
@@ -138,11 +144,14 @@ export function PagedTable<T>({
   hasNext,
   isLoading,
   isError,
+  emptyMessage,
   actions,
   sorting,
   pageSize,
   rowsPerPageOptions = [10, 25, 50, 100],
   headerButtons,
+  headerDynamicComponent,
+  showSearch = true,
   filters,
   onSearchChange,
   onNextPage,
@@ -172,6 +181,7 @@ export function PagedTable<T>({
           const isAssignVisible = actions.visibilityAction?.assign?.(item) !== false;
           const isUnassignVisible = actions.visibilityAction?.unassign?.(item) !== false;
           const isResolvedVisible = actions.visibilityAction?.resolved?.(item) !== false;
+          const isMarkAsReadVisible = actions.visibilityAction?.markAsRead?.(item) !== false;
 
           const showEdit = !!actions.edit && isEditVisible;
           const showActivate = !!actions.activate && isActivateVisible;
@@ -180,6 +190,7 @@ export function PagedTable<T>({
           const showAssign = !!actions.assign && isAssignVisible;
           const showUnassign = !!actions.unassign && isUnassignVisible;
           const showResolved = !!actions.resolved && isResolvedVisible;
+          const showMarkAsRead = !!actions.markAsRead && isMarkAsReadVisible;
 
           if (
             !showEdit &&
@@ -188,7 +199,8 @@ export function PagedTable<T>({
             !showDelete &&
             !showAssign &&
             !showUnassign &&
-            !showResolved
+            !showResolved &&
+            !showMarkAsRead
           ) {
             return null;
           }
@@ -200,6 +212,7 @@ export function PagedTable<T>({
           const isAssignDisabled = !!actions.disableAction?.assign?.(item);
           const isUnassignDisabled = !!actions.disableAction?.unassign?.(item);
           const isResolvedDisabled = !!actions.disableAction?.resolved?.(item);
+          const isMarkAsReadDisabled = !!actions.disableAction?.markAsRead?.(item);
 
           return (
             <div className="flex items-center gap-1">
@@ -379,6 +392,33 @@ export function PagedTable<T>({
                   </Tooltip>
                 </TooltipProvider>
               )}
+
+              {showMarkAsRead && (
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <span>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="h-8 w-8 cursor-pointer rounded-md bg-muted text-blue-600 hover:bg-blue-100 hover:text-blue-700 dark:hover:bg-blue-950 dark:hover:text-blue-400 disabled:cursor-not-allowed disabled:opacity-50"
+                          disabled={isMarkAsReadDisabled}
+                          onClick={() => actions.markAsRead!(item)}
+                        >
+                          <LuCheck className="h-4 w-4" />
+                        </Button>
+                      </span>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      {resolveTooltip(
+                        actions.tooltips?.markAsRead,
+                        item,
+                        t("general.actions.markAsRead"),
+                      )}
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+              )}
             </div>
           );
         },
@@ -402,23 +442,25 @@ export function PagedTable<T>({
     <div className="flex w-full min-w-0 max-h-[calc(100vh-10rem)] flex-col gap-4">
       <div className="flex shrink-0 items-center justify-between gap-4">
         <div className="flex items-center gap-2">
-          <div className="relative w-full max-w-sm">
-            <Input
-              placeholder={t("general.table.searchPlaceholder")}
-              value={search}
-              onChange={(e) => onSearchChange(e.target.value)}
-              className="pl-8"
-            />
+          {showSearch && (
+            <div className="relative w-full max-w-sm">
+              <Input
+                placeholder={t("general.table.searchPlaceholder")}
+                value={search}
+                onChange={(e) => onSearchChange(e.target.value)}
+                className="pl-8"
+              />
 
-            <LuSearch className="pointer-events-none absolute top-1/2 right-2.5 size-4 -translate-y-1/2 text-muted-foreground" />
-          </div>
+              <LuSearch className="pointer-events-none absolute top-1/2 right-2.5 size-4 -translate-y-1/2 text-muted-foreground" />
+            </div>
+          )}
 
           {headerButtons && headerButtons.length > 0 && (
             <div className="flex items-center gap-2">
               {headerButtons.map((btn, i) => (
                 <Button key={i} variant={btn.variant ?? "default"} onClick={btn.onClick}>
-                  {btn.icon}
                   {btn.label}
+                  {btn.icon}
                 </Button>
               ))}
             </div>
@@ -460,6 +502,7 @@ export function PagedTable<T>({
               ))}
             </>
           )}
+          {headerDynamicComponent}
         </div>
       </div>
 
@@ -473,11 +516,14 @@ export function PagedTable<T>({
                   const sortDirection = header.column.getIsSorted();
 
                   return (
-                    <TableHead key={header.id} className="text-justify">
+                    <TableHead
+                      key={header.id}
+                      className={header.column.id === "actions" ? "text-center" : "text-left"}
+                    >
                       {header.isPlaceholder ? null : canSort ? (
                         <button
                           type="button"
-                          className="mx-auto flex items-center justify-center gap-1 hover:text-foreground"
+                          className="flex items-center justify-start gap-1 hover:text-foreground"
                           onClick={header.column.getToggleSortingHandler()}
                         >
                           {flexRender(header.column.columnDef.header, header.getContext())}
@@ -521,7 +567,7 @@ export function PagedTable<T>({
                   colSpan={columnsWithActions.length}
                   className="h-24 text-center text-muted-foreground"
                 >
-                  {t("general.table.emptyMessage")}
+                  {emptyMessage ?? t("general.table.emptyMessage")}
                 </TableCell>
               </TableRow>
             ) : (

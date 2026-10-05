@@ -21,9 +21,12 @@ import { UnassignTicketRepository } from "./repositories/unassign.repository";
 import { GetTicketPagedLastSevenDaysRepository } from "./repositories/get-paged-last-seven-days.repository";
 import { GetTicketStatusCountService } from "./services/get-status-count.service";
 import { GetTicketStatusCountRepository } from "./repositories/get-status-count.repository";
-import { GetTicketPagedLastSevenDaysService } from "./services/get-paged-last-seven-days";
+import { GetTicketPagedLastSevenDaysService } from "./services/get-paged-last-seven-days.service";
+import { NotificationModule } from "../notification/notification.module";
+import { UserModule } from "../user/user.module";
 
 @Module({
+  imports: [NotificationModule, UserModule],
   controllers: [TicketController],
   providers: [
     {

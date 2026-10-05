@@ -6,6 +6,8 @@ import { TicketModel } from "../models/ticket";
 import { AppException } from "../../../shared/exceptions/app-exception";
 import { SERVICE_TOKENS } from "../../../shared/di/tokens.services";
 import type { IGetTicketByIdService } from "./contracts/get-by-id";
+import type { ICreateNotificationService } from "../../notification/services/contracts/create";
+import { NotificationTypeEnum } from "../../notification/enums/notification-type.enum";
 
 @Injectable()
 export class AssignTicketService implements IAssignTicketService {
@@ -14,6 +16,8 @@ export class AssignTicketService implements IAssignTicketService {
     private readonly assignTicketRepository: IAssignTicketRepository,
     @Inject(SERVICE_TOKENS.GetTicketByIdService)
     private readonly getTicketByIdService: IGetTicketByIdService,
+    @Inject(SERVICE_TOKENS.CreateNotificationService)
+    private readonly createNotificationService: ICreateNotificationService,
   ) {}
 
   async execute(id: string, userId: string): Promise<TicketModel | null> {
@@ -32,6 +36,15 @@ export class AssignTicketService implements IAssignTicketService {
     if (!response) {
       throw AppException.notFound("ticket.messages.errors.assignFailed");
     }
+
+    await this.createNotificationService.execute({
+      type: NotificationTypeEnum.TICKET_ASSIGNED,
+      ticketId: response.id,
+      parameters: {
+        title: response.title,
+      },
+      userIds: [userId],
+    });
 
     return response;
   }

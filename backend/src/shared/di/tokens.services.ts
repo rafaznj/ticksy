@@ -18,6 +18,7 @@ export const SERVICE_TOKENS = {
   GetUserByEmailService: Symbol.for("GetUserByEmailService"),
   GetUserPagedService: Symbol.for("GetUserPagedService"),
   GetAssignableUsersPagedService: Symbol.for("GetAssignableUsersPagedService"),
+  GetUserIdsByRoleService: Symbol.for("GetUserIdsByRoleService"),
 
   // Ticket
   CreateTicketService: Symbol.for("CreateTicketService"),
@@ -30,4 +31,13 @@ export const SERVICE_TOKENS = {
   UnassignTicketService: Symbol.for("UnassignTicketService"),
   ResolvedTicketService: Symbol.for("ResolvedTicketService"),
   GetTicketStatusCountService: Symbol.for("GetTicketStatusCountService"),
+
+  // Notification
+  NotificationHub: Symbol.for("NotificationHub"),
+
+  CreateNotificationService: Symbol.for("CreateNotificationService"),
+  GetNotificationPagedService: Symbol.for("GetNotificationPagedService"),
+  GetUnreadNotificationCountService: Symbol.for("GetUnreadNotificationCountService"),
+  MarkNotificationAsReadService: Symbol.for("MarkNotificationAsReadService"),
+  MarkAllNotificationsAsReadService: Symbol.for("MarkAllNotificationsAsReadService"),
 } as const;

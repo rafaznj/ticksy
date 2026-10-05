@@ -53,6 +53,7 @@ export function UsersPagedTable() {
         hasNext={hasNext}
         onNextPage={nextPage}
         onPreviousPage={previousPage}
+        emptyMessage={t("user.table.emptyMessage")}
         isLoading={isLoading}
         isError={isError}
         getRowId={(user) => user.id}
@@ -73,8 +74,8 @@ export function UsersPagedTable() {
         ]}
         headerButtons={[
           {
-            label: t("user.table.actions.create"),
             icon: <LuUserPlus />,
+            label: t("user.table.actions.create"),
             onClick: () => openCreateUser(),
           },
         ]}

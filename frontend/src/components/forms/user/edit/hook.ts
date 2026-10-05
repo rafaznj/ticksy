@@ -25,12 +25,12 @@ export function useEditUserForm() {
 
   const roleOptions = useMemo(
     () => [
-      { value: UserRoleEnum.employee, label: t("user.roles.employee") },
+      { value: UserRoleEnum.EMPLOYEE, label: t("user.roles.employee") },
       {
-        value: UserRoleEnum.technical_assistance,
+        value: UserRoleEnum.TECHNICAL_ASSISTANCE,
         label: t("user.roles.technicalAssistance"),
       },
-      { value: UserRoleEnum.admin, label: t("user.roles.admin") },
+      { value: UserRoleEnum.ADMIN, label: t("user.roles.admin") },
     ],
     [t],
   );

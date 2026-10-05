@@ -11,6 +11,7 @@ import { SERVICE_TOKENS } from "@/shared/di/tokens.services";
 import { UserRoleEnum } from "@/modules/user/enums/role.enum";
 import { useDialog } from "@/contexts/use-dialog";
 import { userTableColumns } from "@/components/tables/users/columns";
+import { TANSTACK_QUERY_KEYS } from "@/lib/tanstack/query-keys";
 
 export function useUsersPagedTable() {
   const { t } = useTranslation();
@@ -30,9 +31,9 @@ export function useUsersPagedTable() {
 
   const roleFilterOptions = useMemo(
     () => [
-      { value: UserRoleEnum.employee, label: t("user.roles.employee") },
-      { value: UserRoleEnum.admin, label: t("user.roles.admin") },
-      { value: UserRoleEnum.technical_assistance, label: t("user.roles.technicalAssistance") },
+      { value: UserRoleEnum.EMPLOYEE, label: t("user.roles.employee") },
+      { value: UserRoleEnum.ADMIN, label: t("user.roles.admin") },
+      { value: UserRoleEnum.TECHNICAL_ASSISTANCE, label: t("user.roles.technicalAssistance") },
     ],
     [t],
   );
@@ -70,7 +71,10 @@ export function useUsersPagedTable() {
     setPageSize,
     nextPage,
     previousPage,
-  } = usePagedQuery(getUserPagedService, { queryKey: "users", filters });
+  } = usePagedQuery(getUserPagedService, {
+    queryKey: TANSTACK_QUERY_KEYS.GET_USER_PAGED,
+    filters,
+  });
 
   const roleLabels = useMemo(() => enumToLabels(UserRoleEnum, "user.roles", t), [t]);
 

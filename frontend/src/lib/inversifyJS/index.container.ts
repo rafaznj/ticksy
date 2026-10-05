@@ -2,6 +2,7 @@ import { authContainerModule } from "@/lib/inversifyJS/auth.container";
 import { ticketContainerModule } from "@/lib/inversifyJS/ticket.container";
 import { userContainerModule } from "@/lib/inversifyJS/user.container";
 import { utilsContainerModule } from "@/lib/inversifyJS/utils.container";
+import { notificationContainerModule } from "@/lib/inversifyJS/notification.container";
 import { Container } from "inversify";
 
 export const container = new Container({
@@ -13,4 +14,5 @@ container.load(
   authContainerModule,
   userContainerModule,
   ticketContainerModule,
+  notificationContainerModule,
 );

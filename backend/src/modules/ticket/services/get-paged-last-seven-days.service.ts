@@ -4,7 +4,7 @@ import { REPOSITORY_TOKENS } from "../../../shared/di/tokens.repositories";
 import { IQueryOptions } from "../../../shared/types/query-options";
 import { IPagedResult } from "../../../shared/types/paged-result";
 import { TicketPagedLastSevenDaysModel } from "../models/ticket-paged-last-seven-day";
-import { UserRoleEnum } from "../../user/enums/roles.enum";
+import { UserRoleEnum } from "../../user/enums/role.enum";
 import { TicketScope } from "../models/ticket-scope";
 import { UserModel } from "../../user/models/user-model";
 import { IGetTicketPagedLastSevenDaysService } from "./contracts/get-paged-last-seven-days";
@@ -33,11 +33,11 @@ export class GetTicketPagedLastSevenDaysService implements IGetTicketPagedLastSe
 
   private buildScope(currentUser: Omit<UserModel, "password">): TicketScope | undefined {
     switch (currentUser.role) {
-      case UserRoleEnum.admin:
+      case UserRoleEnum.ADMIN:
         return undefined;
-      case UserRoleEnum.technical_assistance:
+      case UserRoleEnum.TECHNICAL_ASSISTANCE:
         return { assignedToId: currentUser.id };
-      case UserRoleEnum.employee:
+      case UserRoleEnum.EMPLOYEE:
         return { createdById: currentUser.id };
       default:
         return { createdById: currentUser.id };

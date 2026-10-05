@@ -1,7 +1,7 @@
 export enum TicketCategoryEnum {
-  hardware = "hardware",
-  software = "software",
-  account = "account",
-  access = "access",
-  other = "other",
+  HARDWARE = "hardware",
+  SOFTWARE = "software",
+  ACCOUNT = "account",
+  ACCESS = "access",
+  OTHER = "other",
 }

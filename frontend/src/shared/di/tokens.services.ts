@@ -28,4 +28,10 @@ export const SERVICE_TOKENS = {
   UnassignTicketService: Symbol.for("UnassignTicketService"),
   ResolvedTicketService: Symbol.for("ResolvedTicketService"),
   GetTicketStatusCountService: Symbol.for("GetTicketStatusCountService"),
+
+  // Notification
+  GetNotificationPagedService: Symbol.for("GetNotificationPagedService"),
+  GetUnreadNotificationCountService: Symbol.for("GetUnreadNotificationCountService"),
+  MarkNotificationAsReadService: Symbol.for("MarkNotificationAsReadService"),
+  MarkAllNotificationsAsReadService: Symbol.for("MarkAllNotificationsAsReadService"),
 } as const;

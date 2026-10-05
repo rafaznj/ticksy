@@ -4,6 +4,7 @@ import handleMutationResponse from "@/shared/response/handle-mutation-response";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
+import { TANSTACK_QUERY_KEYS } from "@/lib/tanstack/query-keys";
 
 export function useActivateUser(activateUserService: IActivateUserService) {
   const { t } = useTranslation();
@@ -18,7 +19,7 @@ export function useActivateUser(activateUserService: IActivateUserService) {
     onSuccess: () => {
       toast.success(t("user.messages.activated"));
 
-      queryClient.invalidateQueries({ queryKey: ["users", "paged"] });
+      queryClient.invalidateQueries({ queryKey: [TANSTACK_QUERY_KEYS.GET_USER_PAGED] });
     },
     onError: handleMutationError(t("user.messages.errors.activateFailed")),
   });

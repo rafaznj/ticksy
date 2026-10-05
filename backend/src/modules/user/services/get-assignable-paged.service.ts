@@ -14,6 +14,7 @@ export class GetAssignableUsersPagedService implements IGetAssignableUsersPagedS
   ) {}
 
   async execute(options: IQueryOptions): Promise<IPagedResult<UserModel>> {
-    return this.getAssignableUsersPagedRepository.execute(options);
+    const response = await this.getAssignableUsersPagedRepository.execute(options);
+    return response;
   }
 }

@@ -134,6 +134,7 @@
       "deactivate": "Desativar",
       "delete": "Excluir",
       "edit": "Editar",
+      "markAsRead": "Marcar como lida",
       "refresh": "Atualizar",
       "resolve": "Resolver",
       "retry": "Tentar novamente",
@@ -169,6 +170,34 @@
       "searchPlaceholder": "Buscar"
     },
     "theme": "Mudar para o tema {{theme}}"
+  },
+  "notifications": {
+    "actions": {
+      "markAllAsRead": "Marcar todas como lidas"
+    },
+    "messages": {
+      "markAllAsRead": "Todas as notificações foram marcadas como lidas",
+      "markAsRead": "Notificação marcada como lida",
+      "types": {
+        "ticket_assigned": "O ticket <ticket>\"{{title}}\"</ticket> foi atribuído a você",
+        "ticket_created": "<highlight>{{userName}}</highlight> criou o ticket <ticket>\"{{title}}\"</ticket>",
+        "ticket_status_changed": "<highlight>{{userName}}</highlight> alterou o status do ticket <ticket>\"{{title}}\"</ticket> para <status>{{status}}</status>",
+        "ticket_unassigned": "Sua atribuição ao ticket <ticket>\"{{title}}\"</ticket> foi removida"
+      }
+    },
+    "table": {
+      "columns": {
+        "date": "Data",
+        "title": "Título"
+      },
+      "emptyMessage": "Nenhuma notificação encontrada",
+      "unknownTicket": "Ticket não identificado"
+    },
+    "ticketStatus": {
+      "inProgress": "em andamento",
+      "open": "aberto",
+      "resolved": "resolvido"
+    }
   },
   "sidebar": {
     "labels": {

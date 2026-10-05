@@ -6,7 +6,7 @@ import { IGetTicketPagedWithScopeService } from "./contracts/get-paged-with-scop
 import type { IGetTicketPagedWithScopeRepository } from "../repositories/contracts/get-paged-with-scope";
 import { TicketPagedModel } from "../models/ticket-paged";
 import { UserModel } from "../../user/models/user-model";
-import { UserRoleEnum } from "../../user/enums/roles.enum";
+import { UserRoleEnum } from "../../user/enums/role.enum";
 import { TicketScope } from "../models/ticket-scope";
 
 export class GetTicketPagedWithScopeService implements IGetTicketPagedWithScopeService {
@@ -33,11 +33,11 @@ export class GetTicketPagedWithScopeService implements IGetTicketPagedWithScopeS
 
   private buildScope(currentUser: Omit<UserModel, "password">): TicketScope | undefined {
     switch (currentUser.role) {
-      case UserRoleEnum.admin:
+      case UserRoleEnum.ADMIN:
         return undefined;
-      case UserRoleEnum.technical_assistance:
+      case UserRoleEnum.TECHNICAL_ASSISTANCE:
         return { assignedToId: currentUser.id };
-      case UserRoleEnum.employee:
+      case UserRoleEnum.EMPLOYEE:
         return { createdById: currentUser.id };
       default:
         return { createdById: currentUser.id };

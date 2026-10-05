@@ -32,18 +32,18 @@ export function useEditTicketForm() {
 
   const categoryOptions = useMemo(
     () => [
-      { value: TicketCategoryEnum.access, label: t("ticket.fields.category.options.access") },
+      { value: TicketCategoryEnum.ACCESS, label: t("ticket.fields.category.options.access") },
       {
-        value: TicketCategoryEnum.account,
+        value: TicketCategoryEnum.ACCOUNT,
         label: t("ticket.fields.category.options.account"),
       },
-      { value: TicketCategoryEnum.hardware, label: t("ticket.fields.category.options.hardware") },
+      { value: TicketCategoryEnum.HARDWARE, label: t("ticket.fields.category.options.hardware") },
       {
-        value: TicketCategoryEnum.software,
+        value: TicketCategoryEnum.SOFTWARE,
         label: t("ticket.fields.category.options.software"),
       },
       {
-        value: TicketCategoryEnum.other,
+        value: TicketCategoryEnum.OTHER,
         label: t("ticket.fields.category.options.other"),
       },
     ],
@@ -52,10 +52,10 @@ export function useEditTicketForm() {
 
   const priorityOptions = useMemo(
     () => [
-      { value: TicketPriorityEnum.low, label: t("ticket.priority.low") },
-      { value: TicketPriorityEnum.medium, label: t("ticket.priority.medium") },
-      { value: TicketPriorityEnum.high, label: t("ticket.priority.high") },
-      { value: TicketPriorityEnum.urgent, label: t("ticket.priority.urgent") },
+      { value: TicketPriorityEnum.LOW, label: t("ticket.priority.low") },
+      { value: TicketPriorityEnum.MEDIUM, label: t("ticket.priority.medium") },
+      { value: TicketPriorityEnum.HIGH, label: t("ticket.priority.high") },
+      { value: TicketPriorityEnum.URGENT, label: t("ticket.priority.urgent") },
     ],
     [t],
   );

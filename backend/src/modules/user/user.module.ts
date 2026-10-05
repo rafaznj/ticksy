@@ -20,6 +20,8 @@ import { GetAssignableUsersPagedService } from "./services/get-assignable-paged.
 import { GetAssignableUsersPagedRepository } from "./repositories/get-assignable-paged.repository";
 import { ActivateUserService } from "./services/activate.service";
 import { ActivateUserRepository } from "./repositories/activate.repository";
+import { GetUserIdsByRoleRepository } from "./repositories/get-ids-by-role.repository";
+import { GetUserIdsByRoleService } from "./services/get-ids-by-role.service";
 
 @Module({
   imports: [DrizzleModule],
@@ -93,12 +95,21 @@ import { ActivateUserRepository } from "./repositories/activate.repository";
       provide: REPOSITORY_TOKENS.ActivateUserRepository,
       useClass: ActivateUserRepository,
     },
+    {
+      provide: SERVICE_TOKENS.GetUserIdsByRoleService,
+      useClass: GetUserIdsByRoleService,
+    },
+    {
+      provide: REPOSITORY_TOKENS.GetUserIdsByRoleRepository,
+      useClass: GetUserIdsByRoleRepository,
+    },
   ],
   exports: [
     SERVICE_TOKENS.CreateDefaultUsersService,
     SERVICE_TOKENS.CreateUserService,
     SERVICE_TOKENS.GetUserByIdService,
     SERVICE_TOKENS.GetUserByEmailService,
+    SERVICE_TOKENS.GetUserIdsByRoleService,
   ],
 })
 export class UserModule {}

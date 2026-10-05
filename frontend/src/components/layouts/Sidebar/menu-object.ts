@@ -7,10 +7,10 @@ import { GrNotification } from "react-icons/gr";
 const iconClassName = "text-sidebar-foreground/70";
 
 const allUser = Object.values(UserRoleEnum);
-const adminOnly = [UserRoleEnum.admin];
+const adminOnly = [UserRoleEnum.ADMIN];
 
 export function getSidebarMenuGroups(t: TFunction, role?: UserRoleEnum): SidebarMenuGroup[] {
-  const isAdmin = role === UserRoleEnum.admin;
+  const isAdmin = role === UserRoleEnum.ADMIN;
 
   return [
     {
@@ -53,7 +53,7 @@ export function getSidebarMenuGroups(t: TFunction, role?: UserRoleEnum): Sidebar
           tooltip: t("sidebar.tooltips.notifications"),
           icon: GrNotification,
           iconClassName,
-          allowedRoles: adminOnly,
+          allowedRoles: allUser,
         },
       ],
     },

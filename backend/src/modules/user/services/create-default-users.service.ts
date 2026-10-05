@@ -4,7 +4,7 @@ import { UserModel } from "../models/user-model";
 import { ICreateDefaultUsersService } from "./contracts/create-default-users";
 import type { ICreateUserService } from "./contracts/create";
 import { SERVICE_TOKENS } from "../../../shared/di/tokens.services";
-import { UserRoleEnum } from "../enums/roles.enum";
+import { UserRoleEnum } from "../enums/role.enum";
 import { CreateUserDto } from "../dtos/create.dto";
 import { AppException } from "../../../shared/exceptions/app-exception";
 
@@ -21,25 +21,25 @@ export class CreateDefaultUsersService implements ICreateDefaultUsersService {
         name: "John Doe",
         email: "john.doe@email.com",
         password: "@Aa12345",
-        role: UserRoleEnum.employee,
+        role: UserRoleEnum.EMPLOYEE,
       },
       {
         name: "Employee",
         email: "employee@email.com",
         password: "@Aa12345",
-        role: UserRoleEnum.employee,
+        role: UserRoleEnum.EMPLOYEE,
       },
       {
         name: "Technical Assistance",
         email: "technical_assistance@email.com",
         password: "@Aa12345",
-        role: UserRoleEnum.technical_assistance,
+        role: UserRoleEnum.TECHNICAL_ASSISTANCE,
       },
       {
         name: "Administrator",
         email: "admin@email.com",
         password: "@Aa12345",
-        role: UserRoleEnum.admin,
+        role: UserRoleEnum.ADMIN,
       },
     ];
 

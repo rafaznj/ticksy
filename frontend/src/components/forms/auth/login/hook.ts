@@ -1,0 +1,43 @@
+import { useNavigate } from "@tanstack/react-router";
+import { useTranslation } from "react-i18next";
+
+import { useAppForm } from "@/hooks/use-form";
+import { useLoginMutation } from "@/modules/auth/query-hooks/mutation/use-login";
+import { container } from "@/lib/inversifyJS/index.container";
+import { SERVICE_TOKENS } from "@/shared/di/tokens.services";
+import type { ILoginService } from "@/modules/auth/services/contracts/login";
+import type { LoginFormProps } from "@/components/forms/auth/login/types";
+import { loginFormSchema } from "@/components/forms/auth/login/validations";
+
+export function useLoginFormHook() {
+  const navigate = useNavigate();
+  const { t } = useTranslation();
+  const loginService = container.get<ILoginService>(SERVICE_TOKENS.LoginService);
+
+  const { mutate: handleLogin, isPending } = useLoginMutation(loginService);
+
+  const form = useAppForm({
+    defaultValues: {} as LoginFormProps,
+    onSubmit: async (value) => {
+      handleLogin(value.value);
+    },
+    validators: {
+      onBlur: loginFormSchema(t),
+    },
+  });
+
+  const handleSubmit = async (event: React.SubmitEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    await form.handleSubmit();
+  };
+
+  return {
+    form,
+    t,
+    isPending,
+    navigate,
+    handleSubmit,
+  };
+}
