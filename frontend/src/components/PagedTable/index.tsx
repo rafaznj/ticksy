@@ -47,6 +47,7 @@ import { GrNext, GrPrevious } from "react-icons/gr";
 import { TbFilter } from "react-icons/tb";
 
 type TooltipValue<T> = string | ((item: T) => string);
+type ActionIcon<T> = React.ReactNode | ((item: T) => React.ReactNode);
 
 interface ActionVisibility<T> {
   edit?: (row: T) => boolean;
@@ -73,6 +74,27 @@ interface ActionsConfig<T> {
     resolved?: TooltipValue<T>;
     markAsRead?: TooltipValue<T>;
   };
+  disabledTooltips?: {
+    edit?: TooltipValue<T>;
+    activate?: TooltipValue<T>;
+    deactivate?: TooltipValue<T>;
+    delete?: TooltipValue<T>;
+    assign?: TooltipValue<T>;
+    unassign?: TooltipValue<T>;
+    resolved?: TooltipValue<T>;
+    markAsRead?: TooltipValue<T>;
+  };
+  actionIcons?: {
+    edit?: ActionIcon<T>;
+    activate?: ActionIcon<T>;
+    deactivate?: ActionIcon<T>;
+    delete?: ActionIcon<T>;
+    assign?: ActionIcon<T>;
+    unassign?: ActionIcon<T>;
+    resolved?: ActionIcon<T>;
+    markAsRead?: ActionIcon<T>;
+  };
+  toggleActions?: ReadonlyArray<"activate" | "deactivate" | "assign" | "unassign">;
   edit?: (item: T) => void;
   activate?: (item: T) => void;
   deactivate?: (item: T) => void;
@@ -134,6 +156,10 @@ function resolveTooltip<T>(
   return tooltip ?? fallback;
 }
 
+function resolveActionIcon<T>(icon: ActionIcon<T> | undefined, item: T, fallback: React.ReactNode) {
+  return typeof icon === "function" ? icon(item) : (icon ?? fallback);
+}
+
 export function PagedTable<T>({
   columns,
   data,
@@ -183,14 +209,21 @@ export function PagedTable<T>({
           const isResolvedVisible = actions.visibilityAction?.resolved?.(item) !== false;
           const isMarkAsReadVisible = actions.visibilityAction?.markAsRead?.(item) !== false;
 
-          const showEdit = !!actions.edit && isEditVisible;
-          const showActivate = !!actions.activate && isActivateVisible;
-          const showDeactivate = !!actions.deactivate && isDeactivateVisible;
-          const showDelete = !!actions.delete && isDeleteVisible;
-          const showAssign = !!actions.assign && isAssignVisible;
-          const showUnassign = !!actions.unassign && isUnassignVisible;
-          const showResolved = !!actions.resolved && isResolvedVisible;
-          const showMarkAsRead = !!actions.markAsRead && isMarkAsReadVisible;
+          const showEdit = !!actions.edit;
+          const showActivate =
+            !!actions.activate &&
+            (!actions.toggleActions?.includes("activate") || isActivateVisible);
+          const showDeactivate =
+            !!actions.deactivate &&
+            (!actions.toggleActions?.includes("deactivate") || isDeactivateVisible);
+          const showDelete = !!actions.delete;
+          const showAssign =
+            !!actions.assign && (!actions.toggleActions?.includes("assign") || isAssignVisible);
+          const showUnassign =
+            !!actions.unassign &&
+            (!actions.toggleActions?.includes("unassign") || isUnassignVisible);
+          const showResolved = !!actions.resolved;
+          const showMarkAsRead = !!actions.markAsRead;
 
           if (
             !showEdit &&
@@ -205,17 +238,22 @@ export function PagedTable<T>({
             return null;
           }
 
-          const isEditDisabled = !!actions.disableAction?.edit?.(item);
-          const isActivateDisabled = !!actions.disableAction?.activate?.(item);
-          const isDeactivateDisabled = !!actions.disableAction?.deactivate?.(item);
-          const isDeleteDisabled = !!actions.disableAction?.delete?.(item);
-          const isAssignDisabled = !!actions.disableAction?.assign?.(item);
-          const isUnassignDisabled = !!actions.disableAction?.unassign?.(item);
-          const isResolvedDisabled = !!actions.disableAction?.resolved?.(item);
-          const isMarkAsReadDisabled = !!actions.disableAction?.markAsRead?.(item);
+          const isEditDisabled = !isEditVisible || !!actions.disableAction?.edit?.(item);
+          const isActivateDisabled =
+            !isActivateVisible || !!actions.disableAction?.activate?.(item);
+          const isDeactivateDisabled =
+            !isDeactivateVisible || !!actions.disableAction?.deactivate?.(item);
+          const isDeleteDisabled = !isDeleteVisible || !!actions.disableAction?.delete?.(item);
+          const isAssignDisabled = !isAssignVisible || !!actions.disableAction?.assign?.(item);
+          const isUnassignDisabled =
+            !isUnassignVisible || !!actions.disableAction?.unassign?.(item);
+          const isResolvedDisabled =
+            !isResolvedVisible || !!actions.disableAction?.resolved?.(item);
+          const isMarkAsReadDisabled =
+            !isMarkAsReadVisible || !!actions.disableAction?.markAsRead?.(item);
 
           return (
-            <div className="flex items-center gap-1">
+            <div className="flex items-center justify-center gap-1">
               {showEdit && (
                 <TooltipProvider>
                   <Tooltip>
@@ -228,17 +266,26 @@ export function PagedTable<T>({
                           disabled={isEditDisabled}
                           onClick={() => actions.edit!(item)}
                         >
-                          <LuPencil className="h-4 w-4" />
+                          {resolveActionIcon(
+                            actions.actionIcons?.edit,
+                            item,
+                            <LuPencil className="h-4 w-4" />,
+                          )}
                         </Button>
                       </span>
                     </TooltipTrigger>
                     <TooltipContent>
-                      {resolveTooltip(actions.tooltips?.edit, item, t("general.actions.edit"))}
+                      {isEditDisabled
+                        ? resolveTooltip(
+                            actions.disabledTooltips?.edit,
+                            item,
+                            t("general.actions.unavailable"),
+                          )
+                        : resolveTooltip(actions.tooltips?.edit, item, t("general.actions.edit"))}
                     </TooltipContent>
                   </Tooltip>
                 </TooltipProvider>
               )}
-
               {showActivate && (
                 <TooltipProvider>
                   <Tooltip>
@@ -251,21 +298,30 @@ export function PagedTable<T>({
                           disabled={isActivateDisabled}
                           onClick={() => actions.activate!(item)}
                         >
-                          <LuUserCheck className="h-4 w-4" />
+                          {resolveActionIcon(
+                            actions.actionIcons?.activate,
+                            item,
+                            <LuUserCheck className="h-4 w-4" />,
+                          )}
                         </Button>
                       </span>
                     </TooltipTrigger>
                     <TooltipContent>
-                      {resolveTooltip(
-                        actions.tooltips?.activate,
-                        item,
-                        t("general.actions.activate"),
-                      )}
+                      {isActivateDisabled
+                        ? resolveTooltip(
+                            actions.disabledTooltips?.activate,
+                            item,
+                            t("general.actions.unavailable"),
+                          )
+                        : resolveTooltip(
+                            actions.tooltips?.activate,
+                            item,
+                            t("general.actions.activate"),
+                          )}
                     </TooltipContent>
                   </Tooltip>
                 </TooltipProvider>
               )}
-
               {showDeactivate && (
                 <TooltipProvider>
                   <Tooltip>
@@ -278,21 +334,30 @@ export function PagedTable<T>({
                           disabled={isDeactivateDisabled}
                           onClick={() => actions.deactivate!(item)}
                         >
-                          <LuUserX className="h-4 w-4" />
+                          {resolveActionIcon(
+                            actions.actionIcons?.deactivate,
+                            item,
+                            <LuUserX className="h-4 w-4" />,
+                          )}
                         </Button>
                       </span>
                     </TooltipTrigger>
                     <TooltipContent>
-                      {resolveTooltip(
-                        actions.tooltips?.deactivate,
-                        item,
-                        t("general.actions.deactivate"),
-                      )}
+                      {isDeactivateDisabled
+                        ? resolveTooltip(
+                            actions.disabledTooltips?.deactivate,
+                            item,
+                            t("general.actions.unavailable"),
+                          )
+                        : resolveTooltip(
+                            actions.tooltips?.deactivate,
+                            item,
+                            t("general.actions.deactivate"),
+                          )}
                     </TooltipContent>
                   </Tooltip>
                 </TooltipProvider>
               )}
-
               {showAssign && (
                 <TooltipProvider>
                   <Tooltip>
@@ -305,17 +370,30 @@ export function PagedTable<T>({
                           disabled={isAssignDisabled}
                           onClick={() => actions.assign!(item)}
                         >
-                          <LuUserPlus className="h-4 w-4" />
+                          {resolveActionIcon(
+                            actions.actionIcons?.assign,
+                            item,
+                            <LuUserPlus className="h-4 w-4" />,
+                          )}
                         </Button>
                       </span>
                     </TooltipTrigger>
                     <TooltipContent>
-                      {resolveTooltip(actions.tooltips?.assign, item, t("general.actions.assign"))}
+                      {isAssignDisabled
+                        ? resolveTooltip(
+                            actions.disabledTooltips?.assign,
+                            item,
+                            t("general.actions.unavailable"),
+                          )
+                        : resolveTooltip(
+                            actions.tooltips?.assign,
+                            item,
+                            t("general.actions.assign"),
+                          )}
                     </TooltipContent>
                   </Tooltip>
                 </TooltipProvider>
               )}
-
               {showUnassign && (
                 <TooltipProvider>
                   <Tooltip>
@@ -328,21 +406,30 @@ export function PagedTable<T>({
                           disabled={isUnassignDisabled}
                           onClick={() => actions.unassign!(item)}
                         >
-                          <LuUserMinus className="h-4 w-4" />
+                          {resolveActionIcon(
+                            actions.actionIcons?.unassign,
+                            item,
+                            <LuUserMinus className="h-4 w-4" />,
+                          )}
                         </Button>
                       </span>
                     </TooltipTrigger>
                     <TooltipContent>
-                      {resolveTooltip(
-                        actions.tooltips?.unassign,
-                        item,
-                        t("general.actions.unassign"),
-                      )}
+                      {isUnassignDisabled
+                        ? resolveTooltip(
+                            actions.disabledTooltips?.unassign,
+                            item,
+                            t("general.actions.unavailable"),
+                          )
+                        : resolveTooltip(
+                            actions.tooltips?.unassign,
+                            item,
+                            t("general.actions.unassign"),
+                          )}
                     </TooltipContent>
                   </Tooltip>
                 </TooltipProvider>
               )}
-
               {showDelete && (
                 <TooltipProvider>
                   <Tooltip>
@@ -355,17 +442,30 @@ export function PagedTable<T>({
                           disabled={isDeleteDisabled}
                           onClick={() => actions.delete!(item)}
                         >
-                          <LuTrash2 className="h-4 w-4" />
+                          {resolveActionIcon(
+                            actions.actionIcons?.delete,
+                            item,
+                            <LuTrash2 className="h-4 w-4" />,
+                          )}
                         </Button>
                       </span>
                     </TooltipTrigger>
                     <TooltipContent>
-                      {resolveTooltip(actions.tooltips?.delete, item, t("general.actions.delete"))}
+                      {isDeleteDisabled
+                        ? resolveTooltip(
+                            actions.disabledTooltips?.delete,
+                            item,
+                            t("general.actions.unavailable"),
+                          )
+                        : resolveTooltip(
+                            actions.tooltips?.delete,
+                            item,
+                            t("general.actions.delete"),
+                          )}
                     </TooltipContent>
                   </Tooltip>
                 </TooltipProvider>
               )}
-
               {showResolved && (
                 <TooltipProvider>
                   <Tooltip>
@@ -378,21 +478,30 @@ export function PagedTable<T>({
                           disabled={isResolvedDisabled}
                           onClick={() => actions.resolved!(item)}
                         >
-                          <LuCheck className="h-4 w-4" />
+                          {resolveActionIcon(
+                            actions.actionIcons?.resolved,
+                            item,
+                            <LuCheck className="h-4 w-4" />,
+                          )}
                         </Button>
                       </span>
                     </TooltipTrigger>
                     <TooltipContent>
-                      {resolveTooltip(
-                        actions.tooltips?.resolved,
-                        item,
-                        t("general.actions.resolve"),
-                      )}
+                      {isResolvedDisabled
+                        ? resolveTooltip(
+                            actions.disabledTooltips?.resolved,
+                            item,
+                            t("general.actions.unavailable"),
+                          )
+                        : resolveTooltip(
+                            actions.tooltips?.resolved,
+                            item,
+                            t("general.actions.resolve"),
+                          )}
                     </TooltipContent>
                   </Tooltip>
                 </TooltipProvider>
               )}
-
               {showMarkAsRead && (
                 <TooltipProvider>
                   <Tooltip>
@@ -405,16 +514,26 @@ export function PagedTable<T>({
                           disabled={isMarkAsReadDisabled}
                           onClick={() => actions.markAsRead!(item)}
                         >
-                          <LuCheck className="h-4 w-4" />
+                          {resolveActionIcon(
+                            actions.actionIcons?.markAsRead,
+                            item,
+                            <LuCheck className="h-4 w-4" />,
+                          )}
                         </Button>
                       </span>
                     </TooltipTrigger>
                     <TooltipContent>
-                      {resolveTooltip(
-                        actions.tooltips?.markAsRead,
-                        item,
-                        t("general.actions.markAsRead"),
-                      )}
+                      {isMarkAsReadDisabled
+                        ? resolveTooltip(
+                            actions.disabledTooltips?.markAsRead,
+                            item,
+                            t("general.actions.unavailable"),
+                          )
+                        : resolveTooltip(
+                            actions.tooltips?.markAsRead,
+                            item,
+                            t("general.actions.markAsRead"),
+                          )}
                     </TooltipContent>
                   </Tooltip>
                 </TooltipProvider>
@@ -506,7 +625,7 @@ export function PagedTable<T>({
         </div>
       </div>
 
-      <div className="min-h-0 flex-1 overflow-x-hidden overflow-y-auto rounded-md border [&>div]:overflow-x-hidden [&>div]:overflow-y-visible [&_table]:table-fixed [&_td]:max-w-0 [&_td]:overflow-hidden [&_td]:text-ellipsis">
+      <div className="min-h-0 flex-1 overflow-x-hidden overflow-y-auto rounded-md border [&>div]:overflow-x-hidden [&>div]:overflow-y-visible [&_table]:table-fixed">
         <Table>
           <TableHeader className="sticky top-0 z-10 bg-background">
             {table.getHeaderGroups().map((headerGroup) => (
@@ -518,7 +637,9 @@ export function PagedTable<T>({
                   return (
                     <TableHead
                       key={header.id}
-                      className={header.column.id === "actions" ? "text-center" : "text-left"}
+                      className={
+                        header.column.id === "actions" ? "w-44 min-w-44 text-center" : "text-left"
+                      }
                     >
                       {header.isPlaceholder ? null : canSort ? (
                         <button
@@ -574,7 +695,14 @@ export function PagedTable<T>({
               table.getRowModel().rows.map((row) => (
                 <TableRow key={row.id}>
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
+                    <TableCell
+                      key={cell.id}
+                      className={
+                        cell.column.id === "actions"
+                          ? "w-44 min-w-44 whitespace-normal overflow-visible text-center"
+                          : "max-w-0 overflow-hidden text-ellipsis"
+                      }
+                    >
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
                     </TableCell>
                   ))}

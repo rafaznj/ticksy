@@ -15,7 +15,7 @@ export function useMarkNotificationAsRead(service: IMarkNotificationAsReadServic
       return handleMutationResponse(response);
     },
     onSuccess: () => {
-      toast.success(t("notifications.messages.markAsRead"));
+      toast.success(t("notifications.messages.markRead"));
     },
     onSettled: () => {
       void queryClient.invalidateQueries({

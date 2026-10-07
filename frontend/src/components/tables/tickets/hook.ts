@@ -108,12 +108,36 @@ export function useTicketsPagedTable() {
           (ticket.assignedToId === user?.id || isAdmin) &&
           ticket.assignedToId !== null,
       },
+      toggleActions: ["assign", "unassign"] as const,
       tooltips: {
         edit: () => t("general.actions.edit"),
         delete: () => t("general.actions.delete"),
         assign: () => t("general.actions.assign"),
         resolved: () => t("general.actions.resolve"),
         unassign: () => t("general.actions.unassign"),
+      },
+      disabledTooltips: {
+        edit: (ticket: TicketPagedDto) =>
+          ticket.status === TicketStatusEnum.RESOLVED
+            ? t("ticket.table.unableTooltips.resolved")
+            : t("ticket.table.unableTooltips.edit"),
+        delete: () => t("ticket.table.unableTooltips.deleteAssigned"),
+        assign: (ticket: TicketPagedDto) =>
+          ticket.assignedToId
+            ? t("ticket.messages.errors.alreadyAssigned")
+            : t("general.actions.unavailable"),
+        unassign: (ticket: TicketPagedDto) =>
+          ticket.status === TicketStatusEnum.RESOLVED
+            ? t("ticket.table.unableTooltips.resolved")
+            : ticket.assignedToId
+              ? t("general.actions.unavailable")
+              : t("ticket.messages.errors.unassignFailed"),
+        resolved: (ticket: TicketPagedDto) =>
+          ticket.status === TicketStatusEnum.RESOLVED
+            ? t("ticket.table.unableTooltips.resolved")
+            : !ticket.assignedToId
+              ? t("ticket.table.unableTooltips.assign")
+              : t("general.actions.unavailable"),
       },
     };
   }, [

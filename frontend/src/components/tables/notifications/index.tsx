@@ -1,7 +1,7 @@
 import { PagedTable } from "@/components/PagedTable";
 import { useNotificationsPagedTable } from "./hook";
 import { Button } from "@/components/ui/button";
-import { LuCheckCheck } from "react-icons/lu";
+import { LuCheck } from "react-icons/lu";
 
 export function NotificationsPagedTable() {
   const {
@@ -51,14 +51,16 @@ export function NotificationsPagedTable() {
       actions={actions}
       getRowId={(notification) => notification.id}
       headerDynamicComponent={
-        <Button
-          variant="default"
-          disabled={unreadCount === 0 || isMarkingAllAsRead}
-          onClick={() => markAllAsRead()}
-        >
-          {t("notifications.actions.markAllAsRead")}
-          <LuCheckCheck />
-        </Button>
+        unreadCount > 0 && (
+          <Button
+            variant="default"
+            disabled={unreadCount === 0 || isMarkingAllAsRead}
+            onClick={() => markAllAsRead()}
+          >
+            {t("notifications.actions.markAllAsRead")}
+            <LuCheck />
+          </Button>
+        )
       }
     />
   );

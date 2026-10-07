@@ -89,10 +89,15 @@ export function useUsersPagedTable() {
         activate: (user: UserEntity) => user.deleted === true,
         deactivate: (user: UserEntity) => user.deleted === false,
       },
+      toggleActions: ["activate", "deactivate"] as const,
       tooltips: {
         edit: t("user.table.actions.edit"),
         activate: t("user.table.actions.activate"),
         deactivate: t("user.table.actions.deactivate"),
+      },
+      disabledTooltips: {
+        activate: () => t("user.status.disabled"),
+        deactivate: () => t("user.status.enabled"),
       },
     }),
     [openActivateUser, openDeactivateUser, openEditUser, t],

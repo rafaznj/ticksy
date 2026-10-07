@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, createElement } from "react";
 import { useTranslation } from "react-i18next";
 import { usePagedQuery } from "@/components/PagedTable/hook";
 import { container } from "@/lib/inversifyJS/index.container";
@@ -13,6 +13,7 @@ import { useMarkAllNotificationsAsRead } from "@/modules/notifications/query-hoo
 import { notificationTableColumns } from "./columns";
 import type { INotification } from "@/modules/notifications/entity/notification.entity";
 import { TANSTACK_QUERY_KEYS } from "@/lib/tanstack/query-keys";
+import { LuCheck, LuCheckCheck } from "react-icons/lu";
 
 export function useNotificationsPagedTable() {
   const { t } = useTranslation();
@@ -51,6 +52,15 @@ export function useNotificationsPagedTable() {
       tooltips: {
         markAsRead: () => t("general.actions.markAsRead"),
       },
+      disabledTooltips: {
+        markAsRead: () => t("notifications.messages.markRead"),
+      },
+      actionIcons: {
+        markAsRead: (notification: INotification) =>
+          notification.read
+            ? createElement(LuCheckCheck, { className: "h-4 w-4" })
+            : createElement(LuCheck, { className: "h-4 w-4" }),
+      },
     }),
     [markAsRead, t],
   );
@@ -59,7 +69,7 @@ export function useNotificationsPagedTable() {
     ...paged,
     columns,
     actions,
-    unreadCount: unreadCountQuery.data ?? 0,
+    unreadCount: unreadCountQuery.data?.count ?? 0,
     isUnreadCountLoading: unreadCountQuery.isLoading,
     isMarkingAllAsRead,
     markAllAsRead,

@@ -139,6 +139,7 @@
       "save": "Save",
       "submit": "Submit",
       "unassign": "Unassign",
+      "unavailable": "You do not have permission for this action",
       "view": "View"
     },
     "carousel": {
@@ -199,7 +200,7 @@
     },
     "messages": {
       "markAllAsRead": "All notifications marked as read",
-      "markAsRead": "Notification marked as read",
+      "markRead": "Notification read",
       "types": {
         "ticket_assigned": "Ticket <ticket>\"{{title}}\"</ticket> has been assigned to you",
         "ticket_created": "<highlight>{{userName}}</highlight> created ticket <ticket>\"{{title}}\"</ticket>",
@@ -212,8 +213,7 @@
         "date": "Date",
         "title": "Title"
       },
-      "emptyMessage": "No notifications found",
-      "unknownTicket": "Unknown ticket"
+      "emptyMessage": "No notifications found"
     },
     "ticketStatus": {
       "inProgress": "in progress",
@@ -332,9 +332,7 @@
         "alreadyAssigned": "This ticket is already assigned to a user",
         "assignFailed": "Unable to assign the ticket",
         "createFailed": "Unable to create the ticket",
-        "deleteAssigned": "You cannot delete a ticket that has already been assigned",
         "deleteFailed": "Unable to delete the ticket",
-        "editNotAllowed": "You cannot edit a ticket that has already been assigned",
         "notFound": "Ticket not found",
         "resolveFailed": "Unable to resolve the ticket",
         "unassignFailed": "Unable to unassign the ticket",
@@ -377,6 +375,12 @@
       "filterByStatus": "Filter by status",
       "myWeeklyTickets": "My tickets in the last 7 days",
       "searchPlaceholder": "Search tickets",
+      "unableTooltips": {
+        "assign": "This ticket must be assigned to be resolved",
+        "deleteAssigned": "You cannot delete a ticket that has already been assigned",
+        "edit": "You cannot edit a ticket that has already been assigned",
+        "resolved": "This ticket is already resolved"
+      },
       "unassigned": "Unassigned",
       "weeklyAssociatedTickets": "Tickets assigned in the last 7 days",
       "weeklyCreatedTickets": "Tickets created in the last 7 days"

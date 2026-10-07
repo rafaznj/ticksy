@@ -126,6 +126,8 @@
   "general": {
     "actions": {
       "activate": "Ativar",
+      "alreadyAssigned": "Este ticket já está vinculado",
+      "alreadyRead": "Esta notificação já foi lida",
       "assign": "Vincular",
       "back": "Voltar",
       "cancel": "Cancelar",
@@ -141,6 +143,7 @@
       "save": "Salvar",
       "submit": "Enviar",
       "unassign": "Desvincular",
+      "unavailable": "Você não tem permissão para esta ação",
       "view": "Visualizar"
     },
     "carousel": {
@@ -201,7 +204,7 @@
     },
     "messages": {
       "markAllAsRead": "Todas as notificações foram marcadas como lidas",
-      "markAsRead": "Notificação marcada como lida",
+      "markRead": "Notificação lida",
       "types": {
         "ticket_assigned": "O ticket <ticket>\"{{title}}\"</ticket> foi atribuído a você",
         "ticket_created": "<highlight>{{userName}}</highlight> criou o ticket <ticket>\"{{title}}\"</ticket>",
@@ -214,8 +217,7 @@
         "date": "Data",
         "title": "Título"
       },
-      "emptyMessage": "Nenhuma notificação encontrada",
-      "unknownTicket": "Ticket não identificado"
+      "emptyMessage": "Nenhuma notificação encontrada"
     },
     "ticketStatus": {
       "inProgress": "em andamento",
@@ -334,9 +336,7 @@
         "alreadyAssigned": "Este ticket já está vinculado a um usuário",
         "assignFailed": "Não foi possível vincular o ticket",
         "createFailed": "Não foi possível criar o ticket",
-        "deleteAssigned": "Não é possível excluir um ticket que já foi atribuído",
         "deleteFailed": "Não foi possível excluir o ticket",
-        "editNotAllowed": "Não é possível editar um ticket que já foi atribuído",
         "notFound": "Ticket não encontrado",
         "resolveFailed": "Não foi possível resolver o ticket",
         "unassignFailed": "Não foi possível desvincular o ticket",
@@ -374,6 +374,12 @@
       "filterByStatus": "Filtrar por status",
       "myWeeklyTickets": "Meus tickets nos últimos 7 dias",
       "searchPlaceholder": "Buscar tickets",
+      "unableTooltips": {
+        "assign": "É necessário vincular este ticket para ser resolvido",
+        "delete": "Não é possível excluir um ticket que já foi atribuído",
+        "edit": "Não é possível editar um ticket que já foi atribuído",
+        "resolved": "Este ticket já está resolvido"
+      },
       "unassigned": "Sem responsável",
       "weeklyAssociatedTickets": "Tickets associados nos últimos 7 dias",
       "weeklyCreatedTickets": "Tickets criados nos últimos 7 dias"
@@ -522,7 +528,8 @@
       "emptyMessage": "Nenhum usuário encontrado",
       "filterByRole": "Filtrar por perfil",
       "filterByStatus": "Filtrar por status",
-      "searchPlaceholder": "Buscar usuários"
+      "searchPlaceholder": "Buscar usuários",
+      "unableTooltips": {}
     }
   }
 }

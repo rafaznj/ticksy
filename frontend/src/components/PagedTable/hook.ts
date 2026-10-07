@@ -23,10 +23,11 @@ export function usePagedQuery<T>(service: IBaseGetPagedService<T>, options: UseP
   const [sorting, setSorting] = useState<SortingState>([]);
 
   const debouncedSearch = useDebouncedValue(search, searchDebounceMs);
+  const filtersKey = JSON.stringify(filters);
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [debouncedSearch, pageSize, sorting, filters]);
+  }, [debouncedSearch, pageSize, sorting, filtersKey]);
 
   const sort = sorting[0];
 
