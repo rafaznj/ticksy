@@ -22,7 +22,6 @@ function isTicketStatus(value: string | undefined): value is TicketStatusEnum {
   return Object.values(TicketStatusEnum).includes(value as TicketStatusEnum);
 }
 
-// nome e título do ticket usam o azul dos links do projeto
 const messageComponents = {
   highlight: <span className="font-semibold text-blue-600" />,
   ticket: (

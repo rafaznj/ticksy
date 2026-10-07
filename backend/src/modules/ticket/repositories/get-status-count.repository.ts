@@ -42,7 +42,6 @@ export class GetTicketStatusCountRepository implements IGetTicketStatusCountRepo
       .where(and(gte(tickets.createdAt, start), lt(tickets.createdAt, end)))
       .groupBy(weekOfMonth);
 
-    // semanas sem ticket não vêm do banco, então preenche com zero
     return Array.from({ length: totalWeeks }, (_, index) => {
       const row = rows.find((item) => item.week === index + 1);
 

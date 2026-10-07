@@ -47,6 +47,7 @@ export default defineConfig(
       ],
 
       "@typescript-eslint/no-explicit-any": "warn",
+      "@typescript-eslint/no-empty-object-type": "off",
 
       "import/no-duplicates": "error",
       "import/newline-after-import": "warn",
