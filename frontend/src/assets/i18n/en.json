@@ -141,11 +141,30 @@
       "unassign": "Unassign",
       "view": "View"
     },
+    "carousel": {
+      "slides": {
+        "chart": "Charts",
+        "createTicket": "Create ticket",
+        "editProfile": "Edit profile",
+        "home": "Home",
+        "preferences": "Preferences",
+        "sidebar": "Sidebar",
+        "tickets": "Tickets list",
+        "users": "Users list"
+      }
+    },
     "copyright": "© {{year}} Ticksy. All rights reserved",
     "errors": {
       "createFailed": "Could not create the record",
       "defaultError": "An error occurred. Please try again",
       "recordNotFound": "Record not found"
+    },
+    "language": {
+      "label": "Switch language to {{language}}",
+      "options": {
+        "en": "English",
+        "pt": "Portuguese"
+      }
     },
     "notFoundRoute": {
       "description": "The page you are looking for does not exist or has been moved. Please check the address and try again.",
@@ -165,6 +184,13 @@
       "previous": "Previous",
       "rowsPerPage": "Rows per page",
       "searchPlaceholder": "Search"
+    },
+    "theme": {
+      "label": "Switch to {{theme}} theme",
+      "options": {
+        "dark": "Dark",
+        "light": "Light"
+      }
     }
   },
   "notifications": {

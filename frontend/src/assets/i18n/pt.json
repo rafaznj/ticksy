@@ -143,13 +143,31 @@
       "unassign": "Desvincular",
       "view": "Visualizar"
     },
+    "carousel": {
+      "slides": {
+        "chart": "Gráficos",
+        "createTicket": "Criar ticket",
+        "editProfile": "Editar perfil",
+        "home": "Home",
+        "preferences": "Preferências",
+        "sidebar": "Menu",
+        "tickets": "Lista de tickets",
+        "users": "Lista de usuários"
+      }
+    },
     "copyright": "©{{year}} Ticksy. Todos os direitos reservados",
     "errors": {
       "createFailed": "Não foi possível criar o registro",
       "defaultError": "Ocorreu um erro. Por favor, tente novamente",
       "recordNotFound": "Registro não encontrado"
     },
-    "language": "Mudar o idioma para {{language}}",
+    "language": {
+      "label": "Mudar o idioma para {{language}}",
+      "options": {
+        "en": "Inglês",
+        "pt": "Português"
+      }
+    },
     "notFoundRoute": {
       "description": "A página que você está procurando não existe ou foi movida. Por favor, verifique o endereço e tente novamente.",
       "title": "Ops! Página não encontrada"
@@ -169,7 +187,13 @@
       "rowsPerPage": "Linhas por página",
       "searchPlaceholder": "Buscar"
     },
-    "theme": "Mudar para o tema {{theme}}"
+    "theme": {
+      "label": "Mudar para o tema {{theme}}",
+      "options": {
+        "dark": "Escuro",
+        "light": "Claro"
+      }
+    }
   },
   "notifications": {
     "actions": {

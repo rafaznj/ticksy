@@ -6,9 +6,9 @@ import { UserRoleEnum } from "@/modules/user/enums/role.enum";
 import type { JSX } from "react/jsx-runtime";
 
 const HOME_PAGE_BY_ROLE: Record<UserRoleEnum, () => JSX.Element> = {
-  [UserRoleEnum.admin]: AdminMetrics,
-  [UserRoleEnum.employee]: EmployeeMetrics,
-  [UserRoleEnum.technical_assistance]: TechnicalAssistanceMetrics,
+  [UserRoleEnum.ADMIN]: AdminMetrics,
+  [UserRoleEnum.EMPLOYEE]: EmployeeMetrics,
+  [UserRoleEnum.TECHNICAL_ASSISTANCE]: TechnicalAssistanceMetrics,
 };
 
 export default function HomePage() {

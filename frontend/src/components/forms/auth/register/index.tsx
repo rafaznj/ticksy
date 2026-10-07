@@ -1,25 +1,25 @@
+import { useRegisterFormHook } from "@/components/forms/auth/register/hook";
 import { Separator } from "@/components/ui/separator";
-import { useRegisterFormHook } from "@/pages/auth/register/form/hook";
 
 export function RegisterForm() {
   const { form, t, isPending, handleSubmit } = useRegisterFormHook();
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-8">
-      <div className="flex flex-col gap-3">
+    <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+      <div className="flex flex-col gap-2">
         <div className="flex w-full justify-center">
-          <img src="/logo.png" alt="Ticksy" className="h-40 w-40 object-contain block -my-8" />
+          <img src="/logo.png" alt="Ticksy" className="block h-24 w-24 object-contain" />
         </div>
 
         <Separator />
 
-        <div className="w-full space-y-2 text-left pt-1">
-          <h1 className="text-3xl font-bold tracking-tight">{t("auth.register.title")}</h1>
-          <p className="text-base text-muted-foreground">{t("auth.register.description")}</p>
+        <div className="w-full space-y-1 text-left">
+          <h1 className="text-2xl font-bold tracking-tight">{t("auth.register.title")}</h1>
+          <p className="text-sm text-muted-foreground">{t("auth.register.description")}</p>
         </div>
       </div>
 
-      <div className="space-y-5">
+      <div className="space-y-3">
         <form.AppField name="name">
           {(field) => (
             <field.TextField
@@ -55,7 +55,7 @@ export function RegisterForm() {
       </div>
 
       <form.AppForm>
-        <form.SubmitButton className="mt-2 w-full py-3 text-lg cursor-pointer">
+        <form.SubmitButton className="mt-1 w-full cursor-pointer py-3 text-lg">
           {isPending ? t("auth.register.actions.submitting") : t("auth.register.actions.submit")}
         </form.SubmitButton>
       </form.AppForm>

@@ -17,12 +17,15 @@ export function useLoginFormHook() {
   const { mutate: handleLogin, isPending } = useLoginMutation(loginService);
 
   const form = useAppForm({
-    defaultValues: {} as LoginFormProps,
+    defaultValues: {
+      email: "",
+      password: "",
+    } as LoginFormProps,
     onSubmit: async (value) => {
       handleLogin(value.value);
     },
     validators: {
-      onBlur: loginFormSchema(t),
+      onChange: loginFormSchema(t),
     },
   });
 
