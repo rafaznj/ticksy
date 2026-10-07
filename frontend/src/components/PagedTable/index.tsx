@@ -506,7 +506,7 @@ export function PagedTable<T>({
         </div>
       </div>
 
-      <div className="min-h-0 flex-1 overflow-auto rounded-md border [&>div]:overflow-visible">
+      <div className="min-h-0 flex-1 overflow-x-hidden overflow-y-auto rounded-md border [&>div]:overflow-x-hidden [&>div]:overflow-y-visible [&_table]:table-fixed [&_td]:max-w-0 [&_td]:overflow-hidden [&_td]:text-ellipsis">
         <Table>
           <TableHeader className="sticky top-0 z-10 bg-background">
             {table.getHeaderGroups().map((headerGroup) => (

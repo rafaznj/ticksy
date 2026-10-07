@@ -2,6 +2,7 @@ import { useTechnicalAssistanceMetrics } from "@/components/dashboard/TechnicalA
 import { InfiniteList } from "@/components/InfiniteList";
 import { MetricCard } from "@/components/MetricCard";
 import { Badge } from "@/components/ui/badge";
+import { TANSTACK_QUERY_KEYS } from "@/lib/tanstack/query-keys";
 import type { TicketPagedLastSevenDaysDTO } from "@/modules/ticket/dtos/paged-last-seven-day";
 import {
   ticketCategoryStyles,
@@ -29,7 +30,7 @@ export function TechnicalAssistanceMetrics() {
         <InfiniteList<TicketPagedLastSevenDaysDTO>
           title={t("ticket.table.weeklyAssociatedTickets")}
           service={getTicketPagedLastSevenDaysService}
-          queryKey="tickets"
+          queryKey={TANSTACK_QUERY_KEYS.GET_TICKET_PAGED_LAST_SEVEN_DAYS}
           hasSearch
           searchPlaceholder={t("ticket.table.searchPlaceholder")}
           pageSize={20}

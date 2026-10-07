@@ -54,7 +54,7 @@ export function AppSidebar() {
         </SidebarHeader>
       )}
 
-      <SidebarContent className="gap-6 py-3">
+      <SidebarContent className="gap-6 py-3 group-data-[collapsible=icon]:overflow-visible">
         {groups.map((group, index) => (
           <SidebarGroup key={group.tooltip ?? index}>
             {group.tooltip && (
@@ -86,8 +86,8 @@ export function AppSidebar() {
                         {item.href === "/notifications" &&
                           data?.count !== undefined &&
                           data.count > 0 && (
-                            <span className="absolute left-7 top-1 text-xs font-bold text-blue-600 dark:text-blue-400">
-                              {data.count}
+                            <span className="absolute left-5.5 top-1 h-3.5 min-w-3.5 rounded-full bg-blue-600 px-0.5 text-center text-[9px] font-bold leading-3.5 text-white dark:bg-blue-500">
+                              {data.count > 99 ? "+99" : data.count}
                             </span>
                           )}
                       </SidebarMenuButton>

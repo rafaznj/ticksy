@@ -12,6 +12,7 @@ import {
   ticketPriorityStyles,
   ticketStatusStyles,
 } from "@/shared/constants/enum-styles";
+import { TANSTACK_QUERY_KEYS } from "@/lib/tanstack/query-keys";
 
 export function AdminMetrics() {
   const {
@@ -35,7 +36,7 @@ export function AdminMetrics() {
         <InfiniteList<TicketPagedLastSevenDaysDTO>
           title={t("ticket.table.weeklyCreatedTickets")}
           service={getTicketPagedLastSevenDaysService}
-          queryKey="tickets"
+          queryKey={TANSTACK_QUERY_KEYS.GET_TICKET_PAGED_LAST_SEVEN_DAYS}
           hasSearch
           pageSize={20}
           maxHeight="100%"

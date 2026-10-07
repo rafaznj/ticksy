@@ -1,4 +1,3 @@
-// hook.ts
 import { useEffect } from "react";
 import { useTheme } from "next-themes";
 import { useTranslation } from "react-i18next";
@@ -29,7 +28,6 @@ export function useUserPreferencesForm() {
     },
   });
 
-  // Ao abrir, o rascunho volta a refletir o estado real (o tema pode ter mudado pelo header)
   useEffect(() => {
     if (isOpen) form.reset(currentValues);
     // eslint-disable-next-line react-hooks/exhaustive-deps

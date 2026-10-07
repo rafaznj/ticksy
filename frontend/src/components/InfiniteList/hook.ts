@@ -4,9 +4,10 @@ import { AppError } from "@/shared/errors/app-error";
 import type { PagedParamsQuery } from "@/shared/types/paged-params-query";
 import type { IBaseGetPagedService } from "@/shared/base/services/contracts/get-paged";
 import { useDebouncedValue } from "@/hooks/use-debounce-value";
+import type { TanstackQueryKey } from "@/lib/tanstack/query-keys";
 
 interface UseInfiniteListQueryOptions {
-  queryKey: string;
+  queryKey: TanstackQueryKey;
   pageSize?: number;
   searchDebounceMs?: number;
 }

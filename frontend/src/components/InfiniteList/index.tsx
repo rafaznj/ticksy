@@ -9,10 +9,11 @@ import type { HeaderButtonConfig } from "../PagedTable";
 import { useInfiniteListQuery } from "./hook";
 import { LuSearch } from "react-icons/lu";
 import { Skeleton } from "@/components/ui/skeleton";
+import type { TanstackQueryKey } from "@/lib/tanstack/query-keys";
 
 interface InfiniteListProps<T> {
   service: IBaseGetPagedService<T>;
-  queryKey: string;
+  queryKey: TanstackQueryKey;
   hasSearch?: boolean;
   searchPlaceholder?: string;
   headerButtons?: HeaderButtonConfig[];
@@ -103,7 +104,7 @@ export function InfiniteList<T>({
 
       <ul
         className={cn(
-          "grid grid-cols-1 gap-3 overflow-y-auto overflow-x-hidden pr-2 md:grid-cols-2 xl:grid-cols-3 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-border [&::-webkit-scrollbar-track]:bg-transparent",
+          "grid content-start grid-cols-1 gap-3 overflow-y-auto overflow-x-hidden pr-2 md:grid-cols-2 xl:grid-cols-3 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-border [&::-webkit-scrollbar-track]:bg-transparent",
           listClassName,
         )}
         style={{ maxHeight: maxHeight === "100%" ? undefined : maxHeight }}
