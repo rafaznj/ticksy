@@ -1,6 +1,6 @@
 import { useEmployeeMetrics } from "@/components/dashboard/EmployeeMetrics/hook";
-import { InfiniteList } from "@/components/InfiniteList";
-import { MetricCard } from "@/components/MetricCard";
+import { MetricCard } from "@/components/dashboard/MetricCard";
+import { InfiniteList } from "@/components/tables/shared/InfiniteList";
 import { Badge } from "@/components/ui/badge";
 import { TANSTACK_QUERY_KEYS } from "@/lib/tanstack/query-keys";
 import type { TicketPagedLastSevenDaysDTO } from "@/modules/ticket/dtos/paged-last-seven-day";
@@ -22,7 +22,7 @@ export function EmployeeMetrics() {
   } = useEmployeeMetrics();
 
   return (
-    <div className="flex flex-col h-full min-h-0 gap-6 pb-6">
+    <div className="flex h-full min-h-0 min-w-0 flex-col gap-4 pb-4 sm:gap-6 sm:pb-6">
       <MetricCard metrics={metrics} className="lg:grid-cols-3 shrink-0" />
 
       <div className="flex-1 min-h-0 mt-10">

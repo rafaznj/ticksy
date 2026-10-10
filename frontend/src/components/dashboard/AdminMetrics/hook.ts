@@ -1,4 +1,4 @@
-import type { MetricCardItem } from "@/components/MetricCard";
+import type { MetricCardItem } from "@/components/dashboard/MetricCard";
 import { container } from "@/lib/inversifyJS/index.container";
 import { TicketStatusEnum } from "@/modules/ticket/enums/status.enum";
 import { SERVICE_TOKENS } from "@/shared/di/tokens.services";

@@ -1,4 +1,4 @@
-import type { MetricCardItem } from "@/components/MetricCard";
+import type { MetricCardItem } from "@/components/dashboard/MetricCard";
 
 import { container } from "@/lib/inversifyJS/index.container";
 import type { IGetTicketPagedWithScopeService } from "@/modules/ticket/services/contracts/get-paged-with-scope";

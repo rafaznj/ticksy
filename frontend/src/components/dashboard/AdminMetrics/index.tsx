@@ -1,8 +1,7 @@
-import { InfiniteList } from "@/components/InfiniteList";
-import { MetricCard } from "@/components/MetricCard";
+import { MetricCard } from "@/components/dashboard/MetricCard";
 import { Badge } from "@/components/ui/badge";
 import type { TicketPagedLastSevenDaysDTO } from "@/modules/ticket/dtos/paged-last-seven-day";
-import { TicketStatusChart } from "@/components/TicketStatusChart";
+import { TicketStatusChart } from "@/components/dashboard/TicketStatusChart";
 import { formatDate } from "@/shared/utils/format-date";
 import { t } from "i18next";
 import { LuUser } from "react-icons/lu";
@@ -13,6 +12,7 @@ import {
   ticketStatusStyles,
 } from "@/shared/constants/enum-styles";
 import { TANSTACK_QUERY_KEYS } from "@/lib/tanstack/query-keys";
+import { InfiniteList } from "@/components/tables/shared/InfiniteList";
 
 export function AdminMetrics() {
   const {
@@ -27,12 +27,12 @@ export function AdminMetrics() {
   } = useAdminMetrics();
 
   return (
-    <div className="flex flex-col h-full min-h-0 gap-6 pb-6">
+    <div className="flex h-full min-h-0 min-w-0 flex-col gap-4 overflow-y-auto pb-4 sm:gap-6 sm:pb-6 md:overflow-hidden md:pb-6">
       <MetricCard metrics={metrics} className="sm:grid-cols-2 lg:grid-cols-4 shrink-0" />
 
       <TicketStatusChart data={statusCount} isLoading={isStatusCountLoading} />
 
-      <div className="flex-1 min-h-0">
+      <div className="min-h-96 min-w-0 flex-1 md:min-h-0">
         <InfiniteList<TicketPagedLastSevenDaysDTO>
           title={t("ticket.table.weeklyCreatedTickets")}
           service={getTicketPagedLastSevenDaysService}

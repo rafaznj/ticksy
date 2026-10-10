@@ -1,5 +1,33 @@
 {
   "auth": {
+    "confirmPassword": {
+      "actions": {
+        "submit": "Confirm password",
+        "submitting": "Confirming password..."
+      },
+      "description": "Set a new password to access the system",
+      "fields": {
+        "confirmPassword": {
+          "label": "Confirm new password",
+          "placeholder": "••••••••",
+          "validations": {
+            "match": "Passwords must match",
+            "required": "Password confirmation is required"
+          }
+        },
+        "password": {
+          "label": "New password",
+          "placeholder": "••••••••",
+          "validations": {
+            "maxLength": "Password must be at most {{max}} characters",
+            "minLength": "Password must be at least {{min}} characters",
+            "required": "Password is required"
+          }
+        }
+      },
+      "success": "Password confirmed successfully",
+      "title": "Confirm your password"
+    },
     "forgotPassword": {
       "actions": {
         "submit": "Reset password",
@@ -134,6 +162,7 @@
       "deactivate": "Deactivate",
       "delete": "Delete",
       "edit": "Edit",
+      "invite": "Invite",
       "markAsRead": "Mark as read",
       "resolve": "Resolve",
       "save": "Save",
@@ -144,11 +173,9 @@
     },
     "carousel": {
       "slides": {
-        "chart": "Charts",
         "createTicket": "Create ticket",
-        "editProfile": "Edit profile",
         "home": "Home",
-        "preferences": "Preferences",
+        "notifications": "Notifications",
         "sidebar": "Sidebar",
         "tickets": "Tickets list",
         "users": "Users list"
@@ -171,6 +198,7 @@
       "description": "The page you are looking for does not exist or has been moved. Please check the address and try again.",
       "title": "Ops! Page not found"
     },
+    "passwordPlaceholder": "••••••••",
     "settings": "Settings",
     "table": {
       "allOptions": "All options",
@@ -228,7 +256,7 @@
       "preferences": "Preferences"
     },
     "tooltips": {
-      "home": "Go to the home page",
+      "home": "Home",
       "myTickets": "My tickets",
       "newTicket": "New ticket",
       "notifications": "Notifications",
@@ -372,12 +400,14 @@
         "updated_at": "Updated at"
       },
       "emptyMessage": "No tickets found",
+      "filterByCategory": "Filter by category",
+      "filterByPriority": "Filter by priority",
       "filterByStatus": "Filter by status",
       "myWeeklyTickets": "My tickets in the last 7 days",
       "searchPlaceholder": "Search tickets",
       "unableTooltips": {
         "assign": "This ticket must be assigned to be resolved",
-        "deleteAssigned": "You cannot delete a ticket that has already been assigned",
+        "delete": "You cannot delete a ticket that has already been assigned",
         "edit": "You cannot edit a ticket that has already been assigned",
         "resolved": "This ticket is already resolved"
       },
@@ -398,10 +428,6 @@
     "activate": {
       "description": "Are you sure you want to activate the user: {{user}}?",
       "title": "Activate user"
-    },
-    "create": {
-      "description": "Fill out the information below to create a new user",
-      "title": "Create user"
     },
     "deactivate": {
       "description": "Are you sure you want to deactivate the user: {{name}}?",
@@ -442,11 +468,11 @@
         }
       }
     },
+    "invite": {
+      "description": "Fill out the information below to invite a new user",
+      "title": "Invite user"
+    },
     "messages": {
-      "activated": "User activated successfully",
-      "created": "User created successfully",
-      "deactivated": "User deactivated successfully",
-      "deleted": "User deleted successfully",
       "errors": {
         "activateFailed": "Unable to activate the user",
         "createFailed": "Unable to create the user",
@@ -456,7 +482,14 @@
         "notFound": "User not found",
         "updateFailed": "Unable to update the profile"
       },
-      "updated": "Profile updated successfully"
+      "success": {
+        "activated": "User activated successfully",
+        "created": "User created successfully",
+        "deactivated": "User deactivated successfully",
+        "deleted": "User deleted successfully",
+        "invited": "User invited successfully",
+        "updated": "Profile updated successfully"
+      }
     },
     "preferences": {
       "description": "Customize your experience in the system",
@@ -517,9 +550,9 @@
     "table": {
       "actions": {
         "activate": "Activate user",
-        "create": "Create user",
         "deactivate": "Deactivate user",
-        "edit": "Edit user"
+        "edit": "Edit user",
+        "invite": "Invite user"
       },
       "columns": {
         "created_at": "Created at",

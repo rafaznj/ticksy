@@ -1,4 +1,4 @@
 import type { IBaseUpdateService } from "@/shared/base/services/contracts/update";
-import type { UpdateUserDto } from "../../dto/update.dto";
+import type { UpdateUserData } from "../../data/update.data";
 
-export type IUpdateUserService = IBaseUpdateService<UpdateUserDto>;
+export type IUpdateUserService = IBaseUpdateService<UpdateUserData>;
