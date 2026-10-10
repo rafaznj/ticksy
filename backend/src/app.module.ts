@@ -21,7 +21,6 @@ import { NotificationModule } from "./modules/notification/notification.module";
     AuthModule,
     NotificationModule,
   ],
-  controllers: [],
 })
 export class AppModule implements OnModuleInit {
   constructor(

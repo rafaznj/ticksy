@@ -1,5 +1,5 @@
 {
-  "id": "c90efe3f-1c7f-4ef0-9138-6327474fb256",
+  "id": "839fc059-ec14-4adc-ba39-441eb1ae9f72",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -165,6 +165,13 @@
         },
         "deleted": {
           "name": "deleted",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
+        },
+        "must_change_password": {
+          "name": "must_change_password",
           "type": "boolean",
           "primaryKey": false,
           "notNull": true,

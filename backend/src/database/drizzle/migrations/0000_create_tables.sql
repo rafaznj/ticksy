@@ -25,6 +25,7 @@ CREATE TABLE "users" (
 	"password" text NOT NULL,
 	"role" "role" DEFAULT 'employee' NOT NULL,
 	"deleted" boolean DEFAULT false NOT NULL,
+	"must_change_password" boolean DEFAULT false NOT NULL,
 	"created_at" timestamp DEFAULT now() NOT NULL,
 	"updated_at" timestamp DEFAULT now() NOT NULL,
 	CONSTRAINT "users_email_unique" UNIQUE("email")

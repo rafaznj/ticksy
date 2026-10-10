@@ -1,11 +1,9 @@
-import { jsonb, pgEnum, pgTable, timestamp, uuid } from "drizzle-orm/pg-core";
+import { jsonb, pgTable, timestamp, uuid } from "drizzle-orm/pg-core";
 import { NotificationTypeEnum } from "../../../modules/notification/enums/notification-type.enum";
 import { tickets } from "./tickets.schema";
+import { toPgEnum } from "../utils/to-pg-enum";
 
-export const notificationTypeEnum = pgEnum(
-  "notification_type",
-  Object.values(NotificationTypeEnum) as [NotificationTypeEnum, ...NotificationTypeEnum[]],
-);
+export const notificationTypeEnum = toPgEnum("notification_type", NotificationTypeEnum);
 
 export const notifications = pgTable("notifications", {
   id: uuid().defaultRandom().primaryKey(),
