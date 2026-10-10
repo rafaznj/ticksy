@@ -14,7 +14,7 @@ export class DeactivateUserService implements IDeactivateUserService {
     const deactivated = await this.deactivateUserRepository.execute(id);
 
     if (!deactivated) {
-      throw AppException.internalServerError("user.errors.deactivateFailed");
+      throw AppException.internalServerError("user.messages.errors.deactivateFailed");
     }
 
     return deactivated;

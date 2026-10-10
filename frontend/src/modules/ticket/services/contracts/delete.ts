@@ -1,3 +1,3 @@
 import type { IBaseDeleteService } from "@/shared/base/services/contracts/delete";
 
-export type IDeleteTicketService = IBaseDeleteService;
+export interface IDeleteTicketService extends IBaseDeleteService {}

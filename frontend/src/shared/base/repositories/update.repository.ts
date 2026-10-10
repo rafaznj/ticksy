@@ -3,7 +3,8 @@ import { inject, injectable, unmanaged } from "inversify";
 import { INFRASTRUCTURE_TOKENS } from "@/shared/di/tokens.infrastructure";
 import type { IBaseUpdateRepository } from "@/shared/base/repositories/contracts/update";
 import type { AppError } from "@/shared/errors/app-error";
-import { handleRepositoryResponse } from "@/shared/response/handle-repository-response";
+import { handleRepositoryResponse } from "@/shared/interfaces/handle-repository-response";
+import type { APIResponse } from "@/shared/interfaces/api-response";
 
 @injectable()
 export class BaseUpdateRepository<T> implements IBaseUpdateRepository<T> {
@@ -11,8 +12,11 @@ export class BaseUpdateRepository<T> implements IBaseUpdateRepository<T> {
   private axiosSingleton!: AxiosSingleton;
   constructor(@unmanaged() private basePath: string) {}
 
-  async execute(id: string, data: T): Promise<T | AppError> {
-    const response = await this.axiosSingleton.client.put<T>(`${this.basePath}/${id}`, data);
+  async execute(id: string, data: T): Promise<APIResponse<T> | AppError> {
+    const response = await this.axiosSingleton.client.put<APIResponse<T> | AppError>(
+      `${this.basePath}/update/${id}`,
+      data,
+    );
 
     return handleRepositoryResponse(response);
   }

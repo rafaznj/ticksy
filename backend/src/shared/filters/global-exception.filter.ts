@@ -7,13 +7,8 @@ import {
   Logger,
 } from "@nestjs/common";
 import type { Request, Response } from "express";
-import { ErrorMessage } from "../dto/error-message";
-
-interface ErrorResponseBody {
-  success: false;
-  errors: ErrorMessage[];
-  code: number;
-}
+import { ErrorMessage } from "../interfaces/error-message";
+import { ErrorResponseViewModel } from "../interfaces/error-response.vm";
 
 @Catch()
 export class GlobalExceptionFilter implements ExceptionFilter {
@@ -38,7 +33,7 @@ export class GlobalExceptionFilter implements ExceptionFilter {
     response.status(errorResponse.code).json(errorResponse);
   }
 
-  private buildErrorResponse(exception: unknown, status: number): ErrorResponseBody {
+  private buildErrorResponse(exception: unknown, status: number): ErrorResponseViewModel {
     if (exception instanceof HttpException) {
       const body = exception.getResponse();
 
@@ -51,12 +46,12 @@ export class GlobalExceptionFilter implements ExceptionFilter {
       }
 
       const rawMessage = typeof body === "string" ? body : (body as { message?: unknown }).message;
-      const messages = Array.isArray(rawMessage) ? rawMessage : [rawMessage ?? "Unknown error"];
+      const messages = Array.isArray(rawMessage) ? rawMessage : [rawMessage];
 
       return {
         success: false,
         errors: messages.map((msg) => ({
-          key: "general.errors.unknownError",
+          key: "general.errors.defaultError",
           params: { message: String(msg) },
         })),
         code: status,
@@ -65,7 +60,7 @@ export class GlobalExceptionFilter implements ExceptionFilter {
 
     return {
       success: false,
-      errors: [{ key: "general.errors.unknownError" }],
+      errors: [{ key: "general.errors.defaultError" }],
       code: HttpStatus.INTERNAL_SERVER_ERROR,
     };
   }

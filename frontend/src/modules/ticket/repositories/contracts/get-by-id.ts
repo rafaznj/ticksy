@@ -1,4 +1,4 @@
-import type { TicketEntity } from "@/modules/ticket/entity/ticket.entity";
+import type { TicketDto } from "@/modules/ticket/dtos/ticket.dto";
 import type { IBaseGetByIdRepository } from "@/shared/base/repositories/contracts/get-by-id";
 
-export type IGetTicketByIdRepository = IBaseGetByIdRepository<TicketEntity>;
+export interface IGetTicketByIdRepository extends IBaseGetByIdRepository<TicketDto> {}

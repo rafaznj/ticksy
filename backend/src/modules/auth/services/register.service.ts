@@ -3,7 +3,7 @@ import { SERVICE_TOKENS } from "../../../shared/di/tokens.services";
 import type { ICreateUserService } from "../../user/services/contracts/create";
 import type { IJwtTokenService } from "./contracts/jwt-token";
 import { CreateUserDto } from "../../user/dtos/create.dto";
-import { RegisterResult } from "../dto/register-result.dto";
+import { RegisterViewModel } from "../view-models/register.vm";
 import * as argon2 from "argon2";
 import { IRegisterService } from "./contracts/register";
 
@@ -17,7 +17,7 @@ export class RegisterService implements IRegisterService {
     private readonly jwtTokenService: IJwtTokenService,
   ) {}
 
-  async execute(data: CreateUserDto): Promise<RegisterResult> {
+  async execute(data: CreateUserDto): Promise<RegisterViewModel> {
     const user = await this.createUserService.execute(data);
 
     const accessToken = this.jwtTokenService.signAccessToken(user.id, user.email);

@@ -1,5 +1,5 @@
-import { UserModel } from "../../models/user-model";
+import { UserViewModel } from "../../view-models/user.vm";
 
 export interface IGetUserByEmailRepository {
-  execute(email: string): Promise<UserModel | null>;
+  execute(email: string): Promise<UserViewModel | null>;
 }

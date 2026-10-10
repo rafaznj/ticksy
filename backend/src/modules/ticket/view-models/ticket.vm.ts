@@ -1,0 +1,19 @@
+import { TicketCategoryEnum } from "../enums/ticket-category.enum";
+import { TicketPriorityEnum } from "../enums/ticket-priority.enum";
+import { TicketStatusEnum } from "../enums/ticket-status.enum";
+
+export interface TicketViewModel {
+  id: string;
+  code: number;
+  title: string;
+  description: string;
+  category: TicketCategoryEnum;
+  priority: TicketPriorityEnum;
+  status: TicketStatusEnum;
+  createdById: string;
+  createdByName: string;
+  assignedToId: string | null;
+  assignedToName: string | null;
+  createdAt: Date;
+  updatedAt: Date;
+}

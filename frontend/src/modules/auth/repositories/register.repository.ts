@@ -4,9 +4,10 @@ import type { AxiosSingleton } from "@/lib/axios/axios-singleton";
 import { INFRASTRUCTURE_TOKENS } from "@/shared/di/tokens.infrastructure";
 import type { AppError } from "@/shared/errors/app-error";
 import type { IRegisterRepository } from "@/modules/auth/repositories/contracts/register";
-import type { CreateUserDto } from "@/modules/user/dto/create.dto";
-import type { RegisterResponse } from "@/modules/auth/dto/register-response";
-import { handleRepositoryResponse } from "@/shared/response/handle-repository-response";
+import type { RegisterDto } from "@/modules/auth/dto/register.dto";
+import { handleRepositoryResponse } from "@/shared/interfaces/handle-repository-response";
+import type { APIResponse } from "@/shared/interfaces/api-response";
+import type { CreateUserData } from "@/modules/user/data/create.data";
 
 @injectable()
 export class RegisterRepository implements IRegisterRepository {
@@ -17,8 +18,8 @@ export class RegisterRepository implements IRegisterRepository {
     private readonly axiosSingleton: AxiosSingleton,
   ) {}
 
-  async execute(data: CreateUserDto): Promise<RegisterResponse | AppError> {
-    const response = await this.axiosSingleton.client.post<RegisterResponse>(
+  async execute(data: CreateUserData): Promise<APIResponse<RegisterDto> | AppError> {
+    const response = await this.axiosSingleton.client.post<APIResponse<RegisterDto> | AppError>(
       `${this.basePath}/register`,
       data,
     );

@@ -13,11 +13,11 @@ export class RefreshTokenRepository implements IRefreshTokenRepository {
     private readonly db: NodePgDatabase,
   ) {}
 
-  async create(userId: string, tokenHash: string) {
+  async create(userId: string, tokenHash: string, expiresAt: Date) {
     await this.db.insert(refreshTokens).values({
       userId,
       tokenHash,
-      expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+      expiresAt,
     });
   }
 

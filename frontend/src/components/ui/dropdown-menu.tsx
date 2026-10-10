@@ -2,7 +2,7 @@ import * as React from "react";
 import { DropdownMenu as DropdownMenuPrimitive } from "radix-ui";
 
 import { cn } from "@/lib/utils";
-import { CheckIcon, ChevronRightIcon } from "lucide-react";
+import { LuCheck, LuChevronRight } from "react-icons/lu";
 
 function DropdownMenu({ ...props }: React.ComponentProps<typeof DropdownMenuPrimitive.Root>) {
   return <DropdownMenuPrimitive.Root data-slot="dropdown-menu" {...props} />;
@@ -33,7 +33,7 @@ function DropdownMenuContent({
         sideOffset={sideOffset}
         align={align}
         className={cn(
-          "z-50 max-h-(--radix-dropdown-menu-content-available-height) w-(--radix-dropdown-menu-trigger-width) min-w-32 origin-(--radix-dropdown-menu-content-transform-origin) overflow-x-hidden overflow-y-auto rounded-lg bg-popover p-1 text-popover-foreground shadow-md ring-1 ring-foreground/10 duration-100 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 data-[state=closed]:overflow-hidden data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95",
+          "z-50 max-h-(--radix-dropdown-menu-content-available-height) w-(--radix-dropdown-menu-trigger-width) min-w-32 origin-(--radix-dropdown-menu-content-transform-origin) overflow-x-hidden overflow-y-auto rounded-md bg-popover p-1 text-popover-foreground shadow-md ring-1 ring-foreground/10 duration-100 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 data-[state=closed]:overflow-hidden data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95",
           className,
         )}
         {...props}
@@ -104,7 +104,7 @@ function DropdownMenuCheckboxItem({
         data-slot="dropdown-menu-checkbox-item-indicator"
       >
         <DropdownMenuPrimitive.ItemIndicator>
-          <CheckIcon />
+          <LuCheck />
         </DropdownMenuPrimitive.ItemIndicator>
       </span>
       {children}
@@ -141,7 +141,7 @@ function DropdownMenuRadioItem({
         data-slot="dropdown-menu-radio-item-indicator"
       >
         <DropdownMenuPrimitive.ItemIndicator>
-          <CheckIcon />
+          <LuCheck />
         </DropdownMenuPrimitive.ItemIndicator>
       </span>
       {children}
@@ -218,7 +218,7 @@ function DropdownMenuSubTrigger({
       {...props}
     >
       {children}
-      <ChevronRightIcon className="ml-auto" />
+      <LuChevronRight className="ml-auto" />
     </DropdownMenuPrimitive.SubTrigger>
   );
 }

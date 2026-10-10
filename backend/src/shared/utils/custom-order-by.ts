@@ -1,6 +1,6 @@
 import { asc, desc, getTableColumns } from "drizzle-orm";
 import { PgTable } from "drizzle-orm/pg-core";
-import { IQueryOptions } from "../types/query-options";
+import { IQueryOptions } from "../interfaces/query-options";
 
 export const customOrderBy = (options: IQueryOptions, table: PgTable) => {
   const columns = getTableColumns(table);

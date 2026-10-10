@@ -1,4 +1,4 @@
 import type { IBaseUpdateRepository } from "@/shared/base/repositories/contracts/update";
-import type { UpdateUserDto } from "../../dto/update.dto";
+import type { UpdateUserData } from "../../data/update.data";
 
-export type IUpdateUserRepository = IBaseUpdateRepository<UpdateUserDto>;
+export type IUpdateUserRepository = IBaseUpdateRepository<UpdateUserData>;

@@ -1,0 +1,26 @@
+import { useMutation } from "@tanstack/react-query";
+import type { IInviteUserService } from "@/modules/user/services/contracts/invite";
+import { handleMutationError } from "@/shared/errors/handle-mutation-error";
+import { useTranslation } from "react-i18next";
+import handleMutationResponse from "@/shared/interfaces/handle-mutation-response";
+import queryClient from "@/lib/tanstack/query-client";
+import { toast } from "sonner";
+import { TANSTACK_QUERY_KEYS } from "@/lib/tanstack/query-keys";
+import type { InviteUserData } from "@/modules/user/data/invite.data";
+
+export function useInviteUser(inviteUserService: IInviteUserService) {
+  const { t } = useTranslation();
+  return useMutation({
+    mutationFn: async (data: InviteUserData) => {
+      const response = await inviteUserService.execute(data);
+
+      return handleMutationResponse(response);
+    },
+    onSuccess: () => {
+      toast.success(t("user.messages.success.invited"));
+
+      queryClient.invalidateQueries({ queryKey: [TANSTACK_QUERY_KEYS.GET_USER_PAGED] });
+    },
+    onError: handleMutationError(t("user.messages.errors.createFailed")),
+  });
+}

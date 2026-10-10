@@ -1,4 +1,4 @@
-import type { UpdateTicketDto } from "@/modules/ticket/dtos/update.dto";
+import type { UpdateTicketData } from "@/modules/ticket/data/update.data";
 import type { IBaseUpdateRepository } from "@/shared/base/repositories/contracts/update";
 
-export type IUpdateTicketRepository = IBaseUpdateRepository<UpdateTicketDto>;
+export interface IUpdateTicketRepository extends IBaseUpdateRepository<UpdateTicketData> {}

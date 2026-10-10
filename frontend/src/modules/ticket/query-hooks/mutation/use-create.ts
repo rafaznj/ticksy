@@ -1,11 +1,12 @@
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 import type { ICreateTicketService } from "@/modules/ticket/services/contracts/create";
-import type { CreateTicketDto } from "@/modules/ticket/dtos/create.dto";
 import { useTranslation } from "react-i18next";
 import { handleMutationError } from "@/shared/errors/handle-mutation-error";
 import queryClient from "@/lib/tanstack/query-client";
-import handleMutationResponse from "@/shared/response/handle-mutation-response";
+import handleMutationResponse from "@/shared/interfaces/handle-mutation-response";
+import { TANSTACK_QUERY_KEYS } from "@/lib/tanstack/query-keys";
+import type { CreateTicketData } from "@/modules/ticket/data/create.data";
 
 interface UseCreateTicketOptions {
   onSuccess?: () => void;
@@ -17,17 +18,30 @@ export function useCreateTicket(
 ) {
   const { t } = useTranslation();
   return useMutation({
-    mutationFn: async (data: CreateTicketDto) => {
+    mutationFn: async (data: CreateTicketData) => {
       const response = await createTicketService.execute(data);
 
       return handleMutationResponse(response);
     },
-    onSuccess: () => {
-      toast.success(t("ticket.create.messages.success"));
+    onSuccess: async () => {
+      toast.success(t("ticket.messages.created"));
       options?.onSuccess?.();
 
-      queryClient.invalidateQueries({ queryKey: ["tickets"] });
+      await Promise.all([
+        queryClient.invalidateQueries({
+          queryKey: [TANSTACK_QUERY_KEYS.GET_TICKET_PAGED],
+        }),
+        queryClient.invalidateQueries({
+          queryKey: [TANSTACK_QUERY_KEYS.GET_TICKET_PAGED_WITH_SCOPE],
+        }),
+        queryClient.invalidateQueries({
+          queryKey: [TANSTACK_QUERY_KEYS.GET_TICKET_PAGED_LAST_SEVEN_DAYS],
+        }),
+        queryClient.invalidateQueries({
+          queryKey: [TANSTACK_QUERY_KEYS.GET_TICKET_STATUS_COUNT],
+        }),
+      ]);
     },
-    onError: handleMutationError(t("ticket.create.messages.failed")),
+    onError: handleMutationError(t("ticket.messages.errors.createFailed")),
   });
 }

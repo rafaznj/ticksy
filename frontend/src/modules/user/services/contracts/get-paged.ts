@@ -1,8 +1,4 @@
-import type { UserEntity } from "@/modules/user/entity/user.entity";
-import type { AppError } from "@/shared/errors/app-error";
-import type { PagedParamsQuery } from "@/shared/types/paged-params-query";
-import type { PagedResponse } from "@/shared/types/paged-response";
+import type { UserPagedDto } from "@/modules/user/dto/user-paged.dto";
+import type { IBaseGetPagedService } from "@/shared/base/services/contracts/get-paged";
 
-export interface IGetUserPagedService {
-  execute(params: PagedParamsQuery): Promise<PagedResponse<UserEntity> | AppError>;
-}
+export interface IGetUserPagedService extends IBaseGetPagedService<UserPagedDto> {}

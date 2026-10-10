@@ -1,14 +1,14 @@
 import { Inject } from "@nestjs/common";
-import { and } from "drizzle-orm";
+import { and, eq, getTableColumns } from "drizzle-orm";
 import { NodePgDatabase } from "drizzle-orm/node-postgres";
 import { PgTable } from "drizzle-orm/pg-core";
 import { DATABASE_TOKENS } from "../../../database/tokens";
 import { IBaseGetPagedRepository } from "./contracts/get-paged";
-import { IPagedResult } from "../../types/paged-result";
-import { IQueryOptions } from "../../types/query-options";
+import { IQueryOptions } from "../../interfaces/query-options";
 import buildPagedOptions from "../../utils/build-paged-options";
 import { customQueryConditions } from "../../utils/custom-conditions";
 import buildPagedReturn from "../../utils/build-paged-return";
+import { IPagedResult } from "../../interfaces/paged-result";
 
 export class BaseGetPagedRepository<T> implements IBaseGetPagedRepository<T> {
   @Inject(DATABASE_TOKENS.Drizzle)
@@ -23,7 +23,23 @@ export class BaseGetPagedRepository<T> implements IBaseGetPagedRepository<T> {
       this.table,
     );
 
-    const finalWhere = and(whereCondition, softDeleteCondition);
+    const columns = getTableColumns(this.table);
+
+    const deletedValue =
+      typeof options.deleted === "boolean"
+        ? options.deleted
+        : options.deleted === "true"
+          ? true
+          : options.deleted === "false"
+            ? false
+            : undefined;
+
+    const deletedCondition =
+      deletedValue !== undefined && "deleted" in columns
+        ? eq(columns.deleted, deletedValue)
+        : undefined;
+
+    const finalWhere = and(whereCondition, softDeleteCondition, deletedCondition);
 
     const queryBuilder = this.db
       .select()

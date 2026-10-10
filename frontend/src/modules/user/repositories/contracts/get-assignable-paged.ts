@@ -1,8 +1,10 @@
 import type { AppError } from "@/shared/errors/app-error";
-import type { PagedParamsQuery } from "@/shared/types/paged-params-query";
-import type { PagedResponse } from "@/shared/types/paged-response";
-import type { UserEntity } from "../../entity/user.entity";
+
+import type { UserDto } from "../../dto/user.dto";
+import type { APIResponse } from "@/shared/interfaces/api-response";
+import type { PagedParamsQuery } from "@/components/tables/shared/interfaces/paged-params-query";
+import type { PagedResponse } from "@/components/tables/shared/interfaces/paged-response";
 
 export interface IGetAssignableUsersPagedRepository {
-  execute(params: PagedParamsQuery): Promise<PagedResponse<UserEntity> | AppError>;
+  execute(params: PagedParamsQuery): Promise<APIResponse<PagedResponse<UserDto>> | AppError>;
 }

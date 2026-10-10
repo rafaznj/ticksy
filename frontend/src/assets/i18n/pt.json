@@ -1,11 +1,32 @@
 {
   "auth": {
-    "errors": {
-      "emailAlreadyExists": "Já existe um usuário com este e-mail",
-      "invalidCredentials": "E-mail ou senha inválidos. Verifique seus dados e tente novamente",
-      "refreshTokenMissing": "Sua sessão expirou. Faça login novamente",
-      "registerFailed": "Falha ao criar usuário",
-      "userNotFound": "Usuário não encontrado"
+    "confirmPassword": {
+      "actions": {
+        "submit": "Confirmar senha",
+        "submitting": "Confirmando senha..."
+      },
+      "description": "Defina uma nova senha para acessar o sistema",
+      "fields": {
+        "confirmPassword": {
+          "label": "Confirme a nova senha",
+          "placeholder": "••••••••",
+          "validations": {
+            "match": "As senhas devem ser iguais",
+            "required": "A confirmação da senha é obrigatória"
+          }
+        },
+        "password": {
+          "label": "Nova senha",
+          "placeholder": "••••••••",
+          "validations": {
+            "maxLength": "A senha deve ter no máximo {{max}} caracteres",
+            "minLength": "A senha deve ter no mínimo {{min}} caracteres",
+            "required": "A senha é obrigatória"
+          }
+        }
+      },
+      "success": "Senha confirmada com sucesso",
+      "title": "Confirme sua senha"
     },
     "forgotPassword": {
       "actions": {
@@ -41,15 +62,19 @@
           }
         }
       },
-      "messages": {
-        "failed": "Não foi possível realizar o login",
-        "success": "Login realizado com sucesso"
-      },
       "noAccount": "Ainda não possui uma conta?",
       "title": "Acesse sua conta"
     },
-    "logout": {
-      "error": "Não foi possível encerrar sua sessão. Tente novamente"
+    "messages": {
+      "errors": {
+        "emailAlreadyExists": "Já existe um usuário cadastrado com este e-mail",
+        "invalidCredentials": "E-mail ou senha inválidos. Verifique seus dados e tente novamente",
+        "logoutFailed": "Falha ao sair. Por favor, tente novamente",
+        "refreshTokenMissing": "Sua sessão expirou. Faça login novamente",
+        "registerFailed": "Falha ao criar usuário",
+        "userNotFound": "Usuário não encontrado"
+      },
+      "registered": "Usuário registrado com sucesso"
     },
     "register": {
       "actions": {
@@ -95,56 +120,92 @@
     }
   },
   "dashboard": {
-    "metrics": {
-      "open": {
+    "cards": {
+      "assignedToMe": {
+        "description": "Sob minha responsabilidade",
+        "title": "Tickets atribuídos a mim"
+      },
+      "inProgressTickets": {
+        "description": "Atualmente em atendimento",
+        "title": "Tickets em andamento"
+      },
+      "openTickets": {
         "description": "Aguardando atendimento",
-        "title": "Abertos"
+        "title": "Tickets abertos"
       },
-      "highPriority": {
-        "description": "requerem atenção",
-        "title": "Alta prioridade"
+      "resolutionRate": {
+        "description": "Percentual de resolvidos",
+        "title": "Taxa de resolução dos tickets"
       },
-      "inProgress": {
-        "description": "sendo trabalhados",
-        "title": "Em andamento"
-      },
-      "myTickets": {
-        "description": "atribuídos a mim",
-        "title": "Meus tickets"
-      },
-      "resolved": {
-        "title": "Resolvidos"
+      "resolvedTickets": {
+        "description": "Foram solucionados",
+        "title": "Tickets resolvidos"
       },
       "totalTickets": {
-        "description": "Criados neste mês",
+        "description": "Registrados no sistema",
         "title": "Total de tickets"
+      },
+      "urgentPriorityTickets": {
+        "description": "Exigem atenção prioritária",
+        "title": "Tickets de alta prioridade"
       }
     }
   },
   "general": {
     "actions": {
+      "activate": "Ativar",
+      "alreadyAssigned": "Este ticket já está vinculado",
+      "alreadyRead": "Esta notificação já foi lida",
       "assign": "Vincular",
       "back": "Voltar",
       "cancel": "Cancelar",
       "close": "Fechar",
+      "create": "Criar",
       "deactivate": "Desativar",
       "delete": "Excluir",
       "edit": "Editar",
+      "invite": "Convidar",
+      "markAsRead": "Marcar como lida",
       "refresh": "Atualizar",
+      "resolve": "Resolver",
       "retry": "Tentar novamente",
       "save": "Salvar",
-      "resolved": "Resolver"
+      "submit": "Enviar",
+      "unassign": "Desvincular",
+      "unavailable": "Você não tem permissão para esta ação",
+      "view": "Visualizar"
     },
-    "copyright": "© {{year}} Ticksy. Todos os direitos reservados",
+    "carousel": {
+      "slides": {
+        "createTicket": "Criar ticket",
+        "home": "Home",
+        "notifications": "Notificações",
+        "sidebar": "Menu",
+        "tickets": "Lista de tickets",
+        "users": "Lista de usuários"
+      }
+    },
+    "copyright": "©{{year}} Ticksy. Todos os direitos reservados",
     "errors": {
       "createFailed": "Não foi possível criar o registro",
-      "recordNotFound": "Registro não encontrado",
-      "unknownError": "Ocorreu um erro desconhecido"
+      "defaultError": "Ocorreu um erro. Por favor, tente novamente",
+      "recordNotFound": "Registro não encontrado"
     },
-    "language": "Mudar o idioma para {{language}}",
-    "notFoundRoute": "Esta rota não foi encontrada...",
+    "language": {
+      "label": "Mudar o idioma para {{language}}",
+      "options": {
+        "en": "Inglês",
+        "pt": "Português"
+      }
+    },
+    "notFoundRoute": {
+      "description": "A página que você está procurando não existe ou foi movida. Por favor, verifique o endereço e tente novamente.",
+      "title": "Ops! Página não encontrada"
+    },
+    "passwordPlaceholder": "••••••••",
     "settings": "Configurações",
     "table": {
+      "allOptions": "Todas as opções",
       "emptyMessage": "Nenhum registro encontrado",
       "errorMessage": "Erro ao carregar dados",
       "header": {
@@ -157,17 +218,52 @@
       "rowsPerPage": "Linhas por página",
       "searchPlaceholder": "Buscar"
     },
-    "theme": "Mudar para o tema {{theme}}"
+    "theme": {
+      "label": "Mudar para o tema {{theme}}",
+      "options": {
+        "dark": "Escuro",
+        "light": "Claro"
+      }
+    }
+  },
+  "notifications": {
+    "actions": {
+      "markAllAsRead": "Marcar todas como lidas"
+    },
+    "messages": {
+      "markAllAsRead": "Todas as notificações foram marcadas como lidas",
+      "markRead": "Notificação lida",
+      "types": {
+        "ticket_assigned": "O ticket <ticket>\"{{title}}\"</ticket> foi atribuído a você",
+        "ticket_created": "<highlight>{{userName}}</highlight> criou o ticket <ticket>\"{{title}}\"</ticket>",
+        "ticket_status_changed": "<highlight>{{userName}}</highlight> alterou o status do ticket <ticket>\"{{title}}\"</ticket> para <status>{{status}}</status>",
+        "ticket_unassigned": "Sua atribuição ao ticket <ticket>\"{{title}}\"</ticket> foi removida"
+      }
+    },
+    "table": {
+      "columns": {
+        "date": "Data",
+        "title": "Título"
+      },
+      "emptyMessage": "Nenhuma notificação encontrada"
+    },
+    "ticketStatus": {
+      "inProgress": "em andamento",
+      "open": "aberto",
+      "resolved": "resolvido"
+    }
   },
   "sidebar": {
     "labels": {
       "editProfile": "Editar perfil",
-      "logout": "Sair"
+      "logout": "Sair",
+      "preferences": "Preferências"
     },
     "tooltips": {
-      "home": "Ir para a página inicial",
+      "home": "Home",
       "myTickets": "Meus tickets",
       "newTicket": "Novo ticket",
+      "notifications": "Notificações",
       "profile": "Perfil",
       "tickets": "Ver tickets",
       "users": "Gerenciar usuários"
@@ -175,55 +271,34 @@
   },
   "ticket": {
     "assign": {
-      "actions": {
-        "assigning": "Vinculando...",
-        "cancel": "Cancelar",
-        "confirm": "Vincular"
-      },
-      "description": "Selecione um técnico para vincular este ticket",
-      "messages": {
-        "failed": "Não foi possível vincular o ticket",
-        "success": "Ticket vinculador com sucesso"
-      },
       "title": "Vincular ticket"
     },
+    "category": {
+      "access": "Acesso",
+      "account": "Conta",
+      "hardware": "Hardware",
+      "other": "Outro",
+      "software": "Software"
+    },
+    "chart": {
+      "labels": {
+        "inProgress": "Em andamento",
+        "open": "Aberto",
+        "resolved": "Resolvido"
+      },
+      "title": "Status dos tickets"
+    },
     "create": {
-      "actions": {
-        "cancel": "Cancelar",
-        "submit": "Criar ticket"
-      },
       "description": "Preencha as informações abaixo para registrar um novo ticket",
-      "messages": {
-        "failed": "Não foi possível criar o ticket",
-        "success": "Ticket criado com sucesso"
-      },
       "title": "Novo ticket"
     },
     "delete": {
-      "actions": {
-        "cancel": "Cancelar",
-        "confirm": "Excluir",
-        "deleting": "Excluindo..."
-      },
       "description": "Tem certeza que deseja excluir este ticket? Esta ação não pode ser desfeita",
       "title": "Excluir ticket"
     },
     "edit": {
-      "actions": {
-        "cancel": "Cancelar",
-        "save": "Salvar alterações",
-        "saving": "Salvando..."
-      },
       "description": "Atualize as informações do ticket",
       "title": "Editar ticket"
-    },
-    "errors": {
-      "alreadyAssigned": "Este ticket já está vinculado a um usuário",
-      "createFailed": "Não foi possível criar o ticket",
-      "deleteAssigned": "Não é possível excluir um ticket que já foi atribuído",
-      "deleteFailed": "Não foi possível excluir o ticket",
-      "editNotAllowed": "Não é possível editar um ticket que já foi atribuído",
-      "updateFailed": "Não foi possível atualizar o ticket"
     },
     "fields": {
       "assignee": {
@@ -231,6 +306,21 @@
         "placeholder": "Selecione o responsável",
         "validations": {
           "required": "O responsável é obrigatório"
+        }
+      },
+      "category": {
+        "label": "Categoria",
+        "options": {
+          "access": "Acesso",
+          "account": "Conta",
+          "hardware": "Hardware",
+          "other": "Outro",
+          "software": "Software"
+        },
+        "placeholder": "Selecione a categoria",
+        "validations": {
+          "invalid": "Selecione uma categoria válida",
+          "required": "A categoria é obrigatória"
         }
       },
       "description": {
@@ -250,7 +340,7 @@
           "medium": "Média",
           "urgent": "Urgente"
         },
-        "placeholder": "Selecione a prioridade do ticket",
+        "placeholder": "Selecione a prioridade",
         "validations": {
           "invalid": "Selecione uma prioridade válida",
           "required": "A prioridade é obrigatória"
@@ -266,6 +356,24 @@
         }
       }
     },
+    "messages": {
+      "assigned": "Ticket vinculado com sucesso",
+      "created": "Ticket criado com sucesso",
+      "deleted": "Ticket excluído com sucesso",
+      "errors": {
+        "alreadyAssigned": "Este ticket já está vinculado a um usuário",
+        "assignFailed": "Não foi possível vincular o ticket",
+        "createFailed": "Não foi possível criar o ticket",
+        "deleteFailed": "Não foi possível excluir o ticket",
+        "notFound": "Ticket não encontrado",
+        "resolveFailed": "Não foi possível resolver o ticket",
+        "unassignFailed": "Não foi possível desvincular o ticket",
+        "updateFailed": "Não foi possível atualizar o ticket"
+      },
+      "resolved": "Ticket resolvido com sucesso",
+      "unassigned": "Ticket desvinculado com sucesso",
+      "updated": "Ticket atualizado com sucesso"
+    },
     "priority": {
       "high": "Alta",
       "low": "Baixa",
@@ -277,14 +385,11 @@
       "open": "Aberto",
       "resolved": "Resolvido"
     },
-    "success": {
-      "created": "Ticket criado com sucesso",
-      "deleted": "Ticket excluído com sucesso",
-      "updated": "Ticket atualizado com sucesso"
-    },
     "table": {
       "columns": {
         "assignedToName": "Responsável",
+        "category": "Categoria",
+        "code": "Código",
         "created_at": "Criado em",
         "createdByName": "Criador",
         "description": "Descrição",
@@ -294,36 +399,38 @@
         "updated_at": "Atualizado em"
       },
       "emptyMessage": "Nenhum ticket encontrado",
+      "filterByCategory": "Filtrar por categoria",
+      "filterByPriority": "Filtrar por prioridade",
+      "filterByStatus": "Filtrar por status",
+      "myWeeklyTickets": "Meus tickets nos últimos 7 dias",
       "searchPlaceholder": "Buscar tickets",
-      "unassigned": "Sem responsável"
+      "unableTooltips": {
+        "assign": "É necessário vincular este ticket para ser resolvido",
+        "delete": "Não é possível excluir um ticket que já foi atribuído",
+        "edit": "Não é possível editar um ticket que já foi atribuído",
+        "resolved": "Este ticket já está resolvido"
+      },
+      "unassigned": "Sem responsável",
+      "weeklyAssociatedTickets": "Tickets associados nos últimos 7 dias",
+      "weeklyCreatedTickets": "Tickets criados nos últimos 7 dias"
+    },
+    "unassign": {
+      "description": "Tem certeza que deseja desvincular este ticket do usuário: {{user}}?",
+      "title": "Desvincular ticket"
     }
   },
   "user": {
+    "activate": {
+      "description": "Tem certeza que deseja ativar o usuário: {{user}}?",
+      "title": "Ativar usuário"
+    },
     "deactivate": {
-      "actions": {
-        "cancel": "Cancelar",
-        "confirm": "Desativar"
-      },
-      "description": "Tem certeza que deseja desativar o usuário {{name}}?",
+      "description": "Tem certeza que deseja desativar o usuário: {{name}}?",
       "title": "Desativar usuário"
     },
     "edit": {
-      "actions": {
-        "cancel": "Cancelar",
-        "save": "Salvar alterações",
-        "saving": "Salvando..."
-      },
       "description": "Atualize as informações do usuário",
       "title": "Editar perfil"
-    },
-    "errors": {
-      "activateFailed": "Não foi possível ativar o usuário",
-      "createFailed": "Não foi possível criar o usuário",
-      "deactivateFailed": "Não foi possível desativar o usuário",
-      "deleteFailed": "Não foi possível excluir o usuário",
-      "loadFailed": "Não foi possível carregar os dados do usuário",
-      "notFound": "Usuário não encontrado",
-      "updateFailed": "Não foi possível atualizar o perfil"
     },
     "fields": {
       "email": {
@@ -352,9 +459,80 @@
         },
         "placeholder": "Selecione o perfil",
         "validations": {
-          "invalid": "Selecione um perfil válido"
+          "required": "O perfil é obrigatório"
         }
       }
+    },
+    "invite": {
+      "description": "Preencha as informações abaixo para convidar um novo usuário",
+      "title": "Convidar usuário"
+    },
+    "messages": {
+      "errors": {
+        "activateFailed": "Não foi possível ativar o usuário",
+        "createFailed": "Não foi possível criar o usuário",
+        "deactivateFailed": "Não foi possível desativar o usuário",
+        "deleteFailed": "Não foi possível excluir o usuário",
+        "loadFailed": "Não foi possível carregar os dados do usuário",
+        "notFound": "Usuário não encontrado",
+        "updateFailed": "Não foi possível atualizar o perfil"
+      },
+      "success": {
+        "activated": "Usuário ativado com sucesso",
+        "created": "Usuário criado com sucesso",
+        "deactivated": "Usuário desativado com sucesso",
+        "deleted": "Usuário excluído com sucesso",
+        "invited": "Convite enviado com sucesso",
+        "updated": "Perfil atualizado com sucesso"
+      }
+    },
+    "preferences": {
+      "description": "Personalize sua experiência no sistema",
+      "language": {
+        "description": "Escolha o idioma do sistema",
+        "label": "Idioma",
+        "options": {
+          "enUS": "English",
+          "ptBR": "Português (Brasil)"
+        }
+      },
+      "theme": {
+        "description": "Escolha como o sistema deve ser exibido",
+        "label": "Tema",
+        "options": {
+          "dark": "Escuro",
+          "light": "Claro",
+          "system": "Sistema"
+        }
+      },
+      "title": "Preferências"
+    },
+    "profile": {
+      "description": "Atualize suas informações pessoais",
+      "errors": {
+        "loadFailed": "Não foi possível carregar seus dados",
+        "updateFailed": "Não foi possível atualizar seu perfil"
+      },
+      "fields": {
+        "email": {
+          "label": "E-mail",
+          "placeholder": "Digite seu e-mail",
+          "validations": {
+            "invalid": "Informe um endereço de e-mail válido",
+            "maxLength": "O e-mail deve ter no máximo {{max}} caracteres"
+          }
+        },
+        "name": {
+          "label": "Nome",
+          "placeholder": "Digite seu nome",
+          "validations": {
+            "maxLength": "O nome deve ter no máximo {{max}} caracteres",
+            "minLength": "O nome deve ter no mínimo {{min}} caracteres",
+            "required": "O nome é obrigatório"
+          }
+        }
+      },
+      "title": "Editar perfil"
     },
     "roles": {
       "admin": "Administrador",
@@ -365,17 +543,12 @@
       "disabled": "Desabilitado",
       "enabled": "Habilitado"
     },
-    "success": {
-      "activated": "Usuário ativado com sucesso",
-      "created": "Usuário criado com sucesso",
-      "deactivated": "Usuário desativado com sucesso",
-      "deleted": "Usuário excluído com sucesso",
-      "updated": "Perfil atualizado com sucesso"
-    },
     "table": {
       "actions": {
+        "activate": "Ativar usuário",
         "deactivate": "Desativar usuário",
-        "edit": "Editar usuário"
+        "edit": "Editar usuário",
+        "invite": "Convidar usuário"
       },
       "columns": {
         "created_at": "Criado em",
@@ -386,7 +559,10 @@
         "updated_at": "Atualizado em"
       },
       "emptyMessage": "Nenhum usuário encontrado",
-      "searchPlaceholder": "Buscar usuários"
+      "filterByRole": "Filtrar por perfil",
+      "filterByStatus": "Filtrar por status",
+      "searchPlaceholder": "Buscar usuários",
+      "unableTooltips": {}
     }
   }
 }

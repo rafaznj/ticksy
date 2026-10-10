@@ -1,12 +1,10 @@
 import { Outlet, createFileRoute, redirect } from "@tanstack/react-router";
-import { ThemeProvider } from "next-themes";
 
 import { useAuthStore } from "@/lib/zustand/use-auth";
-import { AppHeader } from "@/components/layouts/AppHeader";
 import { AppSidebar } from "@/components/layouts/Sidebar";
-import { SidebarProvider } from "@/components/ui/sidebar";
+import { SidebarProvider, SidebarInset, SidebarTrigger } from "@/components/ui/sidebar";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { DialogProvider } from "@/contexts/dialog-provider";
+import { DialogProvider } from "@/providers/dialog-provider";
 
 export const Route = createFileRoute("/_authenticated")({
   beforeLoad: () => {
@@ -21,22 +19,21 @@ export const Route = createFileRoute("/_authenticated")({
 
 function AuthenticatedLayout() {
   return (
-    <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
-      <TooltipProvider delayDuration={0}>
-        <SidebarProvider open={false} onOpenChange={() => {}}>
-          <div className="flex min-h-screen w-full">
-            <DialogProvider>
-              <AppSidebar />
-              <main className="flex min-w-0 flex-1 flex-col">
-                <AppHeader />
-                <div className="flex-1 px-4 py-6 md:px-6 lg:px-8">
-                  <Outlet />
-                </div>
-              </main>
-            </DialogProvider>
-          </div>
-        </SidebarProvider>
-      </TooltipProvider>
-    </ThemeProvider>
+    <TooltipProvider delayDuration={0}>
+      <SidebarProvider open={false} onOpenChange={() => {}}>
+        <DialogProvider>
+          <AppSidebar />
+
+          <SidebarInset className="flex h-svh min-w-0 flex-col overflow-hidden bg-background">
+            <div className="flex min-h-10 shrink-0 items-center px-3 pt-2 md:hidden">
+              <SidebarTrigger />
+            </div>
+            <div className="flex min-h-0 min-w-0 flex-1 flex-col overflow-y-auto p-3 sm:p-4 md:overflow-hidden md:p-6 lg:p-8">
+              <Outlet />
+            </div>
+          </SidebarInset>
+        </DialogProvider>
+      </SidebarProvider>
+    </TooltipProvider>
   );
 }

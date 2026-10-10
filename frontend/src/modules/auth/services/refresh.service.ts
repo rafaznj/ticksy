@@ -20,6 +20,6 @@ export class RefreshService implements IRefreshService {
       throw response;
     }
 
-    useAuthStore.setState({ accessToken: response.accessToken });
+    useAuthStore.setState({ accessToken: response.data.accessToken });
   }
 }

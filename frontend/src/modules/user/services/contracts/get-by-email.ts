@@ -1,6 +1,6 @@
 import type { AppError } from "@/shared/errors/app-error";
-import type { UserEntity } from "../../entity/user.entity";
+import type { UserDto } from "../../dto/user.dto";
 
 export interface IGetUserByEmailService {
-  execute(email: string): Promise<UserEntity | AppError>;
+  execute(email: string): Promise<UserDto | AppError>;
 }

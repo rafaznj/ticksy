@@ -1,4 +1,4 @@
-import { IQueryOptions } from "../types/query-options";
+import { IQueryOptions } from "../interfaces/query-options";
 
 export default function buildPagedOptions(options: IQueryOptions) {
   const limit =

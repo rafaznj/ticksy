@@ -1,10 +1,10 @@
 import { Inject, Injectable } from "@nestjs/common";
 
-import { UserModel } from "../models/user-model";
+import { UserViewModel } from "../view-models/user.vm";
 import { ICreateDefaultUsersService } from "./contracts/create-default-users";
 import type { ICreateUserService } from "./contracts/create";
 import { SERVICE_TOKENS } from "../../../shared/di/tokens.services";
-import { UserRoleEnum } from "../enums/roles.enum";
+import { UserRoleEnum } from "../enums/role.enum";
 import { CreateUserDto } from "../dtos/create.dto";
 import { AppException } from "../../../shared/exceptions/app-exception";
 
@@ -18,12 +18,6 @@ export class CreateDefaultUsersService implements ICreateDefaultUsersService {
   async execute(): Promise<void> {
     const seedUsers: CreateUserDto[] = [
       {
-        name: "Administrator",
-        email: "admin@email.com",
-        password: "@Aa12345",
-        role: UserRoleEnum.ADMIN,
-      },
-      {
         name: "Employee",
         email: "employee@email.com",
         password: "@Aa12345",
@@ -35,6 +29,12 @@ export class CreateDefaultUsersService implements ICreateDefaultUsersService {
         password: "@Aa12345",
         role: UserRoleEnum.TECHNICAL_ASSISTANCE,
       },
+      {
+        name: "Administrator",
+        email: "admin@email.com",
+        password: "@Aa12345",
+        role: UserRoleEnum.ADMIN,
+      },
     ];
 
     for (const user of seedUsers) {
@@ -42,11 +42,14 @@ export class CreateDefaultUsersService implements ICreateDefaultUsersService {
     }
   }
 
-  private async create(dto: CreateUserDto): Promise<UserModel | null> {
+  private async create(dto: CreateUserDto): Promise<UserViewModel | null> {
     try {
       return await this.createUserService.execute(dto);
     } catch (error) {
-      if (error instanceof AppException && error.hasKey("auth.errors.emailAlreadyExists")) {
+      if (
+        error instanceof AppException &&
+        error.hasKey("auth.messages.errors.emailAlreadyExists")
+      ) {
         return null;
       }
       throw error;

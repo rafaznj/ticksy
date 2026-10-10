@@ -1,10 +1,11 @@
-import type { TicketEntity } from "@/modules/ticket/entity/ticket.entity";
 import type { AppError } from "@/shared/errors/app-error";
 import { inject, injectable } from "inversify";
 import { REPOSITORY_TOKENS } from "@/shared/di/tokens.repositories";
 import type { IAssignTicketRepository } from "@/modules/ticket/repositories/contracts/assign";
 import type { IAssignTicketService } from "@/modules/ticket/services/contracts/assign";
-import { handleServiceResponse } from "@/shared/response/handle-service-response";
+
+import type { TicketAssignDto } from "@/modules/ticket/dtos/assign.dto";
+import { handleServiceResponse } from "@/shared/interfaces/handle-service-response";
 
 @injectable()
 export class AssignTicketService implements IAssignTicketService {
@@ -13,7 +14,7 @@ export class AssignTicketService implements IAssignTicketService {
     private readonly assignTicketRepository: IAssignTicketRepository,
   ) {}
 
-  async execute(id: string, userId: string): Promise<TicketEntity | AppError> {
+  async execute(id: string, userId: string): Promise<TicketAssignDto | AppError> {
     const response = await this.assignTicketRepository.execute(id, userId);
 
     return handleServiceResponse(response);

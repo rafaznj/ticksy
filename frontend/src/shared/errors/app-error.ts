@@ -16,6 +16,6 @@ export class AppError {
   }
 
   static generic(): AppError {
-    return new AppError([{ key: "general.errors.unknownError" }]);
+    return new AppError([{ key: "general.errors.defaultError" }]);
   }
 }

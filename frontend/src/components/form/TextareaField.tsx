@@ -1,8 +1,8 @@
-import { type ComponentProps } from "react";
+import { useEffect, type ComponentProps } from "react";
 
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { useFieldContext } from "@/hooks/use-form";
+import { useFieldContext } from "@/hooks/use-app-form";
 import { FieldErrors } from "@/components/form/FieldErrors";
 
 interface TextareaFieldProps extends Omit<
@@ -16,8 +16,14 @@ interface TextareaFieldProps extends Omit<
 export function TextareaField({ label, required, ...props }: TextareaFieldProps) {
   const field = useFieldContext<string>();
 
+  useEffect(() => {
+    if (field.state.value === undefined) {
+      field.handleChange("");
+    }
+  }, [field]);
+
   return (
-    <div className="flex flex-col gap-1.5">
+    <div className="flex flex-col gap-3">
       {label && (
         <Label htmlFor={field.name} className="flex items-center gap-0.5">
           {label}

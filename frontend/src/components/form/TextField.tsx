@@ -1,12 +1,13 @@
-import { useState, type ComponentProps } from "react";
-import { Eye, EyeOff } from "lucide-react";
+import { useState, useEffect, type ComponentProps } from "react";
 
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useFieldContext } from "@/hooks/use-form";
+import { useFieldContext } from "@/hooks/use-app-form";
 import { FieldErrors } from "@/components/form/FieldErrors";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { LuEye, LuEyeOff } from "react-icons/lu";
+import { t } from "i18next";
 
 interface TextFieldProps extends Omit<
   ComponentProps<typeof Input>,
@@ -16,15 +17,21 @@ interface TextFieldProps extends Omit<
   required?: boolean;
 }
 
-export function TextField({ label, required, type, ...props }: TextFieldProps) {
+export function TextField({ label, required, type, placeholder, ...props }: TextFieldProps) {
   const field = useFieldContext<string>();
   const [showPassword, setShowPassword] = useState(false);
 
   const isPassword = type === "password";
   const inputType = isPassword ? (showPassword ? "text" : "password") : type;
 
+  useEffect(() => {
+    if (field.state.value === undefined) {
+      field.handleChange("");
+    }
+  }, [field]);
+
   return (
-    <div className="flex flex-col gap-1.5">
+    <div className="flex flex-col gap-3">
       {label && (
         <Label htmlFor={field.name} className="flex items-center gap-0.5">
           {label}
@@ -46,6 +53,7 @@ export function TextField({ label, required, type, ...props }: TextFieldProps) {
           onBlur={field.handleBlur}
           aria-invalid={field.state.meta.isTouched && field.state.meta.errors.length > 0}
           className={cn("h-11 pr-11", props.className)}
+          placeholder={isPassword ? t("general.passwordPlaceholder") : placeholder}
           {...props}
         />
 
@@ -55,13 +63,11 @@ export function TextField({ label, required, type, ...props }: TextFieldProps) {
             variant="ghost"
             size="icon"
             tabIndex={-1}
-            aria-label={showPassword ? "Hide password" : "Show password"}
             onMouseDown={(e) => e.preventDefault()}
             onClick={() => setShowPassword((v) => !v)}
             className=" absolute inset-y-0 right-0 h-full w-11 rounded-none border-0 shadow-none hover:bg-transparent focus-visible:ring-0 active:translate-y-0 cursor-pointer"
           >
-            {" "}
-            {showPassword ? <EyeOff className="size-4" /> : <Eye className="size-4" />}{" "}
+            {showPassword ? <LuEyeOff className="size-4" /> : <LuEye className="size-4" />}{" "}
           </Button>
         )}
       </div>

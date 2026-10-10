@@ -5,28 +5,35 @@ import {
   IsEmail,
   MinLength,
   Matches,
-  IsOptional,
   IsEnum,
+  IsBoolean,
+  IsOptional,
 } from "class-validator";
-import { UserRoleEnum } from "../enums/roles.enum";
+import { UserRoleEnum } from "../enums/role.enum";
 
 export class CreateUserDto {
-  @IsString()
   @IsNotEmpty()
+  @IsString()
   @MaxLength(80)
   name!: string;
 
+  @IsNotEmpty()
   @IsEmail()
   @MaxLength(254)
   email!: string;
 
+  @IsNotEmpty()
   @IsEnum(UserRoleEnum)
-  @IsOptional()
-  role?: UserRoleEnum;
+  role!: UserRoleEnum;
 
+  @IsNotEmpty()
   @IsString()
   @MinLength(8)
   @MaxLength(72)
   @Matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%]).+$/)
   password!: string;
+
+  @IsOptional()
+  @IsBoolean()
+  mustChangePassword?: boolean;
 }

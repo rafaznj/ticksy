@@ -1,4 +1,4 @@
-import type { UserEntity } from "@/modules/user/entity/user.entity";
+import type { UserPagedDto } from "@/modules/user/dto/user-paged.dto";
 import type { IGetUserPagedRepository } from "@/modules/user/repositories/contracts/get-paged";
 import type { IGetUserPagedService } from "@/modules/user/services/contracts/get-paged";
 import { BaseGetPagedService } from "@/shared/base/services/get-paged.service";
@@ -7,7 +7,7 @@ import { inject, injectable } from "inversify";
 
 @injectable()
 export class GetUserPagedService
-  extends BaseGetPagedService<UserEntity>
+  extends BaseGetPagedService<UserPagedDto>
   implements IGetUserPagedService
 {
   constructor(

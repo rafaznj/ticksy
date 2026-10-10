@@ -1,10 +1,11 @@
 import { AxiosSingleton } from "@/lib/axios/axios-singleton";
 import { inject, injectable } from "inversify";
-import type { UserEntity } from "../entity/user.entity";
+import type { UserDto } from "../dto/user.dto";
 import type { IGetUserByEmailRepository } from "./contracts/get-by-email";
 import { INFRASTRUCTURE_TOKENS } from "@/shared/di/tokens.infrastructure";
 import type { AppError } from "@/shared/errors/app-error";
-import { handleRepositoryResponse } from "@/shared/response/handle-repository-response";
+import { handleRepositoryResponse } from "@/shared/interfaces/handle-repository-response";
+import type { APIResponse } from "@/shared/interfaces/api-response";
 
 @injectable()
 export class GetUserByEmailRepository implements IGetUserByEmailRepository {
@@ -15,8 +16,8 @@ export class GetUserByEmailRepository implements IGetUserByEmailRepository {
     private axiosSingleton: AxiosSingleton,
   ) {}
 
-  async execute(email: string): Promise<UserEntity | AppError> {
-    const response = await this.axiosSingleton.client.get<UserEntity>(
+  async execute(email: string): Promise<APIResponse<UserDto> | AppError> {
+    const response = await this.axiosSingleton.client.get<APIResponse<UserDto>>(
       `${this.basePath}/get-by-email/${email}`,
     );
 

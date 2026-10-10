@@ -1,11 +1,11 @@
 {
-  "id": "70fc1464-4126-4e28-9b8b-234236a23528",
+  "id": "839fc059-ec14-4adc-ba39-441eb1ae9f72",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
-    "public.ticket": {
-      "name": "ticket",
+    "public.tickets": {
+      "name": "tickets",
       "schema": "",
       "columns": {
         "id": {
@@ -14,6 +14,23 @@
           "primaryKey": true,
           "notNull": true,
           "default": "gen_random_uuid()"
+        },
+        "code": {
+          "name": "code",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "identity": {
+            "type": "always",
+            "name": "tickets_code_seq",
+            "schema": "public",
+            "increment": "1",
+            "startWith": "1",
+            "minValue": "1",
+            "maxValue": "2147483647",
+            "cache": "1",
+            "cycle": false
+          }
         },
         "title": {
           "name": "title",
@@ -24,6 +41,13 @@
         "description": {
           "name": "description",
           "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "category": {
+          "name": "category",
+          "type": "ticket_category",
+          "typeSchema": "public",
           "primaryKey": false,
           "notNull": true
         },
@@ -40,7 +64,7 @@
           "typeSchema": "public",
           "primaryKey": false,
           "notNull": true,
-          "default": "'OPEN'"
+          "default": "'open'"
         },
         "created_by_id": {
           "name": "created_by_id",
@@ -71,19 +95,19 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "ticket_created_by_id_user_id_fk": {
-          "name": "ticket_created_by_id_user_id_fk",
-          "tableFrom": "ticket",
-          "tableTo": "user",
+        "tickets_created_by_id_users_id_fk": {
+          "name": "tickets_created_by_id_users_id_fk",
+          "tableFrom": "tickets",
+          "tableTo": "users",
           "columnsFrom": ["created_by_id"],
           "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
-        "ticket_assigned_to_id_user_id_fk": {
-          "name": "ticket_assigned_to_id_user_id_fk",
-          "tableFrom": "ticket",
-          "tableTo": "user",
+        "tickets_assigned_to_id_users_id_fk": {
+          "name": "tickets_assigned_to_id_users_id_fk",
+          "tableFrom": "tickets",
+          "tableTo": "users",
           "columnsFrom": ["assigned_to_id"],
           "columnsTo": ["id"],
           "onDelete": "no action",
@@ -91,13 +115,19 @@
         }
       },
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
+      "uniqueConstraints": {
+        "tickets_code_unique": {
+          "name": "tickets_code_unique",
+          "nullsNotDistinct": false,
+          "columns": ["code"]
+        }
+      },
       "policies": {},
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.user": {
-      "name": "user",
+    "public.users": {
+      "name": "users",
       "schema": "",
       "columns": {
         "id": {
@@ -131,10 +161,17 @@
           "typeSchema": "public",
           "primaryKey": false,
           "notNull": true,
-          "default": "'EMPLOYEE'"
+          "default": "'employee'"
         },
         "deleted": {
           "name": "deleted",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
+        },
+        "must_change_password": {
+          "name": "must_change_password",
           "type": "boolean",
           "primaryKey": false,
           "notNull": true,
@@ -158,7 +195,13 @@
       "indexes": {},
       "foreignKeys": {},
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
+      "uniqueConstraints": {
+        "users_email_unique": {
+          "name": "users_email_unique",
+          "nullsNotDistinct": false,
+          "columns": ["email"]
+        }
+      },
       "policies": {},
       "checkConstraints": {},
       "isRLSEnabled": false
@@ -208,10 +251,10 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "refresh_tokens_user_id_user_id_fk": {
-          "name": "refresh_tokens_user_id_user_id_fk",
+        "refresh_tokens_user_id_users_id_fk": {
+          "name": "refresh_tokens_user_id_users_id_fk",
           "tableFrom": "refresh_tokens",
-          "tableTo": "user",
+          "tableTo": "users",
           "columnsFrom": ["user_id"],
           "columnsTo": ["id"],
           "onDelete": "cascade",
@@ -223,23 +266,181 @@
       "policies": {},
       "checkConstraints": {},
       "isRLSEnabled": false
+    },
+    "public.notifications": {
+      "name": "notifications",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "type": {
+          "name": "type",
+          "type": "notification_type",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "ticketId": {
+          "name": "ticketId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "parameters": {
+          "name": "parameters",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "createdAt": {
+          "name": "createdAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "notifications_ticketId_tickets_id_fk": {
+          "name": "notifications_ticketId_tickets_id_fk",
+          "tableFrom": "notifications",
+          "tableTo": "tickets",
+          "columnsFrom": ["ticketId"],
+          "columnsTo": ["id"],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.notification_recipients": {
+      "name": "notification_recipients",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "notificationId": {
+          "name": "notificationId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "userId": {
+          "name": "userId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "readAt": {
+          "name": "readAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "createdAt": {
+          "name": "createdAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "notification_recipients_userId_readAt_index": {
+          "name": "notification_recipients_userId_readAt_index",
+          "columns": [
+            {
+              "expression": "userId",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "readAt",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "notification_recipients_notificationId_notifications_id_fk": {
+          "name": "notification_recipients_notificationId_notifications_id_fk",
+          "tableFrom": "notification_recipients",
+          "tableTo": "notifications",
+          "columnsFrom": ["notificationId"],
+          "columnsTo": ["id"],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "notification_recipients_userId_users_id_fk": {
+          "name": "notification_recipients_userId_users_id_fk",
+          "tableFrom": "notification_recipients",
+          "tableTo": "users",
+          "columnsFrom": ["userId"],
+          "columnsTo": ["id"],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "notification_recipients_notificationId_userId_unique": {
+          "name": "notification_recipients_notificationId_userId_unique",
+          "nullsNotDistinct": false,
+          "columns": ["notificationId", "userId"]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
     }
   },
   "enums": {
+    "public.ticket_category": {
+      "name": "ticket_category",
+      "schema": "public",
+      "values": ["hardware", "software", "account", "access", "other"]
+    },
     "public.ticket_priority": {
       "name": "ticket_priority",
       "schema": "public",
-      "values": ["LOW", "MEDIUM", "HIGH", "URGENT"]
+      "values": ["low", "medium", "high", "urgent"]
     },
     "public.ticket_status": {
       "name": "ticket_status",
       "schema": "public",
-      "values": ["OPEN", "IN_PROGRESS", "RESOLVED"]
+      "values": ["open", "in_progress", "resolved"]
     },
     "public.role": {
       "name": "role",
       "schema": "public",
-      "values": ["EMPLOYEE", "ADMIN", "TECHNICAL_ASSISTANCE"]
+      "values": ["employee", "technical_assistance", "admin"]
+    },
+    "public.notification_type": {
+      "name": "notification_type",
+      "schema": "public",
+      "values": ["ticket_created", "ticket_assigned", "ticket_unassigned", "ticket_status_changed"]
     }
   },
   "schemas": {},

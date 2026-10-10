@@ -1,7 +1,7 @@
 import type { IBaseCreateRepository } from "@/shared/base/repositories/contracts/create";
 import type { IBaseCreateService } from "@/shared/base/services/contracts/create";
 import { AppError } from "@/shared/errors/app-error";
-import { handleServiceResponse } from "@/shared/response/handle-service-response";
+import { handleServiceResponse } from "@/shared/interfaces/handle-service-response";
 import { injectable } from "inversify";
 
 @injectable()

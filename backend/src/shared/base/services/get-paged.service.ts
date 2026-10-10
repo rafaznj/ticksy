@@ -1,7 +1,7 @@
 import type { IBaseGetPagedRepository } from "../repositories/contracts/get-paged";
 import type { IBaseGetPagedService } from "./contracts/get-paged";
-import { IQueryOptions } from "../../types/query-options";
-import { IPagedResult } from "../../types/paged-result";
+import { IQueryOptions } from "../../interfaces/query-options";
+import { IPagedResult } from "../../interfaces/paged-result";
 
 export class BaseGetPagedService<T> implements IBaseGetPagedService<T> {
   constructor(protected readonly repository: IBaseGetPagedRepository<T>) {}

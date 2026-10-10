@@ -8,15 +8,23 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
+import { createFileRoute } from '@tanstack/react-router'
+
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as RegisterRouteImport } from './routes/register'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as ConfirmPasswordRouteImport } from './routes/confirm-password'
 import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
 import { Route as AuthenticatedIndexRouteImport } from './routes/_authenticated/index'
 import { Route as AuthenticatedTicketsRouteImport } from './routes/_authenticated/tickets'
 import { Route as AuthenticatedHomeRouteImport } from './routes/_authenticated/home'
-import { Route as AuthenticatedUserUsersRouteImport } from './routes/_authenticated/user/users'
-import { Route as AuthenticatedUserProfileRouteImport } from './routes/_authenticated/user/profile'
+
+const AuthenticatedUsersLazyRouteImport = createFileRoute(
+  '/_authenticated/users',
+)()
+const AuthenticatedNotificationsLazyRouteImport = createFileRoute(
+  '/_authenticated/notifications',
+)()
 
 const RegisterRoute = RegisterRouteImport.update({
   id: '/register',
@@ -28,6 +36,11 @@ const LoginRoute = LoginRouteImport.update({
   path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ConfirmPasswordRoute = ConfirmPasswordRouteImport.update({
+  id: '/confirm-password',
+  path: '/confirm-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthenticatedRoute = AuthenticatedRouteImport.update({
   id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
@@ -37,6 +50,21 @@ const AuthenticatedIndexRoute = AuthenticatedIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
+const AuthenticatedUsersLazyRoute = AuthenticatedUsersLazyRouteImport.update({
+  id: '/users',
+  path: '/users',
+  getParentRoute: () => AuthenticatedRoute,
+} as any).lazy(() =>
+  import('./routes/_authenticated/users.lazy').then((d) => d.Route),
+)
+const AuthenticatedNotificationsLazyRoute =
+  AuthenticatedNotificationsLazyRouteImport.update({
+    id: '/notifications',
+    path: '/notifications',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any).lazy(() =>
+    import('./routes/_authenticated/notifications.lazy').then((d) => d.Route),
+  )
 const AuthenticatedTicketsRoute = AuthenticatedTicketsRouteImport.update({
   id: '/tickets',
   path: '/tickets',
@@ -47,80 +75,76 @@ const AuthenticatedHomeRoute = AuthenticatedHomeRouteImport.update({
   path: '/home',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
-const AuthenticatedUserUsersRoute = AuthenticatedUserUsersRouteImport.update({
-  id: '/user/users',
-  path: '/user/users',
-  getParentRoute: () => AuthenticatedRoute,
-} as any)
-const AuthenticatedUserProfileRoute =
-  AuthenticatedUserProfileRouteImport.update({
-    id: '/user/profile',
-    path: '/user/profile',
-    getParentRoute: () => AuthenticatedRoute,
-  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof AuthenticatedIndexRoute
+  '/confirm-password': typeof ConfirmPasswordRoute
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
   '/home': typeof AuthenticatedHomeRoute
   '/tickets': typeof AuthenticatedTicketsRoute
-  '/user/profile': typeof AuthenticatedUserProfileRoute
-  '/user/users': typeof AuthenticatedUserUsersRoute
+  '/notifications': typeof AuthenticatedNotificationsLazyRoute
+  '/users': typeof AuthenticatedUsersLazyRoute
 }
 export interface FileRoutesByTo {
+  '/confirm-password': typeof ConfirmPasswordRoute
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
   '/home': typeof AuthenticatedHomeRoute
   '/tickets': typeof AuthenticatedTicketsRoute
+  '/notifications': typeof AuthenticatedNotificationsLazyRoute
+  '/users': typeof AuthenticatedUsersLazyRoute
   '/': typeof AuthenticatedIndexRoute
-  '/user/profile': typeof AuthenticatedUserProfileRoute
-  '/user/users': typeof AuthenticatedUserUsersRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_authenticated': typeof AuthenticatedRouteWithChildren
+  '/confirm-password': typeof ConfirmPasswordRoute
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
   '/_authenticated/home': typeof AuthenticatedHomeRoute
   '/_authenticated/tickets': typeof AuthenticatedTicketsRoute
+  '/_authenticated/notifications': typeof AuthenticatedNotificationsLazyRoute
+  '/_authenticated/users': typeof AuthenticatedUsersLazyRoute
   '/_authenticated/': typeof AuthenticatedIndexRoute
-  '/_authenticated/user/profile': typeof AuthenticatedUserProfileRoute
-  '/_authenticated/user/users': typeof AuthenticatedUserUsersRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/confirm-password'
     | '/login'
     | '/register'
     | '/home'
     | '/tickets'
-    | '/user/profile'
-    | '/user/users'
+    | '/notifications'
+    | '/users'
   fileRoutesByTo: FileRoutesByTo
   to:
+    | '/confirm-password'
     | '/login'
     | '/register'
     | '/home'
     | '/tickets'
+    | '/notifications'
+    | '/users'
     | '/'
-    | '/user/profile'
-    | '/user/users'
   id:
     | '__root__'
     | '/_authenticated'
+    | '/confirm-password'
     | '/login'
     | '/register'
     | '/_authenticated/home'
     | '/_authenticated/tickets'
+    | '/_authenticated/notifications'
+    | '/_authenticated/users'
     | '/_authenticated/'
-    | '/_authenticated/user/profile'
-    | '/_authenticated/user/users'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   AuthenticatedRoute: typeof AuthenticatedRouteWithChildren
+  ConfirmPasswordRoute: typeof ConfirmPasswordRoute
   LoginRoute: typeof LoginRoute
   RegisterRoute: typeof RegisterRoute
 }
@@ -141,6 +165,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/confirm-password': {
+      id: '/confirm-password'
+      path: '/confirm-password'
+      fullPath: '/confirm-password'
+      preLoaderRoute: typeof ConfirmPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_authenticated': {
       id: '/_authenticated'
       path: ''
@@ -153,6 +184,20 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof AuthenticatedIndexRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/users': {
+      id: '/_authenticated/users'
+      path: '/users'
+      fullPath: '/users'
+      preLoaderRoute: typeof AuthenticatedUsersLazyRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/notifications': {
+      id: '/_authenticated/notifications'
+      path: '/notifications'
+      fullPath: '/notifications'
+      preLoaderRoute: typeof AuthenticatedNotificationsLazyRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
     '/_authenticated/tickets': {
@@ -169,37 +214,23 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedHomeRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
-    '/_authenticated/user/users': {
-      id: '/_authenticated/user/users'
-      path: '/user/users'
-      fullPath: '/user/users'
-      preLoaderRoute: typeof AuthenticatedUserUsersRouteImport
-      parentRoute: typeof AuthenticatedRoute
-    }
-    '/_authenticated/user/profile': {
-      id: '/_authenticated/user/profile'
-      path: '/user/profile'
-      fullPath: '/user/profile'
-      preLoaderRoute: typeof AuthenticatedUserProfileRouteImport
-      parentRoute: typeof AuthenticatedRoute
-    }
   }
 }
 
 interface AuthenticatedRouteChildren {
   AuthenticatedHomeRoute: typeof AuthenticatedHomeRoute
   AuthenticatedTicketsRoute: typeof AuthenticatedTicketsRoute
+  AuthenticatedNotificationsLazyRoute: typeof AuthenticatedNotificationsLazyRoute
+  AuthenticatedUsersLazyRoute: typeof AuthenticatedUsersLazyRoute
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
-  AuthenticatedUserProfileRoute: typeof AuthenticatedUserProfileRoute
-  AuthenticatedUserUsersRoute: typeof AuthenticatedUserUsersRoute
 }
 
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedHomeRoute: AuthenticatedHomeRoute,
   AuthenticatedTicketsRoute: AuthenticatedTicketsRoute,
+  AuthenticatedNotificationsLazyRoute: AuthenticatedNotificationsLazyRoute,
+  AuthenticatedUsersLazyRoute: AuthenticatedUsersLazyRoute,
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
-  AuthenticatedUserProfileRoute: AuthenticatedUserProfileRoute,
-  AuthenticatedUserUsersRoute: AuthenticatedUserUsersRoute,
 }
 
 const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(
@@ -208,6 +239,7 @@ const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   AuthenticatedRoute: AuthenticatedRouteWithChildren,
+  ConfirmPasswordRoute: ConfirmPasswordRoute,
   LoginRoute: LoginRoute,
   RegisterRoute: RegisterRoute,
 }

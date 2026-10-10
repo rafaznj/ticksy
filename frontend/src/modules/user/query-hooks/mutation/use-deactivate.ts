@@ -1,8 +1,10 @@
 import type { IDeactivateUserService } from "@/modules/user/services/contracts/deactivate";
 import { handleMutationError } from "@/shared/errors/handle-mutation-error";
-import handleMutationResponse from "@/shared/response/handle-mutation-response";
+import handleMutationResponse from "@/shared/interfaces/handle-mutation-response";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
+import { toast } from "sonner";
+import { TANSTACK_QUERY_KEYS } from "@/lib/tanstack/query-keys";
 
 export function useDeactivateUser(deactivateUserService: IDeactivateUserService) {
   const { t } = useTranslation();
@@ -15,8 +17,10 @@ export function useDeactivateUser(deactivateUserService: IDeactivateUserService)
       return handleMutationResponse(response);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["users", "paged"] });
+      toast.success(t("user.messages.success.deactivated"));
+
+      queryClient.invalidateQueries({ queryKey: [TANSTACK_QUERY_KEYS.GET_USER_PAGED] });
     },
-    onError: handleMutationError(t("user.errors.deactivateFailed")),
+    onError: handleMutationError(t("user.messages.errors.deactivateFailed")),
   });
 }

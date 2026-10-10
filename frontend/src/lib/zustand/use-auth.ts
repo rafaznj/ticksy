@@ -1,12 +1,12 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-import type { UserEntity } from "@/modules/user/entity/user.entity";
+import type { UserDto } from "@/modules/user/dto/user.dto";
 
 interface AuthState {
   accessToken: string | null;
-  user: UserEntity | null;
-  setAuth: (accessToken: string, user: UserEntity) => void;
+  user: UserDto | null;
+  setAuth: (accessToken: string, user: UserDto) => void;
   clearAuth: () => void;
   logout: () => void;
 }

@@ -1,6 +1,6 @@
 import { CreateUserDto } from "../../../user/dtos/create.dto";
-import { RegisterResult } from "../../dto/register-result.dto";
+import { RegisterViewModel } from "../../view-models/register.vm";
 
 export interface IRegisterService {
-  execute(data: CreateUserDto): Promise<RegisterResult>;
+  execute(data: CreateUserDto): Promise<RegisterViewModel>;
 }

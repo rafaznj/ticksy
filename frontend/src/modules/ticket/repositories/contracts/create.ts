@@ -1,5 +1,8 @@
-import type { CreateTicketDto } from "@/modules/ticket/dtos/create.dto";
-import type { TicketEntity } from "@/modules/ticket/entity/ticket.entity";
+import type { CreateTicketData } from "@/modules/ticket/data/create.data";
+import type { TicketDto } from "@/modules/ticket/dtos/ticket.dto";
 import type { IBaseCreateRepository } from "@/shared/base/repositories/contracts/create";
 
-export type ICreateTicketRepository = IBaseCreateRepository<CreateTicketDto, TicketEntity>;
+export interface ICreateTicketRepository extends IBaseCreateRepository<
+  CreateTicketData,
+  TicketDto
+> {}

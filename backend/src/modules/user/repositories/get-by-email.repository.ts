@@ -6,7 +6,7 @@ import { DATABASE_TOKENS } from "../../../database/tokens";
 import * as schema from "../../../database/drizzle/schema";
 
 import { IGetUserByEmailRepository } from "./contracts/get-by-email";
-import { UserModel } from "../models/user-model";
+import { UserViewModel } from "../view-models/user.vm";
 
 @Injectable()
 export class GetUserByEmailRepository implements IGetUserByEmailRepository {
@@ -15,11 +15,11 @@ export class GetUserByEmailRepository implements IGetUserByEmailRepository {
     private readonly db: NodePgDatabase<typeof schema>,
   ) {}
 
-  async execute(email: string): Promise<UserModel | null> {
+  async execute(email: string): Promise<UserViewModel | null> {
     const [user] = await this.db
       .select()
-      .from(schema.user)
-      .where(eq(schema.user.email, email))
+      .from(schema.users)
+      .where(eq(schema.users.email, email))
       .limit(1);
 
     return user ?? null;

@@ -1,7 +1,8 @@
 import type { AppError } from "@/shared/errors/app-error";
-import type { CreateUserDto } from "@/modules/user/dto/create.dto";
-import type { RegisterResponse } from "@/modules/auth/dto/register-response";
+import type { RegisterDto } from "@/modules/auth/dto/register.dto";
+import type { CreateUserData } from "@/modules/user/data/create.data";
+import type { APIResponse } from "@/shared/interfaces/api-response";
 
 export interface IRegisterRepository {
-  execute(dto: CreateUserDto): Promise<RegisterResponse | AppError>;
+  execute(dto: CreateUserData): Promise<APIResponse<RegisterDto> | AppError>;
 }

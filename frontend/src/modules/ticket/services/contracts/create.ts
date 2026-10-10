@@ -1,5 +1,5 @@
 import type { IBaseCreateService } from "@/shared/base/services/contracts/create";
-import type { CreateTicketDto } from "../../dtos/create.dto";
-import type { TicketEntity } from "../../entity/ticket.entity";
+import type { TicketDto } from "../../dtos/ticket.dto";
+import type { CreateTicketData } from "@/modules/ticket/data/create.data";
 
-export type ICreateTicketService = IBaseCreateService<CreateTicketDto, TicketEntity>;
+export interface ICreateTicketService extends IBaseCreateService<CreateTicketData, TicketDto> {}

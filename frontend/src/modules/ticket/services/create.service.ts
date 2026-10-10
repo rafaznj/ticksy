@@ -3,11 +3,11 @@ import { REPOSITORY_TOKENS } from "@/shared/di/tokens.repositories";
 import type { ICreateTicketRepository } from "../repositories/contracts/create";
 import type { ICreateTicketService } from "./contracts/create";
 import { inject } from "inversify";
-import type { CreateTicketDto } from "@/modules/ticket/dtos/create.dto";
-import type { TicketEntity } from "@/modules/ticket/entity/ticket.entity";
+import type { TicketDto } from "@/modules/ticket/dtos/ticket.dto";
+import type { CreateTicketData } from "@/modules/ticket/data/create.data";
 
 export class CreateTicketService
-  extends BaseCreateService<CreateTicketDto, TicketEntity>
+  extends BaseCreateService<CreateTicketData, TicketDto>
   implements ICreateTicketService
 {
   constructor(

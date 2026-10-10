@@ -18,6 +18,12 @@ import { GetUserPagedService } from "./services/get-paged.service";
 import { CreateDefaultUsersService } from "./services/create-default-users.service";
 import { GetAssignableUsersPagedService } from "./services/get-assignable-paged.service";
 import { GetAssignableUsersPagedRepository } from "./repositories/get-assignable-paged.repository";
+import { ActivateUserService } from "./services/activate.service";
+import { ActivateUserRepository } from "./repositories/activate.repository";
+import { GetUserIdsByRoleRepository } from "./repositories/get-ids-by-role.repository";
+import { GetUserIdsByRoleService } from "./services/get-ids-by-role.service";
+import { InviteUserService } from "./services/invite.service";
+import { ConfirmPasswordService } from "./services/confirm-password.service";
 
 @Module({
   imports: [DrizzleModule],
@@ -83,12 +89,39 @@ import { GetAssignableUsersPagedRepository } from "./repositories/get-assignable
       provide: REPOSITORY_TOKENS.DeactivateUserRepository,
       useClass: DeactivateUserRepository,
     },
+    {
+      provide: SERVICE_TOKENS.ActivateUserService,
+      useClass: ActivateUserService,
+    },
+    {
+      provide: REPOSITORY_TOKENS.ActivateUserRepository,
+      useClass: ActivateUserRepository,
+    },
+    {
+      provide: SERVICE_TOKENS.GetUserIdsByRoleService,
+      useClass: GetUserIdsByRoleService,
+    },
+    {
+      provide: SERVICE_TOKENS.InviteUserService,
+      useClass: InviteUserService,
+    },
+    {
+      provide: SERVICE_TOKENS.ConfirmPasswordService,
+      useClass: ConfirmPasswordService,
+    },
+    {
+      provide: REPOSITORY_TOKENS.GetUserIdsByRoleRepository,
+      useClass: GetUserIdsByRoleRepository,
+    },
   ],
   exports: [
     SERVICE_TOKENS.CreateDefaultUsersService,
     SERVICE_TOKENS.CreateUserService,
     SERVICE_TOKENS.GetUserByIdService,
     SERVICE_TOKENS.GetUserByEmailService,
+    SERVICE_TOKENS.GetUserIdsByRoleService,
+    SERVICE_TOKENS.InviteUserService,
+    SERVICE_TOKENS.ConfirmPasswordService,
   ],
 })
 export class UserModule {}

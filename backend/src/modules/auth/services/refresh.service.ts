@@ -6,7 +6,7 @@ import { AppException } from "../../../shared/exceptions/app-exception";
 import type { IJwtTokenService } from "./contracts/jwt-token";
 import type { IGetUserByIdService } from "../../user/services/contracts/get-by-id";
 import type { IRefreshService } from "./contracts/refresh";
-import type { RefreshResult } from "../dto/refresh-result";
+import { RefreshTokenViewModel } from "../view-models/refresh-token.vm";
 
 @Injectable()
 export class RefreshService implements IRefreshService {
@@ -17,19 +17,19 @@ export class RefreshService implements IRefreshService {
     private readonly getUserByIdService: IGetUserByIdService,
   ) {}
 
-  async execute(refreshToken: string): Promise<RefreshResult> {
+  async execute(refreshToken: string): Promise<RefreshTokenViewModel> {
     const payload = this.jwtTokenService.verifyRefreshToken(refreshToken);
 
     const stored = await this.jwtTokenService.findActiveByUserId(payload.sub);
 
     if (!stored || !(await argon2.verify(stored.tokenHash, refreshToken))) {
-      throw AppException.unauthorized("auth.errors.refreshTokenMissing");
+      throw AppException.unauthorized("auth.messages.errors.refreshTokenMissing");
     }
 
     const user = await this.getUserByIdService.execute(payload.sub);
 
     if (!user) {
-      throw AppException.unauthorized("auth.errors.userNotFound");
+      throw AppException.unauthorized("auth.messages.errors.userNotFound");
     }
 
     await this.jwtTokenService.revoke(user.id);

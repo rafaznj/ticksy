@@ -16,7 +16,11 @@ export class JwtTokenService implements IJwtTokenService {
   ) {}
 
   async create(userId: string, tokenHash: string) {
-    await this.refreshTokenRepository.create(userId, tokenHash);
+    const expiresAt = new Date(
+      Date.now() + this.configService.getOrThrow<number>("jwt.refreshExpirationMs"),
+    );
+
+    await this.refreshTokenRepository.create(userId, tokenHash, expiresAt);
   }
 
   async findActiveByUserId(userId: string) {

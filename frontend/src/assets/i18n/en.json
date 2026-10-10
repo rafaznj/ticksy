@@ -1,11 +1,32 @@
 {
   "auth": {
-    "errors": {
-      "emailAlreadyExists": "A user with this email already exists",
-      "invalidCredentials": "Invalid email or password. Please check your credentials and try again",
-      "refreshTokenMissing": "Your session has expired. Please sign in again",
-      "userNotFound": "User not found",
-      "registerFailed": "Failed to create user"
+    "confirmPassword": {
+      "actions": {
+        "submit": "Confirm password",
+        "submitting": "Confirming password..."
+      },
+      "description": "Set a new password to access the system",
+      "fields": {
+        "confirmPassword": {
+          "label": "Confirm new password",
+          "placeholder": "••••••••",
+          "validations": {
+            "match": "Passwords must match",
+            "required": "Password confirmation is required"
+          }
+        },
+        "password": {
+          "label": "New password",
+          "placeholder": "••••••••",
+          "validations": {
+            "maxLength": "Password must be at most {{max}} characters",
+            "minLength": "Password must be at least {{min}} characters",
+            "required": "Password is required"
+          }
+        }
+      },
+      "success": "Password confirmed successfully",
+      "title": "Confirm your password"
     },
     "forgotPassword": {
       "actions": {
@@ -41,15 +62,19 @@
           }
         }
       },
-      "messages": {
-        "failed": "Unable to sign in",
-        "success": "Successfully signed in"
-      },
       "noAccount": "Don't have an account?",
       "title": "Sign in to your account"
     },
-    "logout": {
-      "error": "Unable to sign you out. Please try again"
+    "messages": {
+      "errors": {
+        "emailAlreadyExists": "A user with this email is already registered",
+        "invalidCredentials": "Invalid email or password. Please check your credentials and try again",
+        "logoutFailed": "Failed to log out. Please try again",
+        "refreshTokenMissing": "Your session has expired. Please sign in again",
+        "registerFailed": "Failed to create user",
+        "userNotFound": "User not found"
+      },
+      "registered": "User registered successfully"
     },
     "register": {
       "actions": {
@@ -95,55 +120,88 @@
     }
   },
   "dashboard": {
-    "metrics": {
-      "inProgress": {
-        "description": "Currently being handled",
-        "title": "In Progress"
+    "cards": {
+      "assignedToMe": {
+        "description": "Under my responsibility",
+        "title": "Tickets assigned to me"
       },
-      "resolved": {
-        "description": "Resolved this month",
-        "title": "Resolved"
+      "inProgressTickets": {
+        "description": "Tickets currently being handled",
+        "title": "Tickets in progress"
+      },
+      "openTickets": {
+        "description": "Awaiting support",
+        "title": "Open tickets"
+      },
+      "resolutionRate": {
+        "description": "Percentage of resolved tickets",
+        "title": "Resolution rate "
+      },
+      "resolvedTickets": {
+        "description": "Have been resolved",
+        "title": "Tickets resolved"
       },
       "totalTickets": {
-        "description": "Created this month",
-        "title": "Total Tickets"
+        "description": "Tickets registered in the system",
+        "title": "Total tickets"
       },
-      "open": {
-        "description": "awaiting action",
-        "title": "Open"
-      },
-      "myTickets": {
-        "description": "assigned to me",
-        "title": "My tickets"
-      },
-      "highPriority": {
-        "description": "require attention",
-        "title": "High priority"
+      "urgentPriorityTickets": {
+        "description": "Requiring priority attention",
+        "title": "Tickets urgent-priority"
       }
     }
   },
   "general": {
     "actions": {
+      "activate": "Activate",
       "assign": "Assign",
       "back": "Back",
       "cancel": "Cancel",
       "close": "Close",
+      "create": "Create",
       "deactivate": "Deactivate",
       "delete": "Delete",
       "edit": "Edit",
+      "invite": "Invite",
+      "markAsRead": "Mark as read",
+      "resolve": "Resolve",
       "save": "Save",
-      "resolved": "Resolved"
+      "submit": "Submit",
+      "unassign": "Unassign",
+      "unavailable": "You do not have permission for this action",
+      "view": "View"
+    },
+    "carousel": {
+      "slides": {
+        "createTicket": "Create ticket",
+        "home": "Home",
+        "notifications": "Notifications",
+        "sidebar": "Sidebar",
+        "tickets": "Tickets list",
+        "users": "Users list"
+      }
     },
     "copyright": "© {{year}} Ticksy. All rights reserved",
     "errors": {
       "createFailed": "Could not create the record",
-      "recordNotFound": "Record not found",
-      "unknownError": "An unknown error occurred"
+      "defaultError": "An error occurred. Please try again",
+      "recordNotFound": "Record not found"
     },
-    "language": "Switch to the {{language}} language",
-    "notFoundRoute": "This route was not found...",
+    "language": {
+      "label": "Switch language to {{language}}",
+      "options": {
+        "en": "English",
+        "pt": "Portuguese"
+      }
+    },
+    "notFoundRoute": {
+      "description": "The page you are looking for does not exist or has been moved. Please check the address and try again.",
+      "title": "Ops! Page not found"
+    },
+    "passwordPlaceholder": "••••••••",
     "settings": "Settings",
     "table": {
+      "allOptions": "All options",
       "emptyMessage": "No records found",
       "errorMessage": "Failed to load data",
       "header": {
@@ -156,17 +214,52 @@
       "rowsPerPage": "Rows per page",
       "searchPlaceholder": "Search"
     },
-    "theme": "Switch to the {{theme}} theme"
+    "theme": {
+      "label": "Switch to {{theme}} theme",
+      "options": {
+        "dark": "Dark",
+        "light": "Light"
+      }
+    }
+  },
+  "notifications": {
+    "actions": {
+      "markAllAsRead": "Mark all as read"
+    },
+    "messages": {
+      "markAllAsRead": "All notifications marked as read",
+      "markRead": "Notification read",
+      "types": {
+        "ticket_assigned": "Ticket <ticket>\"{{title}}\"</ticket> has been assigned to you",
+        "ticket_created": "<highlight>{{userName}}</highlight> created ticket <ticket>\"{{title}}\"</ticket>",
+        "ticket_status_changed": "<highlight>{{userName}}</highlight> changed the status of ticket <ticket>\"{{title}}\"</ticket> to <status>{{status}}</status>",
+        "ticket_unassigned": "Your assignment to ticket <ticket>\"{{title}}\"</ticket> has been removed"
+      }
+    },
+    "table": {
+      "columns": {
+        "date": "Date",
+        "title": "Title"
+      },
+      "emptyMessage": "No notifications found"
+    },
+    "ticketStatus": {
+      "inProgress": "in progress",
+      "open": "open",
+      "resolved": "resolved"
+    }
   },
   "sidebar": {
     "labels": {
       "editProfile": "Edit profile",
-      "logout": "Log out"
+      "logout": "Log out",
+      "preferences": "Preferences"
     },
     "tooltips": {
-      "home": "Go to the home page",
+      "home": "Home",
       "myTickets": "My tickets",
       "newTicket": "New ticket",
+      "notifications": "Notifications",
       "profile": "Profile",
       "tickets": "View tickets",
       "users": "Manage users"
@@ -174,55 +267,34 @@
   },
   "ticket": {
     "assign": {
-      "actions": {
-        "assigning": "Assigning...",
-        "cancel": "Cancel",
-        "confirm": "Assign"
-      },
-      "description": "Selecione um técnico para vincular este ticket",
-      "messages": {
-        "failed": "Unable to assign the ticket",
-        "success": "Ticket assigned successfully"
-      },
       "title": "Assign ticket"
     },
+    "category": {
+      "access": "Access",
+      "account": "Account",
+      "hardware": "Hardware",
+      "other": "Other",
+      "software": "Software"
+    },
+    "chart": {
+      "labels": {
+        "inProgress": "In progress",
+        "open": "Open",
+        "resolved": "Resolved"
+      },
+      "title": "Ticket status"
+    },
     "create": {
-      "actions": {
-        "cancel": "Cancel",
-        "submit": "Create ticket"
-      },
       "description": "Fill out the information below to create a new ticket",
-      "messages": {
-        "failed": "Unable to create the ticket",
-        "success": "Ticket created successfully"
-      },
       "title": "New ticket"
     },
     "delete": {
-      "actions": {
-        "cancel": "Cancel",
-        "confirm": "Delete",
-        "deleting": "Deleting..."
-      },
       "description": "Are you sure you want to delete ticket? This action cannot be undone",
       "title": "Delete ticket"
     },
     "edit": {
-      "actions": {
-        "cancel": "Cancel",
-        "save": "Save changes",
-        "saving": "Saving..."
-      },
       "description": "Update the ticket information",
       "title": "Edit ticket"
-    },
-    "errors": {
-      "alreadyAssigned": "This ticket is already assigned to a user",
-      "createFailed": "Unable to create the ticket",
-      "deleteAssigned": "You cannot delete a ticket that has already been assigned",
-      "deleteFailed": "Unable to delete the ticket",
-      "editNotAllowed": "You cannot edit a ticket that has already been assigned",
-      "updateFailed": "Unable to update the ticket"
     },
     "fields": {
       "assignee": {
@@ -230,6 +302,21 @@
         "placeholder": "Select the assignee",
         "validations": {
           "required": "Assignee is required"
+        }
+      },
+      "category": {
+        "label": "Category",
+        "options": {
+          "access": "Access",
+          "account": "Account",
+          "hardware": "Hardware",
+          "other": "Other",
+          "software": "Software"
+        },
+        "placeholder": "Select the category",
+        "validations": {
+          "invalid": "Please select a valid category",
+          "required": "Category is required"
         }
       },
       "description": {
@@ -249,7 +336,7 @@
           "medium": "Medium",
           "urgent": "Urgent"
         },
-        "placeholder": "Select the ticket priority",
+        "placeholder": "Select the priority",
         "validations": {
           "invalid": "Please select a valid priority",
           "required": "Priority is required"
@@ -264,6 +351,24 @@
           "required": "Title is required"
         }
       }
+    },
+    "messages": {
+      "assigned": "Ticket assigned successfully",
+      "created": "Ticket created successfully",
+      "deleted": "Ticket deleted successfully",
+      "errors": {
+        "alreadyAssigned": "This ticket is already assigned to a user",
+        "assignFailed": "Unable to assign the ticket",
+        "createFailed": "Unable to create the ticket",
+        "deleteFailed": "Unable to delete the ticket",
+        "notFound": "Ticket not found",
+        "resolveFailed": "Unable to resolve the ticket",
+        "unassignFailed": "Unable to unassign the ticket",
+        "updateFailed": "Unable to update the ticket"
+      },
+      "resolved": "Ticket resolved successfully",
+      "unassigned": "Ticket unassigned successfully",
+      "updated": "Ticket updated successfully"
     },
     "priority": {
       "high": "High",
@@ -284,6 +389,8 @@
     "table": {
       "columns": {
         "assignedToName": "Assignee",
+        "category": "Category",
+        "code": "Code",
         "created_at": "Created at",
         "createdByName": "Creator",
         "description": "Description",
@@ -293,36 +400,42 @@
         "updated_at": "Updated at"
       },
       "emptyMessage": "No tickets found",
+      "filterByCategory": "Filter by category",
+      "filterByPriority": "Filter by priority",
+      "filterByStatus": "Filter by status",
+      "myWeeklyTickets": "My tickets in the last 7 days",
       "searchPlaceholder": "Search tickets",
-      "unassigned": "Unassigned"
+      "unableTooltips": {
+        "assign": "This ticket must be assigned to be resolved",
+        "delete": "You cannot delete a ticket that has already been assigned",
+        "edit": "You cannot edit a ticket that has already been assigned",
+        "resolved": "This ticket is already resolved"
+      },
+      "unassigned": "Unassigned",
+      "weeklyAssociatedTickets": "Tickets assigned in the last 7 days",
+      "weeklyCreatedTickets": "Tickets created in the last 7 days"
+    },
+    "unassign": {
+      "description": "Are you sure you want to unassign this ticket: {{user}}?",
+      "messages": {
+        "failed": "Unable to unassign the ticket",
+        "success": "Ticket unassigned successfully"
+      },
+      "title": "Unassign ticket"
     }
   },
   "user": {
+    "activate": {
+      "description": "Are you sure you want to activate the user: {{user}}?",
+      "title": "Activate user"
+    },
     "deactivate": {
-      "actions": {
-        "cancel": "Cancel",
-        "confirm": "Deactivate"
-      },
-      "description": "Are you sure you want to deactivate the user {{name}}?",
+      "description": "Are you sure you want to deactivate the user: {{name}}?",
       "title": "Deactivate user"
     },
     "edit": {
-      "actions": {
-        "cancel": "Cancel",
-        "save": "Save changes",
-        "saving": "Saving..."
-      },
       "description": "Update the user information",
       "title": "Edit profile"
-    },
-    "errors": {
-      "activateFailed": "Unable to activate the user",
-      "createFailed": "Unable to create the user",
-      "deactivateFailed": "Unable to deactivate the user",
-      "deleteFailed": "Unable to delete the user",
-      "loadFailed": "Unable to load user data",
-      "notFound": "User not found",
-      "updateFailed": "Unable to update the profile"
     },
     "fields": {
       "email": {
@@ -351,9 +464,79 @@
         },
         "placeholder": "Select the role",
         "validations": {
-          "invalid": "Please select a valid role"
+          "required": "Role is required"
         }
       }
+    },
+    "invite": {
+      "description": "Fill out the information below to invite a new user",
+      "title": "Invite user"
+    },
+    "messages": {
+      "errors": {
+        "activateFailed": "Unable to activate the user",
+        "createFailed": "Unable to create the user",
+        "deactivateFailed": "Unable to deactivate the user",
+        "deleteFailed": "Unable to delete the user",
+        "loadFailed": "Unable to load user data",
+        "notFound": "User not found",
+        "updateFailed": "Unable to update the profile"
+      },
+      "success": {
+        "activated": "User activated successfully",
+        "created": "User created successfully",
+        "deactivated": "User deactivated successfully",
+        "deleted": "User deleted successfully",
+        "invited": "User invited successfully",
+        "updated": "Profile updated successfully"
+      }
+    },
+    "preferences": {
+      "description": "Customize your experience in the system",
+      "language": {
+        "description": "Choose the system language",
+        "label": "Language",
+        "options": {
+          "enUS": "English",
+          "ptBR": "Português (Brasil)"
+        }
+      },
+      "theme": {
+        "description": "Choose how the system should be displayed",
+        "label": "Theme",
+        "options": {
+          "dark": "Dark",
+          "light": "Light",
+          "system": "System"
+        }
+      },
+      "title": "Preferences"
+    },
+    "profile": {
+      "description": "Update your personal information",
+      "fields": {
+        "email": {
+          "label": "Email",
+          "placeholder": "Enter your email",
+          "validations": {
+            "invalid": "Please enter a valid email address",
+            "maxLength": "Email must not exceed {{max}} characters"
+          }
+        },
+        "name": {
+          "label": "Name",
+          "placeholder": "Enter your name",
+          "validations": {
+            "maxLength": "Name must not exceed {{max}} characters",
+            "minLength": "Name must be at least {{min}} characters",
+            "required": "Name is required"
+          }
+        }
+      },
+      "success": {
+        "updated": "Profile updated successfully"
+      },
+      "title": "Edit profile"
     },
     "roles": {
       "admin": "Administrator",
@@ -364,17 +547,12 @@
       "disabled": "Disabled",
       "enabled": "Enabled"
     },
-    "success": {
-      "activated": "User activated successfully",
-      "created": "User created successfully",
-      "deactivated": "User deactivated successfully",
-      "deleted": "User deleted successfully",
-      "updated": "Profile updated successfully"
-    },
     "table": {
       "actions": {
+        "activate": "Activate user",
         "deactivate": "Deactivate user",
-        "edit": "Edit user"
+        "edit": "Edit user",
+        "invite": "Invite user"
       },
       "columns": {
         "created_at": "Created at",
@@ -385,6 +563,8 @@
         "updated_at": "Updated at"
       },
       "emptyMessage": "No users found",
+      "filterByRole": "Filter by role",
+      "filterByStatus": "Filter by status",
       "searchPlaceholder": "Search users"
     }
   }

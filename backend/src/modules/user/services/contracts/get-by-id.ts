@@ -1,4 +1,4 @@
 import { IBaseGetByIdService } from "../../../../shared/base/services/contracts/get-by-id";
-import { UserModel } from "../../models/user-model";
+import { UserViewModel } from "../../view-models/user.vm";
 
-export type IGetUserByIdService = IBaseGetByIdService<UserModel>;
+export type IGetUserByIdService = IBaseGetByIdService<UserViewModel>;

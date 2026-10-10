@@ -12,12 +12,21 @@ import { AssignTicketService } from "./services/assign.service";
 import { ResolvedTicketService } from "./services/resolved.service";
 import { DeleteTicketService } from "./services/delete.service";
 import { DeleteTicketRepository } from "./repositories/delete.repository";
-import { GetTicketPagedService } from "./services/get-paged.service";
-import { GetTicketPagedRepository } from "./repositories/get-paged.repository";
+import { GetTicketPagedWithScopeService } from "./services/get-paged-with-scope.service";
+import { GetTicketPagedWithScopeRepository } from "./repositories/get-paged-with-scope.repository";
 import { AssignTicketRepository } from "./repositories/assign.repository";
 import { ResolvedTicketRepository } from "./repositories/resolved.repository";
+import { UnassignTicketService } from "./services/unassign.service";
+import { UnassignTicketRepository } from "./repositories/unassign.repository";
+import { GetTicketPagedLastSevenDaysRepository } from "./repositories/get-paged-last-seven-days.repository";
+import { GetTicketStatusCountService } from "./services/get-status-count.service";
+import { GetTicketStatusCountRepository } from "./repositories/get-status-count.repository";
+import { GetTicketPagedLastSevenDaysService } from "./services/get-paged-last-seven-days.service";
+import { NotificationModule } from "../notification/notification.module";
+import { UserModule } from "../user/user.module";
 
 @Module({
+  imports: [NotificationModule, UserModule],
   controllers: [TicketController],
   providers: [
     {
@@ -37,12 +46,20 @@ import { ResolvedTicketRepository } from "./repositories/resolved.repository";
       useClass: GetTicketByIdRepository,
     },
     {
-      provide: SERVICE_TOKENS.GetTicketPagedService,
-      useClass: GetTicketPagedService,
+      provide: SERVICE_TOKENS.GetTicketPagedWithScopeService,
+      useClass: GetTicketPagedWithScopeService,
     },
     {
-      provide: REPOSITORY_TOKENS.GetTicketPagedRepository,
-      useClass: GetTicketPagedRepository,
+      provide: REPOSITORY_TOKENS.GetTicketPagedWithScopeRepository,
+      useClass: GetTicketPagedWithScopeRepository,
+    },
+    {
+      provide: SERVICE_TOKENS.GetTicketPagedLastSevenDaysService,
+      useClass: GetTicketPagedLastSevenDaysService,
+    },
+    {
+      provide: REPOSITORY_TOKENS.GetTicketPagedLastSevenDaysRepository,
+      useClass: GetTicketPagedLastSevenDaysRepository,
     },
     {
       provide: SERVICE_TOKENS.UpdateTicketService,
@@ -69,12 +86,28 @@ import { ResolvedTicketRepository } from "./repositories/resolved.repository";
       useClass: AssignTicketRepository,
     },
     {
+      provide: SERVICE_TOKENS.UnassignTicketService,
+      useClass: UnassignTicketService,
+    },
+    {
+      provide: REPOSITORY_TOKENS.UnassignTicketRepository,
+      useClass: UnassignTicketRepository,
+    },
+    {
       provide: SERVICE_TOKENS.ResolvedTicketService,
       useClass: ResolvedTicketService,
     },
     {
       provide: REPOSITORY_TOKENS.ResolvedTicketRepository,
       useClass: ResolvedTicketRepository,
+    },
+    {
+      provide: SERVICE_TOKENS.GetTicketStatusCountService,
+      useClass: GetTicketStatusCountService,
+    },
+    {
+      provide: REPOSITORY_TOKENS.GetTicketStatusCountRepository,
+      useClass: GetTicketStatusCountRepository,
     },
   ],
 })

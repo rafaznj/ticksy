@@ -7,6 +7,7 @@ import { ConfigModule } from "@nestjs/config";
 import { jwtConfig } from "./shared/config/jwt.config";
 import { SERVICE_TOKENS } from "./shared/di/tokens.services";
 import type { ICreateDefaultUsersService } from "./modules/user/services/contracts/create-default-users";
+import { NotificationModule } from "./modules/notification/notification.module";
 
 @Module({
   imports: [
@@ -18,8 +19,8 @@ import type { ICreateDefaultUsersService } from "./modules/user/services/contrac
     TicketModule,
     UserModule,
     AuthModule,
+    NotificationModule,
   ],
-  controllers: [],
 })
 export class AppModule implements OnModuleInit {
   constructor(

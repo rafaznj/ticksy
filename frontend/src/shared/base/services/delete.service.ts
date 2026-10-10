@@ -2,7 +2,7 @@ import { injectable } from "inversify";
 import type { IBaseDeleteRepository } from "../repositories/contracts/delete";
 import type { IBaseDeleteService } from "./contracts/delete";
 import { AppError } from "@/shared/errors/app-error";
-import { handleServiceResponse } from "@/shared/response/handle-service-response";
+import { handleServiceResponse } from "@/shared/interfaces/handle-service-response";
 
 @injectable()
 export class BaseDeleteService implements IBaseDeleteService {

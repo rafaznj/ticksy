@@ -6,17 +6,29 @@ export const REPOSITORY_TOKENS = {
   CreateUserRepository: Symbol.for("CreateUserRepository"),
   UpdateUserRepository: Symbol.for("UpdateUserRepository"),
   DeactivateUserRepository: Symbol.for("DeactivateUserRepository"),
+  ActivateUserRepository: Symbol.for("ActivateUserRepository"),
   GetUserByIdRepository: Symbol.for("GetUserByIdRepository"),
   GetUserByEmailRepository: Symbol.for("GetUserByEmailRepository"),
   GetUserPagedRepository: Symbol.for("GetUserPagedRepository"),
   GetAssignableUsersPagedRepository: Symbol.for("GetAssignableUsersPagedRepository"),
+  GetUserIdsByRoleRepository: Symbol.for("GetUserIdsByRoleRepository"),
 
   // Ticket
   CreateTicketRepository: Symbol.for("CreateTicketRepository"),
   UpdateTicketRepository: Symbol.for("UpdateTicketRepository"),
   DeleteTicketRepository: Symbol.for("DeleteTicketRepository"),
   GetTicketByIdRepository: Symbol.for("GetTicketByIdRepository"),
-  GetTicketPagedRepository: Symbol.for("GetTicketPagedRepository"),
+  GetTicketPagedWithScopeRepository: Symbol.for("GetTicketPagedWithScopeRepository"),
+  GetTicketPagedLastSevenDaysRepository: Symbol.for("GetTicketPagedLastSevenDaysRepository"),
   AssignTicketRepository: Symbol.for("AssignTicketRepository"),
+  UnassignTicketRepository: Symbol.for("UnassignTicketRepository"),
   ResolvedTicketRepository: Symbol.for("ResolvedTicketRepository"),
+  GetTicketStatusCountRepository: Symbol.for("GetTicketStatusCountRepository"),
+
+  // Notification
+  CreateNotificationRepository: Symbol.for("CreateNotificationRepository"),
+  GetNotificationPagedRepository: Symbol.for("GetNotificationPagedRepository"),
+  GetUnreadNotificationCountRepository: Symbol.for("GetUnreadNotificationCountRepository"),
+  MarkNotificationAsReadRepository: Symbol.for("MarkNotificationAsReadRepository"),
+  MarkAllNotificationsAsReadRepository: Symbol.for("MarkAllNotificationsAsReadRepository"),
 } as const;
