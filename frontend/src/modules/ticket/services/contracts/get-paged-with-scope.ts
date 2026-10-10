@@ -1,8 +1,4 @@
 import type { TicketPagedDto } from "@/modules/ticket/dtos/paged.dto";
-import type { AppError } from "@/shared/errors/app-error";
-import type { PagedParamsQuery } from "@/shared/types/paged-params-query";
-import type { PagedResponse } from "@/shared/types/paged-response";
+import type { IBaseGetPagedService } from "@/shared/base/services/contracts/get-paged";
 
-export interface IGetTicketPagedWithScopeService {
-  execute(params: PagedParamsQuery): Promise<PagedResponse<TicketPagedDto> | AppError>;
-}
+export interface IGetTicketPagedWithScopeService extends IBaseGetPagedService<TicketPagedDto> {}

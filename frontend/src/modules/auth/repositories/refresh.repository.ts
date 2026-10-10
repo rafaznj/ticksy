@@ -1,11 +1,12 @@
 import { inject, injectable } from "inversify";
 
 import type { AxiosSingleton } from "@/lib/axios/axios-singleton";
-import type { RefreshResponse } from "@/modules/auth/dto/refresh-response.dto";
+import type { RefreshDto } from "@/modules/auth/dto/refresh.dto";
 import type { IRefreshRepository } from "./contracts/refresh";
 import { INFRASTRUCTURE_TOKENS } from "@/shared/di/tokens.infrastructure";
 import type { AppError } from "@/shared/errors/app-error";
-import { handleRepositoryResponse } from "@/shared/response/handle-repository-response";
+import { handleRepositoryResponse } from "@/shared/interfaces/handle-repository-response";
+import type { APIResponse } from "@/shared/interfaces/api-response";
 
 @injectable()
 export class RefreshRepository implements IRefreshRepository {
@@ -16,8 +17,8 @@ export class RefreshRepository implements IRefreshRepository {
     private readonly axiosSingleton: AxiosSingleton,
   ) {}
 
-  async execute(): Promise<RefreshResponse | AppError> {
-    const response = await this.axiosSingleton.client.post<RefreshResponse>(
+  async execute(): Promise<APIResponse<RefreshDto> | AppError> {
+    const response = await this.axiosSingleton.client.post<APIResponse<RefreshDto> | AppError>(
       `${this.basePath}/refresh`,
     );
 

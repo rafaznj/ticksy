@@ -17,10 +17,10 @@ import { useAuthStore } from "@/lib/zustand/use-auth";
 import { useLogout } from "@/modules/auth/query-hooks/mutation/use-logout";
 import { useTranslation } from "react-i18next";
 import { LuLogOut, LuPencil, LuSlidersHorizontal } from "react-icons/lu";
-import { UserProfileEditForm } from "@/components/forms/user/profile-edit";
-import { useDialog } from "@/contexts/use-dialog";
+import { UserProfileEditForm } from "@/forms/user/profile-edit";
+import { useDialog } from "@/hooks/use-dialog";
 import { DIALOG_KEYS } from "@/shared/constants/dialog-keys";
-import { UserPreferencesForms } from "@/components/forms/user/preferences";
+import { UserPreferencesForms } from "@/forms/user/preferences";
 
 export function AppSidebarFooter() {
   const { t } = useTranslation();
@@ -48,6 +48,9 @@ export function AppSidebarFooter() {
                     name={user?.name}
                   />
                 </Avatar>
+                <span className="min-w-0 truncate text-sm font-medium group-data-[collapsible=icon]:hidden">
+                  {user?.name}
+                </span>
               </SidebarMenuButton>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="start" side="top" sideOffset={8} className="w-56">

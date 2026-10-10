@@ -1,15 +1,15 @@
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 import type { IUpdateUserService } from "@/modules/user/services/contracts/update";
-import type { UpdateUserDto } from "@/modules/user/dto/update.dto";
+import type { UpdateUserData } from "@/modules/user/data/update.data";
 import { handleMutationError } from "@/shared/errors/handle-mutation-error";
 import { useTranslation } from "react-i18next";
 import { useAuthStore } from "@/lib/zustand/use-auth";
-import handleMutationResponse from "@/shared/response/handle-mutation-response";
+import handleMutationResponse from "@/shared/interfaces/handle-mutation-response";
 
 interface UpdateUserParams {
   id: string;
-  data: UpdateUserDto;
+  data: UpdateUserData;
 }
 
 export function useUpdateUser(updateUserService: IUpdateUserService) {
@@ -32,7 +32,7 @@ export function useUpdateUser(updateUserService: IUpdateUserService) {
         });
       }
 
-      toast.success(t("user.messages.updated"));
+      toast.success(t("user.messages.success.updated"));
     },
     onError: handleMutationError(t("user.messages.errors.updateFailed")),
   });

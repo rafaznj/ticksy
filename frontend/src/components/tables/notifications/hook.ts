@@ -1,6 +1,6 @@
 import { useMemo, createElement } from "react";
 import { useTranslation } from "react-i18next";
-import { usePagedQuery } from "@/components/PagedTable/hook";
+import { usePagedQuery } from "@/components/tables/shared/PagedTable/hook";
 import { container } from "@/lib/inversifyJS/index.container";
 import { SERVICE_TOKENS } from "@/shared/di/tokens.services";
 import type { IGetNotificationPagedService } from "@/modules/notifications/services/contracts/get-paged";
@@ -11,7 +11,7 @@ import { useGetUnreadNotificationCount } from "@/modules/notifications/query-hoo
 import { useMarkNotificationAsRead } from "@/modules/notifications/query-hooks/mutation/use-mark-as-read";
 import { useMarkAllNotificationsAsRead } from "@/modules/notifications/query-hooks/mutation/use-mark-all-as-read";
 import { notificationTableColumns } from "./columns";
-import type { INotification } from "@/modules/notifications/entity/notification.entity";
+import type { NotificationDto } from "@/modules/notifications/dto/notification.dto";
 import { TANSTACK_QUERY_KEYS } from "@/lib/tanstack/query-keys";
 import { LuCheck, LuCheckCheck } from "react-icons/lu";
 
@@ -45,9 +45,9 @@ export function useNotificationsPagedTable() {
   const columns = useMemo(() => notificationTableColumns(t), [t]);
   const actions = useMemo(
     () => ({
-      markAsRead: (notification: INotification) => markAsRead(notification.id),
+      markAsRead: (notification: NotificationDto) => markAsRead(notification.id),
       visibilityAction: {
-        markAsRead: (notification: INotification) => notification.read === false,
+        markAsRead: (notification: NotificationDto) => notification.read === false,
       },
       tooltips: {
         markAsRead: () => t("general.actions.markAsRead"),
@@ -56,7 +56,7 @@ export function useNotificationsPagedTable() {
         markAsRead: () => t("notifications.messages.markRead"),
       },
       actionIcons: {
-        markAsRead: (notification: INotification) =>
+        markAsRead: (notification: NotificationDto) =>
           notification.read
             ? createElement(LuCheckCheck, { className: "h-4 w-4" })
             : createElement(LuCheck, { className: "h-4 w-4" }),

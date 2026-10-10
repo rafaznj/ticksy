@@ -1,0 +1,114 @@
+import { useEffect, useMemo } from "react";
+
+import { useAppForm } from "@/hooks/use-app-form";
+import { container } from "@/lib/inversifyJS/index.container";
+import { DIALOG_KEYS } from "@/shared/constants/dialog-keys";
+import { SERVICE_TOKENS } from "@/shared/di/tokens.services";
+import { useStore } from "@tanstack/react-form";
+import { useTranslation } from "react-i18next";
+import { useDialog } from "@/hooks/use-dialog";
+import type { TicketDto } from "@/modules/ticket/dtos/ticket.dto";
+import type { IUpdateTicketService } from "@/modules/ticket/services/contracts/update";
+import { useUpdateTicket } from "@/modules/ticket/query-hooks/mutation/use-update";
+import type { EditTicketFormProps } from "@/forms/ticket/edit/types";
+import { editTicketFormSchema } from "@/forms/ticket/edit/validations";
+import { TicketPriorityEnum } from "@/modules/ticket/enums/priority.enum";
+import { TicketCategoryEnum } from "@/modules/ticket/enums/category.enum";
+
+export function useEditTicketForm() {
+  const { t } = useTranslation();
+
+  const { isOpen, data: selectedTicket, close } = useDialog<TicketDto>(DIALOG_KEYS.UPDATE_TICKET);
+
+  const updateTicketService = container.get<IUpdateTicketService>(
+    SERVICE_TOKENS.UpdateTicketService,
+  );
+
+  const { mutateAsync: updateTicket } = useUpdateTicket(updateTicketService);
+
+  const categoryOptions = useMemo(
+    () => [
+      { value: TicketCategoryEnum.ACCESS, label: t("ticket.fields.category.options.access") },
+      {
+        value: TicketCategoryEnum.ACCOUNT,
+        label: t("ticket.fields.category.options.account"),
+      },
+      { value: TicketCategoryEnum.HARDWARE, label: t("ticket.fields.category.options.hardware") },
+      {
+        value: TicketCategoryEnum.SOFTWARE,
+        label: t("ticket.fields.category.options.software"),
+      },
+      {
+        value: TicketCategoryEnum.OTHER,
+        label: t("ticket.fields.category.options.other"),
+      },
+    ],
+    [t],
+  );
+
+  const priorityOptions = useMemo(
+    () => [
+      { value: TicketPriorityEnum.LOW, label: t("ticket.priority.low") },
+      { value: TicketPriorityEnum.MEDIUM, label: t("ticket.priority.medium") },
+      { value: TicketPriorityEnum.HIGH, label: t("ticket.priority.high") },
+      { value: TicketPriorityEnum.URGENT, label: t("ticket.priority.urgent") },
+    ],
+    [t],
+  );
+
+  const form = useAppForm({
+    defaultValues: {
+      title: selectedTicket?.title,
+      description: selectedTicket?.description,
+      priority: selectedTicket?.priority,
+    } as EditTicketFormProps,
+    validators: {
+      onBlur: editTicketFormSchema(t),
+    },
+    onSubmit: async ({ value }) => {
+      if (!selectedTicket?.id) return;
+
+      await updateTicket({
+        id: selectedTicket.id,
+        data: value,
+      });
+
+      close();
+    },
+  });
+
+  useEffect(() => {
+    if (isOpen && selectedTicket) {
+      form.reset({
+        title: selectedTicket.title,
+        description: selectedTicket.description,
+        priority: selectedTicket.priority,
+      });
+    }
+  }, [form, isOpen, selectedTicket]);
+
+  const [canSubmit, isSubmitting, isBlurred] = useStore(form.store, (state) => [
+    state.canSubmit,
+    state.isSubmitting,
+    state.isBlurred,
+  ]);
+
+  const handleSubmit = async (event?: React.FormEvent<HTMLFormElement>) => {
+    event?.preventDefault();
+    event?.stopPropagation();
+    await form.handleSubmit();
+  };
+
+  return {
+    t,
+    isOpen,
+    form,
+    categoryOptions,
+    priorityOptions,
+    canSubmit,
+    isSubmitting,
+    isBlurred,
+    close,
+    handleSubmit,
+  };
+}

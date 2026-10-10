@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import type { IMarkNotificationAsReadService } from "@/modules/notifications/services/contracts/mark-as-read";
-import handleMutationResponse from "@/shared/response/handle-mutation-response";
+import handleMutationResponse from "@/shared/interfaces/handle-mutation-response";
 import { TANSTACK_QUERY_KEYS } from "@/lib/tanstack/query-keys";
 import { toast } from "sonner";
 import { t } from "i18next";

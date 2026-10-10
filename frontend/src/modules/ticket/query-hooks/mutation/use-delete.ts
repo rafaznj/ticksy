@@ -2,7 +2,7 @@ import queryClient from "@/lib/tanstack/query-client";
 import { TANSTACK_QUERY_KEYS } from "@/lib/tanstack/query-keys";
 import type { IDeleteTicketService } from "@/modules/ticket/services/contracts/delete";
 import { handleMutationError } from "@/shared/errors/handle-mutation-error";
-import handleMutationResponse from "@/shared/response/handle-mutation-response";
+import handleMutationResponse from "@/shared/interfaces/handle-mutation-response";
 import { useMutation } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";

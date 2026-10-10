@@ -1,4 +1,4 @@
-import type { INotification } from "@/modules/notifications/entity/notification.entity";
+import type { NotificationDto } from "@/modules/notifications/dto/notification.dto";
 import type { IGetNotificationPagedRepository } from "@/modules/notifications/repositories/contracts/get-paged";
 import type { IGetNotificationPagedService } from "@/modules/notifications/services/contracts/get-paged";
 import { BaseGetPagedService } from "@/shared/base/services/get-paged.service";
@@ -7,7 +7,7 @@ import { inject, injectable } from "inversify";
 
 @injectable()
 export class GetNotificationPagedService
-  extends BaseGetPagedService<INotification>
+  extends BaseGetPagedService<NotificationDto>
   implements IGetNotificationPagedService
 {
   constructor(

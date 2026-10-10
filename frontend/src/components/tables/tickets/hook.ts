@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { usePagedQuery } from "@/components/PagedTable/hook";
+import { usePagedQuery } from "@/components/tables/shared/PagedTable/hook";
 import { container } from "@/lib/inversifyJS/index.container";
 import { enumToLabels } from "@/shared/utils/enum-to-labels";
 import { SERVICE_TOKENS } from "@/shared/di/tokens.services";
@@ -11,8 +11,8 @@ import { TicketStatusEnum } from "@/modules/ticket/enums/status.enum";
 import type { TicketPagedDto } from "@/modules/ticket/dtos/paged.dto";
 import { useAuthStore } from "@/lib/zustand/use-auth";
 import { UserRoleEnum } from "@/modules/user/enums/role.enum";
-import { useDialog } from "@/contexts/use-dialog";
-import type { TicketEntity } from "@/modules/ticket/entity/ticket.entity";
+import { useDialog } from "@/hooks/use-dialog";
+import type { TicketDto } from "@/modules/ticket/dtos/ticket.dto";
 import { DIALOG_KEYS } from "@/shared/constants/dialog-keys";
 import { ticketTableColumns } from "@/components/tables/tickets/columns";
 import type { IResolvedTicketService } from "@/modules/ticket/services/contracts/resolved";
@@ -27,7 +27,23 @@ export function useTicketsPagedTable() {
   const ticketsRoute = getRouteApi("/_authenticated/tickets");
   const { status: statusFromRoute } = ticketsRoute.useSearch();
   const [status, setStatus] = useState<TicketStatusEnum | "all">(statusFromRoute ?? "all");
-  const filters = useMemo(() => (status === "all" ? {} : { status }), [status]);
+  const [priority, setPriority] = useState<TicketPriorityEnum | "all">("all");
+  const [category, setCategory] = useState<TicketCategoryEnum | "all">("all");
+  // const filters = useMemo(() => (status === "all" ? {} : { status }), [status]);
+
+  const filters = useMemo(() => {
+    const filter: Record<string, unknown> = {};
+    if (status !== "all") {
+      filter.status = status;
+    }
+    if (priority !== "all") {
+      filter.priority = priority;
+    }
+    if (category !== "all") {
+      filter.category = category;
+    }
+    return filter;
+  }, [status, priority, category]);
 
   const getTicketPagedWithScopeService = container.get<IGetTicketPagedWithScopeService>(
     SERVICE_TOKENS.GetTicketPagedWithScopeService,
@@ -54,10 +70,10 @@ export function useTicketsPagedTable() {
     filters,
   });
 
-  const { open: openEditTicket } = useDialog<TicketEntity>(DIALOG_KEYS.UPDATE_TICKET);
-  const { open: openDeleteTicket } = useDialog<TicketEntity>(DIALOG_KEYS.DELETE_TICKET);
-  const { open: openAssignTicket } = useDialog<TicketEntity>(DIALOG_KEYS.ASSIGN_TICKET);
-  const { open: openUnassignTicket } = useDialog<TicketEntity>(DIALOG_KEYS.UNASSIGN_TICKET);
+  const { open: openEditTicket } = useDialog<TicketDto>(DIALOG_KEYS.UPDATE_TICKET);
+  const { open: openDeleteTicket } = useDialog<TicketDto>(DIALOG_KEYS.DELETE_TICKET);
+  const { open: openAssignTicket } = useDialog<TicketDto>(DIALOG_KEYS.ASSIGN_TICKET);
+  const { open: openUnassignTicket } = useDialog<TicketDto>(DIALOG_KEYS.UNASSIGN_TICKET);
 
   const resolvedTicketService = container.get<IResolvedTicketService>(
     SERVICE_TOKENS.ResolvedTicketService,
@@ -71,6 +87,16 @@ export function useTicketsPagedTable() {
   const statusFilterOptions = useMemo(
     () => Object.values(TicketStatusEnum).map((value) => ({ value, label: statusLabels[value] })),
     [statusLabels],
+  );
+  const priorityFilterOptions = useMemo(
+    () =>
+      Object.values(TicketPriorityEnum).map((value) => ({ value, label: priorityLabels[value] })),
+    [priorityLabels],
+  );
+  const categoryFilterOptions = useMemo(
+    () =>
+      Object.values(TicketCategoryEnum).map((value) => ({ value, label: categoryLabels[value] })),
+    [categoryLabels],
   );
 
   const isAdmin = user?.role === UserRoleEnum.ADMIN;
@@ -121,7 +147,7 @@ export function useTicketsPagedTable() {
           ticket.status === TicketStatusEnum.RESOLVED
             ? t("ticket.table.unableTooltips.resolved")
             : t("ticket.table.unableTooltips.edit"),
-        delete: () => t("ticket.table.unableTooltips.deleteAssigned"),
+        delete: () => t("ticket.table.unableTooltips.delete"),
         assign: (ticket: TicketPagedDto) =>
           ticket.assignedToId
             ? t("ticket.messages.errors.alreadyAssigned")
@@ -166,13 +192,19 @@ export function useTicketsPagedTable() {
     pageSize,
     t,
     status,
+    priority,
+    category,
     statusLabels,
     statusFilterOptions,
+    priorityFilterOptions,
+    categoryFilterOptions,
     setSearch,
     onSortingChange,
     setPageSize,
     nextPage,
     previousPage,
     setStatus,
+    setPriority,
+    setCategory,
   };
 }

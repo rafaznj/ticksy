@@ -9,7 +9,7 @@ const Toaster = ({ ...props }: ToasterProps) => {
     <Sonner
       theme={theme as ToasterProps["theme"]}
       className="toaster group"
-      position="top-right"
+      position="top-center"
       closeButton={true}
       icons={{
         success: <LuCircleCheck className="size-5 text-emerald-500" />,

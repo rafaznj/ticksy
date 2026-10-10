@@ -1,11 +1,11 @@
-import { PagedTable } from "@/components/PagedTable";
+import { PagedTable } from "@/components/tables/shared/PagedTable";
 import { useUsersPagedTable } from "./hook";
-import { EditUserForm } from "@/components/forms/user/edit";
-import { DeactivateUserForm } from "@/components/forms/user/deactivate";
-import { ActivateUserForm } from "@/components/forms/user/activate";
-import { LuUserPlus } from "react-icons/lu";
+import { EditUserForm } from "@/forms/user/edit";
+import { DeactivateUserForm } from "@/forms/user/deactivate";
+import { ActivateUserForm } from "@/forms/user/activate";
 import type { UserRoleEnum } from "@/modules/user/enums/role.enum";
-import { CreateUserForm } from "@/components/forms/user/create";
+import { InviteUserForm } from "@/forms/user/invite";
+import { LuMail } from "react-icons/lu";
 
 export function UsersPagedTable() {
   const {
@@ -74,14 +74,14 @@ export function UsersPagedTable() {
         ]}
         headerButtons={[
           {
-            icon: <LuUserPlus />,
-            label: t("user.table.actions.create"),
+            icon: <LuMail />,
+            label: t("user.table.actions.invite"),
             onClick: () => openCreateUser(),
           },
         ]}
       />
 
-      <CreateUserForm />
+      <InviteUserForm />
       <EditUserForm />
       <ActivateUserForm />
       <DeactivateUserForm />

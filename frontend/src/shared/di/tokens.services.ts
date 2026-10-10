@@ -7,6 +7,8 @@ export const SERVICE_TOKENS = {
 
   // User
   CreateUserService: Symbol.for("CreateUserService"),
+  InviteUserService: Symbol.for("InviteUserService"),
+  ConfirmPasswordService: Symbol.for("ConfirmPasswordService"),
   UpdateUserService: Symbol.for("UpdateUserService"),
   DeactivateUserService: Symbol.for("DeactivateUserService"),
   ActivateUserService: Symbol.for("ActivateUserService"),

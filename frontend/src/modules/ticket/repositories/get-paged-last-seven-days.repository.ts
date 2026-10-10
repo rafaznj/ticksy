@@ -1,12 +1,14 @@
 import { inject, injectable } from "inversify";
-import type { PagedParamsQuery } from "@/shared/types/paged-params-query";
-import type { PagedResponse } from "@/shared/types/paged-response";
-import type { AppError } from "@/shared/errors/app-error";
-import { handleRepositoryResponse } from "@/shared/response/handle-repository-response";
+
 import { INFRASTRUCTURE_TOKENS } from "@/shared/di/tokens.infrastructure";
 import type { AxiosSingleton } from "@/lib/axios/axios-singleton";
 import type { IGetTicketPagedLastSevenDaysRepository } from "@/modules/ticket/repositories/contracts/get-paged-last-seven-days";
 import type { TicketPagedLastSevenDaysDTO } from "@/modules/ticket/dtos/paged-last-seven-day";
+import type { AppError } from "@/shared/errors/app-error";
+import type { APIResponse } from "@/shared/interfaces/api-response";
+import { handleRepositoryResponse } from "@/shared/interfaces/handle-repository-response";
+import type { PagedParamsQuery } from "@/components/tables/shared/interfaces/paged-params-query";
+import type { PagedResponse } from "@/components/tables/shared/interfaces/paged-response";
 
 @injectable()
 export class GetTicketPagedLastSevenDaysRepository implements IGetTicketPagedLastSevenDaysRepository {
@@ -19,9 +21,9 @@ export class GetTicketPagedLastSevenDaysRepository implements IGetTicketPagedLas
 
   async execute(
     params: PagedParamsQuery,
-  ): Promise<PagedResponse<TicketPagedLastSevenDaysDTO> | AppError> {
+  ): Promise<APIResponse<PagedResponse<TicketPagedLastSevenDaysDTO>> | AppError> {
     const response = await this.axiosSingleton.client.get<
-      PagedResponse<TicketPagedLastSevenDaysDTO>
+      APIResponse<PagedResponse<TicketPagedLastSevenDaysDTO>>
     >(`${this.basePath}/get-paged-last-seven-days`, {
       params,
     });

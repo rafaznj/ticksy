@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import handleQueryResponse from "@/shared/response/handle-query-response";
+import handleQueryResponse from "@/shared/interfaces/handle-query-response";
 import type { IGetUnreadNotificationCountService } from "@/modules/notifications/services/contracts/get-unread-count";
 import { TANSTACK_QUERY_KEYS } from "@/lib/tanstack/query-keys";
 

@@ -3,7 +3,7 @@ import type { TFunction } from "i18next";
 import { Trans } from "react-i18next";
 import { cn } from "@/lib/utils";
 import { formatDate } from "@/shared/utils/format-date";
-import type { INotification } from "@/modules/notifications/entity/notification.entity";
+import type { NotificationDto } from "@/modules/notifications/dto/notification.dto";
 import { TicketStatusEnum } from "@/modules/ticket/enums/status.enum";
 
 const statusKeys = {
@@ -29,7 +29,7 @@ const messageComponents = {
   ),
 };
 
-export function notificationTableColumns(t: TFunction): ColumnDef<INotification>[] {
+export function notificationTableColumns(t: TFunction): ColumnDef<NotificationDto>[] {
   const messageKeys = {
     ticket_assigned: "notifications.messages.types.ticket_assigned",
     ticket_created: "notifications.messages.types.ticket_created",

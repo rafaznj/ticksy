@@ -1,5 +1,6 @@
 import type { AppError } from "@/shared/errors/app-error";
+import type { APIResponse } from "@/shared/interfaces/api-response";
 
 export interface ILogoutRepository {
-  execute(): Promise<void | AppError>;
+  execute(): Promise<APIResponse<void> | AppError>;
 }

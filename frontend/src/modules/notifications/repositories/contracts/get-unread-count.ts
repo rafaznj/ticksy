@@ -1,6 +1,7 @@
-import type { INotificationCount } from "@/modules/notifications/entity/notification-count";
+import type { NotificationCountDto } from "@/modules/notifications/dto/count.dto";
 import type { AppError } from "@/shared/errors/app-error";
+import type { APIResponse } from "@/shared/interfaces/api-response";
 
 export interface IGetUnreadNotificationCountRepository {
-  execute: () => Promise<INotificationCount | AppError>;
+  execute: () => Promise<APIResponse<NotificationCountDto> | AppError>;
 }

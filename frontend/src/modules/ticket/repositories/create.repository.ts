@@ -1,13 +1,13 @@
 import { injectable, injectFromBase } from "inversify";
 import { BaseCreateRepository } from "@/shared/base/repositories/create.repository";
-import type { CreateTicketDto } from "../dtos/create.dto";
-import type { TicketEntity } from "../entity/ticket.entity";
+import type { TicketDto } from "../dtos/ticket.dto";
 import type { ICreateTicketRepository } from "./contracts/create";
+import type { CreateTicketData } from "@/modules/ticket/data/create.data";
 
 @injectFromBase()
 @injectable()
 export class CreateTicketRepository
-  extends BaseCreateRepository<CreateTicketDto, TicketEntity>
+  extends BaseCreateRepository<CreateTicketData, TicketDto>
   implements ICreateTicketRepository
 {
   constructor() {

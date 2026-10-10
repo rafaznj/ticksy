@@ -4,7 +4,8 @@ import type { AxiosSingleton } from "@/lib/axios/axios-singleton";
 import type { ILogoutRepository } from "./contracts/logout";
 import { INFRASTRUCTURE_TOKENS } from "@/shared/di/tokens.infrastructure";
 import type { AppError } from "@/shared/errors/app-error";
-import { handleRepositoryResponse } from "@/shared/response/handle-repository-response";
+import { handleRepositoryResponse } from "@/shared/interfaces/handle-repository-response";
+import type { APIResponse } from "@/shared/interfaces/api-response";
 
 @injectable()
 export class LogoutRepository implements ILogoutRepository {
@@ -15,8 +16,10 @@ export class LogoutRepository implements ILogoutRepository {
     private readonly axiosSingleton: AxiosSingleton,
   ) {}
 
-  async execute(): Promise<void | AppError> {
-    const response = await this.axiosSingleton.client.post(`${this.basePath}/logout`);
+  async execute(): Promise<APIResponse<void> | AppError> {
+    const response = await this.axiosSingleton.client.post<APIResponse<void> | AppError>(
+      `${this.basePath}/logout`,
+    );
 
     return handleRepositoryResponse(response);
   }

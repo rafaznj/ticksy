@@ -1,6 +1,6 @@
 export const DIALOG_KEYS = {
   // User
-  CREATE_USER: "create-user",
+  INVITE_USER: "invite-user",
   UPDATE_USER: "update-user",
   PROFILE_EDIT: "profile-edit",
   DEACTIVATE_USER: "deactivate-user",

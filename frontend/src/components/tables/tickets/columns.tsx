@@ -3,7 +3,6 @@ import { Badge } from "@/components/ui/badge";
 import { formatDate } from "@/shared/utils/format-date";
 import type { TicketPagedDto } from "@/modules/ticket/dtos/paged.dto";
 import { t } from "i18next";
-import { TruncatedCell } from "@/components/TruncatedCell";
 import {
   ticketCategoryStyles,
   ticketPriorityStyles,
@@ -31,13 +30,13 @@ export function ticketTableColumns({
       accessorKey: "title",
       header: t("ticket.table.columns.title"),
       enableSorting: true,
-      cell: ({ row }) => <TruncatedCell text={row.original.title} />,
+      cell: ({ row }) => row.original.title,
     },
     {
       accessorKey: "description",
       header: t("ticket.table.columns.description"),
       enableSorting: false,
-      cell: ({ row }) => <TruncatedCell text={row.original.description} />,
+      cell: ({ row }) => row.original.description,
     },
     {
       accessorKey: "status",
@@ -84,16 +83,14 @@ export function ticketTableColumns({
     {
       accessorKey: "createdByName",
       header: t("ticket.table.columns.createdByName"),
-      cell: ({ row }) => <TruncatedCell text={row.original.createdByName} />,
+      cell: ({ row }) => row.original.createdByName,
       enableSorting: false,
       disabled: !isAdmin && !isTechnicalAssistance,
     },
     {
       accessorKey: "assignedToName",
       header: t("ticket.table.columns.assignedToName"),
-      cell: ({ row }) => (
-        <TruncatedCell text={row.original.assignedToName ?? t("ticket.table.unassigned")} />
-      ),
+      cell: ({ row }) => row.original.assignedToName ?? t("ticket.table.unassigned"),
       enableSorting: false,
     },
     {

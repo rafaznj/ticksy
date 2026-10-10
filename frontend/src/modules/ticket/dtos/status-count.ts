@@ -1,4 +1,4 @@
-export interface StatusCountDTO {
+export interface TicketStatusCountDTO {
   open: number;
   inProgress: number;
   resolved: number;

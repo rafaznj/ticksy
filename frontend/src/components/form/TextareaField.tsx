@@ -2,7 +2,7 @@ import { useEffect, type ComponentProps } from "react";
 
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { useFieldContext } from "@/hooks/use-form";
+import { useFieldContext } from "@/hooks/use-app-form";
 import { FieldErrors } from "@/components/form/FieldErrors";
 
 interface TextareaFieldProps extends Omit<

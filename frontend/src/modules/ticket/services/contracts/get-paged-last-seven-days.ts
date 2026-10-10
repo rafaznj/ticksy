@@ -1,8 +1,4 @@
 import type { TicketPagedLastSevenDaysDTO } from "@/modules/ticket/dtos/paged-last-seven-day";
-import type { AppError } from "@/shared/errors/app-error";
-import type { PagedParamsQuery } from "@/shared/types/paged-params-query";
-import type { PagedResponse } from "@/shared/types/paged-response";
+import type { IBaseGetPagedService } from "@/shared/base/services/contracts/get-paged";
 
-export interface IGetTicketPagedLastSevenDaysService {
-  execute(params: PagedParamsQuery): Promise<PagedResponse<TicketPagedLastSevenDaysDTO> | AppError>;
-}
+export interface IGetTicketPagedLastSevenDaysService extends IBaseGetPagedService<TicketPagedLastSevenDaysDTO> {}

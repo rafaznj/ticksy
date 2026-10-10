@@ -1,4 +1,6 @@
+import type { UserDto } from "@/modules/user/dto/user.dto";
+
 export interface LoginDto {
-  email: string;
-  password: string;
+  accessToken: string;
+  user: UserDto;
 }

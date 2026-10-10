@@ -1,13 +1,13 @@
 import { injectable, injectFromBase } from "inversify";
 import { BaseCreateRepository } from "@/shared/base/repositories/create.repository";
-import type { CreateUserDto } from "../dto/create.dto";
-import type { UserEntity } from "../entity/user.entity";
+import type { UserDto } from "../dto/user.dto";
 import type { ICreateUserRepository } from "./contracts/create";
+import type { CreateUserData } from "@/modules/user/data/create.data";
 
 @injectFromBase()
 @injectable()
 export class CreateUserRepository
-  extends BaseCreateRepository<CreateUserDto, UserEntity>
+  extends BaseCreateRepository<CreateUserData, UserDto>
   implements ICreateUserRepository
 {
   constructor() {

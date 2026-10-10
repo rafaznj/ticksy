@@ -1,14 +1,14 @@
 import { BaseCreateService } from "@/shared/base/services/create.service";
 import { REPOSITORY_TOKENS } from "@/shared/di/tokens.repositories";
-import type { CreateUserDto } from "../dto/create.dto";
-import type { UserEntity } from "../entity/user.entity";
+import type { UserDto } from "../dto/user.dto";
 import type { ICreateUserRepository } from "../repositories/contracts/create";
 import type { ICreateUserService } from "./contracts/create";
 import { inject, injectable } from "inversify";
+import type { CreateUserData } from "@/modules/user/data/create.data";
 
 @injectable()
 export class CreateUserService
-  extends BaseCreateService<CreateUserDto, UserEntity>
+  extends BaseCreateService<CreateUserData, UserDto>
   implements ICreateUserService
 {
   constructor(

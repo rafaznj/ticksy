@@ -1,9 +1,11 @@
 import type { AxiosSingleton } from "@/lib/axios/axios-singleton";
-import type { StatusCountDTO } from "@/modules/ticket/dtos/status-count";
+import type { TicketStatusCountDTO } from "@/modules/ticket/dtos/status-count";
 import type { IGetTicketStatusCountRepository } from "@/modules/ticket/repositories/contracts/get-status-count";
 import { INFRASTRUCTURE_TOKENS } from "@/shared/di/tokens.infrastructure";
 import type { AppError } from "@/shared/errors/app-error";
-import { handleRepositoryResponse } from "@/shared/response/handle-repository-response";
+import type { APIResponse } from "@/shared/interfaces/api-response";
+import { handleRepositoryResponse } from "@/shared/interfaces/handle-repository-response";
+
 import { inject, injectable } from "inversify";
 
 @injectable()
@@ -15,8 +17,8 @@ export class GetTicketStatusCountRepository implements IGetTicketStatusCountRepo
     private readonly axios: AxiosSingleton,
   ) {}
 
-  async execute(): Promise<StatusCountDTO[] | AppError> {
-    const response = await this.axios.client.get<StatusCountDTO[]>(
+  async execute(): Promise<APIResponse<TicketStatusCountDTO[]> | AppError> {
+    const response = await this.axios.client.get<APIResponse<TicketStatusCountDTO[]>>(
       `${this.basePath}/get-status-count`,
     );
 

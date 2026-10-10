@@ -1,7 +1,7 @@
 import { inject, injectable } from "inversify";
 import { REPOSITORY_TOKENS } from "@/shared/di/tokens.repositories";
 import { AppError } from "@/shared/errors/app-error";
-import { handleServiceResponse } from "@/shared/response/handle-service-response";
+import { handleServiceResponse } from "@/shared/interfaces/handle-service-response";
 import type { IActivateUserRepository } from "@/modules/user/repositories/contracts/activate";
 import type { IActivateUserService } from "@/modules/user/services/contracts/activate";
 

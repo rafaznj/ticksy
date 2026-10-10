@@ -1,7 +1,7 @@
-import type { LoginResponse } from "@/modules/auth/dto/login-response";
+import type { LoginData } from "@/modules/auth/data/login.data";
 import type { LoginDto } from "@/modules/auth/dto/login.dto";
 import type { AppError } from "@/shared/errors/app-error";
 
 export interface ILoginService {
-  execute(data: LoginDto): Promise<LoginResponse | AppError>;
+  execute(data: LoginData): Promise<LoginDto | AppError>;
 }

@@ -1,4 +1,4 @@
-import { PagedTable } from "@/components/PagedTable";
+import { PagedTable } from "@/components/tables/shared/PagedTable";
 import { useNotificationsPagedTable } from "./hook";
 import { Button } from "@/components/ui/button";
 import { LuCheck } from "react-icons/lu";

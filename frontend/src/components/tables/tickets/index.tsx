@@ -1,9 +1,11 @@
-import { AssignTicketForm } from "@/components/forms/ticket/assign";
-import { DeleteTicketForm } from "@/components/forms/ticket/delete";
-import { EditTicketForm } from "@/components/forms/ticket/edit";
-import { UnassignTicketForm } from "@/components/forms/ticket/unassign";
-import { PagedTable } from "@/components/PagedTable";
+import { AssignTicketForm } from "@/forms/ticket/assign";
+import { DeleteTicketForm } from "@/forms/ticket/delete";
+import { EditTicketForm } from "@/forms/ticket/edit";
+import { UnassignTicketForm } from "@/forms/ticket/unassign";
+import { PagedTable } from "@/components/tables/shared/PagedTable";
 import { useTicketsPagedTable } from "@/components/tables/tickets/hook";
+import type { TicketCategoryEnum } from "@/modules/ticket/enums/category.enum";
+import type { TicketPriorityEnum } from "@/modules/ticket/enums/priority.enum";
 import { TicketStatusEnum } from "@/modules/ticket/enums/status.enum";
 
 export function TicketsPagedTable() {
@@ -22,13 +24,19 @@ export function TicketsPagedTable() {
     isError,
     t,
     status,
+    priority,
+    category,
     statusFilterOptions,
+    priorityFilterOptions,
+    categoryFilterOptions,
     onSortingChange,
     setPageSize,
     setSearch,
     nextPage,
     previousPage,
     setStatus,
+    setPriority,
+    setCategory,
   } = useTicketsPagedTable();
 
   return (
@@ -59,6 +67,18 @@ export function TicketsPagedTable() {
             onChange: (value) => setStatus(value as TicketStatusEnum | "all"),
             options: statusFilterOptions,
             allLabel: t("ticket.table.filterByStatus"),
+          },
+          {
+            value: priority,
+            onChange: (value) => setPriority(value as TicketPriorityEnum | "all"),
+            options: priorityFilterOptions,
+            allLabel: t("ticket.table.filterByPriority"),
+          },
+          {
+            value: category,
+            onChange: (value) => setCategory(value as TicketCategoryEnum | "all"),
+            options: categoryFilterOptions,
+            allLabel: t("ticket.table.filterByCategory"),
           },
         ]}
       />

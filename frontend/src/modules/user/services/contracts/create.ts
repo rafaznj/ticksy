@@ -1,5 +1,5 @@
 import type { IBaseCreateService } from "@/shared/base/services/contracts/create";
-import type { CreateUserDto } from "../../dto/create.dto";
-import type { UserEntity } from "../../entity/user.entity";
+import type { UserDto } from "../../dto/user.dto";
+import type { CreateUserData } from "@/modules/user/data/create.data";
 
-export type ICreateUserService = IBaseCreateService<CreateUserDto, UserEntity>;
+export interface ICreateUserService extends IBaseCreateService<CreateUserData, UserDto> {}

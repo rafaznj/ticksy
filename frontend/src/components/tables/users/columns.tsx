@@ -2,25 +2,26 @@ import type { ColumnDef } from "@tanstack/react-table";
 import { Badge } from "@/components/ui/badge";
 import { formatDate } from "@/shared/utils/format-date";
 import { t } from "i18next";
-import type { UserEntity } from "@/modules/user/entity/user.entity";
-import { TruncatedCell } from "@/components/TruncatedCell";
 import { userActiveStyles, userRoleStyles } from "@/shared/constants/enum-styles";
+import type { UserPagedDto } from "@/modules/user/dto/user-paged.dto";
 
 interface userTableColumnsParams {
   roleLabels: Record<string, string>;
 }
 
-export function userTableColumns({ roleLabels }: userTableColumnsParams): ColumnDef<UserEntity>[] {
-  const columns: ColumnDef<UserEntity>[] = [
+export function userTableColumns({
+  roleLabels,
+}: userTableColumnsParams): ColumnDef<UserPagedDto>[] {
+  const columns: ColumnDef<UserPagedDto>[] = [
     {
       accessorKey: "name",
       header: t("user.table.columns.name"),
-      cell: ({ row }) => <TruncatedCell text={row.original.name} maxLength={20} />,
+      cell: ({ row }) => row.original.name,
     },
     {
       accessorKey: "email",
       header: t("user.table.columns.email"),
-      cell: ({ row }) => <TruncatedCell text={row.original.email} maxLength={25} />,
+      cell: ({ row }) => row.original.email,
     },
     {
       accessorKey: "role",
@@ -35,16 +36,6 @@ export function userTableColumns({ roleLabels }: userTableColumnsParams): Column
       ),
     },
     {
-      accessorKey: "createdAt",
-      header: t("user.table.columns.created_at"),
-      cell: ({ row }) => formatDate(row.original.createdAt),
-    },
-    {
-      accessorKey: "updatedAt",
-      header: t("user.table.columns.updated_at"),
-      cell: ({ row }) => formatDate(row.original.updatedAt),
-    },
-    {
       accessorKey: "isActive",
       header: t("user.table.columns.isActive"),
       cell: ({ row }) => {
@@ -56,6 +47,16 @@ export function userTableColumns({ roleLabels }: userTableColumnsParams): Column
           </Badge>
         );
       },
+    },
+    {
+      accessorKey: "createdAt",
+      header: t("user.table.columns.created_at"),
+      cell: ({ row }) => formatDate(row.original.createdAt),
+    },
+    {
+      accessorKey: "updatedAt",
+      header: t("user.table.columns.updated_at"),
+      cell: ({ row }) => formatDate(row.original.updatedAt),
     },
   ];
 

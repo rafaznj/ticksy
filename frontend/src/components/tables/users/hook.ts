@@ -1,17 +1,17 @@
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { usePagedQuery } from "@/components/PagedTable/hook";
+import { usePagedQuery } from "@/components/tables/shared/PagedTable/hook";
 import { container } from "@/lib/inversifyJS/index.container";
 import type { IGetUserPagedService } from "@/modules/user/services/contracts/get-paged";
-import type { UserEntity } from "@/modules/user/entity/user.entity";
 import { enumToLabels } from "@/shared/utils/enum-to-labels";
 import { DIALOG_KEYS } from "@/shared/constants/dialog-keys";
 import { SERVICE_TOKENS } from "@/shared/di/tokens.services";
 import { UserRoleEnum } from "@/modules/user/enums/role.enum";
-import { useDialog } from "@/contexts/use-dialog";
+import { useDialog } from "@/hooks/use-dialog";
 import { userTableColumns } from "@/components/tables/users/columns";
 import { TANSTACK_QUERY_KEYS } from "@/lib/tanstack/query-keys";
+import type { UserPagedDto } from "@/modules/user/dto/user-paged.dto";
 
 export function useUsersPagedTable() {
   const { t } = useTranslation();
@@ -50,10 +50,10 @@ export function useUsersPagedTable() {
     SERVICE_TOKENS.GetUserPagedService,
   );
 
-  const { open: openCreateUser } = useDialog<UserEntity>(DIALOG_KEYS.CREATE_USER);
-  const { open: openEditUser } = useDialog<UserEntity>(DIALOG_KEYS.UPDATE_USER);
-  const { open: openActivateUser } = useDialog<UserEntity>(DIALOG_KEYS.ACTIVATE_USER);
-  const { open: openDeactivateUser } = useDialog<UserEntity>(DIALOG_KEYS.DEACTIVATE_USER);
+  const { open: openCreateUser } = useDialog<UserPagedDto>(DIALOG_KEYS.INVITE_USER);
+  const { open: openEditUser } = useDialog<UserPagedDto>(DIALOG_KEYS.UPDATE_USER);
+  const { open: openActivateUser } = useDialog<UserPagedDto>(DIALOG_KEYS.ACTIVATE_USER);
+  const { open: openDeactivateUser } = useDialog<UserPagedDto>(DIALOG_KEYS.DEACTIVATE_USER);
 
   const {
     data,
@@ -82,12 +82,12 @@ export function useUsersPagedTable() {
 
   const actions = useMemo(
     () => ({
-      edit: (user: UserEntity) => openEditUser(user),
-      activate: (user: UserEntity) => openActivateUser(user),
-      deactivate: (user: UserEntity) => openDeactivateUser(user),
+      edit: (user: UserPagedDto) => openEditUser(user),
+      activate: (user: UserPagedDto) => openActivateUser(user),
+      deactivate: (user: UserPagedDto) => openDeactivateUser(user),
       visibilityAction: {
-        activate: (user: UserEntity) => user.deleted === true,
-        deactivate: (user: UserEntity) => user.deleted === false,
+        activate: (user: UserPagedDto) => user.deleted === true,
+        deactivate: (user: UserPagedDto) => user.deleted === false,
       },
       toggleActions: ["activate", "deactivate"] as const,
       tooltips: {

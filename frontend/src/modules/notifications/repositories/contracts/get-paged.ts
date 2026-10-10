@@ -1,4 +1,4 @@
-import type { INotification } from "@/modules/notifications/entity/notification.entity";
+import type { NotificationDto } from "@/modules/notifications/dto/notification.dto";
 import type { IBaseGetPagedRepository } from "@/shared/base/repositories/contracts/get-paged";
 
-export interface IGetNotificationPagedRepository extends IBaseGetPagedRepository<INotification> {}
+export interface IGetNotificationPagedRepository extends IBaseGetPagedRepository<NotificationDto> {}

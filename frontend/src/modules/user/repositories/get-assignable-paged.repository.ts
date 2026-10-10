@@ -1,11 +1,13 @@
 import type { AxiosSingleton } from "@/lib/axios/axios-singleton";
-import type { UserEntity } from "@/modules/user/entity/user.entity";
+import type { UserDto } from "@/modules/user/dto/user.dto";
 import type { IGetAssignableUsersPagedRepository } from "@/modules/user/repositories/contracts/get-assignable-paged";
 import { INFRASTRUCTURE_TOKENS } from "@/shared/di/tokens.infrastructure";
 import type { AppError } from "@/shared/errors/app-error";
-import { handleRepositoryResponse } from "@/shared/response/handle-repository-response";
-import type { PagedParamsQuery } from "@/shared/types/paged-params-query";
-import type { PagedResponse } from "@/shared/types/paged-response";
+import type { APIResponse } from "@/shared/interfaces/api-response";
+import { handleRepositoryResponse } from "@/shared/interfaces/handle-repository-response";
+import type { PagedParamsQuery } from "@/components/tables/shared/interfaces/paged-params-query";
+import type { PagedResponse } from "@/components/tables/shared/interfaces/paged-response";
+
 import { inject, injectable } from "inversify";
 
 @injectable()
@@ -17,8 +19,8 @@ export class GetAssignableUsersPagedRepository implements IGetAssignableUsersPag
     private axiosSingleton: AxiosSingleton,
   ) {}
 
-  async execute(params: PagedParamsQuery): Promise<PagedResponse<UserEntity> | AppError> {
-    const response = await this.axiosSingleton.client.get<PagedResponse<UserEntity>>(
+  async execute(params: PagedParamsQuery): Promise<APIResponse<PagedResponse<UserDto>> | AppError> {
+    const response = await this.axiosSingleton.client.get<APIResponse<PagedResponse<UserDto>>>(
       `${this.basePath}/get-assignable`,
       { params },
     );

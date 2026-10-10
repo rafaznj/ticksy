@@ -2,7 +2,7 @@ import { injectable } from "inversify";
 import type { IBaseGetByIdRepository } from "../repositories/contracts/get-by-id";
 import type { IBaseGetByIdService } from "./contracts/get-by-id";
 import { AppError } from "@/shared/errors/app-error";
-import { handleServiceResponse } from "@/shared/response/handle-service-response";
+import { handleServiceResponse } from "@/shared/interfaces/handle-service-response";
 
 @injectable()
 export class BaseGetByIdService<TOutput> implements IBaseGetByIdService<TOutput> {

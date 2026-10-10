@@ -1,12 +1,12 @@
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 import type { ICreateTicketService } from "@/modules/ticket/services/contracts/create";
-import type { CreateTicketDto } from "@/modules/ticket/dtos/create.dto";
 import { useTranslation } from "react-i18next";
 import { handleMutationError } from "@/shared/errors/handle-mutation-error";
 import queryClient from "@/lib/tanstack/query-client";
-import handleMutationResponse from "@/shared/response/handle-mutation-response";
+import handleMutationResponse from "@/shared/interfaces/handle-mutation-response";
 import { TANSTACK_QUERY_KEYS } from "@/lib/tanstack/query-keys";
+import type { CreateTicketData } from "@/modules/ticket/data/create.data";
 
 interface UseCreateTicketOptions {
   onSuccess?: () => void;
@@ -18,7 +18,7 @@ export function useCreateTicket(
 ) {
   const { t } = useTranslation();
   return useMutation({
-    mutationFn: async (data: CreateTicketDto) => {
+    mutationFn: async (data: CreateTicketData) => {
       const response = await createTicketService.execute(data);
 
       return handleMutationResponse(response);

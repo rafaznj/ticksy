@@ -1,9 +1,11 @@
 import type { AxiosSingleton } from "@/lib/axios/axios-singleton";
-import type { TicketEntity } from "@/modules/ticket/entity/ticket.entity";
+import type { TicketDto } from "@/modules/ticket/dtos/ticket.dto";
 import type { IUnassignTicketRepository } from "@/modules/ticket/repositories/contracts/unassign";
 import { INFRASTRUCTURE_TOKENS } from "@/shared/di/tokens.infrastructure";
 import type { AppError } from "@/shared/errors/app-error";
-import { handleRepositoryResponse } from "@/shared/response/handle-repository-response";
+import type { APIResponse } from "@/shared/interfaces/api-response";
+import { handleRepositoryResponse } from "@/shared/interfaces/handle-repository-response";
+
 import { inject } from "inversify";
 
 export class UnassignTicketRepository implements IUnassignTicketRepository {
@@ -14,8 +16,8 @@ export class UnassignTicketRepository implements IUnassignTicketRepository {
     private axiosSingleton: AxiosSingleton,
   ) {}
 
-  async execute(id: string): Promise<TicketEntity | AppError> {
-    const response = await this.axiosSingleton.client.patch<TicketEntity>(
+  async execute(id: string): Promise<APIResponse<TicketDto> | AppError> {
+    const response = await this.axiosSingleton.client.patch<APIResponse<TicketDto> | AppError>(
       `${this.basePath}/unassign/${id}`,
     );
 

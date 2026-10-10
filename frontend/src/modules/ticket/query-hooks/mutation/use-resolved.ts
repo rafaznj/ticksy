@@ -4,7 +4,7 @@ import { handleMutationError } from "@/shared/errors/handle-mutation-error";
 import { useTranslation } from "react-i18next";
 import queryClient from "@/lib/tanstack/query-client";
 import { TANSTACK_QUERY_KEYS } from "@/lib/tanstack/query-keys";
-import handleMutationResponse from "@/shared/response/handle-mutation-response";
+import handleMutationResponse from "@/shared/interfaces/handle-mutation-response";
 import type { IResolvedTicketService } from "@/modules/ticket/services/contracts/resolved";
 
 export function useResolvedTicket(resolvedTicketService: IResolvedTicketService) {

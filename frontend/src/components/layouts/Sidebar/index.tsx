@@ -1,4 +1,4 @@
-import { CreateTicketForm } from "@/components/forms/ticket/create";
+import { CreateTicketForm } from "@/forms/ticket/create";
 import { AppSidebarFooter } from "@/components/layouts/Sidebar/footer";
 import { useAppSidebar } from "@/components/layouts/Sidebar/hook";
 import {
@@ -13,7 +13,7 @@ import {
   SidebarMenuItem,
   SidebarSeparator,
 } from "@/components/ui/sidebar";
-import { useDialog } from "@/contexts/use-dialog";
+import { useDialog } from "@/hooks/use-dialog";
 import { cn } from "@/lib/utils";
 import { useAuthStore } from "@/lib/zustand/use-auth";
 import { UserRoleEnum } from "@/modules/user/enums/role.enum";
@@ -38,14 +38,14 @@ export function AppSidebar() {
 
   return (
     <Sidebar collapsible="icon" variant="floating">
-      {user?.role !== UserRoleEnum.TECHNICAL_ASSISTANCE && (
+      {user?.role === UserRoleEnum.EMPLOYEE && (
         <SidebarHeader className="px-2 pt-6 pb-4">
           <SidebarMenu>
             <SidebarMenuItem className="flex justify-center">
               <SidebarMenuButton
                 tooltip={t("sidebar.tooltips.newTicket")}
                 onClick={openCreateTicketDialog}
-                className="h-10 gap-2 justify-center rounded-lg bg-primary text-sm text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground px-5 mx-auto group-data-[collapsible=icon]:w-10 group-data-[collapsible=icon]:p-0"
+                className="mx-auto h-10 justify-center gap-2 rounded-lg bg-primary px-5 text-sm text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground max-md:w-fit max-md:px-10 group-data-[collapsible=icon]:w-10 group-data-[collapsible=icon]:p-0"
               >
                 <LuPlus className="size-5 shrink-0" />
               </SidebarMenuButton>

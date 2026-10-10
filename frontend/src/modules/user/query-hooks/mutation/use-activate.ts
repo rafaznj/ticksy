@@ -1,6 +1,6 @@
 import type { IActivateUserService } from "@/modules/user/services/contracts/activate";
 import { handleMutationError } from "@/shared/errors/handle-mutation-error";
-import handleMutationResponse from "@/shared/response/handle-mutation-response";
+import handleMutationResponse from "@/shared/interfaces/handle-mutation-response";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
@@ -17,7 +17,7 @@ export function useActivateUser(activateUserService: IActivateUserService) {
       return handleMutationResponse(response);
     },
     onSuccess: () => {
-      toast.success(t("user.messages.activated"));
+      toast.success(t("user.messages.success.activated"));
 
       queryClient.invalidateQueries({ queryKey: [TANSTACK_QUERY_KEYS.GET_USER_PAGED] });
     },
