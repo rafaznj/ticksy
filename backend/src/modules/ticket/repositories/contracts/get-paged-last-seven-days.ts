@@ -1,11 +1,11 @@
-import { IPagedResult } from "../../../../shared/types/paged-result";
-import { IQueryOptions } from "../../../../shared/types/query-options";
-import { TicketPagedLastSevenDaysModel } from "../../models/ticket-paged-last-seven-day";
-import { TicketScope } from "../../models/ticket-scope";
+import { IPagedResult } from "../../../../shared/interfaces/paged-result";
+import { IQueryOptions } from "../../../../shared/interfaces/query-options";
+import { TicketPagedLastSevenDaysViewModel } from "../../view-models/paged-last-seven-day.vm";
+import { TicketScopeViewModel } from "../../view-models/scope.vm";
 
 export interface IGetTicketPagedLastSevenDaysRepository {
   execute(
     options: IQueryOptions,
-    scope?: TicketScope,
-  ): Promise<IPagedResult<TicketPagedLastSevenDaysModel>>;
+    scope?: TicketScopeViewModel,
+  ): Promise<IPagedResult<TicketPagedLastSevenDaysViewModel>>;
 }

@@ -6,7 +6,8 @@ import { SERVICE_TOKENS } from "../../../shared/di/tokens.services";
 import { AppException } from "../../../shared/exceptions/app-exception";
 import type { IJwtTokenService } from "./contracts/jwt-token";
 import type { ILoginService } from "./contracts/login";
-import type { LoginResult } from "../dto/login-result";
+import { LoginViewModel } from "../view-models/login.vm";
+import { LoginData } from "../data/login.data";
 
 @Injectable()
 export class LoginService implements ILoginService {
@@ -17,9 +18,9 @@ export class LoginService implements ILoginService {
     private readonly jwtTokenService: IJwtTokenService,
   ) {}
 
-  async execute(email: string, password: string): Promise<LoginResult> {
-    const user = await this.getUserByEmailService.execute(email);
-    if (!user || !(await argon2.verify(user.password, password))) {
+  async execute(data: LoginData): Promise<LoginViewModel> {
+    const user = await this.getUserByEmailService.execute(data.email);
+    if (!user || !(await argon2.verify(user.password, data.password))) {
       throw AppException.unauthorized("auth.messages.errors.invalidCredentials");
     }
 

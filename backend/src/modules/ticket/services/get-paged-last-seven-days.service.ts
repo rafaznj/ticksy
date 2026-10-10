@@ -1,13 +1,13 @@
 import { Inject } from "@nestjs/common";
 import type { IGetTicketPagedLastSevenDaysRepository } from "../repositories/contracts/get-paged-last-seven-days";
 import { REPOSITORY_TOKENS } from "../../../shared/di/tokens.repositories";
-import { IQueryOptions } from "../../../shared/types/query-options";
-import { IPagedResult } from "../../../shared/types/paged-result";
-import { TicketPagedLastSevenDaysModel } from "../models/ticket-paged-last-seven-day";
+import { IQueryOptions } from "../../../shared/interfaces/query-options";
+import { TicketPagedLastSevenDaysViewModel } from "../view-models/paged-last-seven-day.vm";
 import { UserRoleEnum } from "../../user/enums/role.enum";
-import { TicketScope } from "../models/ticket-scope";
-import { UserModel } from "../../user/models/user-model";
+import { TicketScopeViewModel } from "../view-models/scope.vm";
+import { UserViewModel } from "../../user/view-models/user.vm";
 import { IGetTicketPagedLastSevenDaysService } from "./contracts/get-paged-last-seven-days";
+import { IPagedResult } from "../../../shared/interfaces/paged-result";
 
 export class GetTicketPagedLastSevenDaysService implements IGetTicketPagedLastSevenDaysService {
   constructor(
@@ -17,8 +17,8 @@ export class GetTicketPagedLastSevenDaysService implements IGetTicketPagedLastSe
 
   async execute(
     options: IQueryOptions,
-    currentUser: Omit<UserModel, "password">,
-  ): Promise<IPagedResult<TicketPagedLastSevenDaysModel>> {
+    currentUser: Omit<UserViewModel, "password">,
+  ): Promise<IPagedResult<TicketPagedLastSevenDaysViewModel>> {
     const scope = this.buildScope(currentUser);
 
     return this.getTicketPagedLastSevenDaysRepository.execute(
@@ -31,7 +31,9 @@ export class GetTicketPagedLastSevenDaysService implements IGetTicketPagedLastSe
     );
   }
 
-  private buildScope(currentUser: Omit<UserModel, "password">): TicketScope | undefined {
+  private buildScope(
+    currentUser: Omit<UserViewModel, "password">,
+  ): TicketScopeViewModel | undefined {
     switch (currentUser.role) {
       case UserRoleEnum.ADMIN:
         return undefined;

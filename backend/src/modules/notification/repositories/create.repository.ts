@@ -2,7 +2,7 @@ import { Inject, Injectable } from "@nestjs/common";
 import { NodePgDatabase } from "drizzle-orm/node-postgres";
 import { notificationRecipients, notifications } from "../../../database/drizzle/schema";
 import { DATABASE_TOKENS } from "../../../database/tokens";
-import type { NotificationEntity } from "../entity/notification.entity";
+import type { NotificationViewModel } from "../view-models/notification.vm";
 import type { ICreateNotificationRepository } from "./contracts/create";
 import { CreateNotificationData } from "../data/create-notification.data";
 
@@ -13,7 +13,7 @@ export class CreateNotificationRepository implements ICreateNotificationReposito
     private readonly db: NodePgDatabase,
   ) {}
 
-  async execute(data: CreateNotificationData): Promise<NotificationEntity> {
+  async execute(data: CreateNotificationData): Promise<NotificationViewModel> {
     return this.db.transaction(async (tx) => {
       const [notification] = await tx
         .insert(notifications)

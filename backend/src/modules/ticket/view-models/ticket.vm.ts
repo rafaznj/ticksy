@@ -2,7 +2,7 @@ import { TicketCategoryEnum } from "../enums/ticket-category.enum";
 import { TicketPriorityEnum } from "../enums/ticket-priority.enum";
 import { TicketStatusEnum } from "../enums/ticket-status.enum";
 
-export interface TicketModel {
+export interface TicketViewModel {
   id: string;
   code: number;
   title: string;
@@ -13,7 +13,7 @@ export interface TicketModel {
   createdById: string;
   createdByName: string;
   assignedToId: string | null;
-  assignedName: string | null;
+  assignedToName: string | null;
   createdAt: Date;
   updatedAt: Date;
 }

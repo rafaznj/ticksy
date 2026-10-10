@@ -4,11 +4,11 @@ import { NodePgDatabase } from "drizzle-orm/node-postgres";
 import { PgTable } from "drizzle-orm/pg-core";
 import { DATABASE_TOKENS } from "../../../database/tokens";
 import { IBaseGetPagedRepository } from "./contracts/get-paged";
-import { IPagedResult } from "../../types/paged-result";
-import { IQueryOptions } from "../../types/query-options";
+import { IQueryOptions } from "../../interfaces/query-options";
 import buildPagedOptions from "../../utils/build-paged-options";
 import { customQueryConditions } from "../../utils/custom-conditions";
 import buildPagedReturn from "../../utils/build-paged-return";
+import { IPagedResult } from "../../interfaces/paged-result";
 
 export class BaseGetPagedRepository<T> implements IBaseGetPagedRepository<T> {
   @Inject(DATABASE_TOKENS.Drizzle)

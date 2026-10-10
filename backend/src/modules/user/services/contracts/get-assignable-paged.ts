@@ -1,7 +1,7 @@
-import type { IPagedResult } from "../../../../shared/types/paged-result";
-import type { IQueryOptions } from "../../../../shared/types/query-options";
-import type { UserModel } from "../../models/user-model";
+import { IPagedResult } from "../../../../shared/interfaces/paged-result";
+import type { IQueryOptions } from "../../../../shared/interfaces/query-options";
+import { UserPagedViewModel } from "../../view-models/user-paged.vm";
 
 export interface IGetAssignableUsersPagedService {
-  execute(options: IQueryOptions): Promise<IPagedResult<UserModel>>;
+  execute(options: IQueryOptions): Promise<IPagedResult<UserPagedViewModel>>;
 }

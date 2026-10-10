@@ -2,7 +2,7 @@ import { Inject } from "@nestjs/common";
 import { eq } from "drizzle-orm";
 import { NodePgDatabase } from "drizzle-orm/node-postgres";
 import { DATABASE_TOKENS } from "../../../database/tokens";
-import { TableWithId } from "../../types/table-with-id.type";
+import { TableWithId } from "../../interfaces/table-with-id.type";
 import { IBaseGetByIdRepository } from "./contracts/get-by-id";
 
 export abstract class BaseGetByIdRepository<T> implements IBaseGetByIdRepository<T> {

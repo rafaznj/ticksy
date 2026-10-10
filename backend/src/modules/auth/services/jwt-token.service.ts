@@ -16,7 +16,11 @@ export class JwtTokenService implements IJwtTokenService {
   ) {}
 
   async create(userId: string, tokenHash: string) {
-    await this.refreshTokenRepository.create(userId, tokenHash);
+    const expiresAt = new Date(
+      Date.now() + this.configService.getOrThrow<number>("jwt.refreshExpirationSeconds") * 1000,
+    );
+
+    await this.refreshTokenRepository.create(userId, tokenHash, expiresAt);
   }
 
   async findActiveByUserId(userId: string) {
@@ -32,7 +36,7 @@ export class JwtTokenService implements IJwtTokenService {
       { sub: userId, email },
       {
         secret: this.configService.get<string>("jwt.accessSecret"),
-        expiresIn: this.configService.get<number>("jwt.accessExpirationMs"),
+        expiresIn: this.configService.get<number>("jwt.accessExpirationSeconds"),
       },
     );
   }
@@ -42,7 +46,7 @@ export class JwtTokenService implements IJwtTokenService {
       { sub: userId },
       {
         secret: this.configService.get<string>("jwt.refreshSecret"),
-        expiresIn: this.configService.get<number>("jwt.refreshExpirationMs"),
+        expiresIn: this.configService.get<number>("jwt.refreshExpirationSeconds"),
       },
     );
   }

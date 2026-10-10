@@ -1,6 +1,6 @@
 import { CreateNotificationData } from "../../data/create-notification.data";
-import type { NotificationEntity } from "../../entity/notification.entity";
+import type { NotificationViewModel } from "../../view-models/notification.vm";
 
 export interface ICreateNotificationService {
-  execute(data: CreateNotificationData): Promise<NotificationEntity | null>;
+  execute(data: CreateNotificationData): Promise<NotificationViewModel | null>;
 }

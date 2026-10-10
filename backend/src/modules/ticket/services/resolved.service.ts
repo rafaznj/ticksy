@@ -2,7 +2,7 @@ import { Inject } from "@nestjs/common";
 import { IResolvedTicketService } from "./contracts/resolved";
 import { REPOSITORY_TOKENS } from "../../../shared/di/tokens.repositories";
 import type { IResolvedTicketRepository } from "../repositories/contracts/resolved";
-import { TicketModel } from "../models/ticket";
+import { TicketViewModel } from "../view-models/ticket.vm";
 import { AppException } from "../../../shared/exceptions/app-exception";
 import type { IGetTicketByIdService } from "./contracts/get-by-id";
 import { SERVICE_TOKENS } from "../../../shared/di/tokens.services";
@@ -23,7 +23,7 @@ export class ResolvedTicketService implements IResolvedTicketService {
     private readonly getUserIdsByRoleService: IGetUserIdsByRoleService,
   ) {}
 
-  async execute(id: string): Promise<TicketModel | null> {
+  async execute(id: string): Promise<TicketViewModel | null> {
     const ticket = await this.getTicketByIdService.execute(id);
 
     if (!ticket) {
@@ -36,7 +36,7 @@ export class ResolvedTicketService implements IResolvedTicketService {
 
     const response = await this.resolvedTicketRepository.execute(id);
 
-    if (!response || !response.assignedName) {
+    if (!response || !response.assignedToName) {
       throw AppException.notFound("ticket.messages.errors.resolveFailed");
     }
 
@@ -46,7 +46,7 @@ export class ResolvedTicketService implements IResolvedTicketService {
       type: NotificationTypeEnum.TICKET_STATUS_CHANGED,
       ticketId: response.id,
       parameters: {
-        userName: response.assignedName,
+        userName: response.assignedToName,
         title: response.title,
         status: response.status,
       },

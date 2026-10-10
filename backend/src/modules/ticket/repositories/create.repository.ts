@@ -3,7 +3,7 @@ import { eq } from "drizzle-orm";
 import { DATABASE_TOKENS } from "../../../database/tokens";
 import { NodePgDatabase } from "drizzle-orm/node-postgres";
 import { users } from "../../../database/drizzle/schema/users.schema";
-import { TicketModel } from "../models/ticket";
+import { TicketViewModel } from "../view-models/ticket.vm";
 import { ICreateTicketRepository } from "./contracts/create";
 import { tickets } from "../../../database/drizzle/schema";
 import { CreateTicketDto } from "../dtos/create.dto";
@@ -19,7 +19,7 @@ export class CreateTicketRepository implements ICreateTicketRepository {
     private readonly db: NodePgDatabase,
   ) {}
 
-  async execute(data: CreateTicketDto): Promise<TicketModel | null> {
+  async execute(data: CreateTicketDto): Promise<TicketViewModel | null> {
     const [created] = await this.db.insert(tickets).values(data).returning({ id: tickets.id });
 
     if (!created) {
@@ -38,7 +38,7 @@ export class CreateTicketRepository implements ICreateTicketRepository {
         createdById: tickets.createdById,
         createdByName: createdByUser.name,
         assignedToId: tickets.assignedToId,
-        assignedName: assignedToUser.name,
+        assignedToName: assignedToUser.name,
         createdAt: tickets.createdAt,
         updatedAt: tickets.updatedAt,
       })

@@ -3,7 +3,7 @@ import { AuthGuard } from "@nestjs/passport";
 import { ConfigService } from "@nestjs/config";
 import type { Request, Response } from "express";
 
-import { LoginDto } from "../dto/login.dto";
+import { LoginDto } from "../dtos/login.dto";
 import type { ILoginService } from "../services/contracts/login";
 import { SERVICE_TOKENS } from "../../../shared/di/tokens.services";
 import type { IRefreshService } from "../services/contracts/refresh";
@@ -11,9 +11,10 @@ import type { ILogoutService } from "../services/contracts/logout";
 import { AppException } from "../../../shared/exceptions/app-exception";
 import { setRefreshCookie } from "../../../shared/utils/set-refresh-cookie";
 import type { IRegisterService } from "../services/contracts/register";
-import { UserModel } from "../../user/models/user-model";
+import { UserViewModel } from "../../user/view-models/user.vm";
 import { OptionalJwtAuthGuard } from "../guards/optional-jwt-auth.guard";
 import { CreateUserDto } from "../../user/dtos/create.dto";
+import { customResponse } from "../../../shared/utils/custom-response";
 
 @Controller("auth")
 export class AuthController {
@@ -30,26 +31,20 @@ export class AuthController {
   ) {}
 
   @Post("/register")
-  async register(@Body() dto: CreateUserDto, @Res({ passthrough: true }) res: Response) {
-    const { accessToken, refreshToken, user } = await this.registerService.execute(dto);
+  async register(@Body() data: CreateUserDto, @Res({ passthrough: true }) res: Response) {
+    const response = await this.registerService.execute(data);
 
-    setRefreshCookie(res, refreshToken, this.configService);
+    setRefreshCookie(res, response.refreshToken, this.configService);
 
-    return {
-      accessToken,
-      user,
-    };
+    return customResponse(response);
   }
 
   @Post("/login")
-  async login(@Body() dto: LoginDto, @Res({ passthrough: true }) res: Response) {
-    const { accessToken, refreshToken, user } = await this.loginService.execute(
-      dto.email,
-      dto.password,
-    );
+  async login(@Body() data: LoginDto, @Res({ passthrough: true }) res: Response) {
+    const response = await this.loginService.execute(data);
 
-    setRefreshCookie(res, refreshToken, this.configService);
-    return { accessToken, user };
+    setRefreshCookie(res, response.refreshToken, this.configService);
+    return customResponse(response);
   }
 
   @Post("/logout")
@@ -74,11 +69,10 @@ export class AuthController {
     }
 
     try {
-      const { accessToken, refreshToken: newRefreshToken } =
-        await this.refreshService.execute(refreshToken);
+      const response = await this.refreshService.execute(refreshToken);
 
-      setRefreshCookie(res, newRefreshToken, this.configService);
-      return { accessToken };
+      setRefreshCookie(res, response.refreshToken, this.configService);
+      return { accessToken: response.accessToken };
     } catch (error) {
       res.clearCookie("refreshToken");
       throw error;
@@ -87,7 +81,7 @@ export class AuthController {
 
   @Get("/me")
   @UseGuards(AuthGuard("jwt"))
-  async me(@Req() req: Request & { user: Omit<UserModel, "password"> }) {
+  async me(@Req() req: Request & { user: Omit<UserViewModel, "password"> }) {
     return req.user;
   }
 }

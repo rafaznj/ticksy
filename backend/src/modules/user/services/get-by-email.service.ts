@@ -2,7 +2,7 @@ import { Inject } from "@nestjs/common";
 import { REPOSITORY_TOKENS } from "../../../shared/di/tokens.repositories";
 import { IGetUserByEmailService } from "./contracts/get-by-email";
 import type { IGetUserByEmailRepository } from "../repositories/contracts/get-by-email";
-import { UserModel } from "../models/user-model";
+import { UserViewModel } from "../view-models/user.vm";
 
 export default class GetUserByEmailService implements IGetUserByEmailService {
   constructor(
@@ -10,7 +10,7 @@ export default class GetUserByEmailService implements IGetUserByEmailService {
     private readonly getUserByEmailRepository: IGetUserByEmailRepository,
   ) {}
 
-  async execute(email: string): Promise<UserModel | null> {
+  async execute(email: string): Promise<UserViewModel | null> {
     const response = await this.getUserByEmailRepository.execute(email);
 
     return response;

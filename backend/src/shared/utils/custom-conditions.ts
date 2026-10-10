@@ -1,7 +1,7 @@
 import { eq, getTableColumns, or } from "drizzle-orm";
 import { customLike } from "./custom-like";
 import { customOrderBy } from "./custom-order-by";
-import { IQueryOptions } from "../types/query-options";
+import { IQueryOptions } from "../interfaces/query-options";
 import { PgTable } from "drizzle-orm/pg-core";
 
 export const customQueryConditions = (options: IQueryOptions, table: PgTable) => {

@@ -1,4 +1,4 @@
-export interface RefreshResult {
+export interface RefreshTokenViewModel {
   accessToken: string;
   refreshToken: string;
 }

@@ -6,8 +6,8 @@ import { NodePgDatabase } from "drizzle-orm/node-postgres";
 import { tickets } from "../../../database/drizzle/schema";
 import { users } from "../../../database/drizzle/schema/users.schema";
 import { alias } from "drizzle-orm/pg-core";
-import { TicketModel } from "../models/ticket";
 import { TicketStatusEnum } from "../enums/ticket-status.enum";
+import { TicketAssignViewModel } from "../view-models/assign.vm";
 
 const createdByUser = alias(users, "created_by_user");
 const assignedToUser = alias(users, "assigned_to_user");
@@ -18,7 +18,7 @@ export class AssignTicketRepository implements IAssignTicketRepository {
     protected db: NodePgDatabase,
   ) {}
 
-  async execute(id: string, userId: string): Promise<TicketModel | null> {
+  async execute(id: string, userId: string): Promise<TicketAssignViewModel | null> {
     const [updated] = await this.db
       .update(tickets)
       .set({ assignedToId: userId, status: TicketStatusEnum.IN_PROGRESS })
@@ -34,16 +34,6 @@ export class AssignTicketRepository implements IAssignTicketRepository {
         id: tickets.id,
         code: tickets.code,
         title: tickets.title,
-        description: tickets.description,
-        category: tickets.category,
-        priority: tickets.priority,
-        status: tickets.status,
-        createdById: tickets.createdById,
-        createdByName: createdByUser.name,
-        assignedToId: tickets.assignedToId,
-        assignedName: assignedToUser.name,
-        createdAt: tickets.createdAt,
-        updatedAt: tickets.updatedAt,
       })
       .from(tickets)
       .innerJoin(createdByUser, eq(tickets.createdById, createdByUser.id))

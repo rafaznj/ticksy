@@ -1,5 +1,5 @@
-import type { UnreadCountModel } from "../../models/unread-count-model";
+import { UnreadNotificationCountViewModel } from "../../view-models/unread-count-model.vm";
 
 export interface IGetUnreadNotificationCountService {
-  execute(userId: string): Promise<UnreadCountModel>;
+  execute(userId: string): Promise<UnreadNotificationCountViewModel>;
 }

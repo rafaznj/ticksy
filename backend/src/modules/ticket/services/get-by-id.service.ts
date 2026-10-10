@@ -3,11 +3,11 @@ import { BaseGetByIdService } from "../../../shared/base/services/get-by-id.serv
 import { REPOSITORY_TOKENS } from "../../../shared/di/tokens.repositories";
 import type { IGetTicketByIdRepository } from "../repositories/contracts/get-by-id";
 import { IGetTicketByIdService } from "./contracts/get-by-id";
-import { TicketModel } from "../models/ticket";
+import { TicketViewModel } from "../view-models/ticket.vm";
 
 @Injectable()
 export class GetTicketByIdService
-  extends BaseGetByIdService<TicketModel>
+  extends BaseGetByIdService<TicketViewModel>
   implements IGetTicketByIdService
 {
   constructor(

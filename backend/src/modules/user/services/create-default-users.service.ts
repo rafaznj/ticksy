@@ -1,6 +1,6 @@
 import { Inject, Injectable } from "@nestjs/common";
 
-import { UserModel } from "../models/user-model";
+import { UserViewModel } from "../view-models/user.vm";
 import { ICreateDefaultUsersService } from "./contracts/create-default-users";
 import type { ICreateUserService } from "./contracts/create";
 import { SERVICE_TOKENS } from "../../../shared/di/tokens.services";
@@ -17,12 +17,6 @@ export class CreateDefaultUsersService implements ICreateDefaultUsersService {
 
   async execute(): Promise<void> {
     const seedUsers: CreateUserDto[] = [
-      {
-        name: "John Doe",
-        email: "john.doe@email.com",
-        password: "@Aa12345",
-        role: UserRoleEnum.EMPLOYEE,
-      },
       {
         name: "Employee",
         email: "employee@email.com",
@@ -48,7 +42,7 @@ export class CreateDefaultUsersService implements ICreateDefaultUsersService {
     }
   }
 
-  private async create(dto: CreateUserDto): Promise<UserModel | null> {
+  private async create(dto: CreateUserDto): Promise<UserViewModel | null> {
     try {
       return await this.createUserService.execute(dto);
     } catch (error) {

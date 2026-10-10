@@ -5,14 +5,14 @@ import { NodePgDatabase } from "drizzle-orm/node-postgres";
 import { DATABASE_TOKENS } from "../../../database/tokens";
 import { tickets } from "../../../database/drizzle/schema/tickets.schema";
 import { users } from "../../../database/drizzle/schema/users.schema";
-import { IPagedResult } from "../../../shared/types/paged-result";
-import { IQueryOptions } from "../../../shared/types/query-options";
+import { IQueryOptions } from "../../../shared/interfaces/query-options";
 import buildPagedOptions from "../../../shared/utils/build-paged-options";
 import { customQueryConditions } from "../../../shared/utils/custom-conditions";
 import buildPagedReturn from "../../../shared/utils/build-paged-return";
 import { IGetTicketPagedLastSevenDaysRepository } from "./contracts/get-paged-last-seven-days";
-import { TicketPagedLastSevenDaysModel } from "../models/ticket-paged-last-seven-day";
-import { TicketScope } from "../models/ticket-scope";
+import { TicketPagedLastSevenDaysViewModel } from "../view-models/paged-last-seven-day.vm";
+import { TicketScopeViewModel } from "../view-models/scope.vm";
+import { IPagedResult } from "../../../shared/interfaces/paged-result";
 
 const createdByUser = alias(users, "created_by_user");
 
@@ -22,8 +22,8 @@ export class GetTicketPagedLastSevenDaysRepository implements IGetTicketPagedLas
 
   async execute(
     options: IQueryOptions,
-    scope?: TicketScope,
-  ): Promise<IPagedResult<TicketPagedLastSevenDaysModel>> {
+    scope?: TicketScopeViewModel,
+  ): Promise<IPagedResult<TicketPagedLastSevenDaysViewModel>> {
     const { limit, offset } = buildPagedOptions(options);
     const { softDeleteCondition, sort, whereCondition } = customQueryConditions(options, tickets);
 
@@ -67,7 +67,7 @@ export class GetTicketPagedLastSevenDaysRepository implements IGetTicketPagedLas
       queryBuilder.orderBy(sort);
     }
 
-    const records = (await queryBuilder) as TicketPagedLastSevenDaysModel[];
+    const records = (await queryBuilder) as TicketPagedLastSevenDaysViewModel[];
     const totalRecords = await this.db.$count(tickets, combinedCondition);
 
     return buildPagedReturn(records, limit, totalRecords);

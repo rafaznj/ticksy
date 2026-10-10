@@ -1,5 +1,6 @@
-import type { LoginResult } from "../../dto/login-result";
+import type { LoginData } from "../../data/login.data";
+import { LoginViewModel } from "../../view-models/login.vm";
 
 export interface ILoginService {
-  execute(email: string, password: string): Promise<LoginResult>;
+  execute(data: LoginData): Promise<LoginViewModel>;
 }

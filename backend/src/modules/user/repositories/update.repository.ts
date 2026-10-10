@@ -2,11 +2,11 @@ import { Injectable } from "@nestjs/common";
 import type { IUpdateUserRepository } from "./contracts/update";
 import { users } from "../../../database/drizzle/schema";
 import { BaseUpdateRepository } from "../../../shared/base/repositories/update.repository";
-import { UpdateUserDto } from "../dtos/update.dto";
+import { UpdateUserData } from "../data/update.data";
 
 @Injectable()
 export class UpdateUserRepository
-  extends BaseUpdateRepository<UpdateUserDto>
+  extends BaseUpdateRepository<UpdateUserData>
   implements IUpdateUserRepository
 {
   constructor() {

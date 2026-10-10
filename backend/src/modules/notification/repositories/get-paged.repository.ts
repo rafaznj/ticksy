@@ -3,12 +3,12 @@ import { desc, eq, sql } from "drizzle-orm";
 import { NodePgDatabase } from "drizzle-orm/node-postgres";
 import { notificationRecipients, notifications } from "../../../database/drizzle/schema";
 import { DATABASE_TOKENS } from "../../../database/tokens";
-import type { IPagedResult } from "../../../shared/types/paged-result";
-import type { IQueryOptions } from "../../../shared/types/query-options";
+import type { IQueryOptions } from "../../../shared/interfaces/query-options";
 import buildPagedOptions from "../../../shared/utils/build-paged-options";
 import buildPagedReturn from "../../../shared/utils/build-paged-return";
-import type { NotificationModel } from "../models/notification-model";
 import type { IGetNotificationPagedRepository } from "./contracts/get-paged";
+import { IPagedResult } from "../../../shared/interfaces/paged-result";
+import { NotificationViewModel } from "../view-models/notification.vm";
 
 @Injectable()
 export class GetNotificationPagedRepository implements IGetNotificationPagedRepository {
@@ -17,7 +17,10 @@ export class GetNotificationPagedRepository implements IGetNotificationPagedRepo
     private readonly db: NodePgDatabase,
   ) {}
 
-  async execute(userId: string, options: IQueryOptions): Promise<IPagedResult<NotificationModel>> {
+  async execute(
+    userId: string,
+    options: IQueryOptions,
+  ): Promise<IPagedResult<NotificationViewModel>> {
     const { limit, offset } = buildPagedOptions(options);
     const where = eq(notificationRecipients.userId, userId);
 

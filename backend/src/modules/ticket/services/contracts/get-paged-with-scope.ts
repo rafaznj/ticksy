@@ -1,11 +1,11 @@
-import { IPagedResult } from "../../../../shared/types/paged-result";
-import { IQueryOptions } from "../../../../shared/types/query-options";
-import { UserModel } from "../../../user/models/user-model";
-import { TicketPagedModel } from "../../models/ticket-paged";
+import { IPagedResult } from "../../../../shared/interfaces/paged-result";
+import { IQueryOptions } from "../../../../shared/interfaces/query-options";
+import { UserViewModel } from "../../../user/view-models/user.vm";
+import { TicketViewModel } from "../../view-models/ticket.vm";
 
 export interface IGetTicketPagedWithScopeService {
   execute(
     options: IQueryOptions,
-    currentUser: Omit<UserModel, "password">,
-  ): Promise<IPagedResult<TicketPagedModel>>;
+    currentUser: UserViewModel,
+  ): Promise<IPagedResult<TicketViewModel>>;
 }

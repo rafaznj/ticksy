@@ -1,13 +1,13 @@
 import { Inject } from "@nestjs/common";
 import { REPOSITORY_TOKENS } from "../../../shared/di/tokens.repositories";
-import { IQueryOptions } from "../../../shared/types/query-options";
-import { IPagedResult } from "../../../shared/types/paged-result";
+import { IQueryOptions } from "../../../shared/interfaces/query-options";
 import { IGetTicketPagedWithScopeService } from "./contracts/get-paged-with-scope";
 import type { IGetTicketPagedWithScopeRepository } from "../repositories/contracts/get-paged-with-scope";
-import { TicketPagedModel } from "../models/ticket-paged";
-import { UserModel } from "../../user/models/user-model";
+import { UserViewModel } from "../../user/view-models/user.vm";
 import { UserRoleEnum } from "../../user/enums/role.enum";
-import { TicketScope } from "../models/ticket-scope";
+import { TicketScopeViewModel } from "../view-models/scope.vm";
+import { IPagedResult } from "../../../shared/interfaces/paged-result";
+import { TicketViewModel } from "../view-models/ticket.vm";
 
 export class GetTicketPagedWithScopeService implements IGetTicketPagedWithScopeService {
   constructor(
@@ -17,8 +17,8 @@ export class GetTicketPagedWithScopeService implements IGetTicketPagedWithScopeS
 
   async execute(
     options: IQueryOptions,
-    currentUser: Omit<UserModel, "password">,
-  ): Promise<IPagedResult<TicketPagedModel>> {
+    currentUser: UserViewModel,
+  ): Promise<IPagedResult<TicketViewModel>> {
     const scope = this.buildScope(currentUser);
 
     return this.getTicketPagedRepository.execute(
@@ -31,7 +31,9 @@ export class GetTicketPagedWithScopeService implements IGetTicketPagedWithScopeS
     );
   }
 
-  private buildScope(currentUser: Omit<UserModel, "password">): TicketScope | undefined {
+  private buildScope(
+    currentUser: Omit<UserViewModel, "password">,
+  ): TicketScopeViewModel | undefined {
     switch (currentUser.role) {
       case UserRoleEnum.ADMIN:
         return undefined;

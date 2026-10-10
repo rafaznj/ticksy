@@ -4,7 +4,7 @@ import { DATABASE_TOKENS } from "../../../database/tokens";
 import { NodePgDatabase } from "drizzle-orm/node-postgres";
 import { tickets } from "../../../database/drizzle/schema";
 import { users } from "../../../database/drizzle/schema/users.schema";
-import { TicketModel } from "../models/ticket";
+import { TicketViewModel } from "../view-models/ticket.vm";
 import { TicketStatusEnum } from "../enums/ticket-status.enum";
 import { IUnassignTicketRepository } from "./contracts/unassign";
 import { alias } from "drizzle-orm/pg-core";
@@ -18,7 +18,7 @@ export class UnassignTicketRepository implements IUnassignTicketRepository {
     protected db: NodePgDatabase,
   ) {}
 
-  async execute(id: string): Promise<TicketModel | null> {
+  async execute(id: string): Promise<TicketViewModel | null> {
     const [updated] = await this.db
       .update(tickets)
       .set({ assignedToId: null, status: TicketStatusEnum.OPEN })
@@ -41,7 +41,7 @@ export class UnassignTicketRepository implements IUnassignTicketRepository {
         createdById: tickets.createdById,
         createdByName: createdByUser.name,
         assignedToId: tickets.assignedToId,
-        assignedName: assignedToUser.name,
+        assignedToName: assignedToUser.name,
         createdAt: tickets.createdAt,
         updatedAt: tickets.updatedAt,
       })

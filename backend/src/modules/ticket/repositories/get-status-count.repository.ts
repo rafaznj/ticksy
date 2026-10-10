@@ -2,7 +2,7 @@ import { Inject } from "@nestjs/common";
 import { and, eq, gte, lt, sql } from "drizzle-orm";
 import { NodePgDatabase } from "drizzle-orm/node-postgres";
 import { DATABASE_TOKENS } from "../../../database/tokens";
-import { StatusCountModel } from "../models/status-count";
+import { TicketStatusCountViewModel } from "../view-models/status-count.vm";
 import { tickets } from "../../../database/drizzle/schema";
 import { TicketStatusEnum } from "../enums/ticket-status.enum";
 import { IGetTicketStatusCountRepository } from "./contracts/get-status-count";
@@ -13,7 +13,7 @@ export class GetTicketStatusCountRepository implements IGetTicketStatusCountRepo
     private readonly db: NodePgDatabase,
   ) {}
 
-  async execute(): Promise<StatusCountModel[]> {
+  async execute(): Promise<TicketStatusCountViewModel[]> {
     const now = new Date();
     const start = new Date(now.getFullYear(), now.getMonth(), 1);
     const end = new Date(now.getFullYear(), now.getMonth() + 1, 1);

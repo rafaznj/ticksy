@@ -5,7 +5,7 @@ import { NodePgDatabase } from "drizzle-orm/node-postgres";
 import { IGetTicketByIdRepository } from "./contracts/get-by-id";
 import { tickets } from "../../../database/drizzle/schema";
 import { users } from "../../../database/drizzle/schema/users.schema";
-import { TicketModel } from "../models/ticket";
+import { TicketViewModel } from "../view-models/ticket.vm";
 import { alias } from "drizzle-orm/pg-core";
 
 const createdByUser = alias(users, "created_by_user");
@@ -18,7 +18,7 @@ export class GetTicketByIdRepository implements IGetTicketByIdRepository {
     private readonly db: NodePgDatabase,
   ) {}
 
-  async execute(id: string): Promise<TicketModel | null> {
+  async execute(id: string): Promise<TicketViewModel | null> {
     const [result] = await this.db
       .select({
         id: tickets.id,
@@ -31,7 +31,7 @@ export class GetTicketByIdRepository implements IGetTicketByIdRepository {
         createdById: tickets.createdById,
         createdByName: createdByUser.name,
         assignedToId: tickets.assignedToId,
-        assignedName: assignedToUser.name,
+        assignedToName: assignedToUser.name,
         createdAt: tickets.createdAt,
         updatedAt: tickets.updatedAt,
       })

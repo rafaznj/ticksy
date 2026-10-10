@@ -2,12 +2,12 @@ import { Inject, Injectable } from "@nestjs/common";
 import { IAssignTicketService } from "./contracts/assign";
 import { REPOSITORY_TOKENS } from "../../../shared/di/tokens.repositories";
 import type { IAssignTicketRepository } from "../repositories/contracts/assign";
-import { TicketModel } from "../models/ticket";
 import { AppException } from "../../../shared/exceptions/app-exception";
 import { SERVICE_TOKENS } from "../../../shared/di/tokens.services";
 import type { IGetTicketByIdService } from "./contracts/get-by-id";
 import type { ICreateNotificationService } from "../../notification/services/contracts/create";
 import { NotificationTypeEnum } from "../../notification/enums/notification-type.enum";
+import { TicketAssignViewModel } from "../view-models/assign.vm";
 
 @Injectable()
 export class AssignTicketService implements IAssignTicketService {
@@ -20,7 +20,7 @@ export class AssignTicketService implements IAssignTicketService {
     private readonly createNotificationService: ICreateNotificationService,
   ) {}
 
-  async execute(id: string, userId: string): Promise<TicketModel | null> {
+  async execute(id: string, userId: string): Promise<TicketAssignViewModel | null> {
     const ticket = await this.getTicketByIdService.execute(id);
 
     if (!ticket) {

@@ -3,11 +3,11 @@ import { BaseGetByIdService } from "../../../shared/base/services/get-by-id.serv
 import { IGetUserByIdService } from "./contracts/get-by-id";
 import { REPOSITORY_TOKENS } from "../../../shared/di/tokens.repositories";
 import type { IGetUserByIdRepository } from "../repositories/contracts/get-by-id";
-import { UserModel } from "../models/user-model";
+import { UserViewModel } from "../view-models/user.vm";
 
 @Injectable()
 export class GetUserByIdService
-  extends BaseGetByIdService<UserModel>
+  extends BaseGetByIdService<UserViewModel>
   implements IGetUserByIdService
 {
   constructor(

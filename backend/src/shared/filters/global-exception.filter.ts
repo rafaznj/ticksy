@@ -7,13 +7,8 @@ import {
   Logger,
 } from "@nestjs/common";
 import type { Request, Response } from "express";
-import { ErrorMessage } from "../dto/error-message";
-
-interface ErrorResponseBody {
-  success: false;
-  errors: ErrorMessage[];
-  code: number;
-}
+import { ErrorMessage } from "../interfaces/error-message";
+import { ErrorResponseViewModel } from "../interfaces/error-response.vm";
 
 @Catch()
 export class GlobalExceptionFilter implements ExceptionFilter {
@@ -38,7 +33,7 @@ export class GlobalExceptionFilter implements ExceptionFilter {
     response.status(errorResponse.code).json(errorResponse);
   }
 
-  private buildErrorResponse(exception: unknown, status: number): ErrorResponseBody {
+  private buildErrorResponse(exception: unknown, status: number): ErrorResponseViewModel {
     if (exception instanceof HttpException) {
       const body = exception.getResponse();
 

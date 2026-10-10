@@ -1,4 +1,4 @@
-export interface TicketScope {
+export interface TicketScopeViewModel {
   createdById?: string;
   assignedToId?: string;
 }

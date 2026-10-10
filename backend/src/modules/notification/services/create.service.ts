@@ -1,5 +1,5 @@
 import { Inject, Injectable } from "@nestjs/common";
-import type { NotificationEntity } from "../entity/notification.entity";
+import type { NotificationViewModel } from "../view-models/notification.vm";
 import type { ICreateNotificationService } from "./contracts/create";
 import { REPOSITORY_TOKENS } from "../../../shared/di/tokens.repositories";
 import { CreateNotificationData } from "../data/create-notification.data";
@@ -16,7 +16,7 @@ export class CreateNotificationService implements ICreateNotificationService {
     private readonly createNotificationRepository: ICreateNotificationRepository,
   ) {}
 
-  async execute(data: CreateNotificationData): Promise<NotificationEntity | null> {
+  async execute(data: CreateNotificationData): Promise<NotificationViewModel | null> {
     const userIds = [...new Set(data.userIds)];
 
     if (userIds.length === 0) return null;

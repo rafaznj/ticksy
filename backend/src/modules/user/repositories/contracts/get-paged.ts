@@ -1,7 +1,7 @@
-import { IPagedResult } from "../../../../shared/types/paged-result";
-import { IQueryOptions } from "../../../../shared/types/query-options";
-import { UserModel } from "../../models/user-model";
+import { IPagedResult } from "../../../../shared/interfaces/paged-result";
+import { IQueryOptions } from "../../../../shared/interfaces/query-options";
+import { UserViewModel } from "../../view-models/user.vm";
 
 export interface IGetUserPagedRepository {
-  execute(options: IQueryOptions): Promise<IPagedResult<UserModel>>;
+  execute(options: IQueryOptions): Promise<IPagedResult<UserViewModel>>;
 }

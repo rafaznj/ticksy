@@ -5,16 +5,17 @@ import { REPOSITORY_TOKENS } from "../../../shared/di/tokens.repositories";
 import { CreateTicketDto } from "../dtos/create.dto";
 import { ICreateTicketService } from "./contracts/create";
 import type { ICreateTicketRepository } from "../repositories/contracts/create";
-import { TicketModel } from "../models/ticket";
+import { TicketViewModel } from "../view-models/ticket.vm";
 import type { ICreateNotificationService } from "../../notification/services/contracts/create";
 import { SERVICE_TOKENS } from "../../../shared/di/tokens.services";
 import { NotificationTypeEnum } from "../../notification/enums/notification-type.enum";
 import type { IGetUserIdsByRoleService } from "../../user/services/contracts/get-ids-by-role";
 import { UserRoleEnum } from "../../user/enums/role.enum";
+import { CreateTicketData } from "../data/create.data";
 
 @Injectable()
 export class CreateTicketService
-  extends BaseCreateService<CreateTicketDto, TicketModel>
+  extends BaseCreateService<CreateTicketData, TicketViewModel>
   implements ICreateTicketService
 {
   constructor(
@@ -28,7 +29,7 @@ export class CreateTicketService
     super(createTicketRepository);
   }
 
-  async execute(data: CreateTicketDto): Promise<TicketModel> {
+  async execute(data: CreateTicketDto): Promise<TicketViewModel> {
     const response = await super.execute(data);
 
     const adminIds = await this.getUserIdsByRoleService.execute(UserRoleEnum.ADMIN);
@@ -40,7 +41,7 @@ export class CreateTicketService
         userName: response.createdByName,
         title: response.title,
       },
-      userIds: adminIds.filter((id) => id !== data.createdById),
+      userIds: adminIds,
     });
 
     return response;

@@ -1,6 +1,6 @@
 import { Inject, Injectable } from "@nestjs/common";
 import { REPOSITORY_TOKENS } from "../../../shared/di/tokens.repositories";
-import { TicketModel } from "../models/ticket";
+import { TicketViewModel } from "../view-models/ticket.vm";
 import { AppException } from "../../../shared/exceptions/app-exception";
 import { SERVICE_TOKENS } from "../../../shared/di/tokens.services";
 import type { IGetTicketByIdService } from "./contracts/get-by-id";
@@ -20,7 +20,7 @@ export class UnassignTicketService implements IUnassignTicketService {
     private readonly createNotificationService: ICreateNotificationService,
   ) {}
 
-  async execute(id: string): Promise<TicketModel | null> {
+  async execute(id: string): Promise<TicketViewModel | null> {
     const ticket = await this.getTicketByIdService.execute(id);
 
     if (!ticket) {

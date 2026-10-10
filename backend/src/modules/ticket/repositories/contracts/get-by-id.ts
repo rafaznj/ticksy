@@ -1,4 +1,4 @@
 import { IBaseGetByIdRepository } from "../../../../shared/base/repositories/contracts/get-by-id";
-import { TicketModel } from "../../models/ticket";
+import { TicketViewModel } from "../../view-models/ticket.vm";
 
-export type IGetTicketByIdRepository = IBaseGetByIdRepository<TicketModel>;
+export type IGetTicketByIdRepository = IBaseGetByIdRepository<TicketViewModel>;

@@ -1,6 +1,6 @@
 import { Injectable, MessageEvent } from "@nestjs/common";
 import { Subscriber, Observable, interval, map, merge } from "rxjs";
-import { NotificationModel } from "../models/notification-model";
+import { NotificationViewModel } from "../view-models/notification.vm";
 
 @Injectable()
 export class NotificationHub {
@@ -27,7 +27,7 @@ export class NotificationHub {
     return merge(live, heartbeat);
   }
 
-  publish(userId: string, notification: NotificationModel) {
+  publish(userId: string, notification: NotificationViewModel) {
     this.connections
       .get(userId)
       ?.forEach((connection) =>
