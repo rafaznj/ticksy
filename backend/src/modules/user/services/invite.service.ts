@@ -25,7 +25,7 @@ export class InviteUserService implements IInviteUserService {
   async execute(data: CreateUserData): Promise<void> {
     const response = await this.brevo.transactionalEmails.sendTransacEmail({
       to: [{ email: data.email }],
-      templateId: 3,
+      templateId: 2,
       params: {
         name: data.name,
         email: data.email,
