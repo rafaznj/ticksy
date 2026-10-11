@@ -2,4 +2,7 @@ import { IBaseCreateRepository } from "../../../../shared/base/repositories/cont
 import { CreateUserData } from "../../data/create.data";
 import { UserViewModel } from "../../view-models/user.vm";
 
-export type ICreateUserRepository = IBaseCreateRepository<CreateUserData, UserViewModel>;
+export interface ICreateUserRepository extends IBaseCreateRepository<
+  CreateUserData,
+  UserViewModel
+> {}

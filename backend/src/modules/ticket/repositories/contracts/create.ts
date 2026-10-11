@@ -2,4 +2,7 @@ import { IBaseCreateRepository } from "../../../../shared/base/repositories/cont
 import { CreateTicketDto } from "../../dtos/create.dto";
 import { TicketViewModel } from "../../view-models/ticket.vm";
 
-export type ICreateTicketRepository = IBaseCreateRepository<CreateTicketDto, TicketViewModel>;
+export interface ICreateTicketRepository extends IBaseCreateRepository<
+  CreateTicketDto,
+  TicketViewModel
+> {}

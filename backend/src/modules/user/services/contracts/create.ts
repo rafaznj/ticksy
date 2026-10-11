@@ -2,4 +2,4 @@ import { IBaseCreateService } from "../../../../shared/base/services/contracts/c
 import { CreateUserData } from "../../data/create.data";
 import { UserViewModel } from "../../view-models/user.vm";
 
-export type ICreateUserService = IBaseCreateService<CreateUserData, UserViewModel>;
+export interface ICreateUserService extends IBaseCreateService<CreateUserData, UserViewModel> {}
