@@ -27,11 +27,15 @@ import type { IGetAssignableUsersPagedService } from "../services/contracts/get-
 import type { IActivateUserService } from "../services/contracts/activate";
 import type { IUserQueryOptions } from "../data/query-options.data";
 import type { IInviteUserService } from "../services/contracts/invite";
-import type { CreateUserData } from "../data/create.data";
 import { ConfirmPasswordDto } from "../dtos/confirm-password.dto";
 import type { IConfirmPasswordService } from "../services/contracts/confirm-password";
 import { customResponse } from "../../../shared/utils/custom-response";
+import { ApiTags, ApiOperation, ApiBearerAuth } from "@nestjs/swagger";
+import { UserRoleEnum } from "../enums/role.enum";
+import { RolesGuard } from "../../auth/guards/role.guard";
+import { Roles } from "../../auth/decorators/roles.decorator";
 
+@ApiTags("Users")
 @Controller("user")
 export class UserController {
   constructor(
@@ -58,61 +62,98 @@ export class UserController {
   ) {}
 
   @Post("/create")
+  @UseGuards(AuthGuard("jwt"), RolesGuard)
+  @Roles(UserRoleEnum.ADMIN)
+  @ApiBearerAuth()
+  @ApiOperation({ summary: "Create a user" })
   async create(@Body() data: CreateUserDto) {
     const response = await this.createUserService.execute(data);
     return customResponse(response);
   }
 
   @Get("get-paged")
+  @UseGuards(AuthGuard("jwt"), RolesGuard)
+  @Roles(UserRoleEnum.ADMIN)
+  @ApiBearerAuth()
+  @ApiOperation({ summary: "List paged users" })
   async getPaged(@Query() query: IUserQueryOptions) {
     const response = await this.getUserPagedService.execute(query);
     return customResponse(response);
   }
 
   @Get("/get-assignable")
+  @UseGuards(AuthGuard("jwt"), RolesGuard)
+  @Roles(UserRoleEnum.ADMIN)
+  @ApiBearerAuth()
+  @ApiOperation({ summary: "List paged users that can be assigned to tickets" })
   async getAssignable(@Query() query: IQueryOptions) {
     const response = await this.getAssignableUsersPagedService.execute(query);
     return customResponse(response);
   }
 
   @Get("/get-by-email/:email")
+  @UseGuards(AuthGuard("jwt"), RolesGuard)
+  @Roles(UserRoleEnum.ADMIN)
+  @ApiBearerAuth()
+  @ApiOperation({ summary: "Get a user by email" })
   async getByEmail(@Param("email") email: string) {
     const response = await this.getUserByEmailService.execute(email);
     return customResponse(response);
   }
 
   @Get("/get-by-id/:id")
+  @UseGuards(AuthGuard("jwt"), RolesGuard)
+  @Roles(UserRoleEnum.ADMIN)
+  @ApiBearerAuth()
+  @ApiOperation({ summary: "Get a user by ID" })
   async getById(@Param("id") id: string) {
     const response = await this.getUserByIdService.execute(id);
     return customResponse(response);
   }
 
   @Put("/update/:id")
+  @UseGuards(AuthGuard("jwt"))
+  @ApiBearerAuth()
+  @ApiOperation({ summary: "Update a user" })
   async update(@Param("id") id: string, @Body() data: UpdateUserDto) {
     const response = await this.updateUserService.execute(id, data);
     return customResponse(response);
   }
 
   @Patch("/deactivate/:id")
+  @UseGuards(AuthGuard("jwt"), RolesGuard)
+  @Roles(UserRoleEnum.ADMIN)
+  @ApiBearerAuth()
+  @ApiOperation({ summary: "Deactivate a user" })
   async deactivate(@Param("id") id: string) {
     const response = await this.deactivateUserService.execute(id);
     return customResponse(response);
   }
 
   @Patch("/activate/:id")
+  @UseGuards(AuthGuard("jwt"), RolesGuard)
+  @Roles(UserRoleEnum.ADMIN)
+  @ApiBearerAuth()
+  @ApiOperation({ summary: "Activate a user" })
   async activate(@Param("id") id: string) {
     const response = await this.activateUserService.execute(id);
     return customResponse<boolean>(response);
   }
 
   @Post("/invite")
-  async invite(@Body() data: CreateUserData) {
+  @UseGuards(AuthGuard("jwt"), RolesGuard)
+  @Roles(UserRoleEnum.ADMIN)
+  @ApiBearerAuth()
+  @ApiOperation({ summary: "Invite a user" })
+  async invite(@Body() data: CreateUserDto) {
     const response = await this.inviteUserService.execute(data);
     return customResponse<void>(response);
   }
 
   @Patch("/confirm-password")
   @UseGuards(AuthGuard("jwt"))
+  @ApiBearerAuth()
+  @ApiOperation({ summary: "Confirm the authenticated user's password" })
   async confirmPassword(
     @Req() req: Request & { user: { id: string } },
     @Body() data: ConfirmPasswordDto,

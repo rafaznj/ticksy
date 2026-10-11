@@ -32,7 +32,12 @@ import type { IGetTicketPagedLastSevenDaysService } from "../services/contracts/
 import type { IGetTicketStatusCountService } from "../services/contracts/get-status-count";
 import { AssignTicketDto } from "../dtos/assign.dto";
 import { customResponse } from "../../../shared/utils/custom-response";
+import { ApiBearerAuth, ApiOperation, ApiTags } from "@nestjs/swagger";
+import { UserRoleEnum } from "../../user/enums/role.enum";
+import { RolesGuard } from "../../auth/guards/role.guard";
+import { Roles } from "../../auth/decorators/roles.decorator";
 
+@ApiTags("Tickets")
 @Controller("ticket")
 export class TicketController {
   constructor(
@@ -59,6 +64,10 @@ export class TicketController {
   ) {}
 
   @Post("/create")
+  @UseGuards(AuthGuard("jwt"), RolesGuard)
+  @Roles(UserRoleEnum.EMPLOYEE)
+  @ApiBearerAuth()
+  @ApiOperation({ summary: "Create a ticket" })
   async create(@Body() data: CreateTicketDto) {
     const response = await this.createTicketService.execute(data);
     return customResponse(response);
@@ -66,6 +75,8 @@ export class TicketController {
 
   @Get("/get-paged-with-scope")
   @UseGuards(AuthGuard("jwt"))
+  @ApiBearerAuth()
+  @ApiOperation({ summary: "List paged tickets within the user's scope" })
   async getPagedWithScope(
     @Query() query: IQueryOptions,
     @Req() req: Request & { user: UserViewModel },
@@ -76,6 +87,8 @@ export class TicketController {
 
   @Get("/get-paged-last-seven-days")
   @UseGuards(AuthGuard("jwt"))
+  @ApiBearerAuth()
+  @ApiOperation({ summary: "List paged tickets from the last seven days" })
   async getPagedLastSevenDays(
     @Query() query: IQueryOptions,
     @Req() req: Request & { user: UserViewModel },
@@ -85,42 +98,65 @@ export class TicketController {
   }
 
   @Get("/get-by-id/:id")
+  @ApiOperation({ summary: "Get a ticket by ID" })
   async getById(@Param("id") id: string) {
     const response = await this.getTicketByIdService.execute(id);
     return customResponse(response);
   }
 
   @Put("/update/:id")
+  @UseGuards(AuthGuard("jwt"))
+  @ApiBearerAuth()
+  @ApiOperation({ summary: "Update a ticket" })
   async update(@Param("id") id: string, @Body() data: UpdateTicketDto) {
     const response = await this.updateTicketService.execute(id, data);
     return customResponse(response);
   }
 
   @Delete("/delete/:id")
+  @UseGuards(AuthGuard("jwt"))
+  @ApiBearerAuth()
+  @ApiOperation({ summary: "Delete a ticket" })
   async delete(@Param("id") id: string) {
     const response = await this.deleteTicketService.execute(id);
     return customResponse(response);
   }
 
   @Patch("/assign/:ticketId")
+  @UseGuards(AuthGuard("jwt"), RolesGuard)
+  @Roles(UserRoleEnum.ADMIN)
+  @ApiBearerAuth()
+  @ApiOperation({ summary: "Assign a ticket to a user" })
   async assign(@Param("ticketId") ticketId: string, @Body() { userId }: AssignTicketDto) {
     const response = await this.assignTicketService.execute(ticketId, userId);
     return customResponse(response);
   }
 
   @Patch("/unassign/:id")
+  @UseGuards(AuthGuard("jwt"), RolesGuard)
+  @Roles(UserRoleEnum.ADMIN)
+  @ApiBearerAuth()
+  @ApiOperation({ summary: "Unassign a ticket" })
   async unassign(@Param("id") id: string) {
     const response = await this.unassignTicketService.execute(id);
     return customResponse(response);
   }
 
   @Patch("/resolved/:id")
+  @UseGuards(AuthGuard("jwt"), RolesGuard)
+  @Roles(UserRoleEnum.ADMIN, UserRoleEnum.TECHNICAL_ASSISTANCE)
+  @ApiBearerAuth()
+  @ApiOperation({ summary: "Mark a ticket as resolved" })
   async resolved(@Param("id") id: string) {
     const response = await this.resolvedTicketService.execute(id);
     return customResponse(response);
   }
 
   @Get("/get-status-count")
+  @UseGuards(AuthGuard("jwt"), RolesGuard)
+  @Roles(UserRoleEnum.ADMIN)
+  @ApiBearerAuth()
+  @ApiOperation({ summary: "Count tickets by status" })
   async getStatusCount() {
     const response = await this.getTicketStatusCountService.execute();
     return customResponse(response);

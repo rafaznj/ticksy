@@ -1,6 +1,7 @@
 import { Body, Controller, Post, Req, Res, UseGuards, Inject, Get } from "@nestjs/common";
 import { AuthGuard } from "@nestjs/passport";
 import { ConfigService } from "@nestjs/config";
+import { ApiBearerAuth, ApiOperation, ApiTags, ApiUnauthorizedResponse } from "@nestjs/swagger";
 import type { Request, Response } from "express";
 
 import { LoginDto } from "../dtos/login.dto";
@@ -16,6 +17,7 @@ import { OptionalJwtAuthGuard } from "../guards/optional-jwt-auth.guard";
 import { CreateUserDto } from "../../user/dtos/create.dto";
 import { customResponse } from "../../../shared/utils/custom-response";
 
+@ApiTags("Auth")
 @Controller("auth")
 export class AuthController {
   constructor(
@@ -31,6 +33,9 @@ export class AuthController {
   ) {}
 
   @Post("/register")
+  @ApiOperation({
+    summary: "Register a new user",
+  })
   async register(@Body() data: CreateUserDto, @Res({ passthrough: true }) res: Response) {
     const response = await this.registerService.execute(data);
 
@@ -40,6 +45,9 @@ export class AuthController {
   }
 
   @Post("/login")
+  @ApiOperation({
+    summary: "Log in",
+  })
   async login(@Body() data: LoginDto, @Res({ passthrough: true }) res: Response) {
     const response = await this.loginService.execute(data);
 
@@ -49,6 +57,10 @@ export class AuthController {
 
   @Post("/logout")
   @UseGuards(OptionalJwtAuthGuard)
+  @ApiBearerAuth()
+  @ApiOperation({
+    summary: "Log out",
+  })
   async logout(
     @Req() req: Request & { user: { id: string } | null },
     @Res({ passthrough: true }) res: Response,
@@ -62,6 +74,10 @@ export class AuthController {
   }
 
   @Post("/refresh")
+  @ApiOperation({
+    summary: "Refresh the access token",
+  })
+  @ApiUnauthorizedResponse({ description: "Refresh token missing, invalid or expired." })
   async refresh(@Req() req: Request, @Res({ passthrough: true }) res: Response) {
     const refreshToken = req.cookies?.refreshToken;
     if (!refreshToken) {
@@ -81,6 +97,8 @@ export class AuthController {
 
   @Get("/me")
   @UseGuards(AuthGuard("jwt"))
+  @ApiBearerAuth()
+  @ApiOperation({ summary: "Get the authenticated user" })
   async me(@Req() req: Request & { user: Omit<UserViewModel, "password"> }) {
     return req.user;
   }
