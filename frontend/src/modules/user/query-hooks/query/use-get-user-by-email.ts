@@ -1,10 +1,16 @@
+import { TANSTACK_QUERY_KEYS } from "@/lib/tanstack/query-keys";
 import type { IGetUserByEmailService } from "@/modules/user/services/contracts/get-by-email";
 import { useQuery } from "@tanstack/react-query";
 
-export function useGetUserByEmail(getUserByEmailService: IGetUserByEmailService, email: string) {
+interface Params {
+  getUserByEmailService: IGetUserByEmailService;
+  email: string;
+}
+
+export function useGetUserByEmail({ getUserByEmailService, email }: Params) {
   return useQuery({
-    queryKey: ["users", "email", email],
-    queryFn: () => getUserByEmailService.execute(email),
+    queryKey: [TANSTACK_QUERY_KEYS.GET_USER_BY_EMAIL, email],
+    queryFn: async () => getUserByEmailService.execute(email),
     enabled: !!email,
   });
 }

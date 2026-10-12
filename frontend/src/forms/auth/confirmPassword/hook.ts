@@ -15,7 +15,7 @@ export function useConfirmPasswordFormHook() {
   const confirmPasswordService = container.get<IConfirmPasswordService>(
     SERVICE_TOKENS.ConfirmPasswordService,
   );
-  const { mutate: handleConfirmPassword } = useConfirmPassword(confirmPasswordService);
+  const { mutate: handleConfirmPassword, isPending } = useConfirmPassword(confirmPasswordService);
 
   const form = useAppForm({
     defaultValues: { password: "", confirmPassword: "" } as ConfirmPasswordFormProps,
@@ -37,6 +37,7 @@ export function useConfirmPasswordFormHook() {
   return {
     form,
     t,
+    isPending,
     navigate,
     handleSubmit,
   };

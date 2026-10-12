@@ -6,7 +6,6 @@ export const confirmPasswordSchema = (t: TFunction) => {
     .object({
       password: z
         .string(t("auth.confirmPassword.fields.password.validations.required"))
-        .trim()
         .min(8, t("auth.confirmPassword.fields.password.validations.minLength", { min: 8 }))
         .max(
           72,
@@ -16,7 +15,13 @@ export const confirmPasswordSchema = (t: TFunction) => {
         ),
       confirmPassword: z
         .string(t("auth.confirmPassword.fields.confirmPassword.validations.required"))
-        .min(1, t("auth.confirmPassword.fields.confirmPassword.validations.required")),
+        .min(1, t("auth.confirmPassword.fields.confirmPassword.validations.required"))
+        .max(
+          72,
+          t("auth.confirmPassword.fields.password.validations.maxLength", {
+            max: 72,
+          }),
+        ),
     })
     .refine((data) => data.password === data.confirmPassword, {
       path: ["confirmPassword"],

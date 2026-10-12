@@ -9,7 +9,6 @@
       "fields": {
         "confirmPassword": {
           "label": "Confirm new password",
-          "placeholder": "••••••••",
           "validations": {
             "match": "Passwords must match",
             "required": "Password confirmation is required"
@@ -17,7 +16,6 @@
         },
         "password": {
           "label": "New password",
-          "placeholder": "••••••••",
           "validations": {
             "maxLength": "Password must be at most {{max}} characters",
             "minLength": "Password must be at least {{min}} characters",
@@ -29,10 +27,13 @@
       "title": "Confirm your password"
     },
     "forgotPassword": {
-      "actions": {
-        "submit": "Reset password",
-        "submitting": "Resetting password..."
-      }
+      "description": "Enter your email to receive instructions to reset your password",
+      "messages": {
+        "success": {
+          "emailSent": "An email has been sent to {{email}} with instructions to reset your password"
+        }
+      },
+      "title": "Forgot password"
     },
     "login": {
       "actions": {
@@ -54,7 +55,6 @@
         },
         "password": {
           "label": "Password",
-          "placeholder": "••••••••",
           "validations": {
             "maxLength": "Password must not exceed {{max}} characters",
             "minLength": "Password must be at least {{min}} characters",
@@ -104,7 +104,6 @@
         },
         "password": {
           "label": "Password",
-          "placeholder": "••••••••",
           "validations": {
             "lowerCaseLetter": "Password must contain at least one lowercase letter",
             "maxLength": "Password must not exceed {{max}} characters",
@@ -167,6 +166,7 @@
       "resolve": "Resolve",
       "save": "Save",
       "submit": "Submit",
+      "submitting": "Submitting...",
       "unassign": "Unassign",
       "unavailable": "You do not have permission for this action",
       "view": "View"
@@ -185,7 +185,27 @@
     "errors": {
       "createFailed": "Could not create the record",
       "defaultError": "An error occurred. Please try again",
+      "mailSendFailed": "Failed to send email. Please try again",
       "recordNotFound": "Record not found"
+    },
+    "fields": {
+      "email": {
+        "label": "Email",
+        "placeholder": "Enter your email",
+        "validations": {
+          "invalid": "Please enter a valid email address",
+          "maxLength": "Email must not exceed {{max}} characters"
+        }
+      },
+      "name": {
+        "label": "Name",
+        "placeholder": "Enter your name",
+        "validations": {
+          "maxLength": "Name must not exceed {{max}} characters",
+          "minLength": "Name must be at least {{min}} characters",
+          "required": "Name is required"
+        }
+      }
     },
     "language": {
       "label": "Switch language to {{language}}",
@@ -478,6 +498,7 @@
         "createFailed": "Unable to create the user",
         "deactivateFailed": "Unable to deactivate the user",
         "deleteFailed": "Unable to delete the user",
+        "inviteFailed": "Unable to send the invitation",
         "loadFailed": "Unable to load user data",
         "notFound": "User not found",
         "updateFailed": "Unable to update the profile"
@@ -487,6 +508,7 @@
         "created": "User created successfully",
         "deactivated": "User deactivated successfully",
         "deleted": "User deleted successfully",
+        "emailSent": "Instructions to reset the password have been sent to the user's email",
         "invited": "User invited successfully",
         "updated": "Profile updated successfully"
       }

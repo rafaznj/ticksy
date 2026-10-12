@@ -41,12 +41,18 @@ import { UpdateUserService } from "@/modules/user/services/update.service";
 import { REPOSITORY_TOKENS } from "@/shared/di/tokens.repositories";
 import { SERVICE_TOKENS } from "@/shared/di/tokens.services";
 import { ContainerModule, type ContainerModuleLoadOptions } from "inversify";
+import { ForgotPasswordUserRepository } from "@/modules/user/repositories/forgot-password.repository";
+import type { IForgotPasswordUserRepository } from "@/modules/user/repositories/contracts/forgot-password";
+import { ForgotPasswordUserService } from "@/modules/user/services/forgot-password.service";
+import type { IForgotPasswordUserService } from "@/modules/user/services/contracts/forgot-password";
 
 export const userContainerModule = new ContainerModule(({ bind }: ContainerModuleLoadOptions) => {
   bind<ICreateUserService>(SERVICE_TOKENS.CreateUserService).to(CreateUserService);
   bind<ICreateUserRepository>(REPOSITORY_TOKENS.CreateUserRepository).to(CreateUserRepository);
+
   bind<IInviteUserService>(SERVICE_TOKENS.InviteUserService).to(InviteUserService);
   bind<IInviteUserRepository>(REPOSITORY_TOKENS.InviteUserRepository).to(InviteUserRepository);
+
   bind<IConfirmPasswordService>(SERVICE_TOKENS.ConfirmPasswordService).to(ConfirmPasswordService);
   bind<IConfirmPasswordRepository>(REPOSITORY_TOKENS.ConfirmPasswordRepository).to(
     ConfirmPasswordRepository,
@@ -83,5 +89,12 @@ export const userContainerModule = new ContainerModule(({ bind }: ContainerModul
   bind<IDeactivateUserService>(SERVICE_TOKENS.DeactivateUserService).to(DeactivateUserService);
   bind<IDeactivateUserRepository>(REPOSITORY_TOKENS.DeactivateUserRepository).to(
     DeactivateUserRepository,
+  );
+
+  bind<IForgotPasswordUserService>(SERVICE_TOKENS.ForgotPasswordUserService).to(
+    ForgotPasswordUserService,
+  );
+  bind<IForgotPasswordUserRepository>(REPOSITORY_TOKENS.ForgotPasswordUserRepository).to(
+    ForgotPasswordUserRepository,
   );
 });

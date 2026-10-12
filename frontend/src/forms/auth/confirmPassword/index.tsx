@@ -2,7 +2,7 @@ import { Separator } from "@/components/ui/separator";
 import { useConfirmPasswordFormHook } from "./hook";
 
 export function ConfirmPasswordForm() {
-  const { form, t, handleSubmit } = useConfirmPasswordFormHook();
+  const { form, t, isPending, handleSubmit } = useConfirmPasswordFormHook();
 
   return (
     <form
@@ -46,7 +46,9 @@ export function ConfirmPasswordForm() {
 
       <form.AppForm>
         <form.SubmitButton className="mt-1 w-full cursor-pointer py-3 text-lg">
-          {t("general.actions.submit")}
+          {isPending
+            ? t("auth.confirmPassword.actions.submitting")
+            : t("auth.confirmPassword.actions.submit")}
         </form.SubmitButton>
       </form.AppForm>
     </form>

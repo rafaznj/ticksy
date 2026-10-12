@@ -12,12 +12,7 @@ import { useTranslation } from "react-i18next";
 import { useDialog } from "@/hooks/use-dialog";
 import { inviteUserFormSchema } from "@/forms/user/invite/validations";
 import { generateRandomPassword } from "@/shared/utils/generate-random-password";
-
-interface InviteUserFormValues {
-  name: string;
-  email: string;
-  role: UserRoleEnum;
-}
+import type { InviteUserFormProps } from "@/forms/user/invite/types";
 
 export function useInviteUserForm() {
   const { t } = useTranslation();
@@ -26,7 +21,7 @@ export function useInviteUserForm() {
 
   const inviteUserService = container.get<IInviteUserService>(SERVICE_TOKENS.InviteUserService);
 
-  const { mutateAsync: inviteUser } = useInviteUser(inviteUserService);
+  const { mutateAsync: handleInviteUser } = useInviteUser(inviteUserService);
 
   const roleOptions = useMemo(
     () => [
@@ -41,14 +36,14 @@ export function useInviteUserForm() {
   );
 
   const form = useAppForm({
-    defaultValues: {} as InviteUserFormValues,
+    defaultValues: {} as InviteUserFormProps,
     validators: {
       onBlur: inviteUserFormSchema(t),
     },
     onSubmit: async ({ value, formApi }) => {
       const password = generateRandomPassword();
 
-      await inviteUser({
+      await handleInviteUser({
         name: value.name,
         email: value.email,
         role: value.role,

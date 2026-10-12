@@ -25,24 +25,34 @@ export default function LoginPage() {
       <AuthCarousel />
 
       <div className="flex h-full w-full items-center justify-center overflow-hidden bg-background p-4 lg:w-[45%] lg:p-6">
-        <Card className="max-h-full w-full max-w-lg overflow-hidden rounded-2xl border shadow-lg duration-700 ease-out animate-in fade-in-0 slide-in-from-bottom-4 fill-mode-both motion-reduce:animate-none">
-          <CardContent className="px-6 pt-4 pb-4 lg:px-10">
-            <LoginForm />
-          </CardContent>
+        <div className="flex max-h-full w-full max-w-lg flex-col items-center gap-2">
+          <Card className="min-h-0 w-full overflow-hidden rounded-2xl border shadow-lg duration-700 ease-out animate-in fade-in-0 slide-in-from-bottom-4 fill-mode-both motion-reduce:animate-none">
+            <CardContent className="px-6 pt-4 pb-4 lg:px-10">
+              <LoginForm />
+            </CardContent>
 
-          <CardFooter className="flex w-full items-center justify-center py-3 duration-700 animate-in fade-in-0 fill-mode-both [animation-delay:300ms] motion-reduce:animate-none">
-            <p className="flex flex-wrap items-center justify-center gap-1.5 text-center text-sm text-muted-foreground">
-              <span>{t("auth.login.noAccount")}</span>
-              <Button
-                variant="link"
-                className="h-auto cursor-pointer p-0 text-sm font-semibold text-blue-600 transition-colors duration-200 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
-                onClick={() => navigate({ to: "/register" })}
-              >
-                {t("auth.login.actions.createAccount")}
-              </Button>
-            </p>
-          </CardFooter>
-        </Card>
+            <CardFooter className="flex w-full items-center justify-center py-3 duration-700 animate-in fade-in-0 fill-mode-both [animation-delay:300ms] motion-reduce:animate-none">
+              <p className="flex flex-wrap items-center justify-center gap-1.5 text-center text-sm text-muted-foreground">
+                <span>{t("auth.login.noAccount")}</span>
+                <Button
+                  variant="link"
+                  className="h-auto cursor-pointer p-0 text-sm font-semibold text-blue-600 transition-colors duration-200 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
+                  onClick={() => navigate({ to: "/register" })}
+                >
+                  {t("auth.login.actions.createAccount")}
+                </Button>
+              </p>
+            </CardFooter>
+          </Card>
+
+          <Button
+            variant="link"
+            className="h-auto cursor-pointer p-0 text-sm text-muted-foreground transition-colors hover:text-foreground duration-700 animate-in fade-in-0 fill-mode-both [animation-delay:300ms] motion-reduce:animate-none"
+            onClick={() => navigate({ to: "/forgot-password" })}
+          >
+            {t("auth.login.actions.forgotPassword")}
+          </Button>
+        </div>
       </div>
     </div>
   );

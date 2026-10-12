@@ -34,6 +34,8 @@ import { ApiTags, ApiOperation, ApiBearerAuth } from "@nestjs/swagger";
 import { UserRoleEnum } from "../enums/role.enum";
 import { RolesGuard } from "../../auth/guards/role.guard";
 import { Roles } from "../../auth/decorators/roles.decorator";
+import { ForgotPasswordDto } from "../dtos/forgot-password.dto";
+import type { IForgotPasswordUserService } from "../services/contracts/forgot-password";
 
 @ApiTags("Users")
 @Controller("user")
@@ -59,6 +61,8 @@ export class UserController {
     private readonly inviteUserService: IInviteUserService,
     @Inject(SERVICE_TOKENS.ConfirmPasswordService)
     private readonly confirmPasswordService: IConfirmPasswordService,
+    @Inject(SERVICE_TOKENS.ForgotPasswordUserService)
+    private readonly forgotPasswordService: IForgotPasswordUserService,
   ) {}
 
   @Post("/create")
@@ -159,6 +163,13 @@ export class UserController {
     @Body() data: ConfirmPasswordDto,
   ) {
     const response = await this.confirmPasswordService.execute(req.user.id, data.password);
+    return customResponse(response);
+  }
+
+  @Patch("/forgot-password")
+  @ApiOperation({ summary: "Forgot a user's password" })
+  async forgotPassword(@Body() data: ForgotPasswordDto) {
+    const response = await this.forgotPasswordService.execute(data);
     return customResponse(response);
   }
 }
