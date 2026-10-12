@@ -159,6 +159,13 @@ pnpm dev:backend
 
 Or enter each folder (`frontend/` or `backend/`) and run `pnpm dev`.
 
+## API documentation (Swagger)
+
+The backend API is documented with Swagger, and you can explore and test the endpoints straight from the browser:
+
+- **Local:** open `/docs` at the address where the backend is running (for example, `http://localhost:4002/docs`)
+- **Production:** [https://ticksy-backend-sapr.onrender.com/docs](https://ticksy-backend-sapr.onrender.com/docs)
+
 ## Structure
 
 ```
