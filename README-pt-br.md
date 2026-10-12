@@ -159,6 +159,13 @@ pnpm dev:backend
 
 Ou entrar em cada pasta (`frontend/` ou `backend/`) e rodar `pnpm dev`.
 
+## Documentação da API (Swagger)
+
+A API do backend é documentada com Swagger, e você pode explorar e testar os endpoints direto pelo navegador:
+
+- **Local:** acesse `/docs` no endereço em que o backend estiver rodando (por exemplo, `http://localhost:4002/docs`)
+- **Produção:** [https://ticksy-backend-sapr.onrender.com/docs](https://ticksy-backend-sapr.onrender.com/docs)
+
 ## Estrutura
 
 ```
