@@ -159,6 +159,16 @@ pnpm dev:backend
 
 Ou entrar em cada pasta (`frontend/` ou `backend/`) e rodar `pnpm dev`.
 
+## Usuários de teste (seed)
+
+O sistema cria automaticamente três usuários de seed, um para cada perfil, para você explorar o app sem precisar se cadastrar:
+
+| Perfil | Nome | E-mail | Senha |
+| --- | --- | --- | --- |
+| `employee` | Employee | `employee@email.com` | `@Aa12345` |
+| `technical_assistance` | Technical Assistance | `technical_assistance@email.com` | `@Aa12345` |
+| `admin` | Administrator | `admin@email.com` | `@Aa12345` |
+
 ## Documentação da API (Swagger)
 
 A API do backend é documentada com Swagger, e você pode explorar e testar os endpoints direto pelo navegador:
