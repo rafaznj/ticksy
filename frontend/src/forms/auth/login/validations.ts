@@ -10,7 +10,6 @@ export const loginFormSchema = (t: TFunction) => {
 
     password: z
       .string(t("auth.login.fields.password.validations.required"))
-      .trim()
       .min(8, t("auth.login.fields.password.validations.minLength", { min: 8 }))
       .max(
         72,

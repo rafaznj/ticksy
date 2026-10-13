@@ -24,6 +24,7 @@ import { GetUserIdsByRoleRepository } from "./repositories/get-ids-by-role.repos
 import { GetUserIdsByRoleService } from "./services/get-ids-by-role.service";
 import { InviteUserService } from "./services/invite.service";
 import { ConfirmPasswordService } from "./services/confirm-password.service";
+import { ForgotPasswordUserService } from "./services/forgot-password.service";
 
 @Module({
   imports: [DrizzleModule],
@@ -112,6 +113,10 @@ import { ConfirmPasswordService } from "./services/confirm-password.service";
     {
       provide: REPOSITORY_TOKENS.GetUserIdsByRoleRepository,
       useClass: GetUserIdsByRoleRepository,
+    },
+    {
+      provide: SERVICE_TOKENS.ForgotPasswordUserService,
+      useClass: ForgotPasswordUserService,
     },
   ],
   exports: [

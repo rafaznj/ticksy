@@ -21,6 +21,6 @@ export function useInviteUser(inviteUserService: IInviteUserService) {
 
       queryClient.invalidateQueries({ queryKey: [TANSTACK_QUERY_KEYS.GET_USER_PAGED] });
     },
-    onError: handleMutationError(t("user.messages.errors.createFailed")),
+    onError: handleMutationError(t("user.messages.errors.inviteFailed")),
   });
 }

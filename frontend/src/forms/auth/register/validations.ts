@@ -16,7 +16,6 @@ export const registerFormSchema = (t: TFunction) => {
 
     password: z
       .string(t("auth.register.fields.password.validations.required"))
-      .trim()
       .min(8, t("auth.register.fields.password.validations.minLength", { min: 8 }))
       .max(72, t("auth.register.fields.password.validations.maxLength", { max: 72 }))
       .refine((value) => /[a-z]/.test(value), {
