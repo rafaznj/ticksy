@@ -127,6 +127,7 @@ interface PagedTableProps<T> {
   search: string;
   currentPage: number;
   totalPages: number;
+  totalItems: number;
   hasPrevious: boolean;
   hasNext: boolean;
   isLoading?: boolean;
@@ -187,6 +188,9 @@ export function PagedTable<T>({
   columns,
   data,
   search,
+  currentPage,
+  totalPages,
+  totalItems,
   hasPrevious,
   hasNext,
   isLoading,
@@ -744,52 +748,64 @@ export function PagedTable<T>({
         </Table>
       </div>
 
-      <div className="flex shrink-0 flex-row items-center justify-end gap-3">
-        <div className="flex items-center gap-2">
-          {onPageSizeChange && (
-            <>
-              <Select
-                value={String(pageSize ?? rowsPerPageOptions[0])}
-                onValueChange={(value) => onPageSizeChange(Number(value))}
-                aria-label={t("general.table.rowsPerPage")}
-              >
-                <SelectTrigger className="h-8 w-17.5">
-                  <SelectValue />
-                </SelectTrigger>
-
-                <SelectContent>
-                  {rowsPerPageOptions.map((option) => (
-                    <SelectItem key={option} value={String(option)}>
-                      {option}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </>
+      <div className="flex shrink-0 flex-row items-center justify-between gap-3">
+        <div className="text-sm text-muted-foreground">
+          {totalItems !== undefined && (
+            <span>{t("general.table.totalRecords", { count: totalItems })}</span>
           )}
         </div>
 
-        <div className="flex items-center gap-2">
-          <div className="flex gap-2">
-            <Button
-              variant="outline"
-              size="icon-sm"
-              aria-label={t("general.table.previous")}
-              disabled={!hasPrevious}
-              onClick={onPreviousPage}
-            >
-              <GrPrevious />
-            </Button>
+        <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
+            {onPageSizeChange && (
+              <>
+                <Select
+                  value={String(pageSize ?? rowsPerPageOptions[0])}
+                  onValueChange={(value) => onPageSizeChange(Number(value))}
+                  aria-label={t("general.table.rowsPerPage")}
+                >
+                  <SelectTrigger className="h-8 w-17.5">
+                    <SelectValue />
+                  </SelectTrigger>
 
-            <Button
-              variant="outline"
-              size="icon-sm"
-              aria-label={t("general.table.next")}
-              disabled={!hasNext}
-              onClick={onNextPage}
-            >
-              <GrNext />
-            </Button>
+                  <SelectContent>
+                    {rowsPerPageOptions.map((option) => (
+                      <SelectItem key={option} value={String(option)}>
+                        {option}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </>
+            )}
+          </div>
+
+          <div className="flex items-center gap-2">
+            <span className="text-sm text-muted-foreground">
+              {t("general.table.pageOf", { current: currentPage, total: totalPages })}
+            </span>
+
+            <div className="flex gap-2">
+              <Button
+                variant="outline"
+                size="icon-sm"
+                aria-label={t("general.table.previous")}
+                disabled={!hasPrevious}
+                onClick={onPreviousPage}
+              >
+                <GrPrevious />
+              </Button>
+
+              <Button
+                variant="outline"
+                size="icon-sm"
+                aria-label={t("general.table.next")}
+                disabled={!hasNext}
+                onClick={onNextPage}
+              >
+                <GrNext />
+              </Button>
+            </div>
           </div>
         </div>
       </div>

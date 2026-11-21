@@ -24,6 +24,10 @@ import { GetTicketStatusCountRepository } from "./repositories/get-status-count.
 import { GetTicketPagedLastSevenDaysService } from "./services/get-paged-last-seven-days.service";
 import { NotificationModule } from "../notification/notification.module";
 import { UserModule } from "../user/user.module";
+import { GetUnassignedTicketsRepository } from "./repositories/get-unassigned-tickets.repository";
+import { CountInprogressTicketsByTechnicianRepository } from "./repositories/count-in-progress-tickets-by-technician.repository";
+import { AutoAssignTicketService } from "./services/auto-assign-tickets.service";
+import { AutoAssignTicketsJob } from "./jobs/auto-assign-tickets.job";
 
 @Module({
   imports: [NotificationModule, UserModule],
@@ -109,6 +113,19 @@ import { UserModule } from "../user/user.module";
       provide: REPOSITORY_TOKENS.GetTicketStatusCountRepository,
       useClass: GetTicketStatusCountRepository,
     },
+    {
+      provide: REPOSITORY_TOKENS.GetUnassignedTicketsRepository,
+      useClass: GetUnassignedTicketsRepository,
+    },
+    {
+      provide: REPOSITORY_TOKENS.CountInprogressTicketsByTechnicianRepository,
+      useClass: CountInprogressTicketsByTechnicianRepository,
+    },
+    {
+      provide: SERVICE_TOKENS.AutoAssignTicketService,
+      useClass: AutoAssignTicketService,
+    },
+    AutoAssignTicketsJob,
   ],
 })
 export class TicketModule {}

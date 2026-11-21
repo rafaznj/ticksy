@@ -38,7 +38,7 @@ export class CreateTicketService
       type: NotificationTypeEnum.TICKET_CREATED,
       ticketId: response.id,
       parameters: {
-        userName: response.createdByName,
+        userName: response.createdByName!,
         title: response.title,
       },
       userIds: adminIds,

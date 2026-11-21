@@ -24,6 +24,10 @@ export const REPOSITORY_TOKENS = {
   UnassignTicketRepository: Symbol.for("UnassignTicketRepository"),
   ResolvedTicketRepository: Symbol.for("ResolvedTicketRepository"),
   GetTicketStatusCountRepository: Symbol.for("GetTicketStatusCountRepository"),
+  GetUnassignedTicketsRepository: Symbol.for("GetUnassignedTicketsRepository"),
+  CountInprogressTicketsByTechnicianRepository: Symbol.for(
+    "CountInprogressTicketsByTechnicianRepository",
+  ),
 
   // Notification
   CreateNotificationRepository: Symbol.for("CreateNotificationRepository"),
