@@ -25,7 +25,7 @@ export const tickets = pgTable("tickets", {
     .notNull(),
   assignedToId: uuid("assigned_to_id").references(() => users.id),
   createdAt: timestamp("created_at").defaultNow().notNull(),
-  updatedAt: timestamp("update_at")
+  updatedAt: timestamp("updated_at")
     .defaultNow()
     .$onUpdate(() => sql`now()`)
     .notNull(),
