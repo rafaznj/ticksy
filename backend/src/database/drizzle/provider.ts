@@ -3,7 +3,7 @@ import { drizzle } from "drizzle-orm/node-postgres";
 import { Pool } from "pg";
 import { databaseConfig } from "../config";
 import { DATABASE_TOKENS } from "../tokens";
-import * as schema from "./schema";
+import { relations } from "./schema/relations";
 
 export const drizzleProvider = [
   {
@@ -12,7 +12,7 @@ export const drizzleProvider = [
       const pool = new Pool(databaseConfig);
       return drizzle({
         client: pool,
-        schema,
+        relations,
         logger: false,
       });
     },

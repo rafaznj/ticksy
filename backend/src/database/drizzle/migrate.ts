@@ -4,14 +4,14 @@ import { drizzle } from "drizzle-orm/node-postgres";
 import { migrate } from "drizzle-orm/node-postgres/migrator";
 import { Pool } from "pg";
 import { databaseConfig } from "../config";
-import * as schema from "./schema";
+import { relations } from "./schema/relations";
 
 const pool = new Pool(databaseConfig);
 
 async function main() {
   const db = drizzle({
     client: pool,
-    schema,
+    relations,
   });
 
   await migrate(db, {
