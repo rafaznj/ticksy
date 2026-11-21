@@ -14,7 +14,7 @@ CREATE TABLE "tickets" (
 	"created_by_id" uuid NOT NULL,
 	"assigned_to_id" uuid,
 	"created_at" timestamp DEFAULT now() NOT NULL,
-	"update_at" timestamp DEFAULT now() NOT NULL,
+	"updated_at" timestamp DEFAULT now() NOT NULL,
 	CONSTRAINT "tickets_code_unique" UNIQUE("code")
 );
 --> statement-breakpoint

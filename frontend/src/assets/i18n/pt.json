@@ -232,11 +232,13 @@
         "actions": "Ações"
       },
       "next": "Próxima",
-      "page": "Página {{current}} de {{total}}",
+      "pageOf": "Página {{current}} de {{total}}",
       "placeholder": "Selecione uma opção",
       "previous": "Anterior",
       "rowsPerPage": "Linhas por página",
-      "searchPlaceholder": "Buscar"
+      "searchPlaceholder": "Buscar",
+      "totalRecords_one": "{{count}} registro",
+      "totalRecords_other": "{{count}} registros"
     },
     "theme": {
       "label": "Mudar para o tema {{theme}}",

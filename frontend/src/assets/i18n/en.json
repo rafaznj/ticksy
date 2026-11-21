@@ -229,10 +229,13 @@
       },
       "next": "Next",
       "page": "Page {{current}} of {{total}}",
+      "pageOf": "Page {{current}} of {{total}}",
       "placeholder": "Select an option",
       "previous": "Previous",
       "rowsPerPage": "Rows per page",
-      "searchPlaceholder": "Search"
+      "searchPlaceholder": "Search",
+      "totalRecords_one": "{{count}} record",
+      "totalRecords_other": "{{count}} records"
     },
     "theme": {
       "label": "Switch to {{theme}} theme",

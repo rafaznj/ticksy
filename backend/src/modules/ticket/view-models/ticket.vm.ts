@@ -11,9 +11,9 @@ export interface TicketViewModel {
   priority: TicketPriorityEnum;
   status: TicketStatusEnum;
   createdById: string;
-  createdByName: string;
+  createdByName?: string;
   assignedToId: string | null;
-  assignedToName: string | null;
+  assignedToName?: string | null;
   createdAt: Date;
   updatedAt: Date;
 }

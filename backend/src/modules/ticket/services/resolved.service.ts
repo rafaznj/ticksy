@@ -36,7 +36,7 @@ export class ResolvedTicketService implements IResolvedTicketService {
 
     const response = await this.resolvedTicketRepository.execute(id);
 
-    if (!response || !response.assignedToName) {
+    if (!response?.assignedToName) {
       throw AppException.notFound("ticket.messages.errors.resolveFailed");
     }
 

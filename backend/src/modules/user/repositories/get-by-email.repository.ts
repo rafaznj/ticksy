@@ -7,12 +7,13 @@ import * as schema from "../../../database/drizzle/schema";
 
 import { IGetUserByEmailRepository } from "./contracts/get-by-email";
 import { UserViewModel } from "../view-models/user.vm";
+import { relations } from "../../../database/drizzle/schema/relations";
 
 @Injectable()
 export class GetUserByEmailRepository implements IGetUserByEmailRepository {
   constructor(
     @Inject(DATABASE_TOKENS.Drizzle)
-    private readonly db: NodePgDatabase<typeof schema>,
+    private readonly db: NodePgDatabase<typeof relations>,
   ) {}
 
   async execute(email: string): Promise<UserViewModel | null> {
