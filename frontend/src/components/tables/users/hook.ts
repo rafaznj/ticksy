@@ -57,6 +57,7 @@ export function useUsersPagedTable() {
 
   const {
     data,
+    totalCount,
     currentPage,
     totalPages,
     hasPrevious,
@@ -105,6 +106,7 @@ export function useUsersPagedTable() {
 
   return {
     data,
+    totalCount,
     columns,
     actions,
     currentPage,

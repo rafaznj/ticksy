@@ -127,7 +127,7 @@ interface PagedTableProps<T> {
   search: string;
   currentPage: number;
   totalPages: number;
-  totalItems: number;
+  totalCount?: number;
   hasPrevious: boolean;
   hasNext: boolean;
   isLoading?: boolean;
@@ -190,7 +190,7 @@ export function PagedTable<T>({
   search,
   currentPage,
   totalPages,
-  totalItems,
+  totalCount: totalItems,
   hasPrevious,
   hasNext,
   isLoading,
