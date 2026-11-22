@@ -51,6 +51,7 @@ export function useTicketsPagedTable() {
 
   const {
     data,
+    totalCount,
     currentPage,
     totalPages,
     hasPrevious,
@@ -179,6 +180,7 @@ export function useTicketsPagedTable() {
 
   return {
     data,
+    totalCount,
     columns,
     actions,
     currentPage,

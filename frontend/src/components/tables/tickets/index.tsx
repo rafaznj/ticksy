@@ -18,6 +18,7 @@ export function TicketsPagedTable() {
     pageSize,
     currentPage,
     totalPages,
+    totalCount,
     hasPrevious,
     hasNext,
     isLoading,
@@ -52,6 +53,7 @@ export function TicketsPagedTable() {
         onPageSizeChange={setPageSize}
         currentPage={currentPage}
         totalPages={totalPages}
+        totalCount={totalCount}
         hasPrevious={hasPrevious}
         hasNext={hasNext}
         onNextPage={nextPage}

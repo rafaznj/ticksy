@@ -17,6 +17,7 @@ export function UsersPagedTable() {
     pageSize,
     currentPage,
     totalPages,
+    totalCount,
     hasPrevious,
     hasNext,
     isLoading,
@@ -49,6 +50,7 @@ export function UsersPagedTable() {
         onPageSizeChange={setPageSize}
         currentPage={currentPage}
         totalPages={totalPages}
+        totalCount={totalCount}
         hasPrevious={hasPrevious}
         hasNext={hasNext}
         onNextPage={nextPage}
