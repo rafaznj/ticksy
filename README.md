@@ -23,6 +23,7 @@ Ticksy is a full-stack help desk system that covers the whole ticket lifecycle: 
   <img alt="NestJS" src="https://img.shields.io/badge/NestJS-E0234E?logo=nestjs&logoColor=white&style=flat-square">
   <img alt="PostgreSQL" src="https://img.shields.io/badge/PostgreSQL-4169E1?logo=postgresql&logoColor=white&style=flat-square">
   <img alt="Drizzle ORM" src="https://img.shields.io/badge/Drizzle_ORM-C5F74F?logo=drizzle&logoColor=black&style=flat-square">
+  <img alt="Jest" src="https://img.shields.io/badge/Jest-C21325?logo=jest&logoColor=white&style=flat-square">
 </p>
 
 ## How the idea came about
@@ -36,6 +37,64 @@ Ticksy started as a personal project to build a complete application end to end:
 | `employee` | Opens tickets and follows the progress of their own requests |
 | `technical_assistance` | Receives the tickets assigned to them and marks them as resolved |
 | `admin` | Manages users, assigns tickets and follows the system's metrics |
+
+## Architecture & Design Decisions
+
+Ticksy was architected with a strong focus on **SOLID principles**, **Clean Architecture**, and **decoupling**, ensuring maintainability, testability, and high coherence across both the backend and frontend.
+
+### Backend Architecture (NestJS)
+
+- **Domain-Driven Modular Monolith:** Organized into bounded business domains (`auth`, `ticket`, `user`, `notification`). Each module manages its own controllers, services, repositories, DTOs, and view models.
+- **Dependency Inversion Principle (DIP):** Services and repositories are decoupled from implementations via explicit TypeScript interfaces and unique dependency injection tokens (`SERVICE_TOKENS` and `REPOSITORY_TOKENS`). Modules interact through contracts rather than concrete classes.
+- **Single Responsibility Principle (SRP):** Business logic resides in granular, single-purpose services exposing a standardized `execute(...)` method (e.g., `AssignTicketService`, `LoginService`, `AutoAssignTicketService`).
+- **Repository Pattern with Drizzle ORM:** Data access is abstracted through dedicated repository classes using Drizzle ORM, providing end-to-end type safety (`type-safe SQL`), zero schema duplication, and near-native SQL performance without heavy ORM overhead.
+- **Scheduled Background Tasks (Cron Jobs):** Built with `@nestjs/schedule`. Jobs act as adapters/entrypoints (similar to controllers) that trigger domain services without embedding business logic inside the scheduler. For example, `AutoAssignTicketsJob` executes daily to balance unassigned tickets across technical assistants respecting a Work-In-Progress (WIP) limit of 5 active tickets per technician.
+- **Real-Time Delivery via SSE:** Server-Sent Events (SSE) provide lightweight, unidirectional real-time updates for typed user notifications (`ticket_created`, `ticket_assigned`, etc.) without WebSocket overhead.
+- **Centralized Error Handling:** Domain-specific exceptions (`AppException`) are intercepted by a `GlobalExceptionFilter`, standardizing error structures and HTTP status codes across the entire API.
+
+### Frontend Architecture (React)
+
+- **Client-Side Dependency Injection (InversifyJS):** Services and API repositories in `modules/` are managed by an InversifyJS container, decoupling data fetching and business rules from React UI components.
+- **Server State & Caching (TanStack Query):** Data fetching, query caching, background refetching, and pagination state are handled via TanStack Query.
+- **Client State (Zustand):** Lightweight global state for user session and authentication tokens (`useAuthStore`).
+- **Type-Safe Routing (TanStack Router):** Declarative, strongly-typed routing with built-in search param validation and route guards for authenticated layouts.
+- **Accessible UI & Design System:** Built on Tailwind CSS, Radix UI primitives, and shadcn/ui with dark/light theme switching (`next-themes`) and multi-language support (English/Portuguese via `i18next`).
+
+---
+
+## Unit Testing
+
+The project employs **Jest** with `@nestjs/testing` for isolated, lightning-fast unit tests focusing on core business rules and security.
+
+### Testing Strategy
+
+- **Co-located Layer Tests:** Unit tests are located in dedicated `__tests__/` subfolders within each layer (e.g., `src/modules/ticket/services/__tests__/assign.service.spec.ts`), keeping test files organized without cluttering production source directories.
+- **DI Resolution Verification:** Tests build an in-memory `TestingModule` to validate that NestJS dependency injection resolves tokens (`SERVICE_TOKENS`, `REPOSITORY_TOKENS`) properly with mocked contracts.
+- **Mocking & Isolation:** External dependencies (database repositories, notification dispatchers, and cryptography engines like `argon2`) are fully mocked with `jest.fn()` and `jest.mock()`. This eliminates database dependencies and ensures tests run in milliseconds.
+- **Separation of Unit vs. E2E:**
+  - `src/**/__tests__/*.spec.ts`: Unit tests testing business logic, exceptions, and side effects in milliseconds.
+  - `backend/test/*.e2e-spec.ts`: End-to-end integration tests using `supertest` against a real NestJS application server.
+
+### Running Tests
+
+```bash
+# Enter backend directory
+cd backend
+
+# Run all unit tests
+pnpm test
+
+# Run unit tests in watch mode
+pnpm test:watch
+
+# Run unit tests with code coverage report
+pnpm test:cov
+
+# Run E2E integration tests
+pnpm test:e2e
+```
+
+---
 
 ## Features
 
