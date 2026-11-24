@@ -8,241 +8,234 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute } from "@tanstack/react-router";
 
-import { Route as rootRouteImport } from './routes/__root'
-import { Route as RegisterRouteImport } from './routes/register'
-import { Route as LoginRouteImport } from './routes/login'
-import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
-import { Route as ConfirmPasswordRouteImport } from './routes/confirm-password'
-import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
-import { Route as AuthenticatedIndexRouteImport } from './routes/_authenticated/index'
-import { Route as AuthenticatedTicketsRouteImport } from './routes/_authenticated/tickets'
-import { Route as AuthenticatedHomeRouteImport } from './routes/_authenticated/home'
+import { Route as rootRouteImport } from "./routes/__root";
+import { Route as RegisterRouteImport } from "./routes/register";
+import { Route as LoginRouteImport } from "./routes/login";
+import { Route as ForgotPasswordRouteImport } from "./routes/forgot-password";
+import { Route as ConfirmPasswordRouteImport } from "./routes/confirm-password";
+import { Route as AuthenticatedRouteImport } from "./routes/_authenticated";
+import { Route as AuthenticatedIndexRouteImport } from "./routes/_authenticated/index";
+import { Route as AuthenticatedTicketsRouteImport } from "./routes/_authenticated/tickets";
+import { Route as AuthenticatedHomeRouteImport } from "./routes/_authenticated/home";
 
-const AuthenticatedUsersLazyRouteImport = createFileRoute(
-  '/_authenticated/users',
-)()
+const AuthenticatedUsersLazyRouteImport = createFileRoute("/_authenticated/users")();
 const AuthenticatedNotificationsLazyRouteImport = createFileRoute(
-  '/_authenticated/notifications',
-)()
+  "/_authenticated/notifications",
+)();
 
 const RegisterRoute = RegisterRouteImport.update({
-  id: '/register',
-  path: '/register',
+  id: "/register",
+  path: "/register",
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 const LoginRoute = LoginRouteImport.update({
-  id: '/login',
-  path: '/login',
+  id: "/login",
+  path: "/login",
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
-  id: '/forgot-password',
-  path: '/forgot-password',
+  id: "/forgot-password",
+  path: "/forgot-password",
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 const ConfirmPasswordRoute = ConfirmPasswordRouteImport.update({
-  id: '/confirm-password',
-  path: '/confirm-password',
+  id: "/confirm-password",
+  path: "/confirm-password",
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 const AuthenticatedRoute = AuthenticatedRouteImport.update({
-  id: '/_authenticated',
+  id: "/_authenticated",
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 const AuthenticatedIndexRoute = AuthenticatedIndexRouteImport.update({
-  id: '/',
-  path: '/',
+  id: "/",
+  path: "/",
   getParentRoute: () => AuthenticatedRoute,
-} as any)
+} as any);
 const AuthenticatedUsersLazyRoute = AuthenticatedUsersLazyRouteImport.update({
-  id: '/users',
-  path: '/users',
+  id: "/users",
+  path: "/users",
   getParentRoute: () => AuthenticatedRoute,
-} as any).lazy(() =>
-  import('./routes/_authenticated/users.lazy').then((d) => d.Route),
-)
-const AuthenticatedNotificationsLazyRoute =
-  AuthenticatedNotificationsLazyRouteImport.update({
-    id: '/notifications',
-    path: '/notifications',
-    getParentRoute: () => AuthenticatedRoute,
-  } as any).lazy(() =>
-    import('./routes/_authenticated/notifications.lazy').then((d) => d.Route),
-  )
+} as any).lazy(() => import("./routes/_authenticated/users.lazy").then((d) => d.Route));
+const AuthenticatedNotificationsLazyRoute = AuthenticatedNotificationsLazyRouteImport.update({
+  id: "/notifications",
+  path: "/notifications",
+  getParentRoute: () => AuthenticatedRoute,
+} as any).lazy(() => import("./routes/_authenticated/notifications.lazy").then((d) => d.Route));
 const AuthenticatedTicketsRoute = AuthenticatedTicketsRouteImport.update({
-  id: '/tickets',
-  path: '/tickets',
+  id: "/tickets",
+  path: "/tickets",
   getParentRoute: () => AuthenticatedRoute,
-} as any)
+} as any);
 const AuthenticatedHomeRoute = AuthenticatedHomeRouteImport.update({
-  id: '/home',
-  path: '/home',
+  id: "/home",
+  path: "/home",
   getParentRoute: () => AuthenticatedRoute,
-} as any)
+} as any);
 
 export interface FileRoutesByFullPath {
-  '/': typeof AuthenticatedIndexRoute
-  '/confirm-password': typeof ConfirmPasswordRoute
-  '/forgot-password': typeof ForgotPasswordRoute
-  '/login': typeof LoginRoute
-  '/register': typeof RegisterRoute
-  '/home': typeof AuthenticatedHomeRoute
-  '/tickets': typeof AuthenticatedTicketsRoute
-  '/notifications': typeof AuthenticatedNotificationsLazyRoute
-  '/users': typeof AuthenticatedUsersLazyRoute
+  "/": typeof AuthenticatedIndexRoute;
+  "/confirm-password": typeof ConfirmPasswordRoute;
+  "/forgot-password": typeof ForgotPasswordRoute;
+  "/login": typeof LoginRoute;
+  "/register": typeof RegisterRoute;
+  "/home": typeof AuthenticatedHomeRoute;
+  "/tickets": typeof AuthenticatedTicketsRoute;
+  "/notifications": typeof AuthenticatedNotificationsLazyRoute;
+  "/users": typeof AuthenticatedUsersLazyRoute;
 }
 export interface FileRoutesByTo {
-  '/confirm-password': typeof ConfirmPasswordRoute
-  '/forgot-password': typeof ForgotPasswordRoute
-  '/login': typeof LoginRoute
-  '/register': typeof RegisterRoute
-  '/home': typeof AuthenticatedHomeRoute
-  '/tickets': typeof AuthenticatedTicketsRoute
-  '/notifications': typeof AuthenticatedNotificationsLazyRoute
-  '/users': typeof AuthenticatedUsersLazyRoute
-  '/': typeof AuthenticatedIndexRoute
+  "/confirm-password": typeof ConfirmPasswordRoute;
+  "/forgot-password": typeof ForgotPasswordRoute;
+  "/login": typeof LoginRoute;
+  "/register": typeof RegisterRoute;
+  "/home": typeof AuthenticatedHomeRoute;
+  "/tickets": typeof AuthenticatedTicketsRoute;
+  "/notifications": typeof AuthenticatedNotificationsLazyRoute;
+  "/users": typeof AuthenticatedUsersLazyRoute;
+  "/": typeof AuthenticatedIndexRoute;
 }
 export interface FileRoutesById {
-  __root__: typeof rootRouteImport
-  '/_authenticated': typeof AuthenticatedRouteWithChildren
-  '/confirm-password': typeof ConfirmPasswordRoute
-  '/forgot-password': typeof ForgotPasswordRoute
-  '/login': typeof LoginRoute
-  '/register': typeof RegisterRoute
-  '/_authenticated/home': typeof AuthenticatedHomeRoute
-  '/_authenticated/tickets': typeof AuthenticatedTicketsRoute
-  '/_authenticated/notifications': typeof AuthenticatedNotificationsLazyRoute
-  '/_authenticated/users': typeof AuthenticatedUsersLazyRoute
-  '/_authenticated/': typeof AuthenticatedIndexRoute
+  __root__: typeof rootRouteImport;
+  "/_authenticated": typeof AuthenticatedRouteWithChildren;
+  "/confirm-password": typeof ConfirmPasswordRoute;
+  "/forgot-password": typeof ForgotPasswordRoute;
+  "/login": typeof LoginRoute;
+  "/register": typeof RegisterRoute;
+  "/_authenticated/home": typeof AuthenticatedHomeRoute;
+  "/_authenticated/tickets": typeof AuthenticatedTicketsRoute;
+  "/_authenticated/notifications": typeof AuthenticatedNotificationsLazyRoute;
+  "/_authenticated/users": typeof AuthenticatedUsersLazyRoute;
+  "/_authenticated/": typeof AuthenticatedIndexRoute;
 }
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath
+  fileRoutesByFullPath: FileRoutesByFullPath;
   fullPaths:
-    | '/'
-    | '/confirm-password'
-    | '/forgot-password'
-    | '/login'
-    | '/register'
-    | '/home'
-    | '/tickets'
-    | '/notifications'
-    | '/users'
-  fileRoutesByTo: FileRoutesByTo
+    | "/"
+    | "/confirm-password"
+    | "/forgot-password"
+    | "/login"
+    | "/register"
+    | "/home"
+    | "/tickets"
+    | "/notifications"
+    | "/users";
+  fileRoutesByTo: FileRoutesByTo;
   to:
-    | '/confirm-password'
-    | '/forgot-password'
-    | '/login'
-    | '/register'
-    | '/home'
-    | '/tickets'
-    | '/notifications'
-    | '/users'
-    | '/'
+    | "/confirm-password"
+    | "/forgot-password"
+    | "/login"
+    | "/register"
+    | "/home"
+    | "/tickets"
+    | "/notifications"
+    | "/users"
+    | "/";
   id:
-    | '__root__'
-    | '/_authenticated'
-    | '/confirm-password'
-    | '/forgot-password'
-    | '/login'
-    | '/register'
-    | '/_authenticated/home'
-    | '/_authenticated/tickets'
-    | '/_authenticated/notifications'
-    | '/_authenticated/users'
-    | '/_authenticated/'
-  fileRoutesById: FileRoutesById
+    | "__root__"
+    | "/_authenticated"
+    | "/confirm-password"
+    | "/forgot-password"
+    | "/login"
+    | "/register"
+    | "/_authenticated/home"
+    | "/_authenticated/tickets"
+    | "/_authenticated/notifications"
+    | "/_authenticated/users"
+    | "/_authenticated/";
+  fileRoutesById: FileRoutesById;
 }
 export interface RootRouteChildren {
-  AuthenticatedRoute: typeof AuthenticatedRouteWithChildren
-  ConfirmPasswordRoute: typeof ConfirmPasswordRoute
-  ForgotPasswordRoute: typeof ForgotPasswordRoute
-  LoginRoute: typeof LoginRoute
-  RegisterRoute: typeof RegisterRoute
+  AuthenticatedRoute: typeof AuthenticatedRouteWithChildren;
+  ConfirmPasswordRoute: typeof ConfirmPasswordRoute;
+  ForgotPasswordRoute: typeof ForgotPasswordRoute;
+  LoginRoute: typeof LoginRoute;
+  RegisterRoute: typeof RegisterRoute;
 }
 
-declare module '@tanstack/react-router' {
+declare module "@tanstack/react-router" {
   interface FileRoutesByPath {
-    '/register': {
-      id: '/register'
-      path: '/register'
-      fullPath: '/register'
-      preLoaderRoute: typeof RegisterRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/login': {
-      id: '/login'
-      path: '/login'
-      fullPath: '/login'
-      preLoaderRoute: typeof LoginRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/forgot-password': {
-      id: '/forgot-password'
-      path: '/forgot-password'
-      fullPath: '/forgot-password'
-      preLoaderRoute: typeof ForgotPasswordRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/confirm-password': {
-      id: '/confirm-password'
-      path: '/confirm-password'
-      fullPath: '/confirm-password'
-      preLoaderRoute: typeof ConfirmPasswordRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated': {
-      id: '/_authenticated'
-      path: ''
-      fullPath: '/'
-      preLoaderRoute: typeof AuthenticatedRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/': {
-      id: '/_authenticated/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof AuthenticatedIndexRouteImport
-      parentRoute: typeof AuthenticatedRoute
-    }
-    '/_authenticated/users': {
-      id: '/_authenticated/users'
-      path: '/users'
-      fullPath: '/users'
-      preLoaderRoute: typeof AuthenticatedUsersLazyRouteImport
-      parentRoute: typeof AuthenticatedRoute
-    }
-    '/_authenticated/notifications': {
-      id: '/_authenticated/notifications'
-      path: '/notifications'
-      fullPath: '/notifications'
-      preLoaderRoute: typeof AuthenticatedNotificationsLazyRouteImport
-      parentRoute: typeof AuthenticatedRoute
-    }
-    '/_authenticated/tickets': {
-      id: '/_authenticated/tickets'
-      path: '/tickets'
-      fullPath: '/tickets'
-      preLoaderRoute: typeof AuthenticatedTicketsRouteImport
-      parentRoute: typeof AuthenticatedRoute
-    }
-    '/_authenticated/home': {
-      id: '/_authenticated/home'
-      path: '/home'
-      fullPath: '/home'
-      preLoaderRoute: typeof AuthenticatedHomeRouteImport
-      parentRoute: typeof AuthenticatedRoute
-    }
+    "/register": {
+      id: "/register";
+      path: "/register";
+      fullPath: "/register";
+      preLoaderRoute: typeof RegisterRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
+    "/login": {
+      id: "/login";
+      path: "/login";
+      fullPath: "/login";
+      preLoaderRoute: typeof LoginRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
+    "/forgot-password": {
+      id: "/forgot-password";
+      path: "/forgot-password";
+      fullPath: "/forgot-password";
+      preLoaderRoute: typeof ForgotPasswordRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
+    "/confirm-password": {
+      id: "/confirm-password";
+      path: "/confirm-password";
+      fullPath: "/confirm-password";
+      preLoaderRoute: typeof ConfirmPasswordRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
+    "/_authenticated": {
+      id: "/_authenticated";
+      path: "";
+      fullPath: "/";
+      preLoaderRoute: typeof AuthenticatedRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
+    "/_authenticated/": {
+      id: "/_authenticated/";
+      path: "/";
+      fullPath: "/";
+      preLoaderRoute: typeof AuthenticatedIndexRouteImport;
+      parentRoute: typeof AuthenticatedRoute;
+    };
+    "/_authenticated/users": {
+      id: "/_authenticated/users";
+      path: "/users";
+      fullPath: "/users";
+      preLoaderRoute: typeof AuthenticatedUsersLazyRouteImport;
+      parentRoute: typeof AuthenticatedRoute;
+    };
+    "/_authenticated/notifications": {
+      id: "/_authenticated/notifications";
+      path: "/notifications";
+      fullPath: "/notifications";
+      preLoaderRoute: typeof AuthenticatedNotificationsLazyRouteImport;
+      parentRoute: typeof AuthenticatedRoute;
+    };
+    "/_authenticated/tickets": {
+      id: "/_authenticated/tickets";
+      path: "/tickets";
+      fullPath: "/tickets";
+      preLoaderRoute: typeof AuthenticatedTicketsRouteImport;
+      parentRoute: typeof AuthenticatedRoute;
+    };
+    "/_authenticated/home": {
+      id: "/_authenticated/home";
+      path: "/home";
+      fullPath: "/home";
+      preLoaderRoute: typeof AuthenticatedHomeRouteImport;
+      parentRoute: typeof AuthenticatedRoute;
+    };
   }
 }
 
 interface AuthenticatedRouteChildren {
-  AuthenticatedHomeRoute: typeof AuthenticatedHomeRoute
-  AuthenticatedTicketsRoute: typeof AuthenticatedTicketsRoute
-  AuthenticatedNotificationsLazyRoute: typeof AuthenticatedNotificationsLazyRoute
-  AuthenticatedUsersLazyRoute: typeof AuthenticatedUsersLazyRoute
-  AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
+  AuthenticatedHomeRoute: typeof AuthenticatedHomeRoute;
+  AuthenticatedTicketsRoute: typeof AuthenticatedTicketsRoute;
+  AuthenticatedNotificationsLazyRoute: typeof AuthenticatedNotificationsLazyRoute;
+  AuthenticatedUsersLazyRoute: typeof AuthenticatedUsersLazyRoute;
+  AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute;
 }
 
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
@@ -251,11 +244,11 @@ const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedNotificationsLazyRoute: AuthenticatedNotificationsLazyRoute,
   AuthenticatedUsersLazyRoute: AuthenticatedUsersLazyRoute,
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
-}
+};
 
 const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(
   AuthenticatedRouteChildren,
-)
+);
 
 const rootRouteChildren: RootRouteChildren = {
   AuthenticatedRoute: AuthenticatedRouteWithChildren,
@@ -263,7 +256,7 @@ const rootRouteChildren: RootRouteChildren = {
   ForgotPasswordRoute: ForgotPasswordRoute,
   LoginRoute: LoginRoute,
   RegisterRoute: RegisterRoute,
-}
+};
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>()
+  ._addFileTypes<FileRouteTypes>();

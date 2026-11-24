@@ -3,102 +3,66 @@
   "version": "10",
   "dialect": "postgres",
   "id": "839fc059-ec14-4adc-ba39-441eb1ae9f72",
-  "prevIds": [
-    "00000000-0000-0000-0000-000000000000"
-  ],
+  "prevIds": ["00000000-0000-0000-0000-000000000000"],
   "footprints": [
     {
       "statementType": "create_enum",
-      "statementTarget": [
-        "enum",
-        "public",
-        "ticket_category"
-      ],
+      "statementTarget": ["enum", "public", "ticket_category"],
       "writes": [
         "s|enum|public.ticket_category",
         "n|enum|public.ticket_category",
         "e|enum|public.ticket_category",
         "n|type|public.ticket_category"
       ],
-      "reads": [
-        "n|sch|public"
-      ]
+      "reads": ["n|sch|public"]
     },
     {
       "statementType": "create_enum",
-      "statementTarget": [
-        "enum",
-        "public",
-        "ticket_priority"
-      ],
+      "statementTarget": ["enum", "public", "ticket_priority"],
       "writes": [
         "s|enum|public.ticket_priority",
         "n|enum|public.ticket_priority",
         "e|enum|public.ticket_priority",
         "n|type|public.ticket_priority"
       ],
-      "reads": [
-        "n|sch|public"
-      ]
+      "reads": ["n|sch|public"]
     },
     {
       "statementType": "create_enum",
-      "statementTarget": [
-        "enum",
-        "public",
-        "ticket_status"
-      ],
+      "statementTarget": ["enum", "public", "ticket_status"],
       "writes": [
         "s|enum|public.ticket_status",
         "n|enum|public.ticket_status",
         "e|enum|public.ticket_status",
         "n|type|public.ticket_status"
       ],
-      "reads": [
-        "n|sch|public"
-      ]
+      "reads": ["n|sch|public"]
     },
     {
       "statementType": "create_enum",
-      "statementTarget": [
-        "enum",
-        "public",
-        "role"
-      ],
+      "statementTarget": ["enum", "public", "role"],
       "writes": [
         "s|enum|public.role",
         "n|enum|public.role",
         "e|enum|public.role",
         "n|type|public.role"
       ],
-      "reads": [
-        "n|sch|public"
-      ]
+      "reads": ["n|sch|public"]
     },
     {
       "statementType": "create_enum",
-      "statementTarget": [
-        "enum",
-        "public",
-        "notification_type"
-      ],
+      "statementTarget": ["enum", "public", "notification_type"],
       "writes": [
         "s|enum|public.notification_type",
         "n|enum|public.notification_type",
         "e|enum|public.notification_type",
         "n|type|public.notification_type"
       ],
-      "reads": [
-        "n|sch|public"
-      ]
+      "reads": ["n|sch|public"]
     },
     {
       "statementType": "create_table",
-      "statementTarget": [
-        "table",
-        "public",
-        "tickets"
-      ],
+      "statementTarget": ["table", "public", "tickets"],
       "writes": [
         "s|tbl|public.tickets",
         "n|tbl|public.tickets",
@@ -117,11 +81,7 @@
     },
     {
       "statementType": "create_table",
-      "statementTarget": [
-        "table",
-        "public",
-        "users"
-      ],
+      "statementTarget": ["table", "public", "users"],
       "writes": [
         "s|tbl|public.users",
         "n|tbl|public.users",
@@ -131,18 +91,11 @@
         "n|rel|public.users_pkey",
         "n|rel|public.users_email_unique"
       ],
-      "reads": [
-        "n|sch|public",
-        "n|enum|public.role"
-      ]
+      "reads": ["n|sch|public", "n|enum|public.role"]
     },
     {
       "statementType": "create_table",
-      "statementTarget": [
-        "table",
-        "public",
-        "refresh_tokens"
-      ],
+      "statementTarget": ["table", "public", "refresh_tokens"],
       "writes": [
         "s|tbl|public.refresh_tokens",
         "n|tbl|public.refresh_tokens",
@@ -151,17 +104,11 @@
         "n|type|public.refresh_tokens",
         "n|rel|public.refresh_tokens_pkey"
       ],
-      "reads": [
-        "n|sch|public"
-      ]
+      "reads": ["n|sch|public"]
     },
     {
       "statementType": "create_table",
-      "statementTarget": [
-        "table",
-        "public",
-        "notifications"
-      ],
+      "statementTarget": ["table", "public", "notifications"],
       "writes": [
         "s|tbl|public.notifications",
         "n|tbl|public.notifications",
@@ -170,18 +117,11 @@
         "n|type|public.notifications",
         "n|rel|public.notifications_pkey"
       ],
-      "reads": [
-        "n|sch|public",
-        "n|enum|public.notification_type"
-      ]
+      "reads": ["n|sch|public", "n|enum|public.notification_type"]
     },
     {
       "statementType": "create_table",
-      "statementTarget": [
-        "table",
-        "public",
-        "notification_recipients"
-      ],
+      "statementTarget": ["table", "public", "notification_recipients"],
       "writes": [
         "s|tbl|public.notification_recipients",
         "n|tbl|public.notification_recipients",
@@ -191,9 +131,7 @@
         "n|rel|public.notification_recipients_pkey",
         "n|rel|public.notification_recipients_notificationId_userId_unique"
       ],
-      "reads": [
-        "n|sch|public"
-      ]
+      "reads": ["n|sch|public"]
     },
     {
       "statementType": "create_index",
@@ -218,11 +156,7 @@
     },
     {
       "statementType": "create_fk",
-      "statementTarget": [
-        "table",
-        "public",
-        "tickets"
-      ],
+      "statementTarget": ["table", "public", "tickets"],
       "writes": [
         "s|fk|public.tickets.tickets_created_by_id_users_id_fk",
         "n|fk|public.tickets.tickets_created_by_id_users_id_fk",
@@ -241,11 +175,7 @@
     },
     {
       "statementType": "create_fk",
-      "statementTarget": [
-        "table",
-        "public",
-        "tickets"
-      ],
+      "statementTarget": ["table", "public", "tickets"],
       "writes": [
         "s|fk|public.tickets.tickets_assigned_to_id_users_id_fk",
         "n|fk|public.tickets.tickets_assigned_to_id_users_id_fk",
@@ -264,11 +194,7 @@
     },
     {
       "statementType": "create_fk",
-      "statementTarget": [
-        "table",
-        "public",
-        "refresh_tokens"
-      ],
+      "statementTarget": ["table", "public", "refresh_tokens"],
       "writes": [
         "s|fk|public.refresh_tokens.refresh_tokens_user_id_users_id_fk",
         "n|fk|public.refresh_tokens.refresh_tokens_user_id_users_id_fk",
@@ -287,11 +213,7 @@
     },
     {
       "statementType": "create_fk",
-      "statementTarget": [
-        "table",
-        "public",
-        "notifications"
-      ],
+      "statementTarget": ["table", "public", "notifications"],
       "writes": [
         "s|fk|public.notifications.notifications_ticketId_tickets_id_fk",
         "n|fk|public.notifications.notifications_ticketId_tickets_id_fk",
@@ -310,11 +232,7 @@
     },
     {
       "statementType": "create_fk",
-      "statementTarget": [
-        "table",
-        "public",
-        "notification_recipients"
-      ],
+      "statementTarget": ["table", "public", "notification_recipients"],
       "writes": [
         "s|fk|public.notification_recipients.notification_recipients_notificationId_notifications_id_fk",
         "n|fk|public.notification_recipients.notification_recipients_notificationId_notifications_id_fk",
@@ -333,11 +251,7 @@
     },
     {
       "statementType": "create_fk",
-      "statementTarget": [
-        "table",
-        "public",
-        "notification_recipients"
-      ],
+      "statementTarget": ["table", "public", "notification_recipients"],
       "writes": [
         "s|fk|public.notification_recipients.notification_recipients_userId_users_id_fk",
         "n|fk|public.notification_recipients.notification_recipients_userId_users_id_fk",
@@ -389,55 +303,31 @@
     {
       "schema": "public",
       "name": "ticket_category",
-      "values": [
-        "hardware",
-        "software",
-        "account",
-        "access",
-        "other"
-      ],
+      "values": ["hardware", "software", "account", "access", "other"],
       "entityType": "enums"
     },
     {
       "schema": "public",
       "name": "ticket_priority",
-      "values": [
-        "low",
-        "medium",
-        "high",
-        "urgent"
-      ],
+      "values": ["low", "medium", "high", "urgent"],
       "entityType": "enums"
     },
     {
       "schema": "public",
       "name": "ticket_status",
-      "values": [
-        "open",
-        "in_progress",
-        "resolved"
-      ],
+      "values": ["open", "in_progress", "resolved"],
       "entityType": "enums"
     },
     {
       "schema": "public",
       "name": "role",
-      "values": [
-        "employee",
-        "technical_assistance",
-        "admin"
-      ],
+      "values": ["employee", "technical_assistance", "admin"],
       "entityType": "enums"
     },
     {
       "schema": "public",
       "name": "notification_type",
-      "values": [
-        "ticket_created",
-        "ticket_assigned",
-        "ticket_unassigned",
-        "ticket_status_changed"
-      ],
+      "values": ["ticket_created", "ticket_assigned", "ticket_unassigned", "ticket_status_changed"],
       "entityType": "enums"
     },
     {
@@ -949,14 +839,10 @@
       "table": "tickets",
       "name": "tickets_created_by_id_users_id_fk",
       "nameExplicit": false,
-      "columns": [
-        "created_by_id"
-      ],
+      "columns": ["created_by_id"],
       "schemaTo": "public",
       "tableTo": "users",
-      "columnsTo": [
-        "id"
-      ],
+      "columnsTo": ["id"],
       "onUpdate": "NO ACTION",
       "onDelete": "NO ACTION",
       "entityType": "fks"
@@ -966,14 +852,10 @@
       "table": "tickets",
       "name": "tickets_assigned_to_id_users_id_fk",
       "nameExplicit": false,
-      "columns": [
-        "assigned_to_id"
-      ],
+      "columns": ["assigned_to_id"],
       "schemaTo": "public",
       "tableTo": "users",
-      "columnsTo": [
-        "id"
-      ],
+      "columnsTo": ["id"],
       "onUpdate": "NO ACTION",
       "onDelete": "NO ACTION",
       "entityType": "fks"
@@ -983,14 +865,10 @@
       "table": "refresh_tokens",
       "name": "refresh_tokens_user_id_users_id_fk",
       "nameExplicit": false,
-      "columns": [
-        "user_id"
-      ],
+      "columns": ["user_id"],
       "schemaTo": "public",
       "tableTo": "users",
-      "columnsTo": [
-        "id"
-      ],
+      "columnsTo": ["id"],
       "onUpdate": "NO ACTION",
       "onDelete": "CASCADE",
       "entityType": "fks"
@@ -1000,14 +878,10 @@
       "table": "notifications",
       "name": "notifications_ticketId_tickets_id_fk",
       "nameExplicit": false,
-      "columns": [
-        "ticketId"
-      ],
+      "columns": ["ticketId"],
       "schemaTo": "public",
       "tableTo": "tickets",
-      "columnsTo": [
-        "id"
-      ],
+      "columnsTo": ["id"],
       "onUpdate": "NO ACTION",
       "onDelete": "CASCADE",
       "entityType": "fks"
@@ -1017,14 +891,10 @@
       "table": "notification_recipients",
       "name": "notification_recipients_notificationId_notifications_id_fk",
       "nameExplicit": false,
-      "columns": [
-        "notificationId"
-      ],
+      "columns": ["notificationId"],
       "schemaTo": "public",
       "tableTo": "notifications",
-      "columnsTo": [
-        "id"
-      ],
+      "columnsTo": ["id"],
       "onUpdate": "NO ACTION",
       "onDelete": "CASCADE",
       "entityType": "fks"
@@ -1034,14 +904,10 @@
       "table": "notification_recipients",
       "name": "notification_recipients_userId_users_id_fk",
       "nameExplicit": false,
-      "columns": [
-        "userId"
-      ],
+      "columns": ["userId"],
       "schemaTo": "public",
       "tableTo": "users",
-      "columnsTo": [
-        "id"
-      ],
+      "columnsTo": ["id"],
       "onUpdate": "NO ACTION",
       "onDelete": "CASCADE",
       "entityType": "fks"
@@ -1050,9 +916,7 @@
       "schema": "public",
       "table": "tickets",
       "name": "tickets_pkey",
-      "columns": [
-        "id"
-      ],
+      "columns": ["id"],
       "nameExplicit": false,
       "entityType": "pks"
     },
@@ -1060,9 +924,7 @@
       "schema": "public",
       "table": "users",
       "name": "users_pkey",
-      "columns": [
-        "id"
-      ],
+      "columns": ["id"],
       "nameExplicit": false,
       "entityType": "pks"
     },
@@ -1070,9 +932,7 @@
       "schema": "public",
       "table": "refresh_tokens",
       "name": "refresh_tokens_pkey",
-      "columns": [
-        "id"
-      ],
+      "columns": ["id"],
       "nameExplicit": false,
       "entityType": "pks"
     },
@@ -1080,9 +940,7 @@
       "schema": "public",
       "table": "notifications",
       "name": "notifications_pkey",
-      "columns": [
-        "id"
-      ],
+      "columns": ["id"],
       "nameExplicit": false,
       "entityType": "pks"
     },
@@ -1090,9 +948,7 @@
       "schema": "public",
       "table": "notification_recipients",
       "name": "notification_recipients_pkey",
-      "columns": [
-        "id"
-      ],
+      "columns": ["id"],
       "nameExplicit": false,
       "entityType": "pks"
     },
@@ -1101,9 +957,7 @@
       "table": "tickets",
       "name": "tickets_code_unique",
       "nameExplicit": false,
-      "columns": [
-        "code"
-      ],
+      "columns": ["code"],
       "nullsNotDistinct": false,
       "entityType": "uniques"
     },
@@ -1112,9 +966,7 @@
       "table": "users",
       "name": "users_email_unique",
       "nameExplicit": false,
-      "columns": [
-        "email"
-      ],
+      "columns": ["email"],
       "nullsNotDistinct": false,
       "entityType": "uniques"
     },
@@ -1123,10 +975,7 @@
       "table": "notification_recipients",
       "name": "notification_recipients_notificationId_userId_unique",
       "nameExplicit": false,
-      "columns": [
-        "notificationId",
-        "userId"
-      ],
+      "columns": ["notificationId", "userId"],
       "nullsNotDistinct": false,
       "entityType": "uniques"
     }
