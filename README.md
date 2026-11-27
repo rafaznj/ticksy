@@ -24,6 +24,7 @@ Ticksy is a full-stack help desk system that covers the whole ticket lifecycle: 
   <img alt="PostgreSQL" src="https://img.shields.io/badge/PostgreSQL-4169E1?logo=postgresql&logoColor=white&style=flat-square">
   <img alt="Drizzle ORM" src="https://img.shields.io/badge/Drizzle_ORM-C5F74F?logo=drizzle&logoColor=black&style=flat-square">
   <img alt="Jest" src="https://img.shields.io/badge/Jest-C21325?logo=jest&logoColor=white&style=flat-square">
+  <img alt="Docker" src="https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white&style=flat-square">
 </p>
 
 ## How the idea came about
@@ -184,6 +185,39 @@ Or run it locally following the instructions below.
 
 ## Running it locally
 
+### Option 1: With Docker Compose (Recommended)
+
+The quickest way to spin up the entire stack (PostgreSQL, Backend, and Frontend) in isolated containers:
+
+```bash
+# 1. Clone the repository
+git clone https://github.com/rafaznj/ticksy.git
+
+# 2. Enter the project folder
+cd ticksy
+
+# 3. Set up the backend environment variables
+# (you can copy backend/.env.example to backend/.env)
+cp backend/.env.example backend/.env
+
+# 4. Start all services with build
+docker compose up --build -d
+```
+
+Docker will:
+- Spin up the **PostgreSQL** database with persistent volume.
+- Build the NestJS **Backend**, automatically apply Drizzle migrations, and expose the API on port `4002`.
+- Compile the **Frontend** production build and serve it via **Nginx** on port `5173`.
+
+To stop the containers:
+```bash
+docker compose down
+```
+
+---
+
+### Option 2: Manually with pnpm
+
 The project is a pnpm monorepo: dependencies are installed once, at the root.
 
 ```bash
@@ -239,7 +273,10 @@ The backend API is documented with Swagger, and you can explore and test the end
 
 ```
 .
+├── docker-compose.yml                                      # Orchestration of all services (PostgreSQL, Backend, and Frontend)
 ├── frontend/
+│   ├── Dockerfile                                          # Multi-stage frontend build & Nginx production image
+│   ├── nginx.conf                                          # Nginx SPA fallback and static caching configuration
 │   └── src/
 │       ├── assets/
 │       │   └── images/
@@ -272,6 +309,7 @@ The backend API is documented with Swagger, and you can explore and test the end
 |
 ├── backend/
 │   ├── .env.example                                        # Example of how the environment variables should look
+│   ├── Dockerfile                                          # Multi-stage NestJS API build with automatic migrations
 │   ├── setup.ts                                            # Project setup script
 │   └── src/
 │       ├── database/

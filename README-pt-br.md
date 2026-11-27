@@ -24,6 +24,7 @@ O Ticksy é um sistema de help desk full-stack que cobre todo o ciclo de vida de
   <img alt="PostgreSQL" src="https://img.shields.io/badge/PostgreSQL-4169E1?logo=postgresql&logoColor=white&style=flat-square">
   <img alt="Drizzle ORM" src="https://img.shields.io/badge/Drizzle_ORM-C5F74F?logo=drizzle&logoColor=black&style=flat-square">
   <img alt="Jest" src="https://img.shields.io/badge/Jest-C21325?logo=jest&logoColor=white&style=flat-square">
+  <img alt="Docker" src="https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white&style=flat-square">
 </p>
 
 ## Como surgiu a ideia
@@ -184,6 +185,39 @@ Ou rode localmente seguindo as instruções abaixo.
 
 ## Rodando localmente
 
+### Opção 1: Com Docker Compose (Recomendado)
+
+A forma mais rápida de subir todo o ecossistema (PostgreSQL, Backend e Frontend) em contêineres isolados:
+
+```bash
+# 1. Clone o repositório
+git clone https://github.com/rafaznj/ticksy.git
+
+# 2. Entre na pasta do projeto
+cd ticksy
+
+# 3. Configure as variáveis de ambiente do backend
+# (você pode copiar do backend/.env.example para backend/.env)
+cp backend/.env.example backend/.env
+
+# 4. Suba todos os serviços com build
+docker compose up --build -d
+```
+
+O Docker irá:
+- Inicializar o banco de dados **PostgreSQL** com volume persistente.
+- Compilar o **Backend** NestJS, aplicar automaticamente as migrations do Drizzle e expor a API na porta `4002`.
+- Gerar o build de produção do **Frontend** e servi-lo via **Nginx** na porta `5173`.
+
+Para parar os contêineres:
+```bash
+docker compose down
+```
+
+---
+
+### Opção 2: Manualmente com pnpm
+
 O projeto é um monorepo com pnpm: as dependências são instaladas uma única vez, na raiz.
 
 ```bash
@@ -239,7 +273,10 @@ A API do backend é documentada com Swagger, e você pode explorar e testar os e
 
 ```
 .
+├── docker-compose.yml                                      # Orquestração dos serviços (PostgreSQL, Backend e Frontend)
 ├── frontend/
+│   ├── Dockerfile                                          # Build multi-stage do frontend e imagem Nginx
+│   ├── nginx.conf                                          # Configuração de SPA e cache no Nginx
 │   └── src/
 │       ├── assets/
 │       │   └── images/
@@ -272,6 +309,7 @@ A API do backend é documentada com Swagger, e você pode explorar e testar os e
 |
 ├── backend/                                             
 │   ├── .env.example                                        # Exemplo de como devem ser as variáveis de ambiente
+│   ├── Dockerfile                                          # Build multi-stage da API NestJS com migrations automáticas
 │   ├── setup.ts                                            # Script de setup do projeto
 │   └── src/
 │       ├── database/
