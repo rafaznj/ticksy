@@ -1,0 +1,61 @@
+services:
+  postgres:
+    image: postgres:17-alpine
+    container_name: ticksy-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: Ticksy
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d Ticksy"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - ticksy-network
+
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    container_name: ticksy-backend
+    restart: unless-stopped
+    ports:
+      - "4002:4002"
+    env_file:
+      - backend/.env
+    environment:
+      - DATABASE_HOST=postgres
+      - URL=0.0.0.0
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - ticksy-network
+
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+      args:
+        - VITE_BACKEND_URL=http://localhost:4002
+    container_name: ticksy-frontend
+    restart: unless-stopped
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+    networks:
+      - ticksy-network
+
+volumes:
+  postgres_data:
+
+networks:
+  ticksy-network:
+    driver: bridge
